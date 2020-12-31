@@ -1,2 +1,17 @@
 <h1>Theaters#edit</h1>
-<p>Find me in app/views/theaters/edit.html.erb</p>
+
+<%= form_with model: @theater do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_field :writer %>
+  <%= f.text_field :country %>
+  <%= f.number_field :men %>
+  <%= f.number_field :female %>
+  <%= f.text_field :translator %>
+  <%= f.text_field :record %>
+  <%= f.text_field :publication %>
+  <%= f.submit "Update" %>
+<% end %>
+
+<%= link_to "Back", theaters_path %>
+
+
