@@ -1,0 +1,9 @@
+<h1>Theaters#index</h1>
+
+<% @theaters.each do |theater| %>
+  <%= theater.title %>
+  <%= theater.writer %>
+  <%= theter.stage_id %>
+<% end %>
+
+<%= link_to "New", new_theater_path %>

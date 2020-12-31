@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  writer: MyString
+  country: MyString
+  man: 1
+  female: 1
+  translator: MyString
+  record: MyString
+  publication: MyString
+  stage_id: 1
+
+two:
+  title: MyString
+  writer: MyString
+  country: MyString
+  man: 1
+  female: 1
+  translator: MyString
+  record: MyString
+  publication: MyString
+  stage_id: 1
