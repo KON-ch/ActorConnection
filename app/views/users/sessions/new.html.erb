@@ -1,0 +1,42 @@
+<div class="container">
+    <h2 class="mt-5 mb-3">ログイン</h2> 
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="form-group row my-2">
+        <%= f.label :email, "Email", class:"col-sm-2 text-sm-center" %>
+        <%= f.email_field :email, autofocus: true, required: "required", autocomplete: "email", class:"col-sm-4" %>
+      </div>
+      <div class="row">
+        <% if alert %>
+          <strong class="error-text">メールアドレスが正しくない可能性があります。</strong>
+        <% end %>
+      </div>
+
+      <div class="form-group row my-2">
+        <%= f.label :password, "Password", class:"col-sm-2 text-sm-center" %>
+        <%= f.password_field :password, autofocus: "true", autocomplete: "current-password", class:"col-sm-4" %>
+      </div>
+      <div class="row">
+        <% if alert %>
+          <strong class="error-text">パスワードが正しくない可能性があります。</strong>
+        <% end %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form-check mt-2">
+          <%= f.check_box :remember_me, class: "form-check-input" %>
+          <%= f.label :remember_me, "次回から自動的にログインする", class: "form-check-label " %>
+        </div>
+      <% end %>
+
+      <div class="my-4">
+        <%= f.submit "ログイン", class: "btn btn-outline-primary w-50" %>
+      </div>
+
+      <div class="form-group">
+          <%= render "users/shared/links" %>
+      </div>
+      
+    <% end %>
+  </div>
+</div>

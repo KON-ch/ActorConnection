@@ -1,0 +1,25 @@
+<h2>パスワード再設定</h2>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %>
+  <%= f.hidden_field :reset_password_token %>
+
+  <div class="form-group">
+    <%= f.label :password, "New password" %><br />
+    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+    <% if resource.errors.messages[:email].present? %> 
+      <strong><%= resource.errors.full_messages_for(:email).first %></strong>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password_confirmation, "New password(確認用)" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="form-group"> 
+    <%= f.submit "Change my password", class:"btn btn-outline-primary" %> 
+  </div>
+<% end %>
+
+<%= render "users/shared/links" %>

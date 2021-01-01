@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <h2 class="my-3">新規会員登録</h2>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "users/shared/error_messages", resource: resource %>
+
+        <div class="form-group row">
+          <%= f.label :name, class:"col-md-5 col-form-label text-md-left" do %>
+            氏名
+            <span>必須</span>
+          <% end %>
+          <div class="col-md-7">
+          <%= f.text_field :name, autofocus: true %>
+          <% if resource.errors.messages[:name].present? %>
+            <strong class="error-text"><%= resource.errors.full_messages_for(:name).first %></strong>
+          <% end %>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :email, class:"col-md-5 col-form-label text-md-left" do %>
+            メールアドレス
+            <span>必須</span>
+          <% end %>
+          <div class="col-md-7">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          <% if resource.errors.messages[:email].present? %>
+            <strong class="error-text"><%= resource.errors.full_messages_for(:email).first %></strong>
+          <% end %>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :birthday, "生年月日", class:"col-md-5 col-form-label text-md-left" %>
+          <div class="col-md-7">
+          <%= f.date_select :birthday, use_month_numbers: true, default: Date.new(1989, 1, 1) %>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :sex, "性別", class:"col-md-5 col-form-label text-md-left" %>
+          <div class="col-md-7">
+            <div class="form-check">
+              <%= f.radio_button :sex, 0 %>
+              <%= f.label :男性 %> 
+            </div>
+            <div class="form-check">
+              <%= f.radio_button :sex, 1 %>
+              <%= f.label :女性 %> 
+            </div>
+            <div class="form-check">
+              <%= f.radio_button :sex, 9%>
+              <%= f.label :秘密 %>
+            </div>
+            <% if resource.errors.messages[:sex].present? %>
+              <strong class="error-text"><%= resource.errors.full_messages_for(:sex).first %></strong>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :password, class:"col-md-5 col-form-label text-md-left" do %>
+            パスワード
+            <span>必須</span>
+          <% end %>
+          <div class="col-md-7">
+            <%= f.password_field :password, autocomplete: "new-password" %>
+            <% if resource.errors.messages[:password].present? %>
+              <strong class="error-text"><%= resource.errors.full_messages_for(:password).first %></strong>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :password_confirmation, "パスワード(確認用)", class:"col-md-5 col-form-label text-md-left" %>
+          <div class="col-md-7">
+            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit "アカウント作成", class:"btn btn-outline-primary" %>
+        </div>
+      <% end %>
+      <%= render "users/shared/links" %>
+    </div>
+  </div>
+</div>
+

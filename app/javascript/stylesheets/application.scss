@@ -1,0 +1,26 @@
+@import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Russo+One&display=swap');
+
+@media screen and (min-width: 721px) {
+  html {
+      font-size: 75%;
+  }
+}
+@media screen and (max-width: 720px) {
+  html {
+      font-size: 62.5%;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: 'Russo One', sans-serif;
+  font-size: 1.4rem;
+}
+
+h1 { font-size: 5.6rem; }
+h2 { font-size: 2.8rem; }
+
+.error-text {
+  color: #ff0400;
+}
