@@ -1,9 +1,23 @@
-<h1>Theaters#index</h1>
+<div class="container w-75">
+  <h2 class="my-5 ml-2">戯曲一覧</h2>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>題名</th>
+        <th>作者</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @theaters.each do |theater| %>
+        <tr>
+            <th scope="row"><%= theater.title %></th>
+            <td><%= theater.writer %></td>
+            <td><%= link_to "詳細", theater_path(theater), class:"btn btn-info w-100" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<% @theaters.each do |theater| %>
-  <%= theater.title %>
-  <%= theater.writer %>
-  <%= link_to "Show", theater_path(theater) %>
-<% end %>
-
-<%= link_to "New", new_theater_path %>
+<%= link_to "New", new_theater_path, class:"" %>
