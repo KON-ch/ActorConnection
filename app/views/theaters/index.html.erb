@@ -1,23 +1,25 @@
 <div class="container w-75">
-  <h2 class="my-5 ml-2">戯曲一覧</h2>
+  <h2 class="mt-5 mb-3 bg-secondary text-light p-3 d-inline-block rounded">戯曲一覧 <i class="fas fa-book-open" style="color: #fbff00;"></i></h2>
   <table class="table table-hover">
     <thead>
       <tr>
         <th>題名</th>
         <th>作者</th>
-        <th></th>
+        <th>男</th>
+        <th>女</th>
       </tr>
     </thead>
     <tbody>
       <% @theaters.each do |theater| %>
         <tr>
-            <th scope="row"><%= theater.title %></th>
-            <td><%= theater.writer %></td>
-            <td><%= link_to "詳細", theater_path(theater), class:"btn btn-info w-100" %></td>
+          <td scope="row" ><%= theater.title %></td>
+          <td><%= theater.writer %></td>
+          <td><%= theater.man %></td>
+          <td><%= theater.female %></td>
+          <td><%= link_to "編集", edit_theater_path(theater), class:"btn btn-outline-secondary" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <%= link_to "新しく戯曲を登録する", new_theater_path, class:"btn btn-primary w-25 mt-3" %>
 </div>
-
-<%= link_to "New", new_theater_path, class:"" %>
