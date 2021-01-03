@@ -15,7 +15,7 @@ class TheatersController < ApplicationController
   def create
     @theater = Theater.new(theater_params)
     if @theater.save
-      redirect_to theaters_path, "新しい戯曲を登録しました"
+      redirect_to theaters_path, notice: "新しい戯曲を登録しました"
     else
       render :new
     end
@@ -26,7 +26,7 @@ class TheatersController < ApplicationController
 
   def update
     @theater.update(theater_params)
-    redirect_to theater_path(@theater), "戯曲情報を修正しました" 
+    redirect_to theater_path(@theater), notice: "戯曲情報を修正しました" 
   end
 
   def destroy
