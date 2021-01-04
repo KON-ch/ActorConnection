@@ -1,5 +1,5 @@
 class TheatersController < ApplicationController
-  before_action :set_theater, only: [:show, :edit, :update, :destroy]
+  before_action :set_theater, only: [:show, :edit, :update, :destroy, :favorite]
 
   def index
     @theaters = Theater.all
@@ -33,6 +33,11 @@ class TheatersController < ApplicationController
 
   def destroy
     @theater.destroy
+    redirect_to theaters_path
+  end
+
+  def favorite
+    current_user.toggle_like!(@theater)
     redirect_to theaters_path
   end
 

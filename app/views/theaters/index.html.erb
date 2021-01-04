@@ -16,7 +16,13 @@
           <td><%= theater.writer %></td>
           <td><%= theater.man %></td>
           <td><%= theater.female %></td>
+          <td>
+            <%= link_to favorite_theater_path(theater), method: :post, class:"btn btn-warning text-secondary" do %>
+              <i class="fa fa-heart"></i><%= current_user.likes?(theater) ? "お気に入り解除" : "お気に入り" %>
+            <% end %>
+          </td>
           <td><%= link_to "編集", edit_theater_path(theater), class:"btn btn-outline-secondary" %></td>
+          <td><%= link_to "削除", theater_path(theater), method: :delete, data: { confirm: '戯曲を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
         </tr>
       <% end %>
     </tbody>

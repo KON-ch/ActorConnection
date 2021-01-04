@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   end
 
   resources :theaters do
+    member do
+      post :favorite
+    end
     resources :reviews, only: [:create]
   end
   resources :stages
