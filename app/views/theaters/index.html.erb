@@ -12,7 +12,7 @@
     <tbody>
       <% @theaters.each do |theater| %>
         <tr>
-          <td scope="row" ><%= theater.title %></td>
+          <td scope="row" ><%= link_to theater_path(theater) do %><%= theater.title %><% end %></td>
           <td><%= theater.writer %></td>
           <td><%= theater.man %></td>
           <td><%= theater.female %></td>

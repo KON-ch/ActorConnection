@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     get "logout", :to => "users/sessions#destroy"
   end
 
-  resources :theaters
+  resources :theaters do
+    resources :reviews, only: [:create]
+  end
   resources :stages
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

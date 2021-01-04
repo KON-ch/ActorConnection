@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_02_232709) do
+ActiveRecord::Schema.define(version: 2021_01_03_220643) do
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "content"
+    t.integer "theater_id"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["theater_id"], name: "index_reviews_on_theater_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
 
   create_table "stages", force: :cascade do |t|
     t.string "group"
@@ -52,5 +62,7 @@ ActiveRecord::Schema.define(version: 2021_01_02_232709) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "reviews", "theaters"
+  add_foreign_key "reviews", "users"
   add_foreign_key "stages", "theaters"
 end
