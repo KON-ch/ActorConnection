@@ -1,8 +1,9 @@
 class TheatersController < ApplicationController
   before_action :set_theater, only: [:show, :edit, :update, :destroy, :favorite]
+  PER = 3
 
   def index
-    @theaters = Theater.all
+    @theaters = Theater.page(params[:page]).per(PER)
   end
 
   def show
