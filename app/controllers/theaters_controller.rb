@@ -3,7 +3,12 @@ class TheatersController < ApplicationController
   PER = 3
 
   def index
-    @theaters = Theater.page(params[:page]).per(PER)
+    if sort_params.present?
+      @theaters = Theater.sort_theaters(sort_params, params[:page])
+    else
+      @theaters = Theater.display_list(params[:page])
+    end
+    @sort_list = Theater.sort_list
   end
 
   def show
@@ -49,5 +54,9 @@ class TheatersController < ApplicationController
 
     def set_theater
       @theater = Theater.find(params[:id])
+    end
+
+    def sort_params
+      params.permit(:sort)
     end
 end

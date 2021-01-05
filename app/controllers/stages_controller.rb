@@ -2,7 +2,12 @@ class StagesController < ApplicationController
   before_action :set_stage, only: [:show, :edit, :update, :destroy]
 
   def index
-    @stages = Stage.all
+    if sort_params.present?
+      @stages = Stage.sort_stages(sort_params, params[:page])
+    else
+      @stages = Stage.display_list(params[:page])
+    end
+    @sort_list = Stage.sort_list
   end
 
   def show
@@ -43,5 +48,9 @@ class StagesController < ApplicationController
 
     def set_stage
       @stage = Stage.find(params[:id])
+    end
+
+    def sort_params
+      params.permit(:sort)
     end
 end
