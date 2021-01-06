@@ -30,8 +30,8 @@
                 <%= current_user.name %> <span class="caret"></span>
               <% end %>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <%= link_to "ログアウト", "#", class: "dropdown-item", action: logout_path, onclick: "event.preventDefault(); document.getElementById('logout-form').submit();" %>
-                <%= form_with url: logout_url, method: "get", id: "logout-form" do |f| %>
+                <%= link_to "マイページ", "#", class: "dropdown-item", action: logout_path, onclick: "event.preventDefault(); document.getElementById('logout-form').submit();" %>
+                <%= form_with url: mypage_users_path, method: "get", id: "logout-form" do |f| %>
                   <%= f.submit style: "display: none;"%>
                 <% end %>
               </div>

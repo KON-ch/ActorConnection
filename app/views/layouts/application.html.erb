@@ -14,10 +14,15 @@
   </head>
 
   <body>
-    <%= render partial: "layouts/header" %>
-    <% if notice.present? %>
-      <div class="alert alert-warning" role="alert">
-        <%= notice %>
+    <%= render partial: "layouts/header" if current_user %>
+    <% if flash[:notice] %>
+      <div class="alert alert-info">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="alert alert-danger">
+        <%= flash[:alert] %>
       </div>
     <% end %>
     <%= yield %>
