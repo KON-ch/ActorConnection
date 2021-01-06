@@ -20,6 +20,8 @@ Rails.application.routes.draw do
       get "mypage", :to => "users#mypage"
       get "mypage/edit", :to => "users#edit"
       put "mypage", :to => "users#update"
+      get "mypage/edit_password", :to => "users#edit_password"
+      put "mypage/password", :to => "users#update_password"
     end
   end
 
