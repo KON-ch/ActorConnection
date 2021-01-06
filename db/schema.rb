@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_04_140019) do
+ActiveRecord::Schema.define(version: 2021_01_06_065044) do
 
   create_table "follows", force: :cascade do |t|
     t.string "follower_type"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2021_01_04_140019) do
     t.integer "stage_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

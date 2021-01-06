@@ -1,5 +1,7 @@
 class TheatersController < ApplicationController
   before_action :set_theater, only: [:show, :edit, :update, :destroy, :favorite]
+  before_action :authenticate_user!
+  
   PER = 3
 
   def index
@@ -49,7 +51,7 @@ class TheatersController < ApplicationController
 
   private
     def theater_params
-      params.require(:theater).permit(:title, :writer, :country, :man, :female, :translator, :include, :publication)
+      params.require(:theater).permit(:title, :writer, :country, :man, :female, :translator, :include, :publication).merge(user_id: current_user.id)
     end
 
     def set_theater

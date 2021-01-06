@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     theater = Theater.find(params[:theater_id])

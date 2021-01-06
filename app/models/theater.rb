@@ -1,6 +1,6 @@
 class Theater < ApplicationRecord
-  has_many :stages
-  has_many :reviews
+  has_many :stages, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   acts_as_likeable
 
   PER = 5
