@@ -25,6 +25,12 @@
                 公演情報
               <% end %>
             </li>
+            <li class="align-self-center mr-md-5">
+              <%= link_to mypage_favorite_users_path, class:"text-dark text-decoration-none" do %>
+                <i class="fas fa-heart"></i>
+                お気に入り一覧
+              <% end %>
+            </li>
             <li class="nav-item dropdown">
               <%= link_to "#", id: "navbarDropdown", class: "nav-link dropdown-toggle", role: "button", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" } do %>
                 <%= current_user.name %> <span class="caret"></span>

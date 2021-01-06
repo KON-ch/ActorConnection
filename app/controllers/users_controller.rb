@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user
-  before_action :authenticate_user!
-
+  
   def edit
   end
 
@@ -25,6 +24,10 @@ class UsersController < ApplicationController
   end
 
   def edit_password
+  end
+
+  def favorite
+    @favorites = @user.likees(Theater)
   end
 
   private
