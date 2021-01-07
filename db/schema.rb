@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_06_065044) do
+ActiveRecord::Schema.define(version: 2021_01_07_120038) do
 
   create_table "follows", force: :cascade do |t|
     t.string "follower_type"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2021_01_06_065044) do
     t.integer "theater_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
     t.index ["theater_id"], name: "index_stages_on_theater_id"
   end
 
