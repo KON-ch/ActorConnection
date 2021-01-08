@@ -35,8 +35,11 @@ class TheatersController < ApplicationController
   end
 
   def update
-    @theater.update(theater_params)
-    redirect_to theater_path(@theater), notice: "戯曲情報を修正しました" 
+    if @theater.update_attributes(theater_params)
+      redirect_to theater_path(@theater), notice: "戯曲情報を修正しました" 
+    else
+      render :edit
+    end
   end
 
   def destroy

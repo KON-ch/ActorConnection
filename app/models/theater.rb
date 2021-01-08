@@ -3,9 +3,7 @@ class Theater < ApplicationRecord
   has_many :reviews, dependent: :destroy
   acts_as_likeable
 
-  PER = 5
-
-  scope :display_list, -> (page) { page(page).per(PER) }
+  extend DisplayList
   scope :sort_theaters, -> (sort_order, page) { order(sort_order[:sort]).display_list(page) }
 
   scope :sort_list, -> {

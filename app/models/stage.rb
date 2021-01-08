@@ -1,9 +1,7 @@
 class Stage < ApplicationRecord
   belongs_to :theater
 
-  PER = 5
-
-  scope :display_list, -> (page) { page(page).per(PER) }
+  extend DisplayList
   scope :sort_stages, -> (sort_order, page) { order(sort_order[:sort]).display_list(page) }
 
   scope :sort_list, -> {

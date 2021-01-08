@@ -1,0 +1,66 @@
+<div class="container">
+  <h2 class="mt-3 mb-3">
+    戯曲管理
+  </h2>
+</div>
+<div class="container">
+  <%= form_with url: dashboard_theaters_path, method: :get, local: true do |f| %>
+    <div class="d-flex flex-inline form-group">
+      <div class="d-flex align-items-center">
+        作品名・作者名
+      </div>
+      <%= f.text_field :keyword, class: "form-control ml-3 w-25" %>
+      <%= f.submit "検索", class: "d-flex btn btn-outline-secondary ml-3" %>
+    </div>
+  <% end %>
+  <%= link_to "+ 新規作成", new_dashboard_theater_path, class:"mt-3 mb-5 btn btn-outline-primary w^25", style:"font-size: 1.4rem;" %>
+  <div class="d-flex">
+    <p>合計<%= @total_count%>件</p>
+    <%= form_with url: dashboard_theaters_path, method: :get, local: true, class:"form-inline ml-2 pb-3" do |f| %>
+      <%= f.hidden_field :sort_theater, value: @theaters %>
+      <% if @sorted.present? %>
+        <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
+      <% else %>
+        <%= f.select :sort, @sort_list, {}, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>題名</th>
+        <th>作者</th>
+        <th>男</th>
+        <th>女</th>
+        <th>翻訳者</th>
+        <th>国籍</th>
+        <th>出版社</th>
+        <th>収録本</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @theaters.each do |theater| %>
+        <tr>
+          <td>
+            <%= link_to theater_path(theater), class:"text-dark" do %>
+              <%= theater.title %>
+            <% end %>
+          </td>
+          <td><%= theater.writer %></td>
+          <td><%= theater.man %></td>
+          <td><%= theater.female %></td>
+          <td><%= theater.translator %></td>
+          <td><%= theater.country %></td>
+          <td><%= theater.publication %></td>
+          <td><%= theater.include %></td>
+          <td><%= link_to "編集", edit_theater_path(theater), class:"btn btn-outline-secondary" %></td>
+          <td><%= link_to "削除", theater_path(theater), method: :delete, data: { confirm: '戯曲を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @theaters %>
+</div>
