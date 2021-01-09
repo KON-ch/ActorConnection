@@ -1,6 +1,7 @@
 class Theater < ApplicationRecord
   has_many :stages, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  belongs_to :user
   acts_as_likeable
 
   extend DisplayList

@@ -1,5 +1,6 @@
 class Stage < ApplicationRecord
   belongs_to :theater
+  belongs_to :user
 
   extend DisplayList
   scope :sort_stages, -> (sort_order, page) { order(sort_order[:sort]).display_list(page) }

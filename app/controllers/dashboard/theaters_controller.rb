@@ -23,6 +23,7 @@ class Dashboard::TheatersController < ApplicationController
   end
 
   def new
+    @theater = Theater.new
   end
 
   def create
@@ -39,7 +40,7 @@ class Dashboard::TheatersController < ApplicationController
 
   def update
     if @theater.update_attributes(theater_params)
-      redirect_to theater_path(@theater), notice: "戯曲情報を修正しました" 
+      redirect_to dashboard_theaters_path, notice: "戯曲情報を修正しました" 
     else
       render :edit
     end
@@ -52,7 +53,7 @@ class Dashboard::TheatersController < ApplicationController
 
   private
   def theater_params
-    params.require(:theater).permit(:title, :writer, :country, :man, :female, :translator, :include, :publication).merge(user_id: current_user.id)
+    params.require(:theater).permit(:title, :writer, :country, :man, :female, :translator, :include, :publication).merge(user_id: current_admin.id)
   end
 
   def set_theater

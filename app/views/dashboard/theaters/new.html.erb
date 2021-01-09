@@ -2,7 +2,7 @@
   <div class="row">
     <h2 class="mt-5 mb-lg-3 offset-lg-2">戯曲登録</h2>
   </div>
-  <%= form_with model: @theater do |f| %>
+  <%= form_with model: @theater, url: dashboard_theaters_path, local: true do |f| %>
     <div class="form-group row">
       <%= f.label :title, "題名", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
       <%= f.text_field :title, class:"form-control col-lg-5" %>

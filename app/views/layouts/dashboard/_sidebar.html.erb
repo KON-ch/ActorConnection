@@ -1,14 +1,16 @@
-<div class="container ml-3 mt-4" style="font-size: 1rem;">
-  <h2 style="font-size: 1.5rem;">戯曲情報管理</h2>
+<div class="ml-3 mt-4" style="font-size: 1rem;">
+  <h2 class="text-secondary" style="font-size: 1.5rem;">戯曲情報管理</h2>
   <div class="d-flex flex-column mb-3">
-    <label class=""><%= link_to "戯曲一覧", dashboard_theaters_path %></label>
-    <label class=""><%= link_to "戯曲情報登録", new_dashboard_theater_path %></label>
+    <ul class="pl-4">
+      <li><%= link_to "戯曲一覧", dashboard_theaters_path,  class:"text-dark" %></li>
+      <li><%= link_to "戯曲情報登録", new_dashboard_theater_path,  class:"text-dark" %></li>
+    </ul>
   </div>
 
-  <h2 style="font-size: 1.5rem;">公演情報管理</h2>
+  <h2 class="text-secondary" style="font-size: 1.5rem;">公演情報管理</h2>
   <div class="d-flex flex-column mb-3">
-    <label class="">公演情報一覧</label>
-    <label class="">公演情報登録</label>
+    <label class="text-dark">公演情報一覧</label>
+    <label class="text-dark">公演情報登録</label>
   </div>
 
   <h2 style="font-size: 1.5rem;">劇場情報管理</h2>
