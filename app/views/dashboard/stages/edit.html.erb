@@ -1,8 +1,8 @@
-<div class="container p-0 w-50 text-center ">
+<div class="container p-0 text-center ">
   <div class="row">
     <h2 class="mt-5 mb-lg-3 offset-lg-2">公演情報変更</h2>
   </div>
-  <%= form_with model: @stage do |f| %>
+  <%= form_with model: @stage, url: dashboard_stage_path(@stage), local: true do |f| %>
     <div class="form-group row">
       <%= f.label :theater_id, "公演名", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
       <%= f.collection_select(:theater_id, @theaters, :id, :title) %>
@@ -25,7 +25,7 @@
   <% end %>
 
   <div class="row">
-    <%= link_to stages_path, class:"offset-lg-2 mt-5 text-secondary" do %>
+    <%= link_to dashboard_stages_path, class:"offset-lg-2 mt-5 text-secondary" do %>
       <i class="far fa-hand-point-left"></i>
       Back
     <% end %>

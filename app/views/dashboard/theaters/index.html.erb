@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 class="mt-3 mb-3">
+  <h2 class="my-3">
     戯曲管理
   </h2>
 </div>
@@ -13,7 +13,7 @@
       <%= f.submit "検索", class: "d-flex btn btn-outline-secondary ml-3" %>
     </div>
   <% end %>
-  <%= link_to "+ 新規作成", new_dashboard_theater_path, class:"mt-3 mb-5 btn btn-outline-primary w^25", style:"font-size: 1.4rem;" %>
+  <%= link_to "+ 新規作成", new_dashboard_theater_path, class:"mt-3 mb-5 btn btn-outline-primary", style:"font-size: 1.4rem;" %>
   <div class="d-flex">
     <p>合計<%= @total_count%>件</p>
     <%= form_with url: dashboard_theaters_path, method: :get, local: true, class:"form-inline ml-2 pb-3" do |f| %>
@@ -44,11 +44,7 @@
     <tbody>
       <% @theaters.each do |theater| %>
         <tr>
-          <td>
-            <%= link_to theater_path(theater), class:"text-dark" do %>
-              <%= theater.title %>
-            <% end %>
-          </td>
+          <td><%= theater.title %></td>
           <td><%= theater.writer %></td>
           <td><%= theater.man %></td>
           <td><%= theater.female %></td>

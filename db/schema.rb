@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_09_110355) do
+ActiveRecord::Schema.define(version: 2021_01_09_125340) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name", null: false
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_110355) do
   end
 
   create_table "stages", force: :cascade do |t|
-    t.string "group"
+    t.string "company"
     t.date "start_date", null: false
     t.date "end_date", null: false
     t.integer "theater_id", null: false

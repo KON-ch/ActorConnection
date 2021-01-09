@@ -44,7 +44,7 @@ class StagesController < ApplicationController
 
   private
     def stage_params
-      params.require(:stage).permit(:start_date, :end_date, :group, :theater_id).merge(user_id: current_user.id)
+      params.require(:stage).permit(:start_date, :end_date, :company, :theater_id).merge(user_id: current_user.id)
     end
 
     def set_stage

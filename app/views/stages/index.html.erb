@@ -27,10 +27,10 @@
     <tbody>
       <% @stages.each do |stage| %>
         <tr>
-          <td scope="row"><%= link_to stage_path(stage) do %><%= Theater.find_by(params[id: stage.theater_id]).title %><% end %></td>
+          <td><%= link_to stage_path(stage) do %><%= Theater.find_by(params[id: stage.theater_id]).title %><% end %></td>
           <td class="d-none d-sm-table-cell"><%= stage.start_date.mon %>月<%= stage.start_date.day %>日</td>
           <td class="d-none d-sm-table-cell"><%= stage.end_date.mon %>月<%= stage.end_date.day %>日</td>
-          <td><%= stage.group %></td>
+          <td><%= stage.company %></td>
           <td class="d-none d-md-table-cell"><%= link_to "編集", edit_stage_path(stage), class:"btn btn-outline-secondary" %></td>
           <td class="d-none d-md-table-cell"><%= link_to "削除", stage_path(stage), method: :delete, data: { confirm: '公演情報を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
         </tr>

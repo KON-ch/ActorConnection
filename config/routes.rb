@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   namespace :dashboard do
     resources :theaters, except: [:show]
+    resources :stages, except: [:show]
   end
 
   devise_for :users, :controllers => {
