@@ -5,7 +5,7 @@ class Dashboard::TheatersController < ApplicationController
 
   def index
     if sort_params.present?
-      @theaters = Theater.sort_theaters(sort_params, params[:page])
+      @theaters = Theater.sort_order(sort_params, params[:page])
     else
       @theaters = Theater.display_list(params[:page])
     end

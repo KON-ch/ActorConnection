@@ -1,0 +1,59 @@
+<div class="container">
+  <h2 class="my-3">
+    ユーザー管理
+  </h2>
+</div>
+<div class="container">
+  <%= form_with url: dashboard_users_path, method: :get, local: true do |f| %>
+    <div class="d-flex flex-inline form-group">
+      <div class="d-flex align-items-center">
+        名前・メールアドレス
+      </div>
+      <%= f.text_field :keyword, class: "form-control ml-3 w-25" %>
+      <%= f.submit "検索", class: "d-flex btn btn-outline-secondary ml-3" %>
+    </div>
+  <% end %>
+  <div class="d-flex">
+    <p>合計<%= @total_count%>件</p>
+    <%= form_with url: dashboard_users_path, method: :get, local: true, class:"form-inline ml-2 pb-3" do |f| %>
+      <%= f.hidden_field :sort_theater, value: @users %>
+      <% if @sorted.present? %>
+        <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
+      <% else %>
+        <%= f.select :sort, @sort_list, {}, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th>メールアドレス</th>
+        <th>性別</th>
+        <th>生年月日</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.sex %></td>
+          <td><%= user.birthday %></td>
+          <td>
+            <%= form_with url: dashboard_user_path(user), method: :delete, local: true do |f| %>
+              <% if user.deleted_flg %>
+                <%= f.submit "復帰", class: "btn btn-outline-success"%>
+              <% else %>
+                <%= f.submit "削除", class: "btn btn-outline-danger"%>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @users %>
+</div>

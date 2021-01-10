@@ -5,7 +5,7 @@ class Theater < ApplicationRecord
   acts_as_likeable
 
   extend DisplayList
-  scope :sort_theaters, -> (sort_order, page) { order(sort_order[:sort]).display_list(page) }
+  extend SortOrder
 
   scope :sort_list, -> {
     {
