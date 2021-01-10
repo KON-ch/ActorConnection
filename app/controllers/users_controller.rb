@@ -31,6 +31,13 @@ class UsersController < ApplicationController
     @favorites = @user.likees(Theater)
   end
 
+  def destroy
+    @user.deleted_flg = User.switch_flg(@user.deleted_flg)
+    @user.save
+    sign_out(@user)
+    redirect_to root_path
+  end
+
   private
     def user_params
       params.permit(:name, :email, :birthday, :sex, :profile, :password, :password_confirmation, :deleted_flg)

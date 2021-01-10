@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     get "logout", :to => "users/sessions#destroy"
   end
 
-  resources :users do
+  resources :users, only: [:edit, :update] do
     collection do
       get "mypage", :to => "users#mypage"
       get "mypage/edit", :to => "users#edit"
@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       get "mypage/edit_password", :to => "users#edit_password"
       put "mypage/password", :to => "users#update_password"
       get "mypage/favorite", :to => "users#favorite"
+      delete "mypage/delete", :to => "users#destroy"
     end
   end
 
