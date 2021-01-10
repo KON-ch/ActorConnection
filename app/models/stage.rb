@@ -1,6 +1,7 @@
 class Stage < ApplicationRecord
   belongs_to :theater
   belongs_to :user
+  belongs_to :place
 
   extend DisplayList
   extend SortOrder

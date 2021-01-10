@@ -22,9 +22,10 @@
         <thead>
           <tr>
             <th>題名</th>
-            <th class="d-none d-sm-table-cell">上演開始日</th>
+            <th class="d-none d-sm-table-cell">開演日</th>
             <th class="d-none d-sm-table-cell">終演日</th>
             <th>団体</th>
+            <th>劇場</th>
             <th class="d-none d-md-table-cell"></th>
             <th class="d-none d-md-table-cell"></th>
           </tr>
@@ -36,6 +37,7 @@
               <td class="d-none d-sm-table-cell"><%= stage.start_date.mon %>月<%= stage.start_date.day %>日</td>
               <td class="d-none d-sm-table-cell"><%= stage.end_date.mon %>月<%= stage.end_date.day %>日</td>
               <td><%= stage.company %></td>
+              <td><%= Place.find_by(params[id: stage.place_id]).name %></td>
               <td class="d-none d-md-table-cell"><%= link_to "編集", edit_stage_path(stage), class:"btn btn-outline-secondary" %></td>
               <td class="d-none d-md-table-cell"><%= link_to "削除", stage_path(stage), method: :delete, data: { confirm: '公演情報を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
             </tr>

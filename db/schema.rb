@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_10_004326) do
+ActiveRecord::Schema.define(version: 2021_01_10_051849) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name", null: false
@@ -55,6 +55,16 @@ ActiveRecord::Schema.define(version: 2021_01_10_004326) do
     t.index ["mentioner_id", "mentioner_type"], name: "fk_mentions"
   end
 
+  create_table "places", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address", null: false
+    t.integer "latitude"
+    t.integer "longitude"
+    t.string "access"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.text "content"
     t.integer "theater_id"
@@ -73,6 +83,8 @@ ActiveRecord::Schema.define(version: 2021_01_10_004326) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.integer "place_id"
+    t.index ["place_id"], name: "index_stages_on_place_id"
     t.index ["theater_id"], name: "index_stages_on_theater_id"
     t.index ["user_id"], name: "index_stages_on_user_id"
   end
@@ -111,6 +123,7 @@ ActiveRecord::Schema.define(version: 2021_01_10_004326) do
 
   add_foreign_key "reviews", "theaters"
   add_foreign_key "reviews", "users"
+  add_foreign_key "stages", "places"
   add_foreign_key "stages", "theaters"
   add_foreign_key "stages", "users"
   add_foreign_key "theaters", "users"

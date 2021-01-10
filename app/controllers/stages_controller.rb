@@ -17,6 +17,7 @@ class StagesController < ApplicationController
   def new
     @stage = Stage.new
     @theaters = Theater.all
+    @places = Place.all
   end
 
   def create
@@ -30,6 +31,7 @@ class StagesController < ApplicationController
 
   def edit
     @theaters = Theater.all
+    @places = Place.all
   end
 
   def update
@@ -44,7 +46,7 @@ class StagesController < ApplicationController
 
   private
     def stage_params
-      params.require(:stage).permit(:start_date, :end_date, :company, :theater_id).merge(user_id: current_user.id)
+      params.require(:stage).permit(:start_date, :end_date, :company, :theater_id, :place_id).merge(user_id: current_user.id)
     end
 
     def set_stage
