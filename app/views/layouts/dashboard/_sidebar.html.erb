@@ -16,10 +16,13 @@
     </ul>
   </div>
 
-  <h2 style="font-size: 1.5rem;">劇場情報管理</h2>
+  <h2 class="text-secondary" style="font-size: 1.5rem;">劇場情報管理</h2>
   <div class="d-flex flex-column mb-3">
-    <label class="">劇場一覧</label>
-    <label class="">劇場情報登録</label>
+    <ul class="pl-4">
+      <li><%= link_to "劇場情報一覧", dashboard_places_path, class:"text-dark" %></li>
+      <li><%= link_to "劇場情報登録", new_dashboard_place_path, class:"text-dark" %></li>
+    </ul>
+
   </div>
 
   <h2 style="font-size: 1.5rem;">AD & WS 管理</h2>

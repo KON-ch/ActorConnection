@@ -33,6 +33,7 @@
         <th>開演日</th>
         <th>終演日</th>
         <th>団体</th>
+        <th>劇場</th>
         <th></th>
         <th></th>
       </tr>
@@ -44,6 +45,7 @@
           <td><%= stage.start_date.mon %>月<%= stage.start_date.day %>日</td>
           <td><%= stage.end_date.mon %>月<%= stage.end_date.day %>日</td>
           <td><%= stage.company %></td>
+          <td><%= Place.find_by(params[id: stage.place_id]).name %></td>
           <td><%= link_to "編集", edit_dashboard_stage_path(stage), class:"btn btn-outline-secondary" %></td>
           <td><%= link_to "削除", dashboard_stage_path(stage), method: :delete, data: { confirm: '公演情報を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
         </tr>

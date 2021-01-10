@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :destroy]
     resources :theaters, except: [:show]
     resources :stages, except: [:show]
+    resources :places, except: [:show]
   end
 
   devise_for :users, :controllers => {

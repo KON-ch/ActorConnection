@@ -1,6 +1,8 @@
 class StagesController < ApplicationController
-  before_action :set_stage, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :set_stage, only: [:show, :edit, :update, :destroy]
+  before_action :set_theaters, only: [:new, :edit]
+  before_action :set_places, only: [:new, :edit]
 
   def index
     if sort_params.present?
@@ -16,8 +18,6 @@ class StagesController < ApplicationController
 
   def new
     @stage = Stage.new
-    @theaters = Theater.all
-    @places = Place.all
   end
 
   def create
@@ -30,8 +30,6 @@ class StagesController < ApplicationController
   end
 
   def edit
-    @theaters = Theater.all
-    @places = Place.all
   end
 
   def update
@@ -51,6 +49,14 @@ class StagesController < ApplicationController
 
     def set_stage
       @stage = Stage.find(params[:id])
+    end
+
+    def set_theaters
+      @theaters = Theater.all
+    end
+
+    def set_places
+      @places = Place.all
     end
 
     def sort_params

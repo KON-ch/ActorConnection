@@ -2,6 +2,7 @@ class Dashboard::StagesController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_stage, only: [:edit, :update, :destroy]
   before_action :set_theaters, only: [:new, :edit]
+  before_action :set_places, only: [:new, :edit]
   layout "dashboard/dashboard"
 
   def index
@@ -54,7 +55,7 @@ class Dashboard::StagesController < ApplicationController
 
   private
     def stage_params
-      params.require(:stage).permit(:start_date, :end_date, :company, :theater_id).merge(user_id: current_admin.id)
+      params.require(:stage).permit(:start_date, :end_date, :company, :theater_id, :place_id).merge(user_id: current_admin.id)
     end
 
     def set_stage
@@ -63,6 +64,10 @@ class Dashboard::StagesController < ApplicationController
 
     def set_theaters
       @theaters = Theater.all
+    end
+
+    def set_places
+      @places = Place.all
     end
 
     def sort_params

@@ -1,0 +1,27 @@
+<div class="container">
+  <h2 class="my-3">
+      劇場情報管理
+  </h2>
+</div>
+<div class="container">
+  <%= link_to "+ 新規登録", new_dashboard_place_path, class:"btn btn-outline-primary mt-3 mb-5", style:"font-size: 1.4rem;" %>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>劇場名</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @places.each do |place| %>
+        <tr>
+          <td><%= place.name %></td>
+          <td><%= link_to "編集", edit_dashboard_place_path(place), class:"btn btn-outline-secondary" %></td>
+          <td><%= link_to "削除", dashboard_place_path(place), method: :delete, data: { confirm: '劇場情報を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
