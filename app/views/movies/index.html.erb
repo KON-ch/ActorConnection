@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <%= render partial: "movies/sidebar" %>
+    </div>
+    <div class="col-lg-9">
+      <div class="d-flex align-items-end">
+        <h2 class="mt-5 mb-3 text-light p-3 d-inline-block rounded" style="background-color: #4CA2FF;">
+          <i class="fas fa-film"></i>
+          映画一覧
+        </h2>
+        <%= form_with url: movies_path, method: :get, local: true, class:"form-inline ml-3 pb-3" do |f| %>
+          <%= f.hidden_field :sort_theater, value: @movies %>
+          <% if @sorted.present? %>
+            <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
+          <% else %>
+            <%= f.select :sort, @sort_list, {}, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
+          <% end %>
+        <% end %>
+      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>題名</th>
+            <th>製作国</th>
+            <th>製作年</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @movies.each do |movie| %>
+            <tr>
+              <td>
+                <%= link_to movie_path(movie), class:"text-dark" do %>
+                  <%= movie.title %>
+                <% end %>
+              </td>
+              <td><%= movie.country %></td>
+              <td><%= movie.production.year %></td>
+              <td><%= link_to "編集", edit_movie_path(movie), class:"btn btn-outline-secondary" %></td>
+              <td><%= link_to "削除", movie_path(movie), method: :delete, data: { confirm: '戯曲を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @movies %>
+      <%= link_to "新しく映画を登録", new_movie_path, class:"btn btn-primary w-25 mt-3" %>
+    </div>
+  </div>
+</div>

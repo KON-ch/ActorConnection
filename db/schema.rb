@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_10_051849) do
+ActiveRecord::Schema.define(version: 2021_01_10_114510) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name", null: false
@@ -53,6 +53,17 @@ ActiveRecord::Schema.define(version: 2021_01_10_051849) do
     t.datetime "created_at"
     t.index ["mentionable_id", "mentionable_type"], name: "fk_mentionables"
     t.index ["mentioner_id", "mentioner_type"], name: "fk_mentions"
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "country"
+    t.date "production"
+    t.integer "viewing", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_movies_on_user_id"
   end
 
   create_table "places", force: :cascade do |t|
@@ -121,6 +132,7 @@ ActiveRecord::Schema.define(version: 2021_01_10_051849) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "movies", "users"
   add_foreign_key "reviews", "theaters"
   add_foreign_key "reviews", "users"
   add_foreign_key "stages", "places"

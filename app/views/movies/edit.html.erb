@@ -1,0 +1,42 @@
+<div class="container p-0 w-50 text-center">
+  <div class="row">
+    <h2 class="mt-5 mb-lg-3 offset-lg-2">映画情報修正</h2>
+  </div>
+  <%= form_with model: @movie do |f| %>
+    <div class="form-group row">
+      <%= f.label :title, "題名", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+      <%= f.text_field :title, class:"form-control col-lg-5" %>
+    </div>
+    <div class="form-group row">
+      <%= f.label :country, "製作国", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+      <%= f.text_field :country, class:"form-control col-lg-5" %>
+    </div>
+    <div class="form-group row">
+      <%= f.label :production, "製作年", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+      <%= f.date_select :production, {discard_month: true, start_year: 1900}, class:"form-control col-lg-5" %>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :viewing, "視聴方法", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+      <div class="form-check col-lg-2 text-left p-0">
+        <%= f.radio_button :viewing, "映画館" %>
+        <%= f.label :映画館 %> 
+      </div>
+      <div class="form-check col-lg-2 text-left p-0">
+        <%= f.radio_button :viewing, "その他" %>
+        <%= f.label :その他 %> 
+      </div>
+    </div>
+
+    <div class="form-group text-right row">
+      <%= f.submit "更新", class:"btn btn-primary mt-3 col-lg-3 offset-lg-7" %>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <%= link_to movies_path, class:"offset-lg-2 mt-5 text-secondary" do %>
+      <i class="far fa-hand-point-left"></i>
+      Back
+    <% end %>
+  </div>
+</div>

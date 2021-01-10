@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  coungry: MyString
+  production: 2021-01-10
+  watch: MyString
+
+two:
+  title: MyString
+  coungry: MyString
+  production: 2021-01-10
+  watch: MyString

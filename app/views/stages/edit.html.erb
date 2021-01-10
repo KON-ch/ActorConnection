@@ -4,27 +4,27 @@
   </div>
   <%= form_with model: @stage do |f| %>
     <div class="form-group row">
-      <%= f.label :theater_id, "公演名", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+      <%= f.label :theater_id, "公演名", class:"col-lg-2 offset-lg-2 col-form-label text-left px-0" %>
       <%= f.collection_select(:theater_id, @theaters, :id, :title) %>
     </div>
     <div class="form-group row">
-      <%= f.label :start_date, "上演開始日", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
-      <%= f.date_select :start_date, use_month_numbers: true, class:"form-control col-lg-5" %>
+      <%= f.label :start_date, "開演日", class:"col-lg-2 offset-lg-2 col-form-label text-left px-0" %>
+      <%= f.date_select :start_date, {use_month_numbers: true}, class:"form-control col-lg-2" %>
     </div>
     <div class="form-group row">
-      <%= f.label :end_date, "終演日", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
-      <%= f.date_select :end_date, use_month_numbers: true, class:"form-control col-lg-5" %>
+      <%= f.label :end_date, "終演日", class:"col-lg-2 offset-lg-2 col-form-label text-left px-0" %>
+      <%= f.date_select :end_date, {use_month_numbers: true}, class:"form-control col-lg-2" %>
     </div>
     <div class="form-group row">
-      <%= f.label :company, "公演団体", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
-      <%= f.text_field :company, class:"form-control col-lg-5" %>
+      <%= f.label :company, "公演団体", class:"col-lg-2 offset-lg-2 col-form-label text-left px-0" %>
+      <%= f.text_field :company, class:"form-control col-lg-6" %>
     </div>
     <div class="form-group row">
-      <%= f.label :place_id, "劇場", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+      <%= f.label :place_id, "劇場", class:"col-lg-2 offset-lg-2 col-form-label text-left px-0" %>
       <%= f.collection_select(:place_id, @places, :id, :name) %>
     </div>
     <div class="form-group text-right row">
-      <%= f.submit "更新", class:"btn btn-primary mt-3 col-lg-3 offset-lg-7" %>
+      <%= f.submit "更新", class:"btn btn-primary mt-3 col-lg-2 offset-lg-8" %>
     </div>
   <% end %>
 

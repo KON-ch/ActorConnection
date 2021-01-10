@@ -23,20 +23,20 @@
     </div>
     <div class="form-group row">
       <%= f.label :birthday, "生年月日", class:"col-lg-4 offset-lg-1 col-form-label text-left px-0" %>
-      <%= f.date_select :birthday, use_month_numbers: true, default: Date.new(1989, 1, 1), class:"form-control col-lg-6" %>
+      <%= f.date_select :birthday, {use_month_numbers: true, default: Date.new(1989, 1, 1)}, class:"form-control col-lg-6" %>
     </div>
     <div class="form-group row my-0">
       <%= f.label :sex, "性別", class:"col-lg-4 offset-lg-1 col-form-label text-left px-0" %>
       <div class="form-check col-lg-2 col-4 text-left p-0">
-        <%= f.radio_button :sex, 0 %>
+        <%= f.radio_button :sex, "男性" %>
         <%= f.label :男性 %> 
       </div>
       <div class="form-check col-lg-2 col-4 text-left p-0">
-        <%= f.radio_button :sex, 1 %>
+        <%= f.radio_button :sex, "女性" %>
         <%= f.label :女性 %> 
       </div>
       <div class="form-check col-lg-2 col-4 text-left p-0">
-        <%= f.radio_button :sex, 9%>
+        <%= f.radio_button :sex, "秘密" %>
         <%= f.label :秘密 %>
       </div>
     </div>
