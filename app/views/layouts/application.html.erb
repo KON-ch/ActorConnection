@@ -16,12 +16,12 @@
   <body>
     <%= render partial: "layouts/header" if current_user %>
     <% if flash[:notice] %>
-      <div class="alert alert-info">
+      <div class="alert alert-info text-center">
         <%= flash[:notice] %>
       </div>
     <% end %>
     <% if flash[:alert] %>
-      <div class="alert alert-danger">
+      <div class="alert alert-danger text-center">
         <%= flash[:alert] %>
       </div>
     <% end %>

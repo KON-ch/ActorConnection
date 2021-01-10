@@ -16,7 +16,7 @@ class Theater < ApplicationRecord
       # "登場人数の多い順" => "number_characters asc",
     }
   }
-
+  
   def number_characters
     theater.man + theater.female
   end

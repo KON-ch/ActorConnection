@@ -1,41 +1,48 @@
-<div class="container w-50">
-  <div class="d-flex align-items-end">
-    <h2 class="mt-5 mb-3 text-light p-3 d-inline-block rounded" style="background-color: #4CA2FF;">
-      <i class="fas fa-theater-masks"></i>
-      公演情報
-    </h2>
-    <%= form_with url: stages_path, method: :get, local: true, class:"form-inline ml-3 pb-3" do |f| %>
-      <%= f.hidden_field :sort_stage, value: @stages %>
-      <% if @sorted.present? %>
-        <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
-      <% else %>
-        <%= f.select :sort, @sort_list, {}, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
-      <% end %>
-    <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <%= render partial: "stages/sidebar" %>
+    </div>
+    <div class="col-lg-9">
+      <div class="d-flex align-items-end">
+        <h2 class="mt-5 mb-3 text-light p-3 d-inline-block rounded" style="background-color: #4CA2FF;">
+          <i class="fas fa-theater-masks"></i>
+          公演情報
+        </h2>
+        <%= form_with url: stages_path, method: :get, local: true, class:"form-inline ml-3 pb-3" do |f| %>
+          <%= f.hidden_field :sort_stage, value: @stages %>
+          <% if @sorted.present? %>
+            <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
+          <% else %>
+            <%= f.select :sort, @sort_list, {}, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
+          <% end %>
+        <% end %>
+      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>題名</th>
+            <th class="d-none d-sm-table-cell">上演開始日</th>
+            <th class="d-none d-sm-table-cell">終演日</th>
+            <th>団体</th>
+            <th class="d-none d-md-table-cell"></th>
+            <th class="d-none d-md-table-cell"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @stages.each do |stage| %>
+            <tr>
+              <td><%= link_to stage_path(stage) do %><%= Theater.find_by(params[id: stage.theater_id]).title %><% end %></td>
+              <td class="d-none d-sm-table-cell"><%= stage.start_date.mon %>月<%= stage.start_date.day %>日</td>
+              <td class="d-none d-sm-table-cell"><%= stage.end_date.mon %>月<%= stage.end_date.day %>日</td>
+              <td><%= stage.company %></td>
+              <td class="d-none d-md-table-cell"><%= link_to "編集", edit_stage_path(stage), class:"btn btn-outline-secondary" %></td>
+              <td class="d-none d-md-table-cell"><%= link_to "削除", stage_path(stage), method: :delete, data: { confirm: '公演情報を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= link_to "公演情報を登録", new_stage_path, class:"btn btn-primary btn-lg mt-3" %>
+    </div>
   </div>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>題名</th>
-        <th class="d-none d-sm-table-cell">上演開始日</th>
-        <th class="d-none d-sm-table-cell">終演日</th>
-        <th>団体</th>
-        <th class="d-none d-md-table-cell"></th>
-        <th class="d-none d-md-table-cell"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @stages.each do |stage| %>
-        <tr>
-          <td><%= link_to stage_path(stage) do %><%= Theater.find_by(params[id: stage.theater_id]).title %><% end %></td>
-          <td class="d-none d-sm-table-cell"><%= stage.start_date.mon %>月<%= stage.start_date.day %>日</td>
-          <td class="d-none d-sm-table-cell"><%= stage.end_date.mon %>月<%= stage.end_date.day %>日</td>
-          <td><%= stage.company %></td>
-          <td class="d-none d-md-table-cell"><%= link_to "編集", edit_stage_path(stage), class:"btn btn-outline-secondary" %></td>
-          <td class="d-none d-md-table-cell"><%= link_to "削除", stage_path(stage), method: :delete, data: { confirm: '公演情報を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%= link_to "公演情報を登録", new_stage_path, class:"btn btn-primary btn-lg mt-3" %>
 </div>
