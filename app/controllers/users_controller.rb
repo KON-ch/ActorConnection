@@ -1,9 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user
   before_action :authenticate_user!
-  
-  def edit
-  end
 
   def update
     @user.update_without_password(user_params)
