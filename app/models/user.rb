@@ -9,7 +9,6 @@ class User < ApplicationRecord
 
   validates :profile, length: { maximum: 255, too_lonb: "最大%{count}文字まで入力できます" }
   validates :password, length: { in: 6..20 }
-  validates :email, uniquness: true
 
   acts_as_liker
 

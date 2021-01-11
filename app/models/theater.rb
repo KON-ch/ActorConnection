@@ -3,8 +3,9 @@ class Theater < ApplicationRecord
   has_many :reviews, dependent: :destroy
   belongs_to :user
 
-  validates :title, :writer, :country, :include, :publication, presence: true
-  validates :man, :female, numericality: { only_integer: true }
+  validates :title, :writer, :country, presence: true
+  validates :man, numericality: { only_integer: true }
+  validates :female, numericality: { only_integer: true }
   acts_as_likeable
 
   extend DisplayList
