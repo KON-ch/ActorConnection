@@ -6,6 +6,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable
+
+  validates :profile, length: { maximum: 255, too_lonb: "最大%{count}文字まで入力できます" }
+  validates :password, length: { in: 6..20 }
+  validates :email, uniquness: true
+
   acts_as_liker
 
   enum sex: { "男性": 0, "女性": 1, "秘密": 9}

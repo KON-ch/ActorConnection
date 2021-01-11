@@ -3,6 +3,8 @@ class Stage < ApplicationRecord
   belongs_to :user
   belongs_to :place
 
+  validates :start_date, :end_date, presence: true
+
   extend DisplayList
   extend SortInfo
 

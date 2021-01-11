@@ -1,6 +1,8 @@
 class Movie < ApplicationRecord
   belongs_to :user
 
+  validates :title, presence: true
+
   enum viewing: { "映画館": 0, "その他": 9}
 
   extend DisplayList
