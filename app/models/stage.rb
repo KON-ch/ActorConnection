@@ -4,7 +4,7 @@ class Stage < ApplicationRecord
   belongs_to :place
 
   extend DisplayList
-  extend SortOrder
+  extend SortInfo
 
   scope :sort_list, -> {
     {

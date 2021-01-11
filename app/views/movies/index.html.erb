@@ -10,7 +10,6 @@
           映画一覧
         </h2>
         <%= form_with url: movies_path, method: :get, local: true, class:"form-inline ml-3 pb-3" do |f| %>
-          <%= f.hidden_field :sort_theater, value: @movies %>
           <% if @sorted.present? %>
             <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
           <% else %>

@@ -3,19 +3,18 @@ class Dashboard::UsersController < ApplicationController
   layout "dashboard/dashboard"
 
   def index
-    if sort_params.present?
-      @users = User.sort_order(sort_params, params[:page])
-    else
-      @users = User.display_list(params[:page])
-    end
-
     if params[:keyword] != nil
       @keyword = params[:keyword]
       @users = search_user.display_list(params[:pages])
-      @total_count = search_user.count
+      total_count(search_user)
     else
-      @total_count = User.count
-      @users = User.display_list(params[:page])
+      if sort_params.present?
+        @users = User.sort_info(sort_params, params[:page])
+        total_count(User)
+      else
+        @users = User.display_list(params[:page])
+        total_count(User)
+      end
     end
 
     @sort_list = User.sort_list
@@ -35,6 +34,10 @@ class Dashboard::UsersController < ApplicationController
 
   def search_user
     User.where("name LIKE ? OR email LIKE ?", "%#{@keyword}%", "%#{@keyword}%")
+  end
+
+  def total_count(user)
+    @total_count = user.count
   end
 
 end

@@ -12,7 +12,7 @@ class User < ApplicationRecord
   
   extend DisplayList
   extend SwitchFlg
-  extend SortOrder
+  extend SortInfo
 
 
   scope :sort_list, -> {

@@ -6,19 +6,18 @@ class Dashboard::StagesController < ApplicationController
   layout "dashboard/dashboard"
 
   def index
-    if sort_params.present?
-      @stages = Stage.sort_order(sort_params, params[:page])
-    else
-      @stages = Stage.display_list(params[:page])
-    end
-
     if params[:keyword] != nil
       @keyword = params[:keyword]
       @stages = search_stage.display_list(params[:pages])
-      @total_count = search_stage.count
+      total_count(search_stage)
     else
-      @total_count = Stage.count
-      @stages = Stage.display_list(params[:page])
+      if sort_params.present?
+        @stages = Stage.sort_info(sort_params, params[:page])
+        total_count(Stage)
+      else
+        @stages = Stage.display_list(params[:page])
+        total_count(Stage)
+      end
     end
 
     @sort_list = Stage.sort_list
@@ -76,5 +75,9 @@ class Dashboard::StagesController < ApplicationController
 
     def search_stage
       Stage.where("company LIKE ?", "%#{@keyword}%")
+    end
+
+    def total_count(stage)
+      @total_count = stage.count
     end
 end

@@ -4,19 +4,18 @@ class Dashboard::TheatersController < ApplicationController
   layout "dashboard/dashboard"
 
   def index
-    if sort_params.present?
-      @theaters = Theater.sort_order(sort_params, params[:page])
-    else
-      @theaters = Theater.display_list(params[:page])
-    end
-
     if params[:keyword] != nil
       @keyword = params[:keyword]
       @theaters = search_theater.display_list(params[:pages])
-      @total_count = search_theater.count
+      total_count(search_theater)
     else
-      @total_count = Theater.count
-      @theaters = Theater.display_list(params[:page])
+      if sort_params.present?
+        @theaters = Theater.sort_info(sort_params, params[:page])
+        total_count(Theater)
+      else
+        @theaters = Theater.display_list(params[:page])
+        total_count(Theater)
+      end
     end
 
     @sort_list = Theater.sort_list
@@ -66,5 +65,9 @@ class Dashboard::TheatersController < ApplicationController
 
   def search_theater
     Theater.where("title LIKE ? OR writer LIKE ?", "%#{@keyword}%", "%#{@keyword}%")
+  end
+
+  def total_count(theater)
+    @total_count = theater.count
   end
 end

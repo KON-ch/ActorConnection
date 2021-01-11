@@ -5,7 +5,7 @@ class Theater < ApplicationRecord
   acts_as_likeable
 
   extend DisplayList
-  extend SortOrder
+  extend SortInfo
 
   scope :sort_list, -> {
     {

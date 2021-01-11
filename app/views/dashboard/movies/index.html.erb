@@ -1,0 +1,52 @@
+<div class="container">
+  <h2 class="my-3">
+    映画管理
+  </h2>
+</div>
+<div class="container">
+  <%= form_with url: dashboard_movies_path, method: :get, local: true do |f| %>
+    <div class="d-flex flex-inline form-group">
+      <div class="d-flex align-items-center">
+        作品名
+      </div>
+      <%= f.text_field :keyword, class: "form-control ml-3 w-25" %>
+      <%= f.submit "検索", class: "d-flex btn btn-outline-secondary ml-3" %>
+    </div>
+  <% end %>
+  <%= link_to "+ 新規作成", new_dashboard_movie_path, class:"mt-3 mb-5 btn btn-outline-primary", style:"font-size: 1.4rem;" %>
+  <div class="d-flex">
+    <p>合計<%= @total_count%>件</p>
+    <%= form_with url: dashboard_movies_path, method: :get, local: true, class:"form-inline ml-3 pb-3" do |f| %>
+      <% if @sorted.present? %>
+        <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
+      <% else %>
+        <%= f.select :sort, @sort_list, {}, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>題名</th>
+        <th>製作国</th>
+        <th>製作年</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @movies.each do |movie| %>
+        <tr>
+          <td><%= movie.title %></td>
+          <td><%= movie.country %></td>
+          <td><%= movie.production.year %></td>
+          <td><%= movie.viewing %></td>
+          <td><%= link_to "編集", edit_dashboard_movie_path(movie), class:"btn btn-outline-secondary" %></td>
+          <td><%= link_to "削除", dashboard_movie_path(movie), method: :delete, data: { confirm: '映画を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @movies %>
+</div>

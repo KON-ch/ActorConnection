@@ -33,8 +33,10 @@
 
   <h2 style="font-size: 1.5rem;">映画情報管理</h2>
   <div class="d-flex flex-column mb-3">
-    <label class="">映画一覧</label>
-    <label class="">映画情報登録</label>
+    <ul class="pl-4">
+      <li><%= link_to "映画情報一覧", dashboard_movies_path, class:"text-dark" %></li>
+      <li><%= link_to "映画情報登録", new_dashboard_movie_path, class:"text-dark" %></li>
+    </ul>
   </div>
 
   <h2 style="font-size: 1.5rem;">その他</h2>

@@ -16,7 +16,6 @@
   <div class="d-flex">
     <p>合計<%= @total_count%>件</p>
     <%= form_with url: dashboard_users_path, method: :get, local: true, class:"form-inline ml-2 pb-3" do |f| %>
-      <%= f.hidden_field :sort_theater, value: @users %>
       <% if @sorted.present? %>
         <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
       <% else %>

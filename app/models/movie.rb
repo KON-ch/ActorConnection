@@ -4,7 +4,7 @@ class Movie < ApplicationRecord
   enum viewing: { "映画館": 0, "その他": 9}
 
   extend DisplayList
-  extend SortOrder
+  extend SortInfo
 
   scope :sort_list, -> {
     {
