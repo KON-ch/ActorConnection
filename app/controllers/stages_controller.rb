@@ -6,7 +6,7 @@ class StagesController < ApplicationController
 
   def index
     if sort_params.present?
-      @stages = Stage.sort_order(sort_params, params[:page])
+      @stages = Stage.sort_info(sort_params, params[:page])
     else
       @stages = Stage.display_list(params[:page])
     end

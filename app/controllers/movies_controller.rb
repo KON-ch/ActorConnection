@@ -6,7 +6,7 @@ class MoviesController < ApplicationController
 
   def index
     if sort_params.present?
-      @movies = Movie.sort_order(sort_params, params[:page])
+      @movies = Movie.sort_info(sort_params, params[:page])
     else
       @movies = Movie.display_list(params[:page])
     end
