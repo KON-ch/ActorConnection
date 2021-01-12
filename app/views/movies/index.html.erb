@@ -17,32 +17,27 @@
           <% end %>
         <% end %>
       </div>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>題名</th>
-            <th>製作国</th>
-            <th>製作年</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @movies.each do |movie| %>
-            <tr>
-              <td>
-                <%= link_to movie_path(movie), class:"text-dark" do %>
-                  <%= movie.title %>
-                <% end %>
-              </td>
-              <td><%= movie.country %></td>
-              <td><%= movie.production.year %></td>
-              <td><%= link_to "編集", edit_movie_path(movie), class:"btn btn-outline-secondary" %></td>
-              <td><%= link_to "削除", movie_path(movie), method: :delete, data: { confirm: '戯曲を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      
+      <div class="card-columns">
+        <% @movies.each do |movie| %>
+          <div class="card shadow">
+            <div class="card-header">
+              <%= movie.country %>
+              <div class="float-right">
+                <%= movie.production.year %>
+              </div>
+            </div>
+            <div class="card-body">
+              <%= link_to movie_path(movie) do %>
+                <h2 class="card-title"><%= movie.title %></h2>
+                <p class="card-title"><%= movie.sub_title %></p>
+              <% end %>
+              <p class="card-text"></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
       <%= paginate @movies %>
       <%= link_to "新しく映画を登録", new_movie_path, class:"btn btn-primary w-25 mt-3" %>
     </div>

@@ -38,7 +38,7 @@ class Dashboard::MoviesController < ApplicationController
   end
 
   def update
-    if @moive.update_attributes(movie_params)
+    if @movie.update_attributes(movie_params)
       redirect_to dashboard_movies_path, notice: "映画情報を修正しました" 
     else
       render :edit
@@ -52,10 +52,10 @@ class Dashboard::MoviesController < ApplicationController
 
   private
   def movie_params
-    params.require(:movie).permit(:title, :country, :production, :viewing).merge(user_id: current_admin.id)
+    params.require(:movie).permit(:title, :country, :production, :viewing, :supervision, :sub_title).merge(user_id: current_admin.id)
   end
 
-  def set_theater
+  def set_movie
     @movie = Movie.find(params[:id])
   end
 

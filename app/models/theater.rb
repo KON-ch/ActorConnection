@@ -4,8 +4,8 @@ class Theater < ApplicationRecord
   belongs_to :user
 
   validates :title, :writer, :country, presence: true
-  validates :man, numericality: { only_integer: true }
-  validates :female, numericality: { only_integer: true }
+  validates :man, numericality: { only_integer: true }, allow_nil: true
+  validates :female, numericality: { only_integer: true}, allow_nil: true
   acts_as_likeable
 
   extend DisplayList

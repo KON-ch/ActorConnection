@@ -2,10 +2,18 @@
   <div class="row">
     <h2 class="mt-5 mb-lg-3 offset-lg-2">映画情報修正</h2>
   </div>
-  <%= form_with model: @movie, url: dashboard_movies_path, local: true do |f| %>
+  <%= form_with model: @movie, url: dashboard_movie_path(@movie), local: true do |f| %>
     <div class="form-group row">
-      <%= f.label :title, "題名", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+      <%= f.label :title, "タイトル", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
       <%= f.text_field :title, class:"form-control col-lg-5" %>
+    </div>
+    <div class="form-group row">
+      <%= f.label :sub_title, "サブタイトル", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+      <%= f.text_field :sub_title, class:"form-control col-lg-5" %>
+    </div>
+    <div class="form-group row">
+      <%= f.label :supervision, "監督", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+      <%= f.text_field :supervision, class:"form-control col-lg-5" %>
     </div>
     <div class="form-group row">
       <%= f.label :country, "製作国", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
@@ -13,11 +21,18 @@
     </div>
     <div class="form-group row">
       <%= f.label :production, "製作年", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
-      <%= f.text_field :production, class:"form-control col-lg-5" %>
+      <%= f.date_select :production, {discard_month: true, start_year: 1930}, class:"form-control col-lg-5" %>
     </div>
     <div class="form-group row">
       <%= f.label :viewing, "視聴方法", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
-      <%= f.text_field :viewing, class:"form-control col-lg-5" %>
+      <div class="form-check col-lg-2 text-left p-0">
+        <%= f.radio_button :viewing, "映画館" %>
+        <%= f.label :映画館 %> 
+      </div>
+      <div class="form-check col-lg-2 text-left p-0">
+        <%= f.radio_button :viewing, "その他" %>
+        <%= f.label :その他 %> 
+      </div>
     </div>
     <div class="form-group text-right row">
       <%= f.submit "更新", class:"btn btn-primary mt-3 col-lg-3 offset-lg-7" %>

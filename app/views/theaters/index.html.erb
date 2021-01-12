@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-3">
+    <div class="d-none d-lg-block col-lg-3">
       <%= render partial: "theaters/sidebar" %>
     </div>
     <div class="col-lg-9">
@@ -17,42 +17,36 @@
           <% end %>
         <% end %>
       </div>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th></th>
-            <th>題名</th>
-            <th>作者</th>
-            <th>男</th>
-            <th>女</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @theaters.each do |theater| %>
-            <tr>
-              <td scope="row" class="pl-0">
-                <%= link_to favorite_theater_path(theater), method: :post, class:"btn text-light", style:"background-color: #FF8300;" do %>
-                  <i class="fa fa-heart"></i><%= current_user.likes?(theater) ? "お気に入り解除" : "お気に入り" %>
+      
+      <div class="card-columns">
+        <% @theaters.each do |theater| %>
+          <div class="card shadow">
+            <div class="card-header">
+              <%= theater.country %>
+              <div class="float-right">
+                <% if theater.man == nil && theater.female == nil %>
+                  <%= link_to "未登録", edit_theater_path(theater) %>
+                <% else %>
+                  男<%= theater.man%>
+                  女<%= theater.female%>
                 <% end %>
-              </td>
-              <td>
-                <%= link_to theater_path(theater), class:"text-dark" do %>
-                  <%= theater.title %>
-                <% end %>
-              </td>
-              <td><%= theater.writer %></td>
-              <td><%= theater.man %></td>
-              <td><%= theater.female %></td>
-              <td><%= link_to "編集", edit_theater_path(theater), class:"btn btn-outline-secondary" %></td>
-              <td><%= link_to "削除", theater_path(theater), method: :delete, data: { confirm: '戯曲を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+              </div>
+            </div>
+            <div class="card-body">
+              <%= link_to theater_path(theater) do %>
+                <h2 class="card-title"><%= theater.title %></h2>
+              <% end %>
+              <p class="card-text"><%= theater.writer %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
       <%= paginate @theaters %>
-      <%= link_to "新しく戯曲を登録", new_theater_path, class:"btn btn-primary w-25 mt-3" %>
+      <%= link_to new_theater_path, class:"btn btn-primary w-25 mt-3", local: true do %>
+        新しく戯曲を登録
+      <% end %>
+    
     </div>
   </div>
 </div>
