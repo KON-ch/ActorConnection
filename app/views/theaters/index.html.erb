@@ -24,7 +24,7 @@
             <div class="card-header">
               <%= theater.country %>
               <div class="float-right">
-                <% if theater.man == nil && theater.female == nil %>
+                <% if theater.man.nil? && theater.female.nil? %>
                   <%= link_to "未登録", edit_theater_path(theater) %>
                 <% else %>
                   男<%= theater.man%>
