@@ -18,21 +18,23 @@
         <% end %>
       </div>
       
-      <div class="card-columns">
+      <div class="row row-cols-4">
         <% @movies.each do |movie| %>
-          <div class="card shadow">
-            <div class="card-header">
-              <%= movie.country %>
-              <div class="float-right">
-                <%= movie.production.year %>
+          <div class="col mb-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-header">
+                <%= movie.country %>
+                <div class="float-right">
+                  <%= movie.production.year %>
+                </div>
               </div>
-            </div>
-            <div class="card-body">
-              <%= link_to movie_path(movie) do %>
-                <h2 class="card-title"><%= movie.title %></h2>
-                <p class="card-title"><%= movie.sub_title %></p>
-              <% end %>
-              <p class="card-text"></p>
+              <div class="card-body">
+                <%= link_to movie_path(movie), class:"text-decoration-none", style:"color: #4CA2FF;" do %>
+                  <p class="card-title"><%= movie.title %></p>
+                  <p class="card-title"><%= movie.sub_title %></p>
+                <% end %>
+                <p class="card-text"></p>
+              </div>
             </div>
           </div>
         <% end %>
