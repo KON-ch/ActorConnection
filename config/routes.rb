@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'index/new'
+  get 'index/create'
+  get 'index/destroy'
   devise_for :admins, :controllers => {
     :sessions => 'admins/sessions'
   }
@@ -17,6 +20,7 @@ Rails.application.routes.draw do
     resources :stages, except: [:show]
     resources :places, except: [:show]
     resources :movies, except: [:show]
+    resources :countries, only: [:index, :create]
   end
 
   devise_for :users, :controllers => {
