@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_13_105727) do
+ActiveRecord::Schema.define(version: 2021_01_13_115948) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name", null: false
@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(version: 2021_01_13_105727) do
 
   create_table "movies", force: :cascade do |t|
     t.string "title", null: false
-    t.string "country"
     t.date "production"
     t.integer "viewing", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -71,6 +70,8 @@ ActiveRecord::Schema.define(version: 2021_01_13_105727) do
     t.integer "user_id", null: false
     t.string "sub_title"
     t.string "supervision"
+    t.integer "country_id"
+    t.index ["country_id"], name: "index_movies_on_country_id"
     t.index ["user_id"], name: "index_movies_on_user_id"
   end
 
@@ -111,7 +112,6 @@ ActiveRecord::Schema.define(version: 2021_01_13_105727) do
   create_table "theaters", force: :cascade do |t|
     t.string "title", null: false
     t.string "writer", null: false
-    t.string "country", null: false
     t.integer "man"
     t.integer "female"
     t.string "translator"
@@ -120,6 +120,8 @@ ActiveRecord::Schema.define(version: 2021_01_13_105727) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.integer "country_id"
+    t.index ["country_id"], name: "index_theaters_on_country_id"
     t.index ["user_id"], name: "index_theaters_on_user_id"
   end
 
@@ -140,11 +142,13 @@ ActiveRecord::Schema.define(version: 2021_01_13_105727) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "movies", "countries"
   add_foreign_key "movies", "users"
   add_foreign_key "reviews", "theaters"
   add_foreign_key "reviews", "users"
   add_foreign_key "stages", "places"
   add_foreign_key "stages", "theaters"
   add_foreign_key "stages", "users"
+  add_foreign_key "theaters", "countries"
   add_foreign_key "theaters", "users"
 end
