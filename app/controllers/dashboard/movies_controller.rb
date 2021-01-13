@@ -1,6 +1,7 @@
 class Dashboard::MoviesController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_movie, only: [:edit, :update, :destroy]
+  before_action :set_countries, only: [:new, :edit]
   layout "dashboard/dashboard"
 
   def index
@@ -52,11 +53,15 @@ class Dashboard::MoviesController < ApplicationController
 
   private
   def movie_params
-    params.require(:movie).permit(:title, :country, :production, :viewing, :supervision, :sub_title).merge(user_id: current_admin.id)
+    params.require(:movie).permit(:title, :country_id, :production, :viewing, :supervision, :sub_title).merge(user_id: current_admin.id)
   end
 
   def set_movie
     @movie = Movie.find(params[:id])
+  end
+
+  def set_countries
+    @countries = Country.all
   end
 
   def sort_params

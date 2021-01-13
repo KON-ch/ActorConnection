@@ -1,6 +1,7 @@
 class Dashboard::TheatersController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_theater, only: [:edit, :update, :destroy]
+  before_action :set_countries, only: [:new, :edit]
   layout "dashboard/dashboard"
 
   def index
@@ -52,11 +53,15 @@ class Dashboard::TheatersController < ApplicationController
 
   private
   def theater_params
-    params.require(:theater).permit(:title, :writer, :country, :man, :female, :translator, :include, :publication).merge(user_id: current_admin.id)
+    params.require(:theater).permit(:title, :writer, :country_id, :man, :female, :translator, :include, :publication).merge(user_id: current_admin.id)
   end
 
   def set_theater
     @theater = Theater.find(params[:id])
+  end
+
+  def set_countries
+    @countries = Country.all
   end
 
   def sort_params

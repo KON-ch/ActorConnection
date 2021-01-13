@@ -1,5 +1,6 @@
 class Movie < ApplicationRecord
   belongs_to :user
+  belongs_to :country
 
   validates :title, presence: true
 

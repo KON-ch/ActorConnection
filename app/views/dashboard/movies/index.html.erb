@@ -42,7 +42,7 @@
         <tr>
           <td><%= movie.title %></td>
           <td><%= movie.sub_title %></td>
-          <td><%= movie.country %></td>
+          <td><%= Country.find(movie.country_id).name %></td>
           <td><%= movie.production.year %></td>
           <td><%= movie.supervision %></td>
           <td><%= movie.viewing %></td>

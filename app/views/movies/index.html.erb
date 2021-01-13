@@ -23,7 +23,7 @@
           <div class="col mb-4">
             <div class="card h-100 shadow-sm">
               <div class="card-header">
-                <%= movie.country %>
+                <%= Country.find(movie.country_id).name %>
                 <div class="float-right">
                   <%= movie.production.year %>
                 </div>

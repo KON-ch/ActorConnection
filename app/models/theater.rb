@@ -2,8 +2,9 @@ class Theater < ApplicationRecord
   has_many :stages, dependent: :destroy
   has_many :reviews, dependent: :destroy
   belongs_to :user
+  belongs_to :country
 
-  validates :title, :writer, :country, presence: true
+  validates :title, :writer, :country_id, presence: true
   validates :man, numericality: { only_integer: true }, allow_nil: true
   validates :female, numericality: { only_integer: true}, allow_nil: true
   acts_as_likeable

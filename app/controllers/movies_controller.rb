@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy, :favorite]
+  before_action :set_countries, only: [:new, :edit]
   before_action :authenticate_user!
   
   PER = 3
@@ -54,11 +55,15 @@ class MoviesController < ApplicationController
 
   private
     def movie_params
-      params.require(:movie).permit(:title, :country, :production, :viewing, :supervision, :sub_title).merge(user_id: current_user.id)
+      params.require(:movie).permit(:title, :country_id, :production, :viewing, :supervision, :sub_title).merge(user_id: current_user.id)
     end
 
     def set_movie
       @movie = Movie.find(params[:id])
+    end
+
+    def set_countries
+      @countries = Country.all
     end
 
     def sort_params

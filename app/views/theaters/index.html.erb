@@ -23,7 +23,7 @@
           <div class="col mb-4">
             <div class="card h-100 shadow-sm">
               <div class="card-header">
-                <%= theater.country %>
+                <%= Country.find(theater.country_id).name %>
                 <div class="float-right">
                   <% if theater.man.nil? && theater.female.nil? %>
                     <%= link_to "未登録", edit_theater_path(theater), style:"color: #FF8300;" %>
