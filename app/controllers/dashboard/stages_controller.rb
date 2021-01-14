@@ -10,14 +10,18 @@ class Dashboard::StagesController < ApplicationController
       @keyword = params[:keyword]
       @stages = search_stage.display_list(params[:pages])
       total_count(search_stage)
-    else
-      if sort_params.present?
+    elsif sort_params.present?
+      if params[:sort_keyword].present?
+        @keyword = params[:sort_keyword]
+        @stages = search_stage.sort_info(sort_params, params[:page])
+        total_count(search_stage)
+      else
         @stages = Stage.sort_info(sort_params, params[:page])
         total_count(Stage)
-      else
-        @stages = Stage.display_list(params[:page])
-        total_count(Stage)
       end
+    else
+      @stages = Stage.display_list(params[:page])
+      total_count(Stage)
     end
 
     @sort_list = Stage.sort_list

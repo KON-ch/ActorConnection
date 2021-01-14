@@ -73,7 +73,7 @@ class Dashboard::MoviesController < ApplicationController
   end
 
   def search_movie
-    Movie.where("title LIKE ? OR sub_title LIKE ?", "%#{@keyword}%", "%#{@keyword}%")
+    Movie.where("title LIKE ? OR sub_title LIKE ? OR supervision LIKE ?", "%#{@keyword}%", "%#{@keyword}%", "%#{@keyword}%")
   end
 
   def total_count(movie)

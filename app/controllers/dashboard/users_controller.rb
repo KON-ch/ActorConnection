@@ -7,14 +7,18 @@ class Dashboard::UsersController < ApplicationController
       @keyword = params[:keyword]
       @users = search_user.display_list(params[:pages])
       total_count(search_user)
-    else
-      if sort_params.present?
+    elsif sort_params.present?
+      if params[:sort_keyword].present?
+        @keyword = params[:sort_keyword]
+        @users = search_user.sort_info(sort_params, params[:page])
+        total_count(search_user)
+      else
         @users = User.sort_info(sort_params, params[:page])
         total_count(User)
-      else
-        @users = User.display_list(params[:page])
-        total_count(User)
       end
+    else
+      @users = User.display_list(params[:page])
+      total_count(User)
     end
 
     @sort_list = User.sort_list

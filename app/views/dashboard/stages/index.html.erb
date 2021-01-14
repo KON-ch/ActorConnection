@@ -7,7 +7,7 @@
   <%= form_with url: dashboard_stages_path, method: :get, local: true do |f| %>
     <div class="d-flex flex-inline form-group">
       <div class="d-flex align-items-center">
-        公演名・団体名
+        団体名
       </div>
       <%= f.text_field :keyword, class: "form-control ml-3 w-25" %>
       <%= f.submit "検索", class: "d-flex btn btn-outline-secondary ml-3" %>
@@ -17,6 +17,7 @@
   <div class="d-flex">
     <p>合計<%= @total_count%>件</p>
     <%= form_with url: dashboard_stages_path, method: :get, local: true, class:"form-inline ml-2 pb-3" do |f| %>
+      <%= f.hidden_field :sort_keyword, value: @keyword %>
       <% if @sorted.present? %>
         <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
       <% else %>
