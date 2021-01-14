@@ -6,17 +6,21 @@ class Dashboard::MoviesController < ApplicationController
 
   def index
     if params[:keyword] != nil
-        @keyword = params[:keyword]
-        @movies = search_movie.display_list(params[:pages])
+      @keyword = params[:keyword]
+      @movies = search_movie.display_list(params[:pages])
+      total_count(search_movie)
+    elsif sort_params.present?
+      if params[:sort_keyword].present?
+        @keyword = params[:sort_keyword]
+        @movies = search_movie.sort_info(sort_params, params[:page])
         total_count(search_movie)
-    else
-      if sort_params.present?
+      else
         @movies = Movie.sort_info(sort_params, params[:page])
         total_count(Movie)
-      else
-        @movies = Movie.display_list(params[:page])
-        total_count(Movie)
       end
+    else
+      @movies = Movie.display_list(params[:page])
+      total_count(Movie)
     end
 
     @sort_list = Movie.sort_list
@@ -69,7 +73,7 @@ class Dashboard::MoviesController < ApplicationController
   end
 
   def search_movie
-    Movie.where("title LIKE ?", "%#{@keyword}%")
+    Movie.where("title LIKE ? OR sub_title LIKE ?", "%#{@keyword}%", "%#{@keyword}%")
   end
 
   def total_count(movie)
