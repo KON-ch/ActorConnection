@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-3">
+    <div class="d-none d-lg-block col-lg-2">
       <%= render partial: "stages/sidebar" %>
     </div>
-    <div class="col-lg-9">
+    <div class="col-lg-10">
       <div class="d-flex align-items-end">
         <h2 class="mt-5 mb-3 text-light p-3 d-inline-block rounded" style="background-color: #4CA2FF;">
           <i class="fas fa-theater-masks"></i>
@@ -17,32 +17,31 @@
           <% end %>
         <% end %>
       </div>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>題名</th>
-            <th class="d-none d-sm-table-cell">開演日</th>
-            <th class="d-none d-sm-table-cell">終演日</th>
-            <th>団体</th>
-            <th>劇場</th>
-            <th class="d-none d-md-table-cell"></th>
-            <th class="d-none d-md-table-cell"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @stages.each do |stage| %>
-            <tr>
-              <td><%= link_to stage_path(stage) do %><%= Theater.find_by(params[id: stage.theater_id]).title %><% end %></td>
-              <td class="d-none d-sm-table-cell"><%= stage.start_date.mon %>月<%= stage.start_date.day %>日</td>
-              <td class="d-none d-sm-table-cell"><%= stage.end_date.mon %>月<%= stage.end_date.day %>日</td>
-              <td><%= stage.company %></td>
-              <td><%= Place.find(stage.place_id).name %></td>
-              <td class="d-none d-md-table-cell"><%= link_to "編集", edit_stage_path(stage), class:"btn btn-outline-secondary" %></td>
-              <td class="d-none d-md-table-cell"><%= link_to "削除", stage_path(stage), method: :delete, data: { confirm: '公演情報を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <div class="row row-cols-4">
+        <% @stages.each do |stage| %>
+          <div class="col mb-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-header">
+                <%= stage.company %>
+              </div>
+              <div class="card-body">
+                <%= link_to stage_path(stage), class:"text-dark", style:"font-size:1.8rem;" do %>
+                  <%= Theater.find(stage.theater_id).title %>
+                <% end %>
+              </div>
+              <div class="card-footer">
+                <%= stage.start_date.mon %>月<%= stage.start_date.day %>日
+                〜
+                <% if stage.start_date.mon != stage.end_date.mon %>
+                  <%= stage.end_date.mon %>月
+                <% end %>
+                <%= stage.end_date.day %>日
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <%= paginate @stages %>
       <%= link_to "公演情報を登録", new_stage_path, class:"btn btn-primary btn-lg mt-3" %>
     </div>
   </div>
