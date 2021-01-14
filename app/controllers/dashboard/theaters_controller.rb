@@ -9,14 +9,18 @@ class Dashboard::TheatersController < ApplicationController
       @keyword = params[:keyword]
       @theaters = search_theater.display_list(params[:pages])
       total_count(search_theater)
-    else
-      if sort_params.present?
+    elsif sort_params.present?
+      if params[:sort_keyword].present?
+        @keyword = params[:sort_keyword]
+        @theaters = search_theater.sort_info(sort_params, params[:page])
+        total_count(search_theater)
+      else
         @theaters = Theater.sort_info(sort_params, params[:page])
         total_count(Theater)
-      else
-        @theaters = Theater.display_list(params[:page])
-        total_count(Theater)
       end
+    else
+      @theaters = Theater.display_list(params[:page])
+      total_count(Theater)
     end
 
     @sort_list = Theater.sort_list
