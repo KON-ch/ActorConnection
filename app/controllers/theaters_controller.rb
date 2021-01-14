@@ -1,13 +1,21 @@
 class TheatersController < ApplicationController
   before_action :set_theater, only: [:show, :edit, :update, :destroy, :favorite]
-  before_action :set_countries, only: [:new, :edit]
+  before_action :set_countries, only: [:index, :new, :edit]
   before_action :authenticate_user!
   
   PER = 3
 
   def index
     if sort_params.present?
-      @theaters = Theater.sort_info(sort_params, params[:page])
+      if sort_params[:sort_country].present?
+        set_country(sort_params[:sort_country])
+        @theaters = Theater.where(country_id: sort_params[:sort_country]).sort_info(sort_params, params[:page])
+      else
+        @theaters = Theater.sort_info(sort_params, params[:page])
+      end
+    elsif params[:country].present?
+      set_country(params[:country])
+      @theaters = Theater.country_theaters(@country, params[:page])
     else
       @theaters = Theater.display_list(params[:page])
     end
@@ -66,7 +74,12 @@ class TheatersController < ApplicationController
       @countries = Country.all
     end
 
-    def sort_params
-      params.permit(:sort)
+    def set_country(country)
+      @country = Country.request_country(country)
     end
+
+    def sort_params
+      params.permit(:sort, :sort_country)
+    end
+
 end

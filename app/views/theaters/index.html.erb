@@ -7,9 +7,17 @@
       <div class="d-flex align-items-end">
         <h2 class="mt-5 mb-3 text-light p-3 d-inline-block rounded" style="background-color: #4CA2FF;">
           <i class="fas fa-book-open"></i>
-          戯曲一覧
+          <% if @country.present? %>
+            <%= @country.name %>の戯曲
+          <% else %>
+            戯曲一覧
+          <% end %>
         </h2>
         <%= form_with url: theaters_path, method: :get, local: true, class:"form-inline ml-3 pb-3" do |f| %>
+          <% if @country.present? %>
+            <%= f.hidden_field :sort_country, value: @country.id %>
+          <% end %>
+          並び替え
           <% if @sorted.present? %>
             <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
           <% else %>

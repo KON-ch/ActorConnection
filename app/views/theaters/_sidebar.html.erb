@@ -1,15 +1,5 @@
-  <h2 class="mt-4">日本の作品</h2>
-  <h2 class="mt-4">外国の作品</h2>
-  <h2 class="mt-5 mb-2">登場人数</h2>
-  <p>男0 / 女2</p>
-  <p>男0 / 女3</p>
-  <p>男0 / 女4</p>
-  <p>男1 / 女1</p>
-  <p>男1 / 女2</p>
-  <p>男1 / 女3</p>
-  <p>男2 / 女0</p>
-  <p>男2 / 女1</p>
-  <p>男2 / 女2</p>
-  <p>男3 / 女0</p>
-  <p>男3 / 女1</p>
-  <p>男4 / 女0</p>
+<% @countries.each do |country| %>
+  <div>
+    <%= link_to country.name, theaters_path(country: country.id) %>
+  </div>
+<% end %>
