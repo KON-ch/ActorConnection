@@ -34,7 +34,7 @@
                 <%= Country.find(theater.country_id).name %>
                 <div class="float-right">
                   <% if theater.man.nil? && theater.female.nil? %>
-                    <%= link_to "未登録", edit_theater_path(theater), style:"color: #FF8300;" %>
+                    <%= link_to "未登録", edit_theater_path(theater), style:"color: #4CA2FF;" %>
                   <% else %>
                     男<%= theater.man%>
                     女<%= theater.female%>
@@ -43,7 +43,7 @@
               </div>
               <div class="card-body">
                 <%= link_to theater_path(theater) do %>
-                  <p class="card-title" style="color: #4CA2FF;"><%= theater.title %></p>
+                  <p class="card-title" style="color: #FF8300; font-size:1.8rem;"><%= theater.title %></p>
                 <% end %>
                 <p class="card-text"><%= theater.writer %></p>
               </div>
