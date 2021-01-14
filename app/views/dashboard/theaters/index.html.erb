@@ -33,10 +33,7 @@
         <th>作者</th>
         <th>男</th>
         <th>女</th>
-        <th>翻訳者</th>
         <th>国籍</th>
-        <th>出版社</th>
-        <th>収録本</th>
         <th></th>
         <th></th>
       </tr>
@@ -48,10 +45,7 @@
           <td><%= theater.writer %></td>
           <td><%= theater.man %></td>
           <td><%= theater.female %></td>
-          <td><%= theater.translator %></td>
           <td><%= Country.find(theater.country_id).name %></td>
-          <td><%= theater.publication %></td>
-          <td><%= theater.include %></td>
           <td><%= link_to "編集", edit_dashboard_theater_path(theater), class:"btn btn-outline-secondary" %></td>
           <td><%= link_to "削除", dashboard_theater_path(theater), method: :delete, data: { confirm: '戯曲を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
         </tr>

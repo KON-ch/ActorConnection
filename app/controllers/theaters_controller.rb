@@ -61,7 +61,7 @@ class TheatersController < ApplicationController
 
   private
     def theater_params
-      params.require(:theater).permit(:title, :writer, :country_id, :man, :female, :translator, :include, :publication).merge(user_id: current_user.id)
+      params.require(:theater).permit(:title, :writer, :country_id, :man, :female).merge(user_id: current_user.id)
     end
 
     def set_theater

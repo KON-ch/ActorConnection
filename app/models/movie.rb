@@ -4,8 +4,6 @@ class Movie < ApplicationRecord
 
   validates :title, presence: true
 
-  enum viewing: { "映画館": 0, "その他": 9}
-
   extend DisplayList
   extend SortInfo
 

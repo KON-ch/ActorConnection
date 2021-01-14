@@ -16,10 +16,6 @@
       <%= f.collection_select(:country_id, @countries, :id, :name) %>
     </div>
     <div class="form-group row">
-      <%= f.label :translator, "翻訳者", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
-      <%= f.text_field :translator, class:"form-control col-lg-5" %>
-    </div>
-    <div class="form-group row">
       <%= f.label :man, "登場人数 ( 男 )", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
       <%= f.number_field :man, min: 0, class:"form-control col-lg-5" %>
     </div>
@@ -27,15 +23,6 @@
       <%= f.label :female, "登場人数 ( 女 )", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
       <%= f.number_field :female, min: 0, class:"form-control col-lg-5" %>
     </div>
-    <div class="form-group row">
-      <%= f.label :include, "収録本", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
-      <%= f.text_field :include, class:"form-control col-lg-5" %>
-    </div>
-    <div class="form-group row">
-      <%= f.label :publication, "出版社", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
-      <%= f.text_field :publication, class:"form-control col-lg-5" %>
-    </div>
-
     <div class="form-group text-right row">
       <%= f.submit "登録", class:"btn btn-primary mt-3 col-lg-3 offset-lg-7" %>
     </div>

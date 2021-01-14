@@ -5,9 +5,6 @@
 <%= @theater.country_id %>
 <%= @theater.man %>
 <%= @theater.female %>
-<%= @theater.translator %>
-<%= @theater.include %>
-<%= @theater.publication %>
 <%= link_to "Edit", edit_theater_path(@theater) %>
 <%= link_to "Delete", theater_path(@theater), method: :delete, data: { confirm: 'Are you sure?' } %>
 

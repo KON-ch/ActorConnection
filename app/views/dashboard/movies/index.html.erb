@@ -46,7 +46,6 @@
           <td><%= Country.find(movie.country_id).name %></td>
           <td><%= movie.production.year %></td>
           <td><%= movie.supervision %></td>
-          <td><%= movie.viewing %></td>
           <td><%= link_to "編集", edit_dashboard_movie_path(movie), class:"btn btn-outline-secondary" %></td>
           <td><%= link_to "削除", dashboard_movie_path(movie), method: :delete, data: { confirm: '映画を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
         </tr>
