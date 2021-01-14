@@ -1,15 +1,23 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-3">
+    <div class="d-none d-lg-block col-lg-3">
       <%= render partial: "movies/sidebar" %>
     </div>
     <div class="col-lg-9">
       <div class="d-flex align-items-end">
         <h2 class="mt-5 mb-3 text-light p-3 d-inline-block rounded" style="background-color: #4CA2FF;">
           <i class="fas fa-film"></i>
-          映画一覧
+          <% if @country.present? %>
+            <%= @country.name %>の映画
+          <% else %>
+            映画一覧
+          <% end %>
         </h2>
         <%= form_with url: movies_path, method: :get, local: true, class:"form-inline ml-3 pb-3" do |f| %>
+          <% if @country.present? %>
+            <%= f.hidden_field :sort_country, value: @country.id %>
+          <% end %>
+          並び替え
           <% if @sorted.present? %>
             <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
           <% else %>

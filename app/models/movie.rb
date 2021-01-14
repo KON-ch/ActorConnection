@@ -9,6 +9,10 @@ class Movie < ApplicationRecord
   extend DisplayList
   extend SortInfo
 
+  scope :country_movies, -> (country, page) {
+    where(country_id: country).display_list(page)
+  }
+
   scope :sort_list, -> {
     {
       "並び替え" => "",

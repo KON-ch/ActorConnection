@@ -1,13 +1,19 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy, :favorite]
-  before_action :set_countries, only: [:new, :edit]
+  before_action :set_countries, only: [:index, :new, :edit]
   before_action :authenticate_user!
   
-  PER = 3
-
   def index
     if sort_params.present?
-      @movies = Movie.sort_info(sort_params, params[:page])
+      if sort_params[:sort_country].present?
+        set_country(sort_params[:sort_country])
+        @movies = Movie.where(country_id: sort_params[:sort_country]).sort_info(sort_params, params[:page])
+      else
+        @movies = Movie.sort_info(sort_params, params[:page])
+      end
+    elsif params[:country].present?
+      set_country(params[:country])
+      @movies = Movie.country_movies(@country, params[:page])
     else
       @movies = Movie.display_list(params[:page])
     end
@@ -64,6 +70,10 @@ class MoviesController < ApplicationController
 
     def set_countries
       @countries = Country.all
+    end
+
+    def set_country(country)
+      @country = Country.request_country(country)
     end
 
     def sort_params

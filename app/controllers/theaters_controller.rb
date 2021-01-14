@@ -2,8 +2,6 @@ class TheatersController < ApplicationController
   before_action :set_theater, only: [:show, :edit, :update, :destroy, :favorite]
   before_action :set_countries, only: [:index, :new, :edit]
   before_action :authenticate_user!
-  
-  PER = 3
 
   def index
     if sort_params.present?

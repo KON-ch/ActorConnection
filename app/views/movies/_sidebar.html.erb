@@ -1,0 +1,5 @@
+<% @countries.each do |country| %>
+  <div>
+    <%= link_to country.name, movies_path(country: country.id) %>
+  </div>
+<% end %>
