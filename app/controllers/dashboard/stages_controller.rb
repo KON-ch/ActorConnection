@@ -53,7 +53,7 @@ class Dashboard::StagesController < ApplicationController
 
   def destroy
     @stage.destroy
-    redirect_to dashboard_stages_path
+    redirect_to dashboard_stages_path, notice: "公演情報を削除しました" 
   end
 
   private

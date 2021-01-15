@@ -44,15 +44,15 @@ class Dashboard::MoviesController < ApplicationController
 
   def update
     if @movie.update_attributes(movie_params)
-      redirect_to dashboard_movies_path, notice: "映画情報を修正しました" 
+      redirect_to dashboard_movies_path, notice: "映画情報を更新しました"
     else
       render :edit
     end
   end
 
   def destroy
-    @moive.destroy
-    redirect_to dashboard_movies_path
+    @movie.destroy
+    redirect_to dashboard_movies_path, notice: "映画情報を削除しました"
   end
 
   private

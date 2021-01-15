@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="d-none d-lg-block col-lg-3">
+    <div class="d-none d-lg-block col-lg-2">
       <%= render partial: "movies/sidebar" %>
     </div>
-    <div class="col-lg-9">
+    <div class="col-lg-10">
       <h2 class="mt-5 mb-3 text-light p-3 d-inline-block rounded" style="background-color: #4CA2FF;">
         <i class="fas fa-film"></i>
         <% if @country.present? %>
@@ -49,6 +49,15 @@
                   <p class="card-title"><%= movie.sub_title %></p>
                 <% end %>
                 <p class="card-text"></p>
+              </div>
+              <div class="card-footer">
+                <%= link_to favorite_movie_path(movie), method: :post, style:"color: #FF8300;" do %>
+                  <% if current_user.likes?(movie) %>
+                    <i class="fas fa-star"></i>
+                  <% else %>
+                    <i class="far fa-star"></i>
+                  <% end %>
+                <% end %>
               </div>
             </div>
           </div>

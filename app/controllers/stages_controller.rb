@@ -23,7 +23,7 @@ class StagesController < ApplicationController
   def create
     @stage = Stage.new(stage_params)
     if @stage.save
-      redirect_to stages_path, notice: "公演情報を作成しました"
+      redirect_to stages_path, notice: "公演情報を登録しました"
     else
       render :new
     end
@@ -39,7 +39,7 @@ class StagesController < ApplicationController
 
   def destroy
     @stage.destroy
-    redirect_to stages_path
+    redirect_to stages_path, notice: "公演情報を削除しました" 
   end
 
   private

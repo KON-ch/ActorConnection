@@ -3,6 +3,7 @@ class Movie < ApplicationRecord
   belongs_to :country
 
   validates :title, presence: true
+  acts_as_likeable
 
   extend DisplayList
   extend SortInfo

@@ -44,7 +44,7 @@ class Dashboard::TheatersController < ApplicationController
 
   def update
     if @theater.update_attributes(theater_params)
-      redirect_to dashboard_theaters_path, notice: "戯曲情報を修正しました" 
+      redirect_to dashboard_theaters_path, notice: "戯曲情報を更新しました" 
     else
       render :edit
     end
@@ -52,7 +52,7 @@ class Dashboard::TheatersController < ApplicationController
 
   def destroy
     @theater.destroy
-    redirect_to dashboard_theaters_path
+    redirect_to dashboard_theaters_path, notice: "戯曲情報を削除しました" 
   end
 
   private

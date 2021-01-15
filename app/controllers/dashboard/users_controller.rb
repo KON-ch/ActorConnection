@@ -28,7 +28,7 @@ class Dashboard::UsersController < ApplicationController
     user = User.find(params[:id])
     user.deleted_flg = User.switch_flg(user.deleted_flg)
     user.save
-    redirect_to dashboard_users_path
+    redirect_to dashboard_users_path, notice: "ユーザー情報を削除しました" 
   end
 
   private

@@ -38,7 +38,7 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     if @movie.save
-      redirect_to movies_path, notice: "新しい映画を登録しました"
+      redirect_to movies_path, notice: "映画情報を登録しました"
     else
       render :new
     end
@@ -49,7 +49,7 @@ class MoviesController < ApplicationController
 
   def update
     if @movie.update_attributes(movie_params)
-      redirect_to movie_path(@movie), notice: "映画情報を修正しました" 
+      redirect_to movie_path(@movie), notice: "映画情報を更新しました" 
     else
       render :edit
     end
@@ -57,7 +57,7 @@ class MoviesController < ApplicationController
 
   def destroy
     @movie.destroy
-    redirect_to movies_path
+    redirect_to movies_path, notice: "映画情報を削除しました" 
   end
 
   def favorite

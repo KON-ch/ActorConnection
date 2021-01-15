@@ -43,7 +43,7 @@
       <% @stages.each do |stage| %>
         <tr>
           <td class="text-center">
-            <% if stage.start_date < Date.today && stage.end_date > Date.today %>
+            <% if stage.start_date <= Date.today && stage.end_date >= Date.today %>
               <label class="badge badge-pill badge-warning text-light py-1" style="background-color: #FF8300;">Now</label>
             <% end %>
           </td>

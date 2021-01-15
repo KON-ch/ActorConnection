@@ -25,14 +25,15 @@ class UsersController < ApplicationController
   end
 
   def favorite
-    @favorites = @user.likees(Theater)
+    @favorites_theater = @user.likees(Theater)
+    @favorites_movie = @user.likees(Movie)
   end
 
   def destroy
     @user.deleted_flg = User.switch_flg(@user.deleted_flg)
     @user.save
     sign_out(@user)
-    redirect_to root_path
+    redirect_to root_path, notice: "退会処理が完了しました" 
   end
 
   private

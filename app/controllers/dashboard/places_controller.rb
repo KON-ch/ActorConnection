@@ -11,7 +11,7 @@ class Dashboard::PlacesController < ApplicationController
   def create
     @place = Place.new(place_params)
     if @place.save
-      redirect_to dashboard_places_path, notice: "公演情報を作成しました"
+      redirect_to dashboard_places_path, notice: "劇場情報を作成しました"
     else
       render :new
     end
@@ -22,7 +22,7 @@ class Dashboard::PlacesController < ApplicationController
 
   def update
     if @place.update_attributes(place_params)
-      redirect_to dashboard_places_path, notice: "公演情報を更新しました"
+      redirect_to dashboard_places_path, notice: "劇場情報を更新しました"
     else
       render :edit
     end
@@ -30,7 +30,7 @@ class Dashboard::PlacesController < ApplicationController
 
   def destroy
     @place.destroy
-    redirect_to dashboard_places_path
+    redirect_to dashboard_places_path, notice: "劇場情報を削除しました" 
   end
 
   private

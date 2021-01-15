@@ -54,6 +54,15 @@
                 <% end %>
                 <p class="card-text"><%= theater.writer %></p>
               </div>
+              <div class="card-footer">
+                <%= link_to favorite_theater_path(theater), method: :post, style:"color: #FF8300;" do %>
+                  <% if current_user.likes?(theater) %>
+                    <i class="fas fa-star"></i>
+                  <% else %>
+                    <i class="far fa-star"></i>
+                  <% end %>
+                <% end %>
+              </div>
             </div>
           </div>
         <% end %>
