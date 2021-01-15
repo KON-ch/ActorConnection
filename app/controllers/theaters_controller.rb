@@ -6,28 +6,22 @@ class TheatersController < ApplicationController
   def index
     if params[:keyword] != nil
       @keyword = params[:keyword]
-      @theaters = search_theater.display_list(params[:pages])
-      total_count(search_theater)
+      display_theater(search_theater)
     elsif sort_params.present?
       if sort_params[:sort_country].present?
         set_country(sort_params[:sort_country])
-        @theaters = Theater.country_theaters(sort_params[:sort_country]).sort_info(sort_params, params[:page])
-        total_count(Theater.country_theaters(sort_params[:sort_country]))
+        sort_theater(Theater.country_theaters(sort_params[:sort_country]))
       elsif params[:sort_keyword].present?
         @keyword = params[:sort_keyword]
-        @theaters = search_theater.sort_info(sort_params, params[:page])
-        total_count(search_theater)
+        sort_theater(search_theater)
       else
-        @theaters = Theater.sort_info(sort_params, params[:page])
-        total_count(Theater)
+        sort_theater(Theater)
       end
     elsif params[:country].present?
       set_country(params[:country])
-      @theaters = Theater.country_theaters(@country).display_list(params[:page])
-      total_count(Theater.country_theaters(@country))
+      display_theater(Theater.country_theaters(@country))
     else
-      @theaters = Theater.display_list(params[:page])
-      total_count(Theater)
+      display_theater(Theater)
     end
     @sort_list = Theater.sort_list
   end
@@ -98,6 +92,16 @@ class TheatersController < ApplicationController
   
     def total_count(theater)
       @total_count = theater.count
+    end
+
+    def display_theater(theater)
+      @theaters = theater.display_list(params[:pages])
+      total_count(theater)
+    end
+
+    def sort_theater(theater)
+      @theaters = theater.sort_info(sort_params, params[:page])
+        total_count(theater)
     end
 
 end
