@@ -1,21 +1,33 @@
 class TheatersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_theater, only: [:show, :edit, :update, :destroy, :favorite]
   before_action :set_countries, only: [:index, :new, :edit]
-  before_action :authenticate_user!
 
   def index
-    if sort_params.present?
+    if params[:keyword] != nil
+      @keyword = params[:keyword]
+      @theaters = search_theater.display_list(params[:pages])
+      total_count(search_theater)
+    elsif sort_params.present?
       if sort_params[:sort_country].present?
         set_country(sort_params[:sort_country])
-        @theaters = Theater.where(country_id: sort_params[:sort_country]).sort_info(sort_params, params[:page])
+        @theaters = Theater.country_theaters(sort_params[:sort_country]).sort_info(sort_params, params[:page])
+        total_count(Theater.country_theaters(sort_params[:sort_country]))
+      elsif params[:sort_keyword].present?
+        @keyword = params[:sort_keyword]
+        @theaters = search_theater.sort_info(sort_params, params[:page])
+        total_count(search_theater)
       else
         @theaters = Theater.sort_info(sort_params, params[:page])
+        total_count(Theater)
       end
     elsif params[:country].present?
       set_country(params[:country])
-      @theaters = Theater.country_theaters(@country, params[:page])
+      @theaters = Theater.country_theaters(@country).display_list(params[:page])
+      total_count(Theater.country_theaters(@country).display_list(params[:page]))
     else
       @theaters = Theater.display_list(params[:page])
+      total_count(Theater)
     end
     @sort_list = Theater.sort_list
   end
@@ -78,6 +90,14 @@ class TheatersController < ApplicationController
 
     def sort_params
       params.permit(:sort, :sort_country)
+    end
+
+    def search_theater
+      Theater.where("title LIKE ? OR writer LIKE ?", "%#{@keyword}%", "%#{@keyword}%")
+    end
+  
+    def total_count(theater)
+      @total_count = theater.count
     end
 
 end

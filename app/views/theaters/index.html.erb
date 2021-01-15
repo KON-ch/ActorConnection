@@ -4,27 +4,35 @@
       <%= render partial: "theaters/sidebar" %>
     </div>
     <div class="col-lg-10">
-      <div class="d-flex align-items-end">
-        <h2 class="mt-5 mb-3 text-light p-3 d-inline-block rounded" style="background-color: #4CA2FF;">
-          <i class="fas fa-book-open"></i>
-          <% if @country.present? %>
-            <%= @country.name %>の戯曲
-          <% else %>
-            戯曲一覧
-          <% end %>
-        </h2>
-        <%= form_with url: theaters_path, method: :get, local: true, class:"form-inline ml-3 pb-3" do |f| %>
-          <% if @country.present? %>
-            <%= f.hidden_field :sort_country, value: @country.id %>
-          <% end %>
-          並び替え
-          <% if @sorted.present? %>
-            <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
-          <% else %>
-            <%= f.select :sort, @sort_list, {}, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
-          <% end %>
+      <h2 class="mt-5 mb-3 text-light p-3 d-inline-block rounded" style="background-color: #4CA2FF;">
+        <i class="fas fa-book-open"></i>
+        <% if @country.present? %>
+          <%= @country.name %>の戯曲
+        <% else %>
+          戯曲一覧
         <% end %>
+      </h2>
+      <div class="d-flex flex-inline">
+        <%= form_with url: theaters_path, method: :get, local: true, class:"form-inline pb-3" do |f| %>
+          <div class="d-flex align-items-center">
+            作品名・作者名
+          </div>
+          <%= f.text_field :keyword, class: "ml-3 w-50" %>
+          <%= f.submit "検索", class: "d-flex btn btn-outline-secondary ml-3" %>
+        <% end %>
+        <p class="align-items-center d-flex ml-3">合計<%= @total_count%>件</p>
       </div>
+      <%= form_with url: theaters_path, method: :get, local: true, class:"form-inline mb-3" do |f| %>
+        <% if @country.present? %>
+          <%= f.hidden_field :sort_country, value: @country.id %>
+        <% end %>
+        <%= f.hidden_field :sort_keyword, value: @keyword %>
+        <% if @sorted.present? %>
+          <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();", class:"form-inline" %>
+        <% else %>
+          <%= f.select :sort, @sort_list, {}, onChange: "javascript: this.form.submit();", class:"form-inline" %>
+        <% end %>
+      <% end %>
       
       <div class="row row-cols-4">
         <% @theaters.each do |theater| %>

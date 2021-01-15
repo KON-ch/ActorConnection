@@ -12,8 +12,8 @@ class Theater < ApplicationRecord
   extend DisplayList
   extend SortInfo
 
-  scope :country_theaters, -> (country, page) {
-    where(country_id: country).display_list(page)
+  scope :country_theaters, -> (country) {
+    where(country_id: country)
   }
 
   scope :sort_list, -> {
