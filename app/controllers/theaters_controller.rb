@@ -24,7 +24,7 @@ class TheatersController < ApplicationController
     elsif params[:country].present?
       set_country(params[:country])
       @theaters = Theater.country_theaters(@country).display_list(params[:page])
-      total_count(Theater.country_theaters(@country).display_list(params[:page]))
+      total_count(Theater.country_theaters(@country))
     else
       @theaters = Theater.display_list(params[:page])
       total_count(Theater)

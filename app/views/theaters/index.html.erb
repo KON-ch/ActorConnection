@@ -12,16 +12,15 @@
           戯曲一覧
         <% end %>
       </h2>
+    
       <div class="d-flex flex-inline">
         <%= form_with url: theaters_path, method: :get, local: true, class:"form-inline pb-3" do |f| %>
-          <div class="d-flex align-items-center">
-            作品名・作者名
-          </div>
-          <%= f.text_field :keyword, class: "ml-3 w-50" %>
+          <%= f.text_field :keyword, placeholder:"作品名・作者名", class: "w-75" %>
           <%= f.submit "検索", class: "d-flex btn btn-outline-secondary ml-3" %>
         <% end %>
         <p class="align-items-center d-flex ml-3">合計<%= @total_count%>件</p>
       </div>
+
       <%= form_with url: theaters_path, method: :get, local: true, class:"form-inline mb-3" do |f| %>
         <% if @country.present? %>
           <%= f.hidden_field :sort_country, value: @country.id %>
@@ -61,10 +60,10 @@
       </div>
 
       <%= paginate @theaters %>
-      <%= link_to new_theater_path, class:"btn btn-primary w-25 my-5", local: true do %>
+
+      <%= link_to new_theater_path, class:"btn btn-primary w-25 float-right", local: true do %>
         新しく戯曲を登録
       <% end %>
-    
     </div>
   </div>
 </div>

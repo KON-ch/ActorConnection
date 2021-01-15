@@ -7,8 +7,8 @@ class Movie < ApplicationRecord
   extend DisplayList
   extend SortInfo
 
-  scope :country_movies, -> (country, page) {
-    where(country_id: country).display_list(page)
+  scope :country_movies, -> (country) {
+    where(country_id: country)
   }
 
   scope :sort_list, -> {

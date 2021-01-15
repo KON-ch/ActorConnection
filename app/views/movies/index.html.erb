@@ -4,27 +4,34 @@
       <%= render partial: "movies/sidebar" %>
     </div>
     <div class="col-lg-9">
-      <div class="d-flex align-items-end">
-        <h2 class="mt-5 mb-3 text-light p-3 d-inline-block rounded" style="background-color: #4CA2FF;">
-          <i class="fas fa-film"></i>
-          <% if @country.present? %>
-            <%= @country.name %>の映画
-          <% else %>
-            映画一覧
-          <% end %>
-        </h2>
-        <%= form_with url: movies_path, method: :get, local: true, class:"form-inline ml-3 pb-3" do |f| %>
-          <% if @country.present? %>
-            <%= f.hidden_field :sort_country, value: @country.id %>
-          <% end %>
-          並び替え
-          <% if @sorted.present? %>
-            <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
-          <% else %>
-            <%= f.select :sort, @sort_list, {}, onChange: "javascript: this.form.submit();", class:"form-inline ml-2" %>
-          <% end %>
+      <h2 class="mt-5 mb-3 text-light p-3 d-inline-block rounded" style="background-color: #4CA2FF;">
+        <i class="fas fa-film"></i>
+        <% if @country.present? %>
+          <%= @country.name %>の映画
+        <% else %>
+          映画一覧
         <% end %>
+      </h2>
+
+      <div class="d-flex flex-inline">
+        <%= form_with url: movies_path, method: :get, local: true, class:"form-inline pb-3" do |f| %>
+          <%= f.text_field :keyword, placeholder:"作品名・監督名", class: "w-75" %>
+          <%= f.submit "検索", class: "d-flex btn btn-outline-secondary ml-3" %>
+        <% end %>
+        <p class="align-items-center d-flex ml-3">合計<%= @total_count%>件</p>
       </div>
+
+      <%= form_with url: movies_path, method: :get, local: true, class:"form-inline pb-3" do |f| %>
+        <% if @country.present? %>
+          <%= f.hidden_field :sort_country, value: @country.id %>
+        <% end %>
+        <%= f.hidden_field :sort_keyword, value: @keyword %>
+        <% if @sorted.present? %>
+          <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();", class:"form-inline" %>
+        <% else %>
+          <%= f.select :sort, @sort_list, {}, onChange: "javascript: this.form.submit();", class:"form-inline" %>
+        <% end %>
+      <% end %>
       
       <div class="row row-cols-3">
         <% @movies.each do |movie| %>
@@ -49,7 +56,7 @@
       </div>
 
       <%= paginate @movies %>
-      <%= link_to "新しく映画を登録", new_movie_path, class:"btn btn-primary w-25 my-5" %>
+      <%= link_to "新しく映画を登録", new_movie_path, class:"btn btn-primary w-25 float-right" %>
     </div>
   </div>
 </div>
