@@ -4,7 +4,23 @@
   </h2>
 </div>
 <div class="container">
-  <%= link_to "+ 新規登録", new_dashboard_place_path, class:"btn btn-outline-primary mt-3 mb-5", style:"font-size: 1.4rem;" %>
+  <%= form_with model: @place, url: dashboard_places_path, local: true do |f| %>
+    <div class="form-group row">
+      <%= f.label :name, "劇場名", class:"col-lg-2 offset-lg-1 col-form-label text-left px-0" %>
+      <%= f.text_field :name, class: "form-control col-lg-5" %>
+    </div>
+    <div class="form-group row">
+      <%= f.label :address, "住所", class:"col-lg-2 offset-lg-1 col-form-label text-left px-0" %>
+      <%= f.text_field :address, class:"form-control col-lg-5" %>
+    </div>
+    <div class="form-group row">
+      <%= f.label :access, "アクセス", class:"col-lg-2 offset-lg-1 col-form-label text-left px-0" %>
+      <%= f.text_area :access, class:"form-control col-lg-5" %>
+    </div>
+    <div class="form-group text-right row">
+      <%= f.submit "登録", class:"btn btn-primary mt-3 col-lg-2 offset-lg-6" %>
+    </div>
+  <% end %>
 
   <table class="table table-hover">
     <thead>

@@ -16,15 +16,6 @@
     </ul>
   </div>
 
-  <h2 class="text-secondary" style="font-size: 1.5rem;">劇場情報管理</h2>
-  <div class="d-flex flex-column mb-3">
-    <ul class="pl-4">
-      <li><%= link_to "劇場情報一覧", dashboard_places_path, class:"text-dark" %></li>
-      <li><%= link_to "劇場情報登録", new_dashboard_place_path, class:"text-dark" %></li>
-    </ul>
-
-  </div>
-
   <h2 style="font-size: 1.5rem;">AD & WS 管理</h2>
   <div class="d-flex flex-column mb-3">
     <label class="">劇場一覧</label>
@@ -44,6 +35,7 @@
     <ul class="pl-4">
       <li>新着情報管理</li>
       <li><%= link_to "ユーザー管理", dashboard_users_path, class:"text-dark" %></li>
+      <li><%= link_to "劇場情報管理", dashboard_places_path, class:"text-dark" %></li>
       <li><%= link_to "国名管理", dashboard_countries_path, class:"text-dark" %></li>
       <li>管理者一覧</li>
     </ul>
