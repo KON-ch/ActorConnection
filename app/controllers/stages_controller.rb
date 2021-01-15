@@ -62,4 +62,5 @@ class StagesController < ApplicationController
     def sort_params
       params.permit(:sort)
     end
+    
 end

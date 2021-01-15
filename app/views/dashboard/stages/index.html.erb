@@ -29,6 +29,7 @@
   <table class="table table-hover">
     <thead>
       <tr>
+        <th></th>
         <th>題名</th>
         <th>開演日</th>
         <th>終演日</th>
@@ -41,11 +42,16 @@
     <tbody>
       <% @stages.each do |stage| %>
         <tr>
-          <td><%= Theater.find_by(params[id: stage.theater_id]).title %></td>
+          <td class="text-center">
+            <% if stage.start_date < Date.today && stage.end_date > Date.today %>
+              <label class="badge badge-pill badge-warning text-light py-1" style="background-color: #FF8300;">Now</label>
+            <% end %>
+          </td>
+          <td><%= Theater.find(stage.theater_id).title %></td>
           <td><%= stage.start_date.mon %>月<%= stage.start_date.day %>日</td>
           <td><%= stage.end_date.mon %>月<%= stage.end_date.day %>日</td>
           <td><%= stage.company %></td>
-          <td><%= Place.find_by(params[id: stage.place_id]).name %></td>
+          <td><%= Place.find(stage.place_id).name %></td>
           <td><%= link_to "編集", edit_dashboard_stage_path(stage), class:"btn btn-outline-secondary" %></td>
           <td><%= link_to "削除", dashboard_stage_path(stage), method: :delete, data: { confirm: '公演情報を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
         </tr>

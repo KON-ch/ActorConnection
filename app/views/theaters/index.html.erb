@@ -34,7 +34,7 @@
                 <%= Country.find(theater.country_id).name %>
                 <div class="float-right">
                   <% if theater.man.nil? && theater.female.nil? %>
-                    <%= link_to "未登録", edit_theater_path(theater), style:"color: #FF8300;" %>
+                    <%= link_to "未登録", edit_theater_path(theater), class:"badge badge-pill badge-warning text-light py-2", style:"background-color: #FF8300;" %>
                   <% else %>
                     男<%= theater.man%>
                     女<%= theater.female%>
