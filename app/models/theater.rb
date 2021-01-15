@@ -16,6 +16,10 @@ class Theater < ApplicationRecord
     where(country_id: country)
   }
 
+  scope :search_theaters, -> (keyword) {
+    where("title LIKE ? OR writer LIKE ?", "%#{keyword}%", "%#{keyword}%")
+  }
+
   scope :sort_list, -> {
     {
       "並び替え" => "",

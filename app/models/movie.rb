@@ -11,6 +11,10 @@ class Movie < ApplicationRecord
     where(country_id: country)
   }
 
+  scope :search_movies, -> (keyword) {
+    where("title LIKE ? OR supervision LIKE ? OR sub_title LIKE ?", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
+  }
+
   scope :sort_list, -> {
     {
       "並び替え" => "",

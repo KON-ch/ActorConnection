@@ -93,7 +93,7 @@ class TheatersController < ApplicationController
     end
 
     def search_theater
-      Theater.where("title LIKE ? OR writer LIKE ?", "%#{@keyword}%", "%#{@keyword}%")
+      Theater.search_theaters(@keyword)
     end
   
     def total_count(theater)

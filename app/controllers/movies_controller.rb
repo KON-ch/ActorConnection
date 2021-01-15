@@ -6,28 +6,22 @@ class MoviesController < ApplicationController
   def index
     if params[:keyword] != nil
       @keyword = params[:keyword]
-      @movies = search_movie.display_list(params[:pages])
-      total_count(search_movie)
+      display_movie(search_movie)
     elsif sort_params.present?
       if sort_params[:sort_country].present?
         set_country(sort_params[:sort_country])
-        @movies = Movie.country_movies(sort_params[:sort_country]).sort_info(sort_params, params[:page])
-        total_count(Movie.country_movies(sort_params[:sort_country]))
+        sort_movie(Movie.country_movies(sort_params[:sort_country]))
       elsif params[:sort_keyword].present?
         @keyword = params[:sort_keyword]
-        @movies = search_movie.sort_info(sort_params, params[:page])
-        total_count(search_movie)
+        sort_movie(search_movie)
       else
-        @movies = Movie.sort_info(sort_params, params[:page])
-        total_count(Theater)
+        sort_movie(Movie)
       end
     elsif params[:country].present?
       set_country(params[:country])
-      @movies = Movie.country_movies(@country).display_list(params[:page])
-      total_count(Movie.country_movies(@country))
+      display_movie(Movie.country_movies(@country))
     else
-      @movies = Movie.display_list(params[:page])
-      total_count(Movie)
+      display_movie(Movie)
     end
     @sort_list = Movie.sort_list
   end
@@ -89,14 +83,24 @@ class MoviesController < ApplicationController
     end
 
     def sort_params
-      params.permit(:sort)
+      params.permit(:sort, :sort_country)
     end
 
     def search_movie
-      Movie.where("title LIKE ? OR supervision LIKE ?", "%#{@keyword}%", "%#{@keyword}%")
+      Movie.search_movies(@keyword)
     end
   
     def total_count(movie)
       @total_count = movie.count
+    end
+
+    def display_movie(movie)
+      @movies = movie.display_list(params[:pages])
+      total_count(movie)
+    end
+
+    def sort_movie(movie)
+      @movies = movie.sort_info(sort_params, params[:page])
+      total_count(movie)
     end
 end
