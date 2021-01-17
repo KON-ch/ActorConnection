@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-
-  get 'index/new'
-  get 'index/create'
-  get 'index/destroy'
+  
   devise_for :admins, :controllers => {
     :sessions => 'admins/sessions'
   }

@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
-  before_action :set_user
   before_action :authenticate_user!
+  before_action :set_user
 
   def update
+    byebug
     @user.update_without_password(user_params)
-    redirect_to mypage_users_url
+    redirect_to mypage_users_path
   end
 
   def mypage
@@ -38,7 +39,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.permit(:name, :email, :birthday, :sex, :profile, :password, :password_confirmation, :deleted_flg)
+      params.require(:user).permit(:name, :email, :birthday, :sex, :profile, :password, :password_confirmation, :deleted_flg)
     end
 
     def set_user

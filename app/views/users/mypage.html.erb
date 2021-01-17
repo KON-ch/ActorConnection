@@ -5,7 +5,8 @@
 
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <%= form_with url: mypage_users_path, local: true, method: :put do |f| %>
+      <%= form_with model: @user, url: mypage_users_path, local: true, method: :put do |f| %>
+        
         <div class="form-group">
           <div class="d-flex justify-content-between">
             <%= f.label :name, "名前", class: "text-md-left" %>
@@ -51,9 +52,9 @@
             <%= f.submit "保存", class: "btn btn-primary mt-3 w-25" %>
 
             <% if @user.errors.messages[:email].present? %>
-            <span class="invalid-feedback" role="alert">
-              <strong>メールアドレスを入力してください</strong>
-            </span>
+              <span class="invalid-feedback" role="alert">
+                <strong>メールアドレスを入力してください</strong>
+              </span>
             <% end %>
           </div>
         </div>
@@ -140,6 +141,8 @@
     </div>
   </div>
 </div>
+
+<%= javascript_pack_tag "users/new"%>
 
 <script type="text/javascript">
   let switchEditUserInfo = (textClass, inputClass, labelClass) => {

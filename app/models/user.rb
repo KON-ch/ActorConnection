@@ -2,6 +2,9 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :theaters
   has_many :stages
+  acts_as_liker
+  has_one_attached :image
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -9,8 +12,6 @@ class User < ApplicationRecord
 
   validates :profile, length: { maximum: 255, too_lonb: "最大%{count}文字まで入力できます" }
   validates :password, length: { in: 6..20 }
-
-  acts_as_liker
 
   enum sex: { "男性": 0, "女性": 1, "秘密": 9}
   
