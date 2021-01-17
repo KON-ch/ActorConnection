@@ -1,10 +1,9 @@
-function handleImage(image) {
+window.handleImage = function(image) {
   let reader = new FileReader();
-  reader.onload = function(e) {
-    let imagePreview = $("#user-image-preview");
-    imagePreview.attr("src", e.target.result);
-    imagePreview.attr("class", "img-fluid w-25");
-  };
-console.log(image);
-reader.readAsDataURL(image[0]);
+  reader.addEventListener("load", function() {
+    let imagePreview = document.getElementById("user-image-preview");
+    imagePreview.setAttribute('src', reader.result);
+    imagePreview.setAttribute('class', "img-fluid w-25");
+  });
+  reader.readAsDataURL(image[0]);
 }

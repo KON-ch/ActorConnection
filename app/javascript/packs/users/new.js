@@ -1,12 +1,12 @@
 /* global $ */
-document.addEventListener('turbolinks:load', function(){
-  document.getElementById('user_image').addEventListener( "change", function(){
+$(document).on('turbolinks:load', () => {
+  $('#user_image').onchange(function() {
     if (this.files && this.files[0]) {
       let reader = new FileReader();
-        reader.addEventListener("load", function(e) {
-          document.getElementById('user-image-preview').setAttribute('src', e.target.result);
-          document.getElementById('user-image-preview').setAttribute('class', "img-fluid w-25");
-        })
+        reader.onload = function(e) {
+          $('#user-image-preview').attr('src', e.target.result);
+          $('#user-image-preview').attr('class', 'img-fluid w-25');
+        }
       reader.readAsDataURL(this.files[0]);
     }
   });

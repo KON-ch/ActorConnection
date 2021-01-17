@@ -11,7 +11,7 @@ class User < ApplicationRecord
   :recoverable, :rememberable, :validatable
 
   validates :profile, length: { maximum: 255, too_lonb: "最大%{count}文字まで入力できます" }
-  validates :password, length: { in: 6..20 }
+  validates :password, length: { in: 6..20 }, on: :update_password
 
   enum sex: { "男性": 0, "女性": 1, "秘密": 9}
   

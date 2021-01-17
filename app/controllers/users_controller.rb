@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   before_action :set_user
 
   def update
-    byebug
     @user.update_without_password(user_params)
     redirect_to mypage_users_path
   end
@@ -13,11 +12,15 @@ class UsersController < ApplicationController
 
   def update_password
     if password_set?
-      @user.update_password(user_params)
-      flash[:notice] = "パスワードは正しく更新されました"
-      redirect_to root_url
+      if @user.update_password(user_params)
+        flash[:notice] = "パスワードは正しく更新されました"
+        redirect_to root_url
+      else
+        flash[:alert] = "パスワードを6文字以上で入力してください"
+        render "edit_password"
+      end
     else
-      @user.errors.add(:password, "パスワードに不備があります")
+      @user.errors.add(:password, "パスワードが一致しません")
       render "edit_password"
     end
   end
@@ -39,7 +42,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :email, :birthday, :sex, :profile, :password, :password_confirmation, :deleted_flg)
+      params.permit(:name, :email, :birthday, :sex, :profile, :password, :password_confirmation, :deleted_flg, :image) 
     end
 
     def set_user

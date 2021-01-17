@@ -5,8 +5,21 @@
 
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <%= form_with model: @user, url: mypage_users_path, local: true, method: :put do |f| %>
-        
+      <%= form_with url: mypage_users_path, local: true, method: :put do |f| %>
+        <div class="form-inline my-4 row">
+          <%= f.label "画像", class: "col-2 d-flex justify-content-start" %>
+          <% if @user.image.attached? %>
+            <%= image_tag @user.image, id:"user-image-preview", class:"img-fluid w-25" %>
+          <% else %>
+            <img src="#" id="user-image-preview">
+          <% end %>
+          <div class="d-flex flex-column ml-2">
+            <%= f.label "画像を選択", for:"user_image", class:"btn btn-outline-secondary" %>
+            <%= f.file_field :image, {onchange: "javascript: handleImage(this.files);"} %>
+            <%= f.submit "保存", class: "btn btn-primary mt-3" %>
+          </div>
+        </div>
+
         <div class="form-group">
           <div class="d-flex justify-content-between">
             <%= f.label :name, "名前", class: "text-md-left" %>
@@ -142,7 +155,7 @@
   </div>
 </div>
 
-<%= javascript_pack_tag "users/new"%>
+<%= javascript_pack_tag "users/edit"%>
 
 <script type="text/javascript">
   let switchEditUserInfo = (textClass, inputClass, labelClass) => {
