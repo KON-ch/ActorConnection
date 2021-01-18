@@ -94,7 +94,7 @@ class TheatersController < ApplicationController
     end
 
     def display_theater(theater)
-      @theaters = theater.display_list(params[:pages])
+      @theaters = theater.display_list(params[:page])
       total_count(theater)
     end
 

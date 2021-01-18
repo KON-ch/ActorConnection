@@ -95,7 +95,7 @@ class MoviesController < ApplicationController
     end
 
     def display_movie(movie)
-      @movies = movie.display_list(params[:pages])
+      @movies = movie.display_list(params[:page])
       total_count(movie)
     end
 
