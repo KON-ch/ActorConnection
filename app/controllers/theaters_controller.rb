@@ -62,7 +62,6 @@ class TheatersController < ApplicationController
 
   def favorite
     current_user.toggle_like!(@theater)
-    redirect_to theaters_path, notice: "戯曲情報を削除しました" 
   end
 
   private
