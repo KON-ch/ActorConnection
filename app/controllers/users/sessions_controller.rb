@@ -10,7 +10,12 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    super
+    user = User.find_by(email: params[:user][:email])
+    if user.present? && !user.deleted_flg?
+      super
+      return
+    end
+    redirect_to root_path
   end
 
   # DELETE /resource/sign_out
