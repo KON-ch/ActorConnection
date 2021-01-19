@@ -40,6 +40,7 @@ class MoviesController < ApplicationController
     if @movie.save
       redirect_to movies_path, notice: "映画情報を登録しました"
     else
+      @countries = Country.all
       render :new
     end
   end

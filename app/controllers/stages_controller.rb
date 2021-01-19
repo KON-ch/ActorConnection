@@ -25,6 +25,8 @@ class StagesController < ApplicationController
     if @stage.save
       redirect_to stages_path, notice: "公演情報を登録しました"
     else
+      @theaters = Theater.all
+      @places = Place.all
       render :new
     end
   end

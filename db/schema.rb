@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_16_110358) do
+ActiveRecord::Schema.define(version: 2021_01_19_023239) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 2021_01_16_110358) do
     t.string "supervision"
     t.integer "country_id"
     t.index ["country_id"], name: "index_movies_on_country_id"
+    t.index ["title", "sub_title"], name: "index_movies_on_title_and_sub_title", unique: true
     t.index ["user_id"], name: "index_movies_on_user_id"
   end
 
@@ -125,6 +126,7 @@ ActiveRecord::Schema.define(version: 2021_01_16_110358) do
     t.integer "user_id"
     t.integer "place_id"
     t.index ["place_id"], name: "index_stages_on_place_id"
+    t.index ["theater_id", "start_date"], name: "index_stages_on_theater_id_and_start_date", unique: true
     t.index ["theater_id"], name: "index_stages_on_theater_id"
     t.index ["user_id"], name: "index_stages_on_user_id"
   end
@@ -139,6 +141,7 @@ ActiveRecord::Schema.define(version: 2021_01_16_110358) do
     t.integer "user_id"
     t.integer "country_id"
     t.index ["country_id"], name: "index_theaters_on_country_id"
+    t.index ["title", "writer"], name: "index_theaters_on_title_and_writer", unique: true
     t.index ["user_id"], name: "index_theaters_on_user_id"
   end
 

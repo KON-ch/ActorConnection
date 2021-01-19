@@ -40,6 +40,7 @@ class TheatersController < ApplicationController
     if @theater.save
       redirect_to theaters_path, notice: "戯曲情報を登録しました"
     else
+      @countries = Country.all
       render :new
     end
   end

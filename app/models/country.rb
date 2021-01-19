@@ -2,7 +2,7 @@ class Country < ApplicationRecord
   has_many :theaters
   has_many :movies
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true, on: :create
 
   scope :request_country, -> (country) { find(country.to_i) }
 
