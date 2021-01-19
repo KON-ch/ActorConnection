@@ -1,0 +1,28 @@
+ <div class="row row-cols-2 row-cols-sm-4 mt-4">
+  <% @favorites_movie.each do |movie| %>
+    <div class="col mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-header">
+          <%= Country.find(movie.country_id).name %>
+          <div class="float-right">
+            <%= movie.production.year %>
+          </div>
+        </div>
+        <div class="card-body">
+          <%= link_to movie_path(movie), class:"text-decoration-none text-dark" do %>
+            <p class="card-title" style="font-size: 1.8rem;"><%= movie.title %></p>
+            <p class="card-title"><%= movie.sub_title %></p>
+          <% end %>
+          <p class="card-text"></p>
+        </div>
+        <div class="card-footer">
+          <%= link_to favorite_movie_path(movie), method: :post, remote: true, style:"color: #FF8300;" do %>
+            <div id="favorite-movie-<%= movie.id %>">
+              <%= render partial: "movies/favorite", locals: {movie: movie} %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

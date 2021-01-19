@@ -1,1 +1,1 @@
-$("#favorite-<%= @movie.id %>").html("<%= j(render partial: "moviess/favorite", locals: {movie: @movie}) %>");
+$("#favorite-movie-<%= @movie.id %>").html("<%= j(render partial: "movies/favorite", locals: {movie: @movie}) %>");

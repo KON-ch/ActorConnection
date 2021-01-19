@@ -1,0 +1,32 @@
+<div class="row row-cols-2 row-cols-sm-4 mt-4">
+  <% @favorites_theater.each do |theater| %>
+    <div class="col mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-header">
+          <%= Country.find(theater.country_id).name %>
+          <div class="float-right">
+            <% if theater.man.nil? && theater.female.nil? %>
+              <%= link_to "未登録", edit_theater_path(theater), class:"badge badge-pill badge-warning text-light py-2", style:"background-color: #FF8300;" %>
+            <% else %>
+              男<%= theater.man%>
+              女<%= theater.female%>
+            <% end %>
+          </div>
+        </div>
+        <div class="card-body">
+          <%= link_to theater_path(theater) do %>
+            <p class="card-title text-dark" style="font-size:1.8rem;"><%= theater.title %></p>
+          <% end %>
+          <p class="card-text"><%= theater.writer %></p>
+        </div>
+        <div class="card-footer">
+          <%= link_to favorite_theater_path(theater), method: :post, remote: true, style:"color: #FF8300;" do %>
+            <div id="favorite-theater-<%= theater.id %>">
+              <%= render partial: "theaters/favorite", locals: {theater: theater} %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

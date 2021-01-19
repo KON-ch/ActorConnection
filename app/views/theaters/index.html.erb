@@ -56,7 +56,7 @@
               </div>
               <div class="card-footer">
                 <%= link_to favorite_theater_path(theater), method: :post, remote: true, style:"color: #FF8300;" do %>
-                  <div id="favorite-<%= theater.id %>">
+                  <div id="favorite-theater-<%= theater.id %>">
                     <%= render partial: "theaters/favorite", locals: {theater: theater} %>
                   </div>
                 <% end %>

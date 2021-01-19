@@ -63,7 +63,6 @@ class MoviesController < ApplicationController
 
   def favorite
     current_user.toggle_like!(@movie)
-    redirect_to movies_path
   end
 
   private

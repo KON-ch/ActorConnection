@@ -3,90 +3,45 @@
     <i class="fas fa-star"></i>
     お気に入り
   </h2>
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link active" href="#!">
+
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <%= link_to "#", remote: true do %>
+        <div id="nav-theater" class="nav-link active text-secondary" href="#">
           <i class="fas fa-book-open"></i>
           戯曲
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-secondary" href="#!">
-          <i class="fas fa-theater-masks"></i>
-          舞台
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-secondary" href="#!">
+        </div>
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <a id="nav-stage" class="nav-link text-secondary" href="#">
+        <i class="fas fa-theater-masks"></i>
+        舞台
+      </a>
+    </li>
+    <li class="nav-item">
+      <%= link_to "#", remote: true do %>
+        <div id="nav-movie" class="nav-link text-secondary">
           <i class="fas fa-film"></i>
           映画
-        </a>
-      </li>
-    </ul>
-      <div class="row row-cols-4 mt-4">
-        <% @favorites_theater.each do |theater| %>
-          <div class="col mb-4">
-            <div class="card h-100 shadow-sm">
-              <div class="card-header">
-                <%= Country.find(theater.country_id).name %>
-                <div class="float-right">
-                  <% if theater.man.nil? && theater.female.nil? %>
-                    <%= link_to "未登録", edit_theater_path(theater), class:"badge badge-pill badge-warning text-light py-2", style:"background-color: #FF8300;" %>
-                  <% else %>
-                    男<%= theater.man%>
-                    女<%= theater.female%>
-                  <% end %>
-                </div>
-              </div>
-              <div class="card-body">
-                <%= link_to theater_path(theater) do %>
-                  <p class="card-title text-dark" style="font-size:1.8rem;"><%= theater.title %></p>
-                <% end %>
-                <p class="card-text"><%= theater.writer %></p>
-              </div>
-              <div class="card-footer">
-                <%= link_to favorite_theater_path(theater), method: :post, style:"color: #FF8300;" do %>
-                  <% if current_user.likes?(theater) %>
-                    <i class="fas fa-star"></i>
-                  <% else %>
-                    <i class="far fa-star"></i>
-                  <% end %>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        <% end %>
       </div>
-
-      <div class="row row-cols-4">
-        <% @favorites_movie.each do |movie| %>
-          <div class="col mb-4">
-            <div class="card h-100 shadow-sm">
-              <div class="card-header">
-                <%= Country.find(movie.country_id).name %>
-                <div class="float-right">
-                  <%= movie.production.year %>
-                </div>
-              </div>
-              <div class="card-body">
-                <%= link_to movie_path(movie), class:"text-decoration-none text-dark" do %>
-                  <p class="card-title" style="font-size: 1.8rem;"><%= movie.title %></p>
-                  <p class="card-title"><%= movie.sub_title %></p>
-                <% end %>
-                <p class="card-text"></p>
-              </div>
-              <div class="card-footer">
-                <%= link_to favorite_movie_path(movie), method: :post, style:"color: #FF8300;" do %>
-                  <% if current_user.likes?(movie) %>
-                    <i class="fas fa-star"></i>
-                  <% else %>
-                    <i class="far fa-star"></i>
-                  <% end %>
-                <% end %>
-              </div>
-        </div>
-      </div>
-    <% end %>
+      <% end %>
+    </li>
+  </ul>
+  <div id="favorite-content">
+    <%= render "users/favorites/theater" %>
   </div>
-
 </div>
+
+<script>
+  $("#nav-movie").on('click', function() {
+    $(".nav-link").removeClass("active");
+    $("#nav-movie").addClass("active");
+    $("#favorite-content").html("<%= j(render "users/favorites/movie") %>");
+  });
+  $("#nav-theater").on('click', function() {
+    $(".nav-link").removeClass("active");
+    $("#nav-theater").addClass("active");
+    $("#favorite-content").html("<%= j(render "users/favorites/theater") %>");
+  });
+</script>
