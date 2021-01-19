@@ -1,24 +1,25 @@
-<div class="container">
-  <div class="row">
-    <h2 class="mt-5 mb-3 col-4 offset-4 p-3 text-light" style="background-color: #4CA2FF;">マイページ</h2>
-  </div>
+<div class="container mt-5">
 
   <div class="row justify-content-center">
     <div class="col-md-6">
       <%= form_with url: mypage_users_path, local: true, method: :put do |f| %>
-        <div class="form-inline my-4 row">
-          <%= f.label "画像", class: "col-2 d-flex justify-content-start" %>
-          <% if @user.image.attached? %>
-            <%= image_tag @user.image, id:"user-image-preview", class:"img-fluid w-25" %>
-          <% else %>
-            <img src="#" id="user-image-preview">
-          <% end %>
-          <div class="d-flex flex-column ml-2">
-            <%= f.label "画像を選択", for:"user_image", class:"btn btn-outline-secondary" %>
-            <%= f.file_field :image, {onchange: "javascript: handleImage(this.files);"} %>
-            <%= f.submit "保存", class: "btn btn-primary mt-3" %>
+        <div class="form-group">
+          <div class="d-flex justify-content-between">
+            <%= f.label "画像", class:"text-md-left" %>
+            <%= f.label "編集", for:"user_image", class:"btn btn-outline-secondary" %>
+            <%= f.file_field :image, {onchange: "javascript: handleImage(this.files);", id:"user_image", style:"display: none;"} %>
+          </div>
+          <div class="d-flex justify-content-between align-items-end">
+            <% if @user.image.attached? %>
+              <%= image_tag @user.image, id:"user-image-preview", class:"img-fluid", style:"height: 9.6rem;" %>
+            <% else %>
+              <img src="#" id="user-image-preview">
+            <% end %>
+            <%= f.submit "保存", class:"btn btn-primary h-50 d-none" %>
           </div>
         </div>
+
+        <hr>
 
         <div class="form-group">
           <div class="d-flex justify-content-between">
@@ -46,6 +47,28 @@
         
         <hr>
 
+        <div class="form-group">
+          <div class="d-flex justify-content-between">
+            <%= f.label :sex, "性別", class: "text-md-left" %>
+          </div>
+          <div>
+            <h2><%= @user.sex %></h2>
+          </div>
+        </div>
+        
+        <hr>
+
+        <div class="form-group">
+          <div class="d-flex justify-content-between">
+            <%= f.label :birthday, "生年月日", class: "text-md-left" %>
+          </div>
+          <div>
+            <h2><%= @user.birthday %></h2>
+          </div>
+        </div>
+
+        <hr>
+      
         <div class="form-group">
           <div class="d-flex justify-content-between">
             <%= f.label :email, "メールアドレス", class: "text-md-left" %>
@@ -98,9 +121,8 @@
       <% end %>
 
       <div class="form-group">
-        <div class="d-flex justify-content-between">
-          <label for="user-name" class="text-md-left">パスワード</label>
-          <%= link_to "変更", mypage_edit_password_users_path, class:"btn btn-outline-secondary" %>
+        <div class="d-flex justify-content-end">
+          <%= link_to "パスワード変更", mypage_edit_password_users_path, class:"mt-1 btn btn-outline-warning" %>
         </div>
       </div>
 
@@ -133,26 +155,6 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="row offset-4">
-      <%= link_to logout_path, class:"text-decoration-none text-dark" do %>
-        <div class="d-flex align-items-center">
-          <div class="col-2 align-items-center">
-            <i class="fas fa-sign-out-alt fa-3x fa-fw"></i>
-          </div>
-          <div class="col-8 align-items-center ml-2 mt-3">
-            <div class="d-flex flex-column">
-              <label for="user-name">ログアウト</label>
-              <p>ログアウトします</p>
-            </div>
-          </div>
-          <div class="col-2 d-flex align-items-center">
-              <i class="fas fa-chevron-right fa-2x"></i>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
 </div>
 
 <%= javascript_pack_tag "users/edit"%>
@@ -169,4 +171,8 @@
           $(inputClass).removeClass('show');
       }
   }
+
+  $("#user_image").on("change", function(){
+    $(".d-none").removeClass("d-none");
+  });
 </script>

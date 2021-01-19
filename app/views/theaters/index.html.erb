@@ -66,7 +66,7 @@
         <% end %>
       </div>
 
-      <%= paginate @theaters, remote: true %>
+      <%= paginate @theaters %>
 
       <%= link_to new_theater_path, class:"btn btn-primary w-25 float-right", local: true do %>
         新しく戯曲を登録
