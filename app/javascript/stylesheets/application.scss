@@ -6,9 +6,14 @@
       font-size: 75%;
   }
 }
-@media screen and (max-width: 720px) {
+@media screen and (min-width: 481px) and (max-width: 720px) {
   html {
       font-size: 62.5%;
+  }
+}
+@media screen and (max-width: 480px) {
+  html {
+      font-size: 50%;
   }
 }
 
@@ -19,8 +24,8 @@ body {
   margin-bottom: 5rem;
 }
 
-h1 { font-size: 5.2rem; }
-h2 { font-size: 2.6rem; }
+h1 { font-size: 4.8rem; }
+h2 { font-size: 2.4rem; }
 
 .error-text {
   color: #ff0400;

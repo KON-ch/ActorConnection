@@ -2,6 +2,7 @@ class Theater < ApplicationRecord
   has_many :stages
   has_one :post, dependent: :destroy, touch: true
   belongs_to :country
+  belongs_to :user
 
   validates :title, :writer, :country_id, presence: true
   validates :title, presence: true, uniqueness: {scope: :writer, message:"この作品は既に作成されています"}
@@ -26,5 +27,13 @@ class Theater < ApplicationRecord
       "投稿の古い順" => "updated_at asc",
     }
   }
+
+  after_commit :create_post, on: [:create]
+
+  private
+    def create_post
+      post = Post.new(theater_id: self.id, user_id: self.user_id)
+      post.save
+    end
 
 end

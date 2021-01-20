@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   resources :theaters
   resources :stages
   resources :movies
-  resources :post, only: [:index, :create] do
+  resources :posts, only: [:index] do
     member do
       post :favorite
     end

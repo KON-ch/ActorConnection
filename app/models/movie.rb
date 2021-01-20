@@ -1,6 +1,7 @@
 class Movie < ApplicationRecord
   has_one :post, dependent: :destroy, touch: true
   belongs_to :country
+  belongs_to :user
 
   validates :title, presence: true, uniqueness: {scope: :sub_title, message:"この作品は既に作成されています"}
   
@@ -24,4 +25,12 @@ class Movie < ApplicationRecord
       "製作年の古い順" => "production asc"
     }
   }
+
+  after_commit :create_post, on: [:create]
+
+  private
+    def create_post
+      post = Post.new(movie_id: self.id, user_id: self.user_id)
+      post.save
+    end
 end

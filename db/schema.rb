@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_20_022020) do
+ActiveRecord::Schema.define(version: 2021_01_20_102300) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -90,8 +90,10 @@ ActiveRecord::Schema.define(version: 2021_01_20_022020) do
     t.string "sub_title"
     t.string "supervision"
     t.integer "country_id", null: false
+    t.integer "user_id"
     t.index ["country_id"], name: "index_movies_on_country_id"
     t.index ["title", "sub_title"], name: "index_movies_on_title_and_sub_title", unique: true
+    t.index ["user_id"], name: "index_movies_on_user_id"
   end
 
   create_table "places", force: :cascade do |t|
@@ -136,9 +138,11 @@ ActiveRecord::Schema.define(version: 2021_01_20_022020) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "place_id"
+    t.integer "user_id"
     t.index ["place_id"], name: "index_stages_on_place_id"
     t.index ["theater_id", "start_date"], name: "index_stages_on_theater_id_and_start_date", unique: true
     t.index ["theater_id"], name: "index_stages_on_theater_id"
+    t.index ["user_id"], name: "index_stages_on_user_id"
   end
 
   create_table "theaters", force: :cascade do |t|
@@ -149,8 +153,10 @@ ActiveRecord::Schema.define(version: 2021_01_20_022020) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "country_id", null: false
+    t.integer "user_id"
     t.index ["country_id"], name: "index_theaters_on_country_id"
     t.index ["title", "writer"], name: "index_theaters_on_title_and_writer", unique: true
+    t.index ["user_id"], name: "index_theaters_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -172,6 +178,7 @@ ActiveRecord::Schema.define(version: 2021_01_20_022020) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "movies", "countries"
+  add_foreign_key "movies", "users"
   add_foreign_key "posts", "movies"
   add_foreign_key "posts", "stages"
   add_foreign_key "posts", "theaters"
@@ -179,5 +186,7 @@ ActiveRecord::Schema.define(version: 2021_01_20_022020) do
   add_foreign_key "reviews", "users"
   add_foreign_key "stages", "places"
   add_foreign_key "stages", "theaters"
+  add_foreign_key "stages", "users"
   add_foreign_key "theaters", "countries"
+  add_foreign_key "theaters", "users"
 end
