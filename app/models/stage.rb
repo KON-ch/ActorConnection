@@ -4,6 +4,8 @@ class Stage < ApplicationRecord
   belongs_to :place
   belongs_to :user
 
+  acts_as_likeable
+
   validates :start_date, :end_date, :company, presence: true
   validates :theater_id, presence: true, uniqueness: {scope: :start_date, message:"この作品は既に作成されています"}
 

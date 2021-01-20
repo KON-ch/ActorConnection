@@ -1,6 +1,6 @@
 class StagesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_stage, only: [:show, :edit, :update, :destroy]
+  before_action :set_stage, only: [:show, :edit, :update, :destroy, :favorite]
   before_action :set_theaters, only: [:new, :edit]
   before_action :set_places, only: [:new, :edit]
 
@@ -42,6 +42,10 @@ class StagesController < ApplicationController
   def destroy
     @stage.destroy
     redirect_to stages_path, notice: "公演情報を削除しました" 
+  end
+
+  def favorite
+    current_user.toggle_like!(@stage)
   end
 
   private

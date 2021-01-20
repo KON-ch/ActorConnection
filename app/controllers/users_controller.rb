@@ -29,7 +29,9 @@ class UsersController < ApplicationController
   end
 
   def favorite
-    @favorites_theater = @user.likees(Post)
+    @favorites_theater = @user.likees(Theater)
+    @favorites_movie = @user.likees(Movie)
+    @favorites_stage = @user.likees(Stage)
   end
 
   def destroy

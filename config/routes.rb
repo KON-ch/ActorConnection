@@ -46,9 +46,21 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :theaters
-  resources :stages
-  resources :movies
+  resources :theaters do
+    member do
+      post :favorite
+    end
+  end
+  resources :stages do
+    member do
+      post :favorite
+    end
+  end
+  resources :movies do 
+    member do
+      post :favorite
+    end
+  end
   resources :posts, only: [:index] do
     member do
       post :favorite

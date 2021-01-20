@@ -4,6 +4,8 @@ class Theater < ApplicationRecord
   belongs_to :country
   belongs_to :user
 
+  acts_as_likeable
+
   validates :title, :writer, :country_id, presence: true
   validates :title, presence: true, uniqueness: {scope: :writer, message:"この作品は既に作成されています"}
   validates :man, numericality: { only_integer: true }, allow_nil: true

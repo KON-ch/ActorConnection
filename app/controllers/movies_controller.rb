@@ -61,8 +61,7 @@ class MoviesController < ApplicationController
   end
 
   def favorite
-    @post = Post.find_by(movie_id: @movie.id)
-    current_user.toggle_like!(@post)
+    current_user.toggle_like!(@movie)
   end
 
   private

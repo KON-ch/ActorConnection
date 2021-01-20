@@ -60,8 +60,7 @@ class TheatersController < ApplicationController
   end
 
   def favorite
-    @post = Post.find_by(theater_id: @theater.id)
-    current_user.toggle_like!(@post)
+    current_user.toggle_like!(@theater)
   end
 
   private

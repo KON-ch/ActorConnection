@@ -14,10 +14,12 @@
       <% end %>
     </li>
     <li class="nav-item">
-      <a id="nav-stage" class="nav-link text-secondary" href="#">
-        <i class="fas fa-theater-masks"></i>
-        舞台
-      </a>
+      <%= link_to "#", remote: true do %>
+        <div id="nav-stage" class="nav-link text-secondary" href="#">
+          <i class="fas fa-theater-masks"></i>
+          舞台
+        </div>
+      <% end %>
     </li>
     <li class="nav-item">
       <%= link_to "#", remote: true do %>
@@ -28,7 +30,7 @@
       <% end %>
     </li>
   </ul>
-  <div id="favorite-content">
+  <div id="favorite-content" class="row row-cols-2 row-cols-sm-3 row-cols-lg-4 mt-4">
     <%= render "users/favorites/theater" %>
   </div>
 </div>
@@ -43,5 +45,10 @@
     $(".nav-link").removeClass("active");
     $("#nav-theater").addClass("active");
     $("#favorite-content").html("<%= j(render "users/favorites/theater") %>");
+  });
+  $("#nav-stage").on('click', function() {
+    $(".nav-link").removeClass("active");
+    $("#nav-stage").addClass("active");
+    $("#favorite-content").html("<%= j(render "users/favorites/stage") %>");
   });
 </script>

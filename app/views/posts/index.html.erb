@@ -1,6 +1,6 @@
 <div class="row mt-5">
   <% @posts.each do |post| %>
-    <div class="col-10 col-md-8 col-lg-6 offset-1 offset-md-2 offset-lg-3 card p-0 mb-3">
+    <div class="col-10 col-md-8 col-lg-5 offset-1 offset-md-2 card p-0 mb-3">
       <div class="d-flex align-items-center">
         <%= image_tag User.find(post.user_id).image, class:"m-3", style:"width: 3.6rem; height: 3.6rem;" %>
         <div class="w-100">
@@ -9,16 +9,31 @@
             <label><%= post.created_at.month %>月<%= post.created_at.day %>日</label>
           </div>
           <div class="d-flex align-items-end">
-            <div class="badge badge-info mb-3 mr-3 p-2 d-none d-sm-block" style="background-color: #FF8300;">New</div>
+            <div class="badge badge-info mb-3 mr-3 p-sm-2 p-1" style="background-color: #FF8300;">New</div>
             <% if post.theater_id.present? %>
-              <label class="badge badge-secondary mb-3 mr-3 p-2">戯曲</label>
-              <h2>『 <%= Theater.find(post.theater_id).title %> 』</h2>
+              <label class="mb-3 mr-3"><i class="fas fa-book-open"></i></label>
+              <h2><%= Theater.find(post.theater_id).title %></h2>
+              <span class="mb-3 ml-4">作者：<%= Theater.find(post.theater_id).writer %></span>
             <% elsif post.movie_id.present? %>
-              <label class="badge badge-secondary mb-3 mr-3 p-2">映画</label>
-              <h2>『 <%= Movie.find(post.movie_id).title %> 』</h2>
+              <label class="mb-3 mr-3"><i class="fas fa-film"></i></label>
+              <h2><%= Movie.find(post.movie_id).title %></h2>
+              <span class="mb-3 ml-4"><%= Movie.find(post.movie_id).production.year %>年</span>
+              <span class="mb-3 ml-2"><%= Country.find((Movie.find(post.movie_id)).country_id).name %></span>
             <% elsif post.stage_id.present? %>
-              <label class="badge badge-secondary mb-3 mr-3 p-2">舞台</label>
-              <h2>『 <%= Theater.find((Stage.find(post.stage_id)).theater_id).title %> 』</h2>
+              <label class="mb-3 mr-3"><i class="fas fa-theater-masks"></i></label>
+              <h2 class="mb-2"><%= Theater.find((Stage.find(post.stage_id)).theater_id).title %></h2>
+              <span class="mb-3 ml-4"><%= (Stage.find(post.stage_id)).company %></span>
+            <% end %>
+          </div>
+          <div>
+            <%= link_to favorite_post_path(post), method: :post, remote: true, style:"color: #FF8300;" do %>
+              <div id="favorite-post-<%= post.id %>">
+                <% if current_user.likes?(post) %>
+                  <i class="fas fa-star"></i>
+                <% else %>
+                  <i class="far fa-star"></i>
+                <% end %>
+              </div>
             <% end %>
           </div>
         </div>

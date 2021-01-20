@@ -3,6 +3,8 @@ class Movie < ApplicationRecord
   belongs_to :country
   belongs_to :user
 
+  acts_as_likeable
+
   validates :title, presence: true, uniqueness: {scope: :sub_title, message:"この作品は既に作成されています"}
   
   extend DisplayList

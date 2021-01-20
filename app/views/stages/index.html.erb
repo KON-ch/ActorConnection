@@ -17,7 +17,7 @@
           <% end %>
         <% end %>
       </div>
-      <div class="row row-cols-2 row-cols-sm-4">
+      <div class="row row-cols-2 row-cols-md-3">
         <% @stages.each do |stage| %>
           <div class="col mb-4">
             <div class="card h-100 shadow-sm">
@@ -33,12 +33,17 @@
                 <%= stage.end_date.day %>日
               </div>
               <div class="card-body">
-                <%= link_to stage_path(stage), class:"text-dark", style:"font-size:1.8rem;" do %>
-                  <%= Theater.find(stage.theater_id).title %>
+                <%= link_to stage_path(stage), class:"text-dark" do %>
+                  <h2 class="card-title" style="font-size:1.8rem"><%= Theater.find(stage.theater_id).title %></h2>
+                  <label class="card-subtitle text-muted"><%= stage.company %></label>
                 <% end %>
               </div>
               <div class="card-footer">
-                <%= stage.company %>
+                <%= link_to favorite_stage_path(stage), method: :post, remote: true, style:"color: #FF8300;" do %>
+                  <div id="favorite-stage-<%= stage.id %>">
+                    <%= render partial: "stages/favorite", locals: {stage: stage} %>
+                  </div>
+                <% end %>
               </div>
             </div>
           </div>
