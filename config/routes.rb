@@ -46,17 +46,14 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :theaters do
+  resources :theaters
+  resources :stages
+  resources :movies
+  resources :post, only: [:index, :create] do
     member do
       post :favorite
     end
     resources :reviews, only: [:create]
-  end
-  resources :stages
-  resources :movies do
-    member do
-      post :favorite
-    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

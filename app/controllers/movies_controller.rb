@@ -27,8 +27,7 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @reviews = @movie.reviews
-    @review = @reviews.new
+    
   end
 
   def new
@@ -62,12 +61,13 @@ class MoviesController < ApplicationController
   end
 
   def favorite
-    current_user.toggle_like!(@movie)
+    @post = Post.find_by(movie_id: @movie.id)
+    current_user.toggle_like!(@post)
   end
 
   private
     def movie_params
-      params.require(:movie).permit(:title, :country_id, :production, :supervision, :sub_title).merge(user_id: current_user.id)
+      params.require(:movie).permit(:title, :country_id, :production, :supervision, :sub_title)
     end
 
     def set_movie

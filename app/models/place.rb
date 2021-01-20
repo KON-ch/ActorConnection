@@ -1,5 +1,5 @@
 class Place < ApplicationRecord
-  has_many :stages
+  has_many :stages, dependent: :nullify
 
   validates :name, :address, presence: true
   validates :latitude, numericality: true, allow_nil: true

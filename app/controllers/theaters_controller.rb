@@ -27,8 +27,6 @@ class TheatersController < ApplicationController
   end
 
   def show
-    @reviews = @theater.reviews
-    @review = @reviews.new
   end
 
   def new
@@ -62,12 +60,13 @@ class TheatersController < ApplicationController
   end
 
   def favorite
-    current_user.toggle_like!(@theater)
+    @post = Post.find_by(theater_id: @theater.id)
+    current_user.toggle_like!(@post)
   end
 
   private
     def theater_params
-      params.require(:theater).permit(:title, :writer, :country_id, :man, :female).merge(user_id: current_user.id)
+      params.require(:theater).permit(:title, :writer, :country_id, :man, :female)
     end
 
     def set_theater

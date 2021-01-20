@@ -1,6 +1,6 @@
 class Stage < ApplicationRecord
   belongs_to :theater
-  belongs_to :user
+  has_one :post, dependent: :destroy, touch: true
   belongs_to :place
 
   validates :start_date, :end_date, :company, presence: true
