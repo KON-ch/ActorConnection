@@ -6,6 +6,7 @@ class PostsController < ApplicationController
 
   def favorite
     @post = Post.find(params[:id])
+    @theater = Theater.find(params[:id])
     current_user.toggle_like!(@post)
   end
 

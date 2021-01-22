@@ -7,6 +7,8 @@ class Post < ApplicationRecord
 
   acts_as_likeable
 
+  default_scope -> { order(created_at: :desc)}
+
   def reviews_new
     reviews.new
   end
