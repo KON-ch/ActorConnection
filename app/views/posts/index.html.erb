@@ -4,8 +4,46 @@
       <div class="d-flex">
         <%= image_tag User.find(post.user_id).image, class:"ml-4 ml-xl-5 my-4 mr-3", style:"width: 3.6rem; height: 3.6rem;" %>
         <div class="w-100">
-          <div class="d-flex justify-content-between mt-3 mr-3 mr-lg-5">
-            <% if post.theater_id.present? %>
+          <div class="d-flex justify-content-between mt-3 mr-3 mb-3 mr-lg-5">
+            <% if post.like_id.present? %>
+              <% if post.theater_id.present? %>
+                <div>
+                  <p class="mt-3 mb-4"><%= User.find(post.user_id).name %></p>
+                  <%= link_to theater_path(post.theater_id), class:"text-decoration-none text-dark" do %>
+                    <i class="fas fa-star mr-3 fa-lg" style="color: #FF8300;"></i>
+                    <label class=""><i class="fas fa-book-open fa-2x mr-3"></i></label>
+                    <p class="d-inline">
+                      <strong><%= Theater.find(post.theater_id).title %></strong>
+                      をお気に入りに登録しました
+                    </p>
+                  <% end %>
+                </div>
+              <% elsif post.movie_id.present? %>
+                <div>
+                  <p class="mt-3 mb-4"><%= User.find(post.user_id).name %></p>
+                  <%= link_to movie_path(post.movie_id), class:"text-decoration-none text-dark" do %>
+                    <i class="fas fa-star mr-3 fa-lg" style="color: #FF8300;"></i>
+                    <i class="fas fa-film fa-2x mr-3"></i>
+                    <p class="d-inline">
+                      <strong><%= Movie.find(post.movie_id).title %></strong>
+                      をお気に入りに登録しました
+                    </p>
+                  <% end %>
+                </div>
+              <% elsif post.stage_id.present? %>
+                <div>
+                  <p class="mt-3 mb-4"><%= User.find(post.user_id).name %></p>
+                  <%= link_to stage_path(post.stage_id), class:"text-decoration-none text-dark" do %>
+                    <i class="fas fa-star mr-2 fa-lg" style="color: #FF8300;"></i>
+                    <label class=""><i class="fas fa-theater-masks fa-2x mr-2"></i></label>
+                    <p class="d-inline">
+                      <strong><%= Theater.find(Stage.find(post.stage_id).theater_id).title %></strong>
+                      をお気に入りに登録しました
+                    </p>
+                  <% end %>
+                </div>
+              <% end %>
+            <% elsif post.theater_id.present? && post.like_id.nil? %>
               <div>
                 <p class="mt-3 mb-4"><%= User.find(post.user_id).name %></p>
                 <label class="badge badge-primary mr-3 p-sm-2 p-1">New</label>
@@ -40,7 +78,7 @@
                   </div>
                 </div>
               </div>
-            <% elsif post.movie_id.present? %>
+            <% elsif post.movie_id.present? && post.like_id.nil? %>
               <div>
                 <p class="mt-3 mb-3"><%= User.find(post.user_id).name %></p>
                 <label class="badge badge-primary mr-3 p-sm-2 p-1">New</label>
@@ -70,9 +108,9 @@
                   </div>
                 </div>
               </div>
-            <% elsif post.stage_id.present? %>
+            <% elsif post.stage_id.present? && post.like_id.nil? %>
               <div>
-                <p class="mt-3 mb-4"><%= User.find(post.user_id).name %></p>
+                <p class="mt-3 mb-4 pb-1"><%= User.find(post.user_id).name %></p>
                 <label class="badge badge-primary mr-3 p-sm-2 p-1">New</label>
                 <label class=""><i class="fas fa-theater-masks fa-4x"></i></label>
                 <p class="mt-2">新しい舞台を登録しました</p>
@@ -109,17 +147,17 @@
           </div>
         </div>
       </div>
-      <div class="card-footer mt-3">
-        <%= link_to favorite_post_path(post), method: :post, remote: true, style:"color: #FF8300;" do %>
-          <div id="favorite-post-<%= post.id %>">
-            <% if current_user.likes?(post) %>
-              <i class="fas fa-star"></i>
-            <% else %>
-              <i class="far fa-star"></i>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+        <div class="card-footer d-none">
+          <%= link_to favorite_post_path(post), method: :post, remote: true, style:"color: #FF8300;" do %>
+            <div id="favorite-post-<%= post.id %>">
+              <% if current_user.likes?(post) %>
+                <i class="fas fa-star"></i>
+              <% else %>
+                <i class="far fa-star"></i>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
     </div>
   <% end %>
 </div>

@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   belongs_to :theater, optional: true
   belongs_to :stage, optional: true
   belongs_to :movie, optional: true
+  belongs_to :like, optional: true
 
   acts_as_likeable
 
