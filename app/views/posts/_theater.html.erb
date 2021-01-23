@@ -1,0 +1,24 @@
+<div class="card-header">
+  <%= post.country.name %>
+  <div class="float-right">
+    <% if post.man.nil? && post.female.nil? %>
+      <%= link_to "未登録", edit_theater_path(post), class:"badge badge-pill badge-warning text-light py-2", style:"background-color: #FF8300; font-size: 0.8rem;" %>
+    <% else %>
+      男<%= post.man%>
+      女<%= post.female%>
+    <% end %>
+  </div>
+</div>
+<div class="card-body">
+  <%= link_to theater_path(post) do %>
+    <p class="card-title text-dark" style="font-size:1.8rem;"><%= post.title %></p>
+  <% end %>
+  <p class="card-text"><%= post.writer %></p>
+</div>
+<div class="card-footer">
+  <%= link_to favorite_theater_path(post), method: :post, remote: true, style:"color: #FF8300;" do %>
+    <div class="favorite-theater-<%= post.id %>">
+      <%= render partial: "theaters/favorite", locals: {theater: post} %>
+    </div>
+  <% end %>
+</div>

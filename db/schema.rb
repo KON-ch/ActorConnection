@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_22_234103) do
+ActiveRecord::Schema.define(version: 2021_01_23_111447) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2021_01_22_234103) do
     t.string "supervision"
     t.integer "country_id", null: false
     t.integer "user_id"
+    t.integer "likers_count", default: 0
     t.index ["country_id"], name: "index_movies_on_country_id"
     t.index ["title", "sub_title"], name: "index_movies_on_title_and_sub_title", unique: true
     t.index ["user_id"], name: "index_movies_on_user_id"
@@ -114,8 +115,11 @@ ActiveRecord::Schema.define(version: 2021_01_22_234103) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "like_id"
+    t.integer "review_id"
+    t.integer "likers_count", default: 0
     t.index ["like_id"], name: "index_posts_on_like_id"
     t.index ["movie_id"], name: "index_posts_on_movie_id"
+    t.index ["review_id"], name: "index_posts_on_review_id"
     t.index ["stage_id"], name: "index_posts_on_stage_id"
     t.index ["theater_id"], name: "index_posts_on_theater_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
@@ -127,8 +131,14 @@ ActiveRecord::Schema.define(version: 2021_01_22_234103) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "viewing"
-    t.integer "post_id", null: false
+    t.integer "theater_id"
+    t.integer "movie_id"
+    t.integer "stage_id"
+    t.integer "post_id"
+    t.index ["movie_id"], name: "index_reviews_on_movie_id"
     t.index ["post_id"], name: "index_reviews_on_post_id"
+    t.index ["stage_id"], name: "index_reviews_on_stage_id"
+    t.index ["theater_id"], name: "index_reviews_on_theater_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
@@ -141,6 +151,7 @@ ActiveRecord::Schema.define(version: 2021_01_22_234103) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "place_id"
     t.integer "user_id"
+    t.integer "likers_count", default: 0
     t.index ["place_id"], name: "index_stages_on_place_id"
     t.index ["theater_id", "start_date"], name: "index_stages_on_theater_id_and_start_date", unique: true
     t.index ["theater_id"], name: "index_stages_on_theater_id"
@@ -156,6 +167,7 @@ ActiveRecord::Schema.define(version: 2021_01_22_234103) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "country_id", null: false
     t.integer "user_id"
+    t.integer "likers_count", default: 0
     t.index ["country_id"], name: "index_theaters_on_country_id"
     t.index ["title", "writer"], name: "index_theaters_on_title_and_writer", unique: true
     t.index ["user_id"], name: "index_theaters_on_user_id"
@@ -183,9 +195,14 @@ ActiveRecord::Schema.define(version: 2021_01_22_234103) do
   add_foreign_key "movies", "users"
   add_foreign_key "posts", "likes"
   add_foreign_key "posts", "movies"
+  add_foreign_key "posts", "reviews"
   add_foreign_key "posts", "stages"
   add_foreign_key "posts", "theaters"
   add_foreign_key "posts", "users"
+  add_foreign_key "reviews", "movies"
+  add_foreign_key "reviews", "posts"
+  add_foreign_key "reviews", "stages"
+  add_foreign_key "reviews", "theaters"
   add_foreign_key "reviews", "users"
   add_foreign_key "stages", "places"
   add_foreign_key "stages", "theaters"

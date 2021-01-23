@@ -27,7 +27,8 @@ class MoviesController < ApplicationController
   end
 
   def show
-    
+    @reviews = @movie.reviews
+    @review = @reviews.new
   end
 
   def new

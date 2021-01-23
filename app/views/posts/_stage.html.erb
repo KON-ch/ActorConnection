@@ -1,0 +1,24 @@
+<div class="card-header">
+  <% if post.start_date < Date.today && post.end_date > Date.today %>
+    <label class="badge badge-pill badge-warning text-light py-1" style="background-color: #FF8300;">Now</label>
+  <% end %>
+  <%= post.start_date.mon %>月<%= post.start_date.day %>日
+  〜
+  <% if post.start_date.mon != post.end_date.mon %>
+    <%= post.end_date.mon %>月
+  <% end %>
+  <%= post.end_date.day %>日
+</div>
+<div class="card-body">
+  <%= link_to stage_path(post.id) do %>
+    <p class="card-title text-dark" style="font-size:1.8rem;"><%= post.theater.title %></p>
+  <% end %>
+  <p class="card-text"><%= post.company %></p>
+</div>
+<div class="card-footer">
+  <%= link_to favorite_stage_path(post), method: :post, remote: true, style:"color: #FF8300;" do %>
+    <div class="favorite-stage-<%= post.id %>">
+      <%= render partial: "stages/favorite", locals: {stage: post} %>
+    </div>
+  <% end %>
+</div>

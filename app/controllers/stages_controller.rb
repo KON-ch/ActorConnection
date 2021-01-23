@@ -14,6 +14,8 @@ class StagesController < ApplicationController
   end
 
   def show
+    @reviews = @stage.reviews
+    @review = @reviews.new
   end
 
   def new

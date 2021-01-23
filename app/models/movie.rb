@@ -1,5 +1,6 @@
 class Movie < ApplicationRecord
   has_one :post, dependent: :destroy, touch: true
+  has_many :reviews, dependent: :destroy
   belongs_to :country
   belongs_to :user
 
@@ -27,6 +28,10 @@ class Movie < ApplicationRecord
       "製作年の古い順" => "production asc"
     }
   }
+
+  def reviews_new
+    reviews.new
+  end
 
   after_commit :create_post, on: [:create]
 

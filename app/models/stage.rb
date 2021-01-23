@@ -1,6 +1,7 @@
 class Stage < ApplicationRecord
   belongs_to :theater
   has_one :post, dependent: :destroy, touch: true
+  has_many :reviews, dependent: :destroy
   belongs_to :place
   belongs_to :user
 
@@ -21,6 +22,10 @@ class Stage < ApplicationRecord
       "終演日が遠い順" => "end_date desc",
     }
   }
+
+  def reviews_new
+    reviews.new
+  end
 
   after_commit :create_post, on: [:create]
 

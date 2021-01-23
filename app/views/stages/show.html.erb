@@ -1,2 +1,20 @@
 <h1>Stages#show</h1>
 <p>Find me in app/views/stages/show.html.erb</p>
+<div class="row">
+  <% @reviews.each do |review| %>
+    <div class="offset-md-5 col-md-5">
+      <p class="h3"><%= review.content %></p>
+      <label><%= review.created_at %></label>
+    </div>
+  <% end %>
+</div>
+<% if user_signed_in? %>
+  <div class="row">
+    <div class="offset-md-5 col-md-5">
+      <%= form_with model: @review, url: stage_reviews_path(@stage) do |f| %>
+        <%= f.text_area :content, class:"form-control m-2" %>
+        <%= f.submit "レビューを追加", class:"btn btn-outline-primary ml-2" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

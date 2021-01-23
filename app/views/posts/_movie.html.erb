@@ -1,0 +1,19 @@
+<div class="card-header">
+  <%= post.country.name %>
+  <div class="float-right">
+    <%= post.production.year %>年
+  </div>
+</div>
+<div class="card-body">
+  <%= link_to movie_path(post), class:"text-dark" do %>
+    <p class="card-title" style="font-size:1.8rem;"><%= post.title %></p>
+  <% end %>
+  <p class="card-text"><%= post.sub_title %></p>
+</div>
+<div class="card-footer">
+  <%= link_to favorite_movie_path(post), method: :post, remote: true, style:"color: #FF8300;" do %>
+    <div id="favorite-movie-<%= post.id %>">
+      <%= render partial: "movies/favorite", locals: {movie: post} %>
+    </div>
+  <% end %>
+</div>

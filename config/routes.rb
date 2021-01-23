@@ -50,16 +50,19 @@ Rails.application.routes.draw do
     member do
       post :favorite
     end
+    resources :reviews, only: [:create]
   end
   resources :stages do
     member do
       post :favorite
     end
+    resources :reviews, only: [:create]
   end
   resources :movies do 
     member do
       post :favorite
     end
+    resources :reviews, only: [:create]
   end
   resources :posts, only: [:index] do
     member do

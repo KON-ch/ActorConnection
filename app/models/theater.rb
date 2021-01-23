@@ -1,5 +1,6 @@
 class Theater < ApplicationRecord
   has_many :stages
+  has_many :reviews, dependent: :destroy
   has_one :post, dependent: :destroy, touch: true
   belongs_to :country
   belongs_to :user
@@ -29,6 +30,10 @@ class Theater < ApplicationRecord
       "投稿の古い順" => "updated_at asc",
     }
   }
+
+  def reviews_new
+    reviews.new
+  end
 
   after_commit :create_post, on: [:create]
 

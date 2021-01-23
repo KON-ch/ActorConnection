@@ -12,7 +12,7 @@ class Like < Socialization::ActiveRecordStores::Like
         post.movie_id = self.likeable_id
       elsif self.likeable_type == "Stage"
         post.stage_id = self.likeable_id
-      elsif self.likeable_type == "post"
+      elsif self.likeable_type == "Post"
         return
       end
       post.save

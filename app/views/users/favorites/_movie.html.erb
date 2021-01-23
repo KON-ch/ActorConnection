@@ -16,7 +16,7 @@
       </div>
       <div class="card-footer">
         <%= link_to favorite_movie_path(movie), method: :post, remote: true, style:"color: #FF8300;" do %>
-          <div id="favorite-movie-<%= movie.id %>">
+          <div class="favorite-movie-<%= movie.id %>">
             <%= render partial: "movies/favorite", locals: {movie: movie} %>
           </div>
         <% end %>

@@ -27,6 +27,8 @@ class TheatersController < ApplicationController
   end
 
   def show
+    @reviews = @theater.reviews
+    @review = @reviews.new
   end
 
   def new
