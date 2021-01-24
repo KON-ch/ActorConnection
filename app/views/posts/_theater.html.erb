@@ -15,10 +15,16 @@
   <% end %>
   <p class="card-text"><%= post.writer %></p>
 </div>
-<div class="card-footer">
+<div class="card-footer d-flex">
   <%= link_to favorite_theater_path(post), method: :post, remote: true, style:"color: #FF8300;" do %>
     <div class="favorite-theater-<%= post.id %>">
       <%= render partial: "theaters/favorite", locals: {theater: post} %>
     </div>
   <% end %>
+  <div class="review-theater-<%= post.id %>">
+    <div type="button" style="color: #FF8300;" data-toggle="modal" data-target="#reviewModal<%= post.id %>">
+      <i class="far fa-check-circle ml-4"></i>
+    </div>
+  </div>
 </div>
+<%= render partial: "posts/review", locals: {post: post, post_title: post} %>

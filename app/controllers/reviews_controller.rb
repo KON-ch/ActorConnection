@@ -16,7 +16,7 @@ class ReviewsController < ApplicationController
       review = post.reviews_new
     end
     review.save_review(review, review_params)
-    redirect_to root_path, notice: "レビューを投稿しました" 
+    redirect_to posts_path, notice: "レビューを投稿しました" 
   end
 
   private
