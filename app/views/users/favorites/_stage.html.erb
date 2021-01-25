@@ -14,7 +14,7 @@
       </div>
       <div class="card-body">
         <%= link_to stage_path(stage), class:"text-dark" do %>
-          <h2 class="card-title" style="font-size:1.8rem"><%= Theater.find(stage.theater_id).title %></h2>
+          <h2 class="card-title" style="font-size:1.8rem"><%= stage.theater.title %></h2>
           <label class="card-subtitle text-muted"><%= stage.company %></label>
         <% end %>
       </div>
@@ -25,12 +25,23 @@
           </div>
         <% end %>
         <div class="review-stage-<%= stage.id %>">
-          <div type="button" style="color: #FF8300;" data-toggle="modal" data-target="#reviewModal<%= stage.id %>">
-            <i class="far fa-check-circle ml-4"></i>
+          <div class="d-flex">
+            <% if review_present?(current_user, stage) %>
+              <div type="button" style="color: #FF8300;" data-toggle="modal" data-target="#reviewModal<%= stage.id %>">
+                <i class="far fa-check-circle ml-4"></i>
+              </div>
+            <% else %>
+              <%= link_to stage_review_path(stage.id, current_user), method: :delete, data: { confirm: 'レビューを削除します' } do %>
+                <i class="fas fa-check-circle ml-4" style="color: #FF8300;"></i>
+              <% end %>
+            <% end %>
+            <p class="ml-2 mb-0" style="color: #FF8300;"><%= stage.reviews.count %></p>
           </div>
+          <%= form_with model: stage.reviews.new, url: stage_reviews_path(stage) do |f| %>
+            <%= render partial: "posts/review", locals: {post: stage, post_title: stage.theater, f: f} %>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
-  <%= render partial: "posts/review", locals: {post: stage, post_title: stage.theater} %>
 <% end %>

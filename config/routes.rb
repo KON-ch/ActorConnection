@@ -50,25 +50,25 @@ Rails.application.routes.draw do
     member do
       post :favorite
     end
-    resources :reviews, only: [:create]
+    resources :reviews, only: [:create, :destroy]
   end
   resources :stages do
     member do
       post :favorite
     end
-    resources :reviews, only: [:create]
+    resources :reviews, only: [:create, :destroy]
   end
   resources :movies do 
     member do
       post :favorite
     end
-    resources :reviews, only: [:create]
+    resources :reviews, only: [:create, :destroy]
   end
   resources :posts, only: [:index] do
     member do
       post :favorite
     end
-    resources :reviews, only: [:create]
+    resources :reviews, only: [:create, :destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

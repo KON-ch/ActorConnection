@@ -2,7 +2,7 @@
   <div class="col mb-4">
     <div class="card h-100 shadow-sm">
       <div class="card-header">
-        <%= Country.find(theater.country_id).name %>
+        <%= theater.country.name %>
         <div class="float-right">
           <% if theater.man.nil? && theater.female.nil? %>
             <%= link_to "未登録", edit_theater_path(theater), class:"badge badge-pill badge-warning text-light py-2", style:"background-color: #FF8300;" %>
@@ -25,12 +25,23 @@
           </div>
         <% end %>
         <div class="review-theater-<%= theater.id %>">
-          <div type="button" style="color: #FF8300;" data-toggle="modal" data-target="#reviewModal<%= theater.id %>">
-            <i class="far fa-check-circle ml-4"></i>
+          <div class="d-flex">
+            <% if review_present?(current_user, theater) %>
+              <div type="button" style="color: #FF8300;" data-toggle="modal" data-target="#reviewModal<%= theater.id %>">
+                <i class="far fa-check-circle ml-4"></i>
+              </div>
+            <% else %>
+              <%= link_to theater_review_path(theater.id, current_user), method: :delete, data: { confirm: 'レビューを削除します' } do %>
+                <i class="fas fa-check-circle ml-4" style="color: #FF8300;"></i>
+              <% end %>
+            <% end %>
+            <p class="ml-2 mb-0" style="color: #FF8300;"><%= theater.reviews.count %></p>
           </div>
+          <%= form_with model: theater.reviews.new, url: theater_reviews_path(theater) do |f| %>
+            <%= render partial: "posts/review", locals: {post: theater, post_title: theater, f: f} %>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
-  <%= render partial: "posts/review", locals: {post: theater, post_title: theater} %>
 <% end %>

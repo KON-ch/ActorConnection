@@ -17,9 +17,21 @@
     </div>
   <% end %>
   <div class="review-movie-<%= post.id %>">
-    <div type="button" style="color: #FF8300;" data-toggle="modal" data-target="#reviewModal<%= post.id %>">
-      <i class="far fa-check-circle ml-4"></i>
+    <div class="d-flex">
+      <% if review_present?(current_user, post) %>
+        <div type="button" style="color: #FF8300;" data-toggle="modal" data-target="#reviewModal<%= post.id %>">
+          <i class="far fa-check-circle ml-4"></i>
+        </div>
+      <% else %>
+        <%= link_to movie_review_path(post.id, current_user), method: :delete, data: { confirm: 'レビューを削除します' } do %>
+          <i class="fas fa-check-circle ml-4" style="color: #FF8300;"></i>
+        <% end %>
+      <% end %>
+      <p class="ml-2 mb-0" style="color: #FF8300;"><%= post.reviews.count %></p>
     </div>
   </div>
 </div>
-<%= render partial: "posts/review", locals: {post: post, post_title: post} %>
+<%= form_with model: post.reviews.new, url: movie_reviews_path(post) do |f| %>
+  <%= render partial: "posts/review", locals: {post: post, post_title: post, f: f} %>
+<% end %>
+<%= %>

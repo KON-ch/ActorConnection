@@ -19,6 +19,20 @@ class ReviewsController < ApplicationController
     redirect_to posts_path, notice: "レビューを投稿しました" 
   end
 
+  def destroy
+    if params[:theater_id].present?
+      review = Review.find_by(user: current_user, theater_id: params[:theater_id])
+    elsif params[:movie_id].present?
+      review = Review.find_by(user: current_user, movie_id: params[:movie_id])
+    elsif params[:stage_id].present?
+      review = Review.find_by(user: current_user, stage_id: params[:stage_id])
+    elsif params[:post_id].present?
+      review = Review.find_by(user: current_user, stage_id: params[:stage_id])
+    end
+    review.destroy
+    redirect_to posts_path, notice: "レビューを削除しました。"
+  end
+
   private
     def review_params
       params.require(:review).permit(:content).merge(user_id: current_user.id, theater_id: params[:theater_id], movie_id: params[:movie_id], stage_id: params[:stage_id], post_id: params[:post_id])
