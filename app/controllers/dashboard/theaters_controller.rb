@@ -15,11 +15,11 @@ class Dashboard::TheatersController < ApplicationController
         @theaters = search_theater.sort_info(sort_params, params[:page])
         total_count(search_theater)
       else
-        @theaters = Theater.sort_info(sort_params, params[:page])
+        @theaters = Theater.includes(:country).sort_info(sort_params, params[:page])
         total_count(Theater)
       end
     else
-      @theaters = Theater.display_list(params[:page])
+      @theaters = Theater.includes(:country).display_list(params[:page])
       total_count(Theater)
     end
 
@@ -73,7 +73,7 @@ class Dashboard::TheatersController < ApplicationController
   end
 
   def search_theater
-    Theater.where("title LIKE ? OR writer LIKE ?", "%#{@keyword}%", "%#{@keyword}%")
+    Theater.includes(:country).where("title LIKE ? OR writer LIKE ?", "%#{@keyword}%", "%#{@keyword}%")
   end
 
   def total_count(theater)

@@ -10,7 +10,7 @@ class TheatersController < ApplicationController
     elsif sort_params.present?
       if sort_params[:sort_country].present?
         set_country(sort_params[:sort_country])
-        sort_theater(Theater.country_theaters(sort_params[:sort_country]))
+        sort_theater(Theater.includes(:country).country_theaters(sort_params[:sort_country]))
       elsif params[:sort_keyword].present?
         @keyword = params[:sort_keyword]
         sort_theater(search_theater)
@@ -19,9 +19,9 @@ class TheatersController < ApplicationController
       end
     elsif params[:country].present?
       set_country(params[:country])
-      display_theater(Theater.country_theaters(@country))
+      display_theater(Theater.includes(:country).country_theaters(@country))
     else
-      display_theater(Theater)
+      display_theater(Theater.includes(:country))
     end
     @sort_list = Theater.sort_list
   end
@@ -87,7 +87,7 @@ class TheatersController < ApplicationController
     end
 
     def search_theater
-      Theater.search_theaters(@keyword)
+      Theater.includes(:country).search_theaters(@keyword)
     end
   
     def total_count(theater)

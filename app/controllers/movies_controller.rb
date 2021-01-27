@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
     elsif sort_params.present?
       if sort_params[:sort_country].present?
         set_country(sort_params[:sort_country])
-        sort_movie(Movie.country_movies(sort_params[:sort_country]))
+        sort_movie(Movie.includes(:country).country_movies(sort_params[:sort_country]))
       elsif params[:sort_keyword].present?
         @keyword = params[:sort_keyword]
         sort_movie(search_movie)
@@ -19,9 +19,9 @@ class MoviesController < ApplicationController
       end
     elsif params[:country].present?
       set_country(params[:country])
-      display_movie(Movie.country_movies(@country))
+      display_movie(Movie.includes(:country).country_movies(@country))
     else
-      display_movie(Movie)
+      display_movie(Movie.includes(:country))
     end
     @sort_list = Movie.sort_list
   end
@@ -87,7 +87,7 @@ class MoviesController < ApplicationController
     end
 
     def search_movie
-      Movie.search_movies(@keyword)
+      Movie.includes(:country).search_movies(@keyword)
     end
   
     def total_count(movie)

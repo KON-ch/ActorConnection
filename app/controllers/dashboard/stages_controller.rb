@@ -16,11 +16,11 @@ class Dashboard::StagesController < ApplicationController
         @stages = search_stage.sort_info(sort_params, params[:page])
         total_count(search_stage)
       else
-        @stages = Stage.sort_info(sort_params, params[:page])
+        @stages = Stage.includes(:theater, :place).sort_info(sort_params, params[:page])
         total_count(Stage)
       end
     else
-      @stages = Stage.display_list(params[:page])
+      @stages = Stage.includes(:theater, :place).display_list(params[:page])
       total_count(Stage)
     end
 
@@ -78,7 +78,7 @@ class Dashboard::StagesController < ApplicationController
     end
 
     def search_stage
-      Stage.where("company LIKE ?", "%#{@keyword}%")
+      Stage.includes(:theater, :place).where("company LIKE ?", "%#{@keyword}%")
     end
 
     def total_count(stage)

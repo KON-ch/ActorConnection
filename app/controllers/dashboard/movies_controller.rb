@@ -15,11 +15,11 @@ class Dashboard::MoviesController < ApplicationController
         @movies = search_movie.sort_info(sort_params, params[:page])
         total_count(search_movie)
       else
-        @movies = Movie.sort_info(sort_params, params[:page])
+        @movies = Movie.includes(:country).sort_info(sort_params, params[:page])
         total_count(Movie)
       end
     else
-      @movies = Movie.display_list(params[:page])
+      @movies = Movie.includes(:country).display_list(params[:page])
       total_count(Movie)
     end
 
@@ -73,7 +73,7 @@ class Dashboard::MoviesController < ApplicationController
   end
 
   def search_movie
-    Movie.where("title LIKE ? OR sub_title LIKE ? OR supervision LIKE ?", "%#{@keyword}%", "%#{@keyword}%", "%#{@keyword}%")
+    Movie.includes(:country).where("title LIKE ? OR sub_title LIKE ? OR supervision LIKE ?", "%#{@keyword}%", "%#{@keyword}%", "%#{@keyword}%")
   end
 
   def total_count(movie)
