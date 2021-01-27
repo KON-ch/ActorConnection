@@ -1,30 +1,100 @@
-<h1>Theaters#show</h1>
-
-<%= @theater.title %>
-<%= @theater.writer %>
-<%= @theater.country_id %>
-<%= @theater.man %>
-<%= @theater.female %>
-<%= link_to "Edit", edit_theater_path(@theater) %>
-<%= link_to "Delete", theater_path(@theater), method: :delete, data: { confirm: 'Are you sure?' } %>
-
-<div class="row">
-  <% @reviews.each do |review| %>
-    <div class="offset-md-5 col-md-5">
-      <p class="h3"><%= review.content %></p>
-      <label><%= review.created_at %></label>
-    </div>
-  <% end %>
-</div>
-<% if user_signed_in? %>
+<div class="container mt-5 p-sm-0">
+  <div class="align-items-end mb-5">
+    <h1 class="font-weight-bold"><%= @theater.title %></h1>
+    <h2 class="d-inline"><%= @theater.writer %></h2>
+    <label class="ml-2">( <%= @theater.country.name %> )</label>
+    <%= link_to favorite_theater_path(@theater), method: :post, remote: true, class:"ml-4", style:"color: #FF8300;" do %>
+      <span class="favorite-theater-<%= @theater.id %>">
+        <%= render partial: "theaters/favorite", locals: {theater: @theater} %>
+      </span>
+    <% end %>
+    <%= link_to "編集", edit_theater_path(@theater), class:"btn btn-sm btn-outline-secondary ml-5 mb-2" %>
+    <% if current_user.id == 1 %>
+      <%= link_to "削除", theater_path(@theater), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-danger ml-3 mb-2" %>
+    <% end %>
+  </div>
   <div class="row">
-    <div class="offset-md-5 col-md-5">
-      <%= form_with model: @review, url: theater_reviews_path(@theater) do |f| %>
-        <%= f.text_area :content, class:"form-control m-2" %>
-        <%= f.submit "レビューを追加", class:"btn btn-outline-primary ml-2" %>
+    <div class="col-5 text-left">
+      <h2 class="d-inline">登場人数</h2>
+      <% if @theater.man.nil? && @theater.female.nil? %>
+        <%= link_to "未登録", edit_theater_path(@theater), class:"btn btn-lg btn-outline-primary mb-3 ml-2" %>
+      <% else %>
+        <br>
+        <label>男 : <%= @theater.man %> 人</label>
+        <span> / </span>
+        <label>女 : <%= @theater.female %> 人</label>
       <% end %>
+      <div class="card shadow mt-4">
+        <div class="card-header d-flex justify-content-between">
+          <label><i class="fas fa-check-circle mr-2" style="color: #FF8300;"></i>My Review</label>
+          <% if @my_review.present? %>
+            <label class="text-right"><%= @my_review.created_at.mon %>月<%= @my_review.created_at.day %>日</label>
+          <% end %>
+        </div>
+        <% if review_present?(current_user, @theater) %>
+          <%= form_with model: @review, url: theater_reviews_path(@theater) do |f| %>
+            <div class="card-body">
+              <%= f.text_area :content, size: "20x10", class:"form-control mr-2 " %>
+            </div>
+            <div class="card-footer text-right">
+              <%= f.submit "レビュー", class:"btn btn-primary ml-2" %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="card-body">
+            <%= form_with model: @my_review, url: theater_review_path(@theater, @my_review), local: true, method: :put do |f| %>
+              <div class="collapse show userReview">
+                <p class="mt-3"><%= @my_review.content %></p>
+              </div>
+              <div class="collapse editUserReview">
+                <%=
+                  f.text_area :content, size: "20x5", autofocus: "true", value: @my_review.content, class:"form-control mr-2"
+                %>
+                <%= f.submit "更新", class:"btn btn-primary mt-3 float-right" %>
+              </div>
+            </div>
+            <div class="card-footer text-right">
+              <span onclick="switchEditUserInfo('.userReview', '.editUserReview', '.userReviewEditLabel');" class="userReviewEditLabel user-edit-label btn btn-outline-secondary">
+                編集
+              </span>
+              <%= link_to  "削除", theater_review_path(@theater.id, current_user), method: :delete, data: { confirm: 'レビューを削除します' }, class:"btn btn-outline-danger" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-6 offset-1">
+      <div class="card shadow-sm h-100">
+        <% if @reviews.present? %>
+          <% @reviews.each do |review| %>
+            <div class="card shadow">
+              <div class="card-header d-flex justify-content-between pt-3 px-3">
+                <label><%= review.user.name %></label>
+                <label><%= review.created_at.mon %>月<%= review.created_at.day %>日</label>
+              </div>
+              <div class="card-body">
+                <p class="m-5"><%= review.content %></p>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-center mt-4">他のユーザーのレビューはまだありません。</p>
+        <% end %>
+      </div>
     </div>
   </div>
-<% end %>
+</div>
 
-<%= link_to "Back", theaters_path %>
+<script type="text/javascript">
+  let switchEditUserInfo = (textClass, inputClass, labelClass) => {
+      if ($(textClass).css('display') == 'block') {
+          $(labelClass).text("キャンセル");
+          $(textClass).removeClass('show');
+          $(inputClass).addClass('show');
+      } else {
+          $(labelClass).text("編集");
+          $(textClass).addClass('show');
+          $(inputClass).removeClass('show');
+      }
+  }
+</script>

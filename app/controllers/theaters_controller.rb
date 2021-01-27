@@ -27,8 +27,9 @@ class TheatersController < ApplicationController
   end
 
   def show
-    @reviews = @theater.reviews
+    @reviews = @theater.reviews.includes(:user).where.not(user: current_user)
     @review = @reviews.new
+    @my_review = @theater.reviews.find_by(user_id: current_user.id)
   end
 
   def new
