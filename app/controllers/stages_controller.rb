@@ -14,8 +14,9 @@ class StagesController < ApplicationController
   end
 
   def show
-    @reviews = @stage.reviews
+    @reviews = @stage.reviews.includes(:user).where.not(user: current_user)
     @review = @reviews.new
+    @my_review = @stage.reviews.find_by(user_id: current_user.id)
   end
 
   def new
