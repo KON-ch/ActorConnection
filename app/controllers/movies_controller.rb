@@ -27,8 +27,9 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @reviews = @movie.reviews
+    @reviews = @movie.reviews.includes(:user).where.not(user: current_user)
     @review = @reviews.new
+    @my_review = @movie.reviews.find_by(user_id: current_user.id)
   end
 
   def new

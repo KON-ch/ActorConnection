@@ -1,5 +1,5 @@
 <div class="container mt-5 p-sm-0">
-  <div class="align-items-end mb-5">
+  <div class="align-items-end mb-3">
     <h1 class="font-weight-bold"><%= @theater.title %></h1>
     <h2 class="d-inline"><%= @theater.writer %></h2>
     <label class="ml-2">( <%= @theater.country.name %> )</label>
@@ -8,7 +8,7 @@
         <%= render partial: "theaters/favorite", locals: {theater: @theater} %>
       </span>
     <% end %>
-    <%= link_to "編集", edit_theater_path(@theater), class:"btn btn-sm btn-outline-secondary ml-5 mb-2" %>
+    <%= link_to "編集", edit_theater_path(@theater), class:"btn btn-sm btn-outline-secondary ml-4 mb-2" %>
     <% if current_user.id == 1 %>
       <%= link_to "削除", theater_path(@theater), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-danger ml-3 mb-2" %>
     <% end %>
@@ -64,7 +64,7 @@
       </div>
     </div>
     <div class="col-6 offset-1">
-      <div class="card shadow-sm h-100">
+      <div class="card shadow-sm h-100 mt-5">
         <% if @reviews.present? %>
           <% @reviews.each do |review| %>
             <div class="card shadow">
