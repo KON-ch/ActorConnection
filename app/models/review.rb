@@ -1,11 +1,12 @@
 class Review < ApplicationRecord
-  validates :content, presence: true
   belongs_to :user
   belongs_to :theater, optional: true
   belongs_to :movie, optional: true
   belongs_to :stage, optional: true
   has_one :post, dependent: :destroy, touch: true
-
+  
+  validates :content, presence: true
+  
   def save_review(review, review_params)
     review.content = review_params[:content]
     review.user_id = review_params[:user_id]

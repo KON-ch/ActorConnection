@@ -1,6 +1,6 @@
 class Stage < ApplicationRecord
   belongs_to :theater
-  has_one :post, dependent: :destroy, touch: true
+  has_many :posts, dependent: :destroy
   has_many :reviews, dependent: :destroy
   belongs_to :place
   belongs_to :user
@@ -12,6 +12,8 @@ class Stage < ApplicationRecord
 
   extend DisplayList
   extend SortInfo
+
+  default_scope -> { order(created_at: :desc)}
 
   scope :sort_list, -> {
     {

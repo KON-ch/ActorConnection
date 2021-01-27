@@ -1,5 +1,5 @@
 class Movie < ApplicationRecord
-  has_one :post, dependent: :destroy, touch: true
+  has_many :posts, dependent: :destroy
   has_many :reviews, dependent: :destroy
   belongs_to :country
   belongs_to :user
@@ -10,6 +10,8 @@ class Movie < ApplicationRecord
   
   extend DisplayList
   extend SortInfo
+
+  default_scope -> { order(created_at: :desc)}
 
   scope :country_movies, -> (country) {
     where(country_id: country)

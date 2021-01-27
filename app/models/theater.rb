@@ -1,19 +1,21 @@
 class Theater < ApplicationRecord
-  has_many :stages
+  has_many :stages, dependent: :destroy
   has_many :reviews, dependent: :destroy
-  has_one :post, dependent: :destroy, touch: true
+  has_many :posts, dependent: :destroy
   belongs_to :country
   belongs_to :user
-
+  
   acts_as_likeable
 
   validates :title, :writer, :country_id, presence: true
   validates :title, presence: true, uniqueness: {scope: :writer, message:"この作品は既に作成されています"}
   validates :man, numericality: { only_integer: true }, allow_nil: true
-  validates :female, numericality: { only_integer: true}, allow_nil: true
+  validates :female, numericality: { only_integer: true }, allow_nil: true
 
   extend DisplayList
   extend SortInfo
+
+  default_scope -> { order(created_at: :desc)}
 
   scope :country_theaters, -> (country) {
     where(country_id: country)
