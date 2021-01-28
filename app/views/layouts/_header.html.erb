@@ -39,8 +39,10 @@
             </li>
             <li class="nav-item dropdown">
               <%= link_to "#", id: "navbarDropdown", class: "nav-link dropdown-toggle", role: "button", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" } do %>
-                <%if current_user.image.present?%>
+                <% if current_user.image.present? %>
                   <%= image_tag current_user.image, class:"rounded-circle", style:"height: 2.4rem;" %>
+                <% else %>
+                  <i class="fas fa-user"></i>
                 <%end%>
                 <%= current_user.name %>
                 <span class="caret"></span>
@@ -49,7 +51,7 @@
                 <%= link_to "登録情報", mypage_users_path, method: :get, class: "dropdown-item" %>
                 <div class="dropdown-divider"></div>
                 <%= link_to "ログアウト", logout_path, method: :get, class: "dropdown-item" %>
-                <% if current_user.id = 1 %>
+                <% if current_user.id == 1 %>
                   <%= link_to "管理者画面", dashboard_users_path, method: :get, class: "dropdown-item" %>
                 <% end %>
               </div>

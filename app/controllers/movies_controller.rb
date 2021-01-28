@@ -64,6 +64,7 @@ class MoviesController < ApplicationController
 
   def favorite
     current_user.toggle_like!(@movie)
+    @movie.reload
   end
 
   private

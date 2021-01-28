@@ -39,6 +39,7 @@ class Movie < ApplicationRecord
 
   private
     def create_post
+      return if self.user_id == 1
       post = Post.new(movie_id: self.id, user_id: self.user_id)
       post.save
     end

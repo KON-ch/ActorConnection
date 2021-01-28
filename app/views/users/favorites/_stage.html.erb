@@ -13,7 +13,7 @@
         <%= stage.end_date.day %>日
       </div>
       <div class="card-body">
-        <%= link_to stage_path(stage), class:"text-dark" do %>
+        <%= link_to stage_path(stage), data: { "turbolinks" => false }, class:"text-dark" do %>
           <h2 class="card-title" style="font-size:1.8rem"><%= stage.theater.title %></h2>
           <label class="card-subtitle text-muted"><%= stage.company %></label>
         <% end %>

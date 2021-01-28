@@ -10,7 +10,7 @@
   </div>
 </div>
 <div class="card-body">
-  <%= link_to theater_path(post) do %>
+  <%= link_to theater_path(post), data: { "turbolinks" => false } do %>
     <p class="card-title text-dark" style="font-size:1.8rem;"><%= post.title %></p>
   <% end %>
   <p class="card-text"><%= post.writer %></p>

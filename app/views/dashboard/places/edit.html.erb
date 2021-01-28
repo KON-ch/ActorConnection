@@ -1,29 +1,83 @@
-<div class="container p-0 text-center ">
+<h2 class="my-3 p-0">劇場情報変更</h2>
+<div class="container">
   <div class="row">
-    <h2 class="mt-7 mb-lg-3 offset-lg-1">劇場情報変更</h2>
-  </div>
-  <%= form_with model: @place, url: dashboard_places_path, local: true do |f| %>
-    <div class="form-group row">
-      <%= f.label :name, "劇場名", class:"col-lg-2 offset-lg-1 col-form-label text-left px-0" %>
-      <%= f.text_field :name, class: "form-control col-lg-7" %>
+    <div class="col-7">
+      <%= form_with model: @place, url: dashboard_place_path(@place), local: true, method: :put do |f| %>
+        <div class="form-group row">
+          <%= f.label :name, "劇場名", class:"col-lg-3 col-form-label text-left px-0" %>
+          <%= f.text_field :name, class: "form-control col-lg-6" %>
+        </div>
+        <div class="form-group row">
+          <%= f.label :address, "住所", class:"col-lg-3 col-form-label text-left px-0" %>
+          <%= f.text_field :address, class:"form-control col-lg-6", id:"address" %>
+          <input type="button" id="search" value="検索" class="col-lg-2 ml-2 btn btn-sm btn-outline-secondary mb-1">
+        </div>
+        <div class="form-group row">
+          <%= f.label :latitude, "緯度", class:"col-lg-3 col-form-label text-left px-0" %>
+          <%= f.text_field :latitude, class:"form-control col-lg-6" %>
+        </div>
+        <div class="form-group row">
+          <%= f.label :longitude, "経度", class:"col-lg-3 col-form-label text-left px-0" %>
+          <%= f.text_field :longitude, class:"form-control col-lg-6" %>
+        </div>
+        <div class="form-group row">
+          <%= f.label :access, "アクセス", class:"col-lg-3 col-form-label text-left px-0" %>
+          <%= f.text_area :access, class:"form-control col-lg-6" %>
+        </div>
+        <div class="form-group text-right row">
+          <%= f.submit "更新", class:"btn btn-primary mt-3 col-lg-2 offset-lg-7" %>
+        </div>
+      <% end %>
     </div>
-    <div class="form-group row">
-      <%= f.label :address, "住所", class:"col-lg-2 offset-lg-1 col-form-label text-left px-0" %>
-      <%= f.text_field :address, class:"form-control col-lg-7" %>
+    <div class="col-5">
+      <div id="display"></div>
+      <div id="map"></div>
     </div>
-    <div class="form-group row">
-      <%= f.label :access, "アクセス", class:"col-lg-2 offset-lg-1 col-form-label text-left px-0" %>
-      <%= f.text_area :access, class:"form-control col-lg-7" %>
-    </div>
-    <div class="form-group text-right row">
-      <%= f.submit "更新", class:"btn btn-primary mt-3 col-lg-2 offset-lg-7" %>
-    </div>
-  <% end %>
-
-  <div class="row">
-    <%= link_to dashboard_places_path, class:"offset-lg-1 mt-7 text-secondary" do %>
-      <i class="far fa-hand-point-left"></i>
-      Back
-    <% end %>
   </div>
 </div>
+
+<script>
+
+  let map
+
+  function initMap(){
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: <%= @place.latitude %>, lng: <%= @place.longitude %>},
+      zoom: 16,
+      disableDefaultUI: true,
+      zoomControl: true
+    });
+
+    new google.maps.Marker({
+      position:  {lat: <%= @place.latitude %>, lng: <%= @place.longitude %>},
+      map: map
+    });
+  }
+
+  document.getElementById('search').addEventListener('click', function() {
+    new google.maps.Geocoder().geocode( {
+      address: document.getElementById('address').value
+    }, function(results, status) {
+      if (status !== 'OK') {
+        alert('Failed: ' + status);
+        retrun;
+      }
+      if (results[0]){
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: results[0].geometry.location,
+          zoom: 16,
+          disableDefaultUI: true,
+          zoomControl: true
+        });
+        new google.maps.Marker({
+          position: results[0].geometry.location,
+          map: map
+        });
+        display.textContent = results[0].geometry.location
+      } else {
+        alert('NO results found');
+      }
+    })
+  })
+</script>
+<script defer src=<%= ENV['MAP_KEY'] %>></script>

@@ -18,14 +18,14 @@
     <% end %>
   </div>
   <div class="row">
-    <div class="col-5 text-left">
+    <div class="col-sm-6 text-left">
       <h2 class="d-inline"><%= @movie.production.year %>年</h2>
       <span style="font-size: 2.0rem;">／</span>
-      <h2 class="d-inline">監督</h2>
+      <label>監督</label>
       <% if @movie.supervision.blank? %>
         <%= link_to "未登録", edit_movie_path(@movie), class:"btn btn-lg btn-outline-primary mb-3 ml-2" %>
       <% else %>
-        <label class="ml-2"><%= @movie.supervision %></label>
+        <h2 class="ml-2 d-inline"><%= @movie.supervision %></h2>
       <% end %>
       <div class="card shadow mt-4">
         <div class="card-header d-flex justify-content-between">
@@ -66,23 +66,9 @@
         <% end %>
       </div>
     </div>
-    <div class="col-6 offset-1">
-      <div class="card shadow-sm h-100 mt-5">
-        <% if @reviews.present? %>
-          <% @reviews.each do |review| %>
-            <div class="card shadow">
-              <div class="card-header d-flex justify-content-between pt-3 px-3">
-                <label><%= review.user.name %></label>
-                <label><%= review.created_at.mon %>月<%= review.created_at.day %>日</label>
-              </div>
-              <div class="card-body">
-                <p class="m-5"><%= review.content %></p>
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <p class="text-center mt-4">他のユーザーのレビューはまだありません。</p>
-        <% end %>
+    <div class="col-sm-5 offset-sm-1">
+      <div class="card shadow-sm h-100 mt-5 p-3">
+        <%= render "reviews/show" %>
       </div>
     </div>
   </div>

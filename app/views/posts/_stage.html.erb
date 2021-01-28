@@ -10,7 +10,7 @@
   <%= post.end_date.day %>日
 </div>
 <div class="card-body">
-  <%= link_to stage_path(post.id) do %>
+  <%= link_to stage_path(post.id), data: { "turbolinks" => false } do %>
     <p class="card-title text-dark" style="font-size:1.8rem;"><%= post.theater.title %></p>
   <% end %>
   <p class="card-text"><%= post.company %></p>

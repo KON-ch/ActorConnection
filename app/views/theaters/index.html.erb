@@ -14,9 +14,9 @@
       </h2>
     
       <div class="d-flex flex-inline">
-        <%= form_with url: theaters_path, method: :get, local: true, class:"form-inline pb-3" do |f| %>
+        <%= form_with url: theaters_path, method: :get, local: true, class:"d-flex pb-3" do |f| %>
           <%= f.text_field :keyword, placeholder:"作品名・作者名", class: "w-75" %>
-          <%= f.submit "検索", class: "d-flex btn btn-outline-secondary ml-3" %>
+          <%= f.submit "検索", class:"btn btn-outline-secondary ml-3" %>
         <% end %>
         <p class="align-items-center d-flex ml-3">合計<%= @total_count%>件</p>
       </div>

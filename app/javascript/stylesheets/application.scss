@@ -3,17 +3,17 @@
 
 @media screen and (min-width: 768px) {
   html {
-      font-size: 75%;
+      font-size: 70%;
   }
 }
 @media screen and (min-width: 576px) and (max-width: 767px) {
   html {
-      font-size: 62.5%;
+      font-size: 57.5%;
   }
 }
 @media screen and (max-width: 575px) {
   html {
-      font-size: 50%;
+      font-size: 45%;
   }
 }
 
@@ -39,4 +39,14 @@ h2 { font-size: 2.4rem; }
 .user-edit-label {
   cursor: pointer;
   cursor: hand;
+}
+
+.col-sm-6 > #map {
+  height: 60vh;
+  width: 45vw;
+}
+
+.col-5 > #map {
+  height: 35vh;
+  width: 25vw;
 }

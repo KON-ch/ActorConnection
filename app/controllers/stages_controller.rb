@@ -17,6 +17,8 @@ class StagesController < ApplicationController
     @reviews = @stage.reviews.includes(:user).where.not(user: current_user)
     @review = @reviews.new
     @my_review = @stage.reviews.find_by(user_id: current_user.id)
+    @lat = @stage.place.latitude
+    @lng = @stage.place.longitude
   end
 
   def new
@@ -49,6 +51,7 @@ class StagesController < ApplicationController
 
   def favorite
     current_user.toggle_like!(@stage)
+    @stage.reload
   end
 
   private

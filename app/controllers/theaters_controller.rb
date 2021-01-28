@@ -64,6 +64,7 @@ class TheatersController < ApplicationController
 
   def favorite
     current_user.toggle_like!(@theater)
+    @theater.reload
   end
 
   private
