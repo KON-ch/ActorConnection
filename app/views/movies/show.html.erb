@@ -19,7 +19,13 @@
   </div>
   <div class="row">
     <div class="col-sm-6 text-left">
-      <h2 class="d-inline"><%= @movie.production.year %>年</h2>
+      <h2 class="d-inline">
+        <% if @movie.production.present? %>
+          <%= @movie.production.year %>年
+        <% else %>
+          未登録
+        <% end %>
+      </h2>
       <span style="font-size: 2.0rem;">／</span>
       <label>監督</label>
       <% if @movie.supervision.blank? %>

@@ -85,7 +85,7 @@ class TheatersController < ApplicationController
     end
 
     def sort_params
-      params.permit(:sort, :sort_country)
+      params.permit(:sort, :sort_country, :sort_keyword)
     end
 
     def search_theater
@@ -97,7 +97,7 @@ class TheatersController < ApplicationController
     end
 
     def display_theater(theater)
-      @theaters = theater.display_list(params[:page])
+      @theaters = theater.order(updated_at: :desc).display_list(params[:page])
       total_count(theater)
     end
 

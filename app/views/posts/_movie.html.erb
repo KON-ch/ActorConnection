@@ -1,7 +1,11 @@
 <div class="card-header">
   <%= post.country.name %>
   <div class="float-right">
-    <%= post.production.year %>年
+    <% if post.production.present? %>
+      <%= post.production.year %>年
+    <% else %>
+      未登録
+    <% end %>
   </div>
 </div>
 <div class="card-body">

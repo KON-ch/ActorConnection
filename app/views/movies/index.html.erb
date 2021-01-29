@@ -44,7 +44,10 @@
       </div>
 
       <%= paginate @movies %>
-      <%= link_to "新しく映画を登録", new_movie_path, class:"btn btn-primary w-25 float-right" %>
+      <div type="button" class="btn btn-primary w-25 float-right" data-toggle="modal" data-target="#newModal">
+        新しく映画を登録        
+      </div>
+      <%= render partial: "movies/new_modal" %>
     </div>
   </div>
 </div>

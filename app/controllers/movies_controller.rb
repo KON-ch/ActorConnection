@@ -85,7 +85,7 @@ class MoviesController < ApplicationController
     end
 
     def sort_params
-      params.permit(:sort, :sort_country)
+      params.permit(:sort, :sort_country, :sort_keyword)
     end
 
     def search_movie
@@ -97,7 +97,7 @@ class MoviesController < ApplicationController
     end
 
     def display_movie(movie)
-      @movies = movie.display_list(params[:page])
+      @movies = movie.order(updated_at: :desc).display_list(params[:page])
       total_count(movie)
     end
 

@@ -4,7 +4,11 @@
       <div class="card-header">
         <%= movie.country.name %>
         <div class="float-right">
-          <%= movie.production.year %>
+          <% if movie.production.present? %>
+            <%= movie.production.year %>
+          <% else %>
+            未登録
+          <% end %>
         </div>
       </div>
       <div class="card-body">

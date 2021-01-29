@@ -11,8 +11,6 @@ class Movie < ApplicationRecord
   extend DisplayList
   extend SortInfo
 
-  default_scope -> { order(created_at: :desc)}
-
   scope :country_movies, -> (country) {
     where(country_id: country)
   }
@@ -24,10 +22,10 @@ class Movie < ApplicationRecord
   scope :sort_list, -> {
     {
       "並び替え" => "",
-      "投稿の新しい順" => "updated_at desc",
-      "投稿の古い順" => "updated_at asc",
-      "製作年の新しい順" => "production desc",
-      "製作年の古い順" => "production asc"
+      "投稿の新しい順" => "updated_at_desc",
+      "投稿の古い順" => "updated_at_asc",
+      "製作年の新しい順" => "production_desc",
+      "製作年の古い順" => "production_asc"
     }
   }
 

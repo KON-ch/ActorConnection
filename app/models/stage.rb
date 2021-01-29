@@ -13,15 +13,13 @@ class Stage < ApplicationRecord
   extend DisplayList
   extend SortInfo
 
-  default_scope -> { order(created_at: :desc)}
-
   scope :sort_list, -> {
     {
       "並び替え" => "",
-      "開演日が近い順" => "start_date asc",
-      "開演日が遠い順" => "start_date desc",
-      "終演日が近い順" => "end_date asc",
-      "終演日が遠い順" => "end_date desc",
+      "開演日が近い順" => "start_date_asc",
+      "開演日が遠い順" => "start_date_desc",
+      "終演日が近い順" => "end_date_asc",
+      "終演日が遠い順" => "end_date_desc",
     }
   }
 

@@ -27,7 +27,10 @@
         <% end %>
       </div>
       <%= paginate @stages %>
-      <%= link_to "公演情報を登録", new_stage_path, class:"btn btn-primary btn-lg mt-3" %>
+      <div type="button" class="btn btn-primary w-25 float-right" data-toggle="modal" data-target="#newModal">
+        公演情報を登録
+      </div>
+      <%= render partial: "stages/new_modal" %>
     </div>
   </div>
 </div>

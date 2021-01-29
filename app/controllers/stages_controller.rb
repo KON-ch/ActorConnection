@@ -1,14 +1,14 @@
 class StagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_stage, only: [:show, :edit, :update, :destroy, :favorite]
-  before_action :set_theaters, only: [:new, :edit]
-  before_action :set_places, only: [:new, :edit]
+  before_action :set_theaters, only: [:index, :new, :edit]
+  before_action :set_places, only: [:index, :new, :edit]
 
   def index
     if sort_params.present?
       @stages = Stage.includes(:theater, :place).sort_info(sort_params, params[:page])
     else
-      @stages = Stage.includes(:theater, :place).display_list(params[:page])
+      @stages = Stage.includes(:theater, :place).order(updated_at: :desc).display_list(params[:page])
     end
     @sort_list = Stage.includes(:theater, :place).sort_list
   end

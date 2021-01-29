@@ -15,8 +15,6 @@ class Theater < ApplicationRecord
   extend DisplayList
   extend SortInfo
 
-  default_scope -> { order(created_at: :desc)}
-
   scope :country_theaters, -> (country) {
     where(country_id: country)
   }
@@ -28,8 +26,8 @@ class Theater < ApplicationRecord
   scope :sort_list, -> {
     {
       "並び替え" => "",
-      "投稿の新しい順" => "updated_at desc",
-      "投稿の古い順" => "updated_at asc",
+      "投稿の新しい順" => "updated_at_desc",
+      "投稿の古い順" => "updated_at_asc",
     }
   }
 

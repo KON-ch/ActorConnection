@@ -44,10 +44,10 @@
       </div>
 
       <%= paginate @theaters %>
-
-      <%= link_to new_theater_path, class:"btn btn-primary w-25 float-right", local: true do %>
-        新しく戯曲を登録
-      <% end %>
+      <div type="button" class="btn btn-primary w-25 float-right" data-toggle="modal" data-target="#newModal">
+        新しく戯曲を登録        
+      </div>
+      <%= render partial: "theaters/new_modal" %>
     </div>
   </div>
 </div>
