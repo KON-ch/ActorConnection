@@ -77,7 +77,7 @@
     </div>
   </div>
 </div>
-<script defer src=<%= ENV['MAP_KEY'] %>></script>
+<script defer src="https://maps.googleapis.com/maps/api/js?key=<% ENV['MAP_KEY'] %>&callback=initMap"></script>
 
 <script type="text/javascript">
   let switchEditUserInfo = (textClass, inputClass, labelClass) => {
