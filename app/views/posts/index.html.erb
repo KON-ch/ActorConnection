@@ -46,13 +46,13 @@
                     </p>
                   <% end %>
                 </div>
-              <% else %>
+              <% elsif post.review_id.present? %>
                 <div>
                   <p class="mt-3 mb-4"><%= post.user.name %></p>
                     <i class="fas fa-star mr-2 fa-lg" style="color: #FF8300;"></i>
-                    <i class="fas fa-theater-masks fa-2x mr-2"></i>
+                    <i class="fas fa-check-circle fa-2x mr-2"></i>
                     <p class="d-inline">
-                      <strong></strong>
+                      <strong>レビュー</strong>
                       をお気に入りに登録しました
                     </p>
                 </div>
@@ -135,12 +135,26 @@
           </div>
         </div>
       </div>
-      <% if post.review_id.present? %>
+      <% if post.review_id.present? && post.like_id.nil? && post.user_id != current_user.id %>
         <div class="card-footer">
-          <%= link_to favorite_post_path(post), method: :post, remote: true, style:"color: #FF8300;" do %>
-            <div id="favorite-post-<%= post.id %>" class="ml-4">
-              <%= render partial: "posts/favorite", locals: {post: post} %>
-            </div>
+          <% if post.review.theater_id.present? %>
+            <%= link_to favorite_theater_review_path(post.review.theater_id, post.review), method: :post, remote: true, style:"color: #FF8300;" do %>
+              <div id="favorite-review-<%= post.review.id %>" class="ml-4">
+                <%= render partial: "reviews/favorite", locals: {review: post.review} %>
+              </div>
+            <% end %>
+          <% elsif post.review.movie_id.present? %>
+            <%= link_to favorite_movie_review_path(post.review.movie_id, post.review), method: :post, remote: true, style:"color: #FF8300;" do %>
+              <div id="favorite-review-<%= post.review.id %>" class="ml-4">
+                <%= render partial: "reviews/favorite", locals: {review: post.review} %>
+              </div>
+            <% end %>
+          <% elsif post.review.stage_id.present? %>
+            <%= link_to favorite_stage_review_path(post.review.stage_id, post.review), method: :post, remote: true, style:"color: #FF8300;" do %>
+              <div id="favorite-review-<%= post.review.id %>" class="ml-4">
+                <%= render partial: "reviews/favorite", locals: {review: post.review} %>
+              </div>
+            <% end %>
           <% end %>
         </div>
       <% end %>

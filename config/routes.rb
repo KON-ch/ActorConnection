@@ -51,24 +51,33 @@ Rails.application.routes.draw do
     member do
       post :favorite
     end
-    resources :reviews, only: [:create, :update, :destroy]
+    resources :reviews, only: [:create, :update, :destroy] do
+      member do
+        post :favorite
+      end
+    end
   end
   resources :stages do
     member do
       post :favorite
     end
-    resources :reviews, only: [:create, :update, :destroy]
+    resources :reviews, only: [:create, :update, :destroy] do
+      member do
+        post :favorite
+      end
+    end
   end
   resources :movies do 
     member do
       post :favorite
     end
-    resources :reviews, only: [:create, :update, :destroy]
+    resources :reviews, only: [:create, :update, :destroy] do
+      member do
+        post :favorite
+      end
+    end
   end
   resources :posts, only: [:index] do
-    member do
-      post :favorite
-    end
     resources :reviews, only: [:create, :update, :destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

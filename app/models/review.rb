@@ -6,6 +6,12 @@ class Review < ApplicationRecord
   has_one :post, dependent: :destroy, touch: true
   
   validates :content, presence: true
+
+  acts_as_likeable
+
+  def reviews_new
+    reviews.new
+  end
   
   def save_review(review, review_params)
     review.content = review_params[:content]

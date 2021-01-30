@@ -6,8 +6,6 @@ class Post < ApplicationRecord
   belongs_to :like, optional: true
   belongs_to :review, optional: true
 
-  acts_as_likeable
-
   default_scope -> { order(created_at: :desc)}
 
   def reviews_new
