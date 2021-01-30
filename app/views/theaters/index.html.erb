@@ -33,7 +33,7 @@
         <% end %>
       <% end %>
       
-      <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4">
+      <div class="row row-cols-2 row-cols-sm-3">
         <% @theaters.each do |theater| %>
           <div class="col mb-4">
             <div class="card h-100 shadow-sm">
@@ -44,8 +44,9 @@
       </div>
 
       <%= paginate @theaters %>
-      <div type="button" class="btn btn-primary w-25 float-right" data-toggle="modal" data-target="#newModal">
-        新しく戯曲を登録        
+      <div type="button" class="btn btn-lg btn-primary float-right position-fixed rounded" style="top:88vh; left:78vw;" data-toggle="modal" data-target="#newModal">
+        <i class="fas fa-pen fa-lg mr-md-2"></i>
+        <label class="d-none d-md-inline">新しく戯曲を登録</label>
       </div>
       <%= render partial: "theaters/new_modal" %>
     </div>
