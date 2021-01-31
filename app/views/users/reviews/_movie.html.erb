@@ -1,0 +1,97 @@
+<div class="col-sm-6 mt-3">
+  <div class="card shadow-sm mt-3">
+    <div class="card-header">
+      <i class="fas fa-film fa-2x mx-2 mt-2"></i>
+      <i class="fas fa-check-circle mr-1 fa-lg" style="color: #FF8300"></i>
+      My Review
+    </div>
+    <% if @reviews_movie.present? %>
+      <% @reviews_movie.each do |review| %>
+        <div class="card shadow m-3">
+          <div class="card-header">
+            <%= review.updated_at.mon %> 月
+            <%= review.updated_at.day %> 日
+          </div>
+          <div class="card-body d-flex justify-content-between">
+            <div class="mt-2 ml-2">
+              <%= form_with model: review, url: movie_review_path(review.movie, review), local: true, method: :put do |f| %>
+                <div class="collapse show userReview<%= review.id %>">
+                  <%= review.content %>
+                </div>
+                <div class="collapse editUserReview<%= review.id %>">
+                  <%=
+                    f.text_area :content, size: "20x5", autofocus: "true", value: review.content, class:"form-control mr-2"
+                  %>
+                  <%= f.submit "更新", class:"btn btn-primary mt-3 float-right" %>
+                </div>
+              <% end %>
+            </div>
+            <div>
+              <div class="card h-100 shadow-sm" style="width: 18rem;">
+                <%= render partial: "posts/movie", locals: {post: review.movie} %>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-right">
+            <span onclick="switchEditUserInfo('.userReview<%= review.id %>', '.editUserReview<%= review.id %>', '.userReviewEditLabel<%= review.id %>');" class="userReviewEditLabel<%= review.id %> user-edit-label btn btn-outline-secondary">
+              編集
+            </span>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-center mt-4">投稿したレビューがありません。</p>
+    <% end %>
+  </div>
+</div>
+<div class="col-sm-6 mt-3">
+  <div class="card shadow-sm mt-3">
+    <div class="card-header">
+      <i class="fas fa-book-open fa-2x mx-2 mt-2"></i>
+      <i class="fas fa-check-circle mr-1 fa-lg" style="color: #FF8300"></i>
+      My Review
+    </div>
+    <% if @likes_movie.present? %>
+      <% @likes_movie.each do |review| %>
+        <div class="card shadow m-3">
+          <div class="card-header">
+            <%= review.updated_at.mon %> 月
+            <%= review.updated_at.day %> 日
+          </div>
+          <div class="card-body d-flex justify-content-between">
+            <div class="mt-2 ml-2">
+              <%= review.user.name %>
+              <%= review.content %>
+            </div>
+            <div class="card h-100 shadow-sm" style="width: 18rem;">
+              <%= render partial: "posts/movie", locals: {post: review.movie} %>
+            </div>
+          </div>
+          <div class="card-footer">
+            <%= link_to favorite_movie_review_path(review.movie, review), method: :post, remote: true, style:"color: #FF8300;" do %>
+              <div id="favorite-review-<%= review.id %>" class="ml-4">
+                <%= render partial: "reviews/favorite", locals: {review: review} %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-center mt-4">お気に入りのレビューがありません。</p>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  let switchEditUserInfo = (textClass, inputClass, labelClass) => {
+      if ($(textClass).css('display') == 'block') {
+          $(labelClass).text("キャンセル");
+          $(textClass).removeClass('show');
+          $(inputClass).addClass('show');
+      } else {
+          $(labelClass).text("編集");
+          $(textClass).addClass('show');
+          $(inputClass).removeClass('show');
+      }
+  }
+</script>

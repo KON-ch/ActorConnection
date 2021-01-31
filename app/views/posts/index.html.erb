@@ -1,163 +1,165 @@
-<div class="row" style="margin-top:12vh; margin-bottom:8vh;">
-  <% @posts.each do |post| %>
-    <div class="col-10 col-sm-8 col-lg-6 offset-1 offset-sm-2 offset-lg-1 col-xl-5 offset-xl-2 card shadow p-0 mb-3">
-      <div class="d-flex">
-        <% if post.user.image.present? %>
-          <%= image_tag post.user.image, class:"ml-4 ml-xl-5 my-4 mr-3", style:"width: 3.6rem; height: 3.6rem;" %>
-        <% else %>
-          <i class="fas fa-user my-4 mr-4 ml-xl-5 ml-4 pl-md-2" style="font-size: 3.1rem;"></i>
-        <% end %>
-        <div class="w-100">
-          <div class="d-flex justify-content-between mt-3 mr-3 mb-3 mr-lg-5">
-            <% if post.like_id.present? %>
-              <% if post.theater_id.present? %>
-                <div>
-                  <p class="mt-3 mb-4"><%= post.user.name %></p>
-                  <%= link_to theater_path(post.theater_id), class:"text-decoration-none text-dark" do %>
-                    <i class="fas fa-star mr-3 fa-lg" style="color: #FF8300;"></i>
-                    <i class="fas fa-book-open fa-2x mr-3"></i>
-                    <p class="d-inline">
-                      <strong><%= post.theater.title %></strong>
-                      をお気に入りに登録しました
-                    </p>
-                  <% end %>
-                </div>
-              <% elsif post.movie_id.present? %>
-                <div>
-                  <p class="mt-3 mb-4"><%= post.user.name %></p>
-                  <%= link_to movie_path(post.movie_id), class:"text-decoration-none text-dark" do %>
-                    <i class="fas fa-star mr-3 fa-lg" style="color: #FF8300;"></i>
-                    <i class="fas fa-film fa-2x mr-3"></i>
-                    <p class="d-inline">
-                      <strong><%= post.movie.title %></strong>
-                      をお気に入りに登録しました
-                    </p>
-                  <% end %>
-                </div>
-              <% elsif post.stage_id.present? %>
-                <div>
-                  <p class="mt-3 mb-4"><%= post.user.name %></p>
-                  <%= link_to stage_path(post.stage_id), class:"text-decoration-none text-dark" do %>
-                    <i class="fas fa-star mr-2 fa-lg" style="color: #FF8300;"></i>
-                    <i class="fas fa-theater-masks fa-2x mr-2"></i>
-                    <p class="d-inline">
-                      <strong><%= post.stage.theater.title %></strong>
-                      をお気に入りに登録しました
-                    </p>
-                  <% end %>
-                </div>
+<div class="container">
+  <div class="row" style="margin-top:12vh; margin-bottom:8vh;">
+    <% @posts.each do |post| %>
+      <div class="col-10 col-sm-8 col-lg-6 offset-1 offset-sm-2 offset-lg-1 col-xl-5 offset-xl-2 card shadow p-0 mb-3">
+        <div class="d-flex">
+          <% if post.user.image.present? %>
+            <%= image_tag post.user.image, class:"ml-4 ml-xl-5 my-4 mr-3", style:"width: 3.6rem; height: 3.6rem;" %>
+          <% else %>
+            <i class="fas fa-user my-4 mr-4 ml-xl-5 ml-4 pl-md-2" style="font-size: 3.1rem;"></i>
+          <% end %>
+          <div class="w-100">
+            <div class="d-flex justify-content-between mt-3 mr-3 mb-3 mr-lg-5">
+              <% if post.like_id.present? %>
+                <% if post.theater_id.present? %>
+                  <div>
+                    <p class="mt-3 mb-4"><%= post.user.name %></p>
+                    <%= link_to theater_path(post.theater_id), class:"text-decoration-none text-dark" do %>
+                      <i class="fas fa-star mr-3 fa-lg" style="color: #FF8300;"></i>
+                      <i class="fas fa-book-open fa-2x mr-3"></i>
+                      <p class="d-inline">
+                        <strong><%= post.theater.title %></strong>
+                        をお気に入りに登録しました
+                      </p>
+                    <% end %>
+                  </div>
+                <% elsif post.movie_id.present? %>
+                  <div>
+                    <p class="mt-3 mb-4"><%= post.user.name %></p>
+                    <%= link_to movie_path(post.movie_id), class:"text-decoration-none text-dark" do %>
+                      <i class="fas fa-star mr-3 fa-lg" style="color: #FF8300;"></i>
+                      <i class="fas fa-film fa-2x mr-3"></i>
+                      <p class="d-inline">
+                        <strong><%= post.movie.title %></strong>
+                        をお気に入りに登録しました
+                      </p>
+                    <% end %>
+                  </div>
+                <% elsif post.stage_id.present? %>
+                  <div>
+                    <p class="mt-3 mb-4"><%= post.user.name %></p>
+                    <%= link_to stage_path(post.stage_id), class:"text-decoration-none text-dark" do %>
+                      <i class="fas fa-star mr-2 fa-lg" style="color: #FF8300;"></i>
+                      <i class="fas fa-theater-masks fa-2x mr-2"></i>
+                      <p class="d-inline">
+                        <strong><%= post.stage.theater.title %></strong>
+                        をお気に入りに登録しました
+                      </p>
+                    <% end %>
+                  </div>
+                <% elsif post.review_id.present? %>
+                  <div>
+                    <p class="mt-3 mb-4"><%= post.user.name %></p>
+                      <i class="fas fa-star mr-2 fa-lg" style="color: #FF8300;"></i>
+                      <i class="far fa-check-circle fa-2x mr-2"></i>
+                      <p class="d-inline">
+                        <strong>レビュー</strong>
+                        をお気に入りに登録しました
+                      </p>
+                  </div>
+                <% end %>
               <% elsif post.review_id.present? %>
+                <% if post.review.theater_id.present? %>
+                  <div>
+                    <p class="mt-3 mb-4"><%= post.user.name %></p>
+                    <i class="fas fa-check-circle mr-2 fa-lg" style="color: #FF8300"></i>
+                    <i class="fas fa-book-open fa-2x mr-3"></i>
+                    <%= post.review.content %>
+                  </div>
+                  <div class="d-flex align-items-end">
+                    <div class="card h-100 shadow-sm mt-2" style="width: 18rem;">
+                      <%= render partial: "posts/theater", locals: {post: post.review.theater} %>
+                    </div>
+                  </div>
+                <% elsif post.review.movie_id.present? %>
+                  <div>
+                    <p class="mt-3 mb-4"><%= post.user.name %></p>
+                    <i class="fas fa-check-circle mr-2 fa-lg" style="color: #FF8300"></i>
+                    <i class="fas fa-film fa-2x mr-3"></i>
+                    <%= post.review.content %>
+                  </div>
+                  <div class="d-flex align-items-end">
+                    <div class="card h-100 shadow-sm mt-2" style="width: 18rem;">
+                    <%= render partial: "posts/movie", locals: {post: post.review.movie} %>
+                    </div>
+                  </div>
+                <% elsif post.review.stage_id.present? %>
+                  <div>
+                    <p class="mt-3 mb-4"><%= post.user.name %></p>
+                    <i class="fas fa-check-circle mr-2 fa-lg" style="color: #FF8300"></i>
+                    <i class="fas fa-theater-masks fa-2x mr-2"></i>
+                    <%= post.review.content %>
+                  </div>
+                  <div class="d-flex align-items-end">
+                    <div class="card h-100 shadow-sm mt-2" style="width: 18rem;">
+                      <%= render partial: "posts/stage", locals: {post: post.review.stage} %>
+                    </div>
+                  </div>
+                <% end %>
+              <% elsif post.theater_id.present? && post.like_id.nil? %>
                 <div>
                   <p class="mt-3 mb-4"><%= post.user.name %></p>
-                    <i class="fas fa-star mr-2 fa-lg" style="color: #FF8300;"></i>
-                    <i class="fas fa-check-circle fa-2x mr-2"></i>
-                    <p class="d-inline">
-                      <strong>レビュー</strong>
-                      をお気に入りに登録しました
-                    </p>
+                  <label class="badge badge-primary mr-3 p-sm-2 p-1">New</label>
+                  <label class=""><i class="fas fa-book-open fa-4x"></i></label>
+                  <p class="mt-2">新しい戯曲を登録しました</p>
+                </div>
+                <div class="d-flex align-items-end">
+                  <div class="card h-100 shadow-sm mt-2" style="width: 18rem;">
+                    <%= render partial: "posts/theater", locals: {post: post.theater} %>
+                  </div>
+                </div>
+              <% elsif post.movie_id.present? && post.like_id.nil? %>
+                <div>
+                  <p class="mt-3 mb-3"><%= post.user.name %></p>
+                  <label class="badge badge-primary mr-3 p-sm-2 p-1">New</label>
+                  <label class=""><i class="fas fa-film fa-5x"></i></label>
+                  <p class="mt-2">新しい映画を登録しました</p>
+                </div>
+                <div class="d-flex align-items-end">
+                  <div class="card h-100 shadow-sm mt-2" style="width: 18rem;">
+                    <%= render partial: "posts/movie", locals: {post: post.movie} %>
+                  </div>
+                </div>
+              <% elsif post.stage_id.present? && post.like_id.nil? %>
+                <div>
+                  <p class="mt-3 mb-4 pb-1"><%= post.user.name %></p>
+                  <label class="badge badge-primary mr-3 p-sm-2 p-1">New</label>
+                  <label class=""><i class="fas fa-theater-masks fa-4x"></i></label>
+                  <p class="mt-2">新しい舞台を登録しました</p>
+                </div>
+                <div class="d-flex align-items-end">
+                  <div class="card h-100 shadow-sm mt-2" style="width: 18rem;">
+                    <%= render partial: "posts/stage", locals: {post: post.stage} %>
+                  </div>
                 </div>
               <% end %>
-            <% elsif post.review_id.present? %>
-              <% if post.review.theater_id.present? %>
-                <div>
-                  <p class="mt-3 mb-4"><%= post.user.name %></p>
-                  <i class="fas fa-check-circle mr-2 fa-lg" style="color: #FF8300"></i>
-                  <i class="fas fa-book-open fa-2x mr-3"></i>
-                  <%= post.review.content %>
-                </div>
-                <div class="d-flex align-items-end">
-                  <div class="card h-100 shadow-sm mt-2" style="width: 18rem;">
-                    <%= render partial: "posts/theater", locals: {post: post, post: post.review.theater} %>
-                  </div>
-                </div>
-              <% elsif post.review.movie_id.present? %>
-                <div>
-                  <p class="mt-3 mb-4"><%= post.user.name %></p>
-                  <i class="fas fa-check-circle mr-2 fa-lg" style="color: #FF8300"></i>
-                  <i class="fas fa-film fa-2x mr-3"></i>
-                  <%= post.review.content %>
-                </div>
-                <div class="d-flex align-items-end">
-                  <div class="card h-100 shadow-sm mt-2" style="width: 18rem;">
-                  <%= render partial: "posts/movie", locals: {post: post.review.movie} %>
-                  </div>
-                </div>
-              <% elsif post.review.stage_id.present? %>
-                <div>
-                  <p class="mt-3 mb-4"><%= post.user.name %></p>
-                  <i class="fas fa-check-circle mr-2 fa-lg" style="color: #FF8300"></i>
-                  <i class="fas fa-theater-masks fa-2x mr-2"></i>
-                  <%= post.review.content %>
-                </div>
-                <div class="d-flex align-items-end">
-                  <div class="card h-100 shadow-sm mt-2" style="width: 18rem;">
-                    <%= render partial: "posts/stage", locals: {post: post.review.stage} %>
-                  </div>
-                </div>
-              <% end %>
-            <% elsif post.theater_id.present? && post.like_id.nil? %>
-              <div>
-                <p class="mt-3 mb-4"><%= post.user.name %></p>
-                <label class="badge badge-primary mr-3 p-sm-2 p-1">New</label>
-                <label class=""><i class="fas fa-book-open fa-4x"></i></label>
-                <p class="mt-2">新しい戯曲を登録しました</p>
-              </div>
-              <div class="d-flex align-items-end">
-                <div class="card h-100 shadow-sm mt-2" style="width: 18rem;">
-                  <%= render partial: "posts/theater", locals: {post: post.theater} %>
-                </div>
-              </div>
-            <% elsif post.movie_id.present? && post.like_id.nil? %>
-              <div>
-                <p class="mt-3 mb-3"><%= post.user.name %></p>
-                <label class="badge badge-primary mr-3 p-sm-2 p-1">New</label>
-                <label class=""><i class="fas fa-film fa-5x"></i></label>
-                <p class="mt-2">新しい映画を登録しました</p>
-              </div>
-              <div class="d-flex align-items-end">
-                <div class="card h-100 shadow-sm mt-2" style="width: 18rem;">
-                  <%= render partial: "posts/movie", locals: {post: post.movie} %>
-                </div>
-              </div>
-            <% elsif post.stage_id.present? && post.like_id.nil? %>
-              <div>
-                <p class="mt-3 mb-4 pb-1"><%= post.user.name %></p>
-                <label class="badge badge-primary mr-3 p-sm-2 p-1">New</label>
-                <label class=""><i class="fas fa-theater-masks fa-4x"></i></label>
-                <p class="mt-2">新しい舞台を登録しました</p>
-              </div>
-              <div class="d-flex align-items-end">
-                <div class="card h-100 shadow-sm mt-2" style="width: 18rem;">
-                  <%= render partial: "posts/stage", locals: {post: post.stage} %>
-                </div>
-              </div>
-            <% end %>
+            </div>
           </div>
         </div>
+        <% if post.review_id.present? && post.like_id.nil? && post.user_id != current_user.id %>
+          <div class="card-footer">
+            <% if post.review.theater_id.present? %>
+              <%= link_to favorite_theater_review_path(post.review.theater_id, post.review), method: :post, remote: true, style:"color: #FF8300;" do %>
+                <div id="favorite-review-<%= post.review.id %>" class="ml-4">
+                  <%= render partial: "reviews/favorite", locals: {review: post.review} %>
+                </div>
+              <% end %>
+            <% elsif post.review.movie_id.present? %>
+              <%= link_to favorite_movie_review_path(post.review.movie_id, post.review), method: :post, remote: true, style:"color: #FF8300;" do %>
+                <div id="favorite-review-<%= post.review.id %>" class="ml-4">
+                  <%= render partial: "reviews/favorite", locals: {review: post.review} %>
+                </div>
+              <% end %>
+            <% elsif post.review.stage_id.present? %>
+              <%= link_to favorite_stage_review_path(post.review.stage_id, post.review), method: :post, remote: true, style:"color: #FF8300;" do %>
+                <div id="favorite-review-<%= post.review.id %>" class="ml-4">
+                  <%= render partial: "reviews/favorite", locals: {review: post.review} %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
-      <% if post.review_id.present? && post.like_id.nil? && post.user_id != current_user.id %>
-        <div class="card-footer">
-          <% if post.review.theater_id.present? %>
-            <%= link_to favorite_theater_review_path(post.review.theater_id, post.review), method: :post, remote: true, style:"color: #FF8300;" do %>
-              <div id="favorite-review-<%= post.review.id %>" class="ml-4">
-                <%= render partial: "reviews/favorite", locals: {review: post.review} %>
-              </div>
-            <% end %>
-          <% elsif post.review.movie_id.present? %>
-            <%= link_to favorite_movie_review_path(post.review.movie_id, post.review), method: :post, remote: true, style:"color: #FF8300;" do %>
-              <div id="favorite-review-<%= post.review.id %>" class="ml-4">
-                <%= render partial: "reviews/favorite", locals: {review: post.review} %>
-              </div>
-            <% end %>
-          <% elsif post.review.stage_id.present? %>
-            <%= link_to favorite_stage_review_path(post.review.stage_id, post.review), method: :post, remote: true, style:"color: #FF8300;" do %>
-              <div id="favorite-review-<%= post.review.id %>" class="ml-4">
-                <%= render partial: "reviews/favorite", locals: {review: post.review} %>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>

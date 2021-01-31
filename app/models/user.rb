@@ -1,9 +1,9 @@
 class User < ApplicationRecord
-  has_many :reviews
   has_many :posts
   has_many :theaters
   has_many :movies
   has_many :stages
+  has_many :reviews
   acts_as_liker
   has_one_attached :image
 

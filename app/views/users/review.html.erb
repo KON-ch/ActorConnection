@@ -1,0 +1,54 @@
+<div class="container" style="margin-top:9vh;">
+  <h2 class="mt-4 mb-3 text-light p-3 d-inline-block rounded" style="background-color: #4CA2FF;">
+    <i class="fas fa-check-circle"></i>
+    レビュー
+  </h2>
+
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <%= link_to "#", remote: true do %>
+        <div id="nav-theater" class="nav-link active text-secondary" href="#">
+          <i class="fas fa-book-open"></i>
+          戯曲
+        </div>
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "#", remote: true do %>
+        <div id="nav-stage" class="nav-link text-secondary" href="#">
+          <i class="fas fa-theater-masks"></i>
+          舞台
+        </div>
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "#", remote: true do %>
+        <div id="nav-movie" class="nav-link text-secondary">
+          <i class="fas fa-film"></i>
+          映画
+      </div>
+      <% end %>
+    </li>
+  </ul>
+  <div id="favorite-content" class="row">
+    <%= render "users/reviews/theater" %>
+  </div>
+</div>
+
+<script>
+  $("#nav-movie").on('click', function() {
+    $(".nav-link").removeClass("active");
+    $("#nav-movie").addClass("active");
+    $("#favorite-content").html("<%= j(render "users/reviews/movie") %>");
+  });
+  $("#nav-theater").on('click', function() {
+    $(".nav-link").removeClass("active");
+    $("#nav-theater").addClass("active");
+    $("#favorite-content").html("<%= j(render "users/reviews/theater") %>");
+  });
+  $("#nav-stage").on('click', function() {
+    $(".nav-link").removeClass("active");
+    $("#nav-stage").addClass("active");
+    $("#favorite-content").html("<%= j(render "users/reviews/stage") %>");
+  });
+</script>
