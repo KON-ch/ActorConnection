@@ -44,9 +44,9 @@ class UsersController < ApplicationController
     @reviews_theater = reviews.where.not(theater_id: nil).order(updated_at: :desc)
     @reviews_movie = reviews.where.not(movie_id: nil).order(updated_at: :desc)
     @reviews_stage = reviews.where.not(stage_id: nil).order(updated_at: :desc)
-    @likes_theater = @user.likees(Review.where.not(theater_id: nil).order(upsated_at: :desc))
-    @likes_movie = @user.likees(Review.where.not(movie_id: nil).order(upsated_at: :desc))
-    @likes_stage = @user.likees(Review.where.not(stage_id: nil).order(upsated_at: :desc))
+    @likes_theater = @user.likees(Review.where.not(theater_id: nil).order(updated_at: :desc))
+    @likes_movie = @user.likees(Review.where.not(movie_id: nil).order(updated_at: :desc))
+    @likes_stage = @user.likees(Review.where.not(stage_id: nil).order(updated_at: :desc))
 
   end
 
