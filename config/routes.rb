@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   devise_for :admins, :controllers => {
+    :registrations => 'admins/registrations',
     :sessions => 'admins/sessions'
   }
 
@@ -9,6 +10,8 @@ Rails.application.routes.draw do
     get "dashboard/login", :to => "admins/sessions#new"
     post "dashboard/login", :to => "admins/sessions#create"
     get "dashboard/logout", :to => "admins/sessions#destroy"
+    get "dashboard/signup", :to => "admins/registrations#new"
+    post "dashboard/signup", :to => "admins/registrations#create"
   end
 
   namespace :dashboard do

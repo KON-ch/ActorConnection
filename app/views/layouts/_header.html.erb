@@ -55,6 +55,7 @@
                 <%= link_to "ログアウト", logout_path, method: :get, class: "dropdown-item" %>
                 <% if current_user.id == 1 %>
                   <%= link_to "管理者画面", dashboard_users_path, method: :get, class: "dropdown-item" %>
+                  <%= link_to "管理者登録", dashboard_signup_path, method: :get, class: "dropdown-item" %>
                 <% end %>
               </div>
             </li>
