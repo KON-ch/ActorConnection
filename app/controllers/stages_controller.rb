@@ -6,15 +6,15 @@ class StagesController < ApplicationController
 
   def index
     if sort_params.present?
-      @stages = Stage.where("CAST(strftime('%m', end_date) as INT) >= ?", Date.today.month).sort_info(sort_params, params[:page])
+      @stages = Stage.where("extract(month from end_date) = ?", Date.today.month).sort_info(sort_params, params[:page])
     elsif params[:date] == "last_month"
-      @stages= Stage.where("CAST(strftime('%m', end_date) as INT) = ?", Date.current.last_month.month).order(updated_at: :desc).display_list(params[:page])
+      @stages= Stage.where("extract(month from end_date) = ?", Date.current.last_month.month).order(updated_at: :desc).display_list(params[:page])
     elsif params[:date] == "next_month"
-      @stages= Stage.where("CAST(strftime('%m', start_date) as INT) = ?", Date.current.next_month.month).order(updated_at: :desc).display_list(params[:page])
+      @stages= Stage.where("extract(month from end_date) = ?", Date.current.next_month.month).order(updated_at: :desc).display_list(params[:page])
     elsif params[:date] == "this_month"
-      @stages= Stage.where("CAST(strftime('%m', start_date) as INT) = ?", Date.current.month).or(Stage.where("CAST(strftime('%m', end_date) as INT) = ?", Date.current.month)).order(updated_at: :desc).display_list(params[:page])
+      @stages= Stage.where("extract(month from end_date) = ?", Date.current.month).or(Stage.where("extract(month from end_date) = ?", Date.current.month)).order(updated_at: :desc).display_list(params[:page])
     else
-      @stages = Stage.where(end_date < Date.today).order(updated_at: :desc).display_list(params[:page])
+      @stages = Stage.where('extract(month from end_date) = ?', Date.today.month).order(updated_at: :desc).display_list(params[:page])
     end
     @sort_list = Stage.sort_list
   end
