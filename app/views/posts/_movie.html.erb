@@ -36,6 +36,6 @@
   </div>
 </div>
 <%= form_with model: post.reviews.new, url: movie_reviews_path(post) do |f| %>
-  <%= render partial: "posts/review", locals: {post: post, post_title: post, f: f} %>
+  <%= render partial: "posts/new_review", locals: {post: post, post_title: post, f: f} %>
 <% end %>
 <%= %>

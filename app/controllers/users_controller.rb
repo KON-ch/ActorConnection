@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user
+  before_action :set_user, expect: [:show]
+
+  def show
+    @user = User.find(params[:id])
+    @reviews = @user.reviews
+  end
 
   def update
     @user.update_without_password(user_params)

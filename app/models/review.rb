@@ -3,7 +3,7 @@ class Review < ApplicationRecord
   belongs_to :theater, optional: true
   belongs_to :movie, optional: true
   belongs_to :stage, optional: true
-  has_one :post, dependent: :destroy, touch: true
+  has_many :posts, dependent: :destroy
   
   validates :content, presence: true
 

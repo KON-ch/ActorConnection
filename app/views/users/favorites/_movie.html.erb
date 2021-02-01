@@ -38,7 +38,7 @@
             <p class="ml-2 mb-0" style="color: #FF8300;"><%= movie.reviews.count %></p>
           </div>
           <%= form_with model: movie.reviews.new, url: movie_reviews_path(movie) do |f| %>
-            <%= render partial: "posts/review", locals: {post: movie, post_title: movie, f: f} %>
+            <%= render partial: "posts/new_review", locals: {post: movie, post_title: movie, f: f} %>
           <% end %>
         </div>
       </div>

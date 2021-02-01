@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     get "logout", :to => "users/sessions#destroy"
   end
 
-  resources :users, only: [:edit, :update] do
+  resources :users, only: [:show, :edit, :update] do
     collection do
       get "mypage", :to => "users#mypage"
       put "mypage", :to => "users#update"
