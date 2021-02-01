@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="row" style="margin-top:12vh; margin-bottom:8vh;">
+  <div id="posts" class="row" style="margin-top:12vh; margin-bottom:8vh;">
     <% @posts.each do |post| %>
-      <div class="col-10 col-sm-8 col-lg-6 offset-1 offset-sm-2 offset-lg-1 col-xl-5 offset-xl-2 card shadow p-0 mb-3">
+      <div class="col-10 col-sm-8 col-lg-6 offset-1 offset-sm-2 offset-lg-1 col-xl-5 offset-xl-2 card shadow p-0 mb-3 posts">
         <div class="d-flex">
           <%= link_to user_path(post.user) do %>
             <% if post.user.image.present? %>
@@ -134,4 +134,18 @@
       </div>
     <% end %>
   </div>
+  <%= paginate @posts %>
 </div>
+
+<script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
+<script>
+$(document).ready(function() {
+  new InfiniteScroll('#posts', {
+    path: 'nav.pagination a[rel=next]',
+    append: '.posts',
+    history: false,
+    hideNav: '.pagination',
+    status: '.page-load-status'
+  });
+});
+</script>

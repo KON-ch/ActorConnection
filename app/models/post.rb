@@ -8,6 +8,8 @@ class Post < ApplicationRecord
 
   default_scope -> { order(created_at: :desc)}
 
+  extend DisplayList
+
   def reviews_new
     reviews.new
   end
