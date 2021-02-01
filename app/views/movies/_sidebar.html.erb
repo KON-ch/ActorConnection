@@ -1,5 +1,8 @@
-<% @countries.each do |country| %>
-  <div>
-    <%= link_to country.name, movies_path(country: country.id) %>
-  </div>
-<% end %>
+<div class="" style="margin-top:6vh;">
+  <h2>国名検索</h2>
+  <% @countries.each do |country| %>
+    <div class="mt-2">
+      <%= link_to country.name, movies_path(country: country.id), class:"text-secondary" %>
+    </div>
+  <% end %>
+</div>

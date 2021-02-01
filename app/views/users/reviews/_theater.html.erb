@@ -33,7 +33,7 @@
             </div>
           </div>
           <div class="card-footer text-right">
-            <span onclick="switchEditUserInfo('.userReview<%= review.id %>', '.editUserReview<%= review.id %>', '.userReviewEditLabel<%= review.id %>');" class="userReviewEditLabel<%= review.id %> user-edit-label btn btn-outline-secondary">
+            <span onclick="switchEditReview('.userReview<%= review.id %>', '.editUserReview<%= review.id %>', '.userReviewEditLabel<%= review.id %>');" class="userReviewEditLabel<%= review.id %> user-edit-label btn btn-outline-secondary">
               編集
             </span>
           </div>
@@ -81,17 +81,3 @@
     <% end %>
   </div>
 </div>
-
-<script type="text/javascript">
-  let switchEditUserInfo = (textClass, inputClass, labelClass) => {
-      if ($(textClass).css('display') == 'block') {
-          $(labelClass).text("キャンセル");
-          $(textClass).removeClass('show');
-          $(inputClass).addClass('show');
-      } else {
-          $(labelClass).text("編集");
-          $(textClass).addClass('show');
-          $(inputClass).removeClass('show');
-      }
-  }
-</script>

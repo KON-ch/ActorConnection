@@ -30,7 +30,7 @@
       <% end %>
     </li>
   </ul>
-  <div id="favorite-content" class="row">
+  <div id="reviews-content" class="row">
     <%= render "users/reviews/theater" %>
   </div>
 </div>
@@ -39,16 +39,28 @@
   $("#nav-movie").on('click', function() {
     $(".nav-link").removeClass("active");
     $("#nav-movie").addClass("active");
-    $("#favorite-content").html("<%= j(render "users/reviews/movie") %>");
+    $("#reviews-content").html("<%= j(render "users/reviews/movie") %>");
   });
   $("#nav-theater").on('click', function() {
     $(".nav-link").removeClass("active");
     $("#nav-theater").addClass("active");
-    $("#favorite-content").html("<%= j(render "users/reviews/theater") %>");
+    $("#reviews-content").html("<%= j(render "users/reviews/theater") %>");
   });
   $("#nav-stage").on('click', function() {
     $(".nav-link").removeClass("active");
     $("#nav-stage").addClass("active");
-    $("#favorite-content").html("<%= j(render "users/reviews/stage") %>");
+    $("#reviews-content").html("<%= j(render "users/reviews/stage") %>");
   });
+
+  let switchEditReview = (textClass, inputClass, labelClass) => {
+      if ($(textClass).css('display') == 'block') {
+          $(labelClass).text("キャンセル");
+          $(textClass).removeClass('show');
+          $(inputClass).addClass('show');
+      } else {
+          $(labelClass).text("編集");
+          $(textClass).addClass('show');
+          $(inputClass).removeClass('show');
+      }
+  }
 </script>

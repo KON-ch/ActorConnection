@@ -1,2 +1,8 @@
-<h2>上演中作品</h2>
-<p>現在上演中の作品はありません</p>
+<div class="" style="margin-top:6vh;">
+  <h2>作品検索</h2>
+  <div class="mt-4">
+    <p><%= link_to "今月の上演作品", stages_path(date: "this_month") %></p>
+    <p><%= link_to "来月の開演作品", stages_path(date: "next_month") %></p>
+    <p><%= link_to "先月の終演作品", stages_path(date: "last_month") %></p>
+  </div>
+</div>
