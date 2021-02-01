@@ -23,7 +23,7 @@
     </div>
     <div class="form-group row">
       <%= f.label :birthday, "生年月日", class:"col-lg-4 offset-lg-1 col-form-label text-left px-0" %>
-      <%= f.date_select :birthday, {use_month_numbers: true, default: Date.new(1989, 1, 1), prompt:""}, {class:"form-control col-lg-2 col-4"} %>
+      <%= f.date_select :birthday, {use_month_numbers: true, start_year: 1940, end_year: 2010, default: Date.new(1989, 1, 1), prompt:""}, {class:"form-control col-lg-2 col-4"} %>
     </div>
     <div class="form-group row my-0">
       <%= f.label :sex, "性別", class:"col-lg-4 offset-lg-1 col-form-label text-left px-0" %>
