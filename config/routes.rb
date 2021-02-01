@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   namespace :dashboard do
+    resources :admins, only: [:index, :destroy]
     resources :users, only: [:index, :destroy]
     resources :theaters, except: [:show]
     resources :stages, except: [:show]
