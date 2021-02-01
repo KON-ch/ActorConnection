@@ -1,47 +1,7 @@
 <% @favorites_stage.each do |stage| %>
   <div class="col mb-4">
     <div class="card h-100 shadow-sm">
-      <div class="card-header">
-        <% if stage.start_date < Date.today && stage.end_date > Date.today %>
-          <label class="badge badge-pill badge-warning text-light py-1" style="background-color: #FF8300;">Now</label>
-        <% end %>
-        <%= stage.start_date.mon %>月<%= stage.start_date.day %>日
-        〜
-        <% if stage.start_date.mon != stage.end_date.mon %>
-          <%= stage.end_date.mon %>月
-        <% end %>
-        <%= stage.end_date.day %>日
-      </div>
-      <div class="card-body">
-        <%= link_to stage_path(stage), data: { "turbolinks" => false }, class:"text-dark" do %>
-          <h2 class="card-title" style="font-size:1.8rem"><%= stage.theater.title %></h2>
-          <label class="card-subtitle text-muted"><%= stage.company %></label>
-        <% end %>
-      </div>
-      <div class="card-footer d-flex">
-        <%= link_to favorite_stage_path(stage), method: :post, remote: true, style:"color: #FF8300;" do %>
-          <div class="favorite-stage-<%= stage.id %>">
-            <%= render partial: "stages/favorite", locals: {stage: stage} %>
-          </div>
-        <% end %>
-        <div class="review-stage-<%= stage.id %>">
-          <div class="d-flex">
-            <% if review_present?(current_user, stage) %>
-              <div type="button" style="color: #FF8300;" data-toggle="modal" data-target="#reviewModal<%= stage.id %>">
-                <i class="far fa-check-circle ml-4"></i>
-              </div>
-            <% else %>
-              <%= link_to stage_review_path(stage.id, current_user), method: :delete, data: { confirm: 'レビューを削除します' } do %>
-                <i class="fas fa-check-circle ml-4" style="color: #FF8300;"></i>
-              <% end %>
-            <% end %>
-            <p class="ml-2 mb-0" style="color: #FF8300;"><%= stage.reviews.count %></p>
-          </div>
-          <%= form_with model: stage.reviews.new, url: stage_reviews_path(stage) do |f| %>
-            <%= render partial: "posts/new_review", locals: {post: stage, post_title: stage.theater, f: f} %>
-          <% end %>
-        </div>
-      </div>
+      <%= render partial: "posts/stage", locals: {post: stage} %>
     </div>
   </div>
 <% end %>

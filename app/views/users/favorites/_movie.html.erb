@@ -1,47 +1,7 @@
 <% @favorites_movie.each do |movie| %>
   <div class="col mb-4">
     <div class="card h-100 shadow-sm">
-      <div class="card-header">
-        <%= movie.country.name %>
-        <div class="float-right">
-          <% if movie.production.present? %>
-            <%= movie.production.year %>
-          <% else %>
-            未登録
-          <% end %>
-        </div>
-      </div>
-      <div class="card-body">
-        <%= link_to movie_path(movie), data: { "turbolinks" => false }, class:"text-decoration-none text-dark" do %>
-          <p class="card-title" style="font-size: 1.8rem;"><%= movie.title %></p>
-          <p class="card-title"><%= movie.sub_title %></p>
-        <% end %>
-        <p class="card-text"></p>
-      </div>
-      <div class="card-footer d-flex">
-        <%= link_to favorite_movie_path(movie), method: :post, remote: true, style:"color: #FF8300;" do %>
-          <div class="favorite-movie-<%= movie.id %>">
-            <%= render partial: "movies/favorite", locals: {movie: movie} %>
-          </div>
-        <% end %>
-        <div class="review-movie-<%= movie.id %>">
-          <div class="d-flex">
-            <% if review_present?(current_user, movie) %>
-              <div type="button" style="color: #FF8300;" data-toggle="modal" data-target="#reviewModal<%= movie.id %>">
-                <i class="far fa-check-circle ml-4"></i>
-              </div>
-            <% else %>
-              <%= link_to movie_review_path(movie.id, current_user), method: :delete, data: { confirm: 'レビューを削除します' } do %>
-                <i class="fas fa-check-circle ml-4" style="color: #FF8300;"></i>
-              <% end %>
-            <% end %>
-            <p class="ml-2 mb-0" style="color: #FF8300;"><%= movie.reviews.count %></p>
-          </div>
-          <%= form_with model: movie.reviews.new, url: movie_reviews_path(movie) do |f| %>
-            <%= render partial: "posts/new_review", locals: {post: movie, post_title: movie, f: f} %>
-          <% end %>
-        </div>
-      </div>
+      <%= render partial: "posts/movie", locals: {post: movie} %>
     </div>
   </div>
 <% end %>

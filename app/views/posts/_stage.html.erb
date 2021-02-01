@@ -11,7 +11,7 @@
 </div>
 <div class="card-body">
   <%= link_to stage_path(post.id), data: { "turbolinks" => false } do %>
-    <p class="card-title text-dark" style="font-size:1.8rem;"><%= post.theater.title %></p>
+    <strong class="card-title text-dark" style="font-size:1.8rem;"><%= post.theater.title %></strong>
   <% end %>
   <p class="card-text"><%= post.company %></p>
 </div>

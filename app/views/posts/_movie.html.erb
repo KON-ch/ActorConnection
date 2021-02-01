@@ -10,7 +10,7 @@
 </div>
 <div class="card-body">
   <%= link_to movie_path(post), class:"text-dark", data: { "turbolinks" => false } do %>
-    <p class="card-title" style="font-size:1.8rem;"><%= post.title %></p>
+    <strong class="card-title" style="font-size:1.8rem;"><%= post.title %></strong>
   <% end %>
   <p class="card-text"><%= post.sub_title %></p>
 </div>
