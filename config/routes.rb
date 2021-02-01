@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     get "dashboard/login", :to => "admins/sessions#new"
     post "dashboard/login", :to => "admins/sessions#create"
     get "dashboard/logout", :to => "admins/sessions#destroy"
+    get "dashboard/edit_password", :to => "admins/edit_password"
+    put "dashboard/password", :to => "admins/update_password"
   end
 
   namespace :dashboard do
