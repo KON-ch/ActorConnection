@@ -27,8 +27,8 @@
         <% end %>
       </div>
       <%= paginate @stages %>
-      <div type="button" class="btn btn-lg btn-primary float-right position-fixed rounded" style="bottom:10vh; right:5vw;" data-toggle="modal" data-target="#newModal">
-        <i class="fas fa-pen fa-lg mr-md-2"></i>
+      <div class="btn btn-lg btn-primary float-right position-fixed rounded p-2" style="bottom:10vh; right:5vw;" data-toggle="modal" data-target="#newModal">
+        <i class="fas fa-pen fa-2x mr-md-2"></i>
         <label class="d-none d-md-inline">公演情報を登録</label>
       </div>
       <%= render partial: "stages/new_modal" %>

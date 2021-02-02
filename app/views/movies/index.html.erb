@@ -44,9 +44,9 @@
       </div>
 
       <%= paginate @movies %>
-      <div type="button" class="btn btn-primary btn-lg float-right position-fixed rounded" style="bottom:10vh; right:5vw;" data-toggle="modal" data-target="#newModal">
-        <i class="fas fa-pen fa-lg mr-md-2"></i>
-        <label class="d-none d-md-inline">新しく映画を登録</label>
+      <div class="btn btn-primary btn-lg float-right position-fixed rounded p-2" style="bottom:10vh; right:5vw;" data-toggle="modal" data-target="#newModal">
+        <i class="fas fa-pen fa-2x mr-md-2"></i>
+        <label class="d-none d-md-inline">新しく登録</label>
       </div>
       <%= render partial: "movies/new_modal" %>
     </div>
