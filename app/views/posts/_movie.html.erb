@@ -23,15 +23,16 @@
   <div class="review-movie-<%= post.id %>">
     <div class="d-flex">
       <% if review_present?(current_user, post) %>
-        <div type="button" style="color: #FF8300;" data-toggle="modal" data-target="#reviewModal<%= post.id %>">
+        <div style="color: #FF8300; cursor:pointer;" data-toggle="modal" data-target="#reviewModal<%= post.id %>">
           <i class="far fa-check-circle ml-4"></i>
+          <span class="ml-1 mb-0"><%= post.reviews.count %></span>
         </div>
       <% else %>
         <%= link_to movie_review_path(post.id, current_user), method: :delete, data: { confirm: 'レビューを削除します' } do %>
           <i class="fas fa-check-circle ml-4" style="color: #FF8300;"></i>
+          <span class="ml-1 mb-0" style="color: #FF8300;"><%= post.reviews.count %></span>
         <% end %>
       <% end %>
-      <p class="ml-2 mb-0" style="color: #FF8300;"><%= post.reviews.count %></p>
     </div>
   </div>
 </div>
