@@ -15,8 +15,11 @@ class ReviewsController < ApplicationController
       post = Post.find(params[:post_id])
       review = post.reviews_new
     end
-    review.save_review(review, review_params)
-    redirect_to posts_path, notice: "レビューを投稿しました" 
+    if review.save_review(review, review_params)
+      redirect_to posts_path, notice: "レビューを投稿しました" 
+    else
+      redirect_to posts_path, notice: "投稿に失敗しました"
+    end
   end
 
   def update
@@ -29,8 +32,11 @@ class ReviewsController < ApplicationController
     elsif params[:post_id].present?
       review = Review.find_by(user: current_user, stage_id: params[:stage_id])
     end
-    review.update_attributes(review_params)
-    redirect_to posts_path, notice: "レビューを編集しました"
+    if review.update_attributes(review_params)
+      redirect_to posts_path, notice: "レビューを編集しました"
+    else
+      redirect_to posts_path, notice: "編集に失敗しました"
+    end
   end
 
   def destroy
@@ -44,8 +50,8 @@ class ReviewsController < ApplicationController
       review = Review.find_by(user: current_user, stage_id: params[:stage_id])
     end
     review.destroy
-    redirect_to posts_path, notice: "レビューを削除しました。"
-  end
+    redirect_to posts_path, notice: "レビューを削除しました"
+    end
 
   def favorite
     @review = Review.find(params[:id])

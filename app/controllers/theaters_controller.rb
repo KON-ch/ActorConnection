@@ -10,7 +10,7 @@ class TheatersController < ApplicationController
     elsif sort_params.present?
       if sort_params[:sort_country].present?
         set_country(sort_params[:sort_country])
-        sort_theater(Theater.includes(:country).country_theaters(sort_params[:sort_country]))
+        sort_theater(Theater.preload(:country).country_theaters(sort_params[:sort_country]))
       elsif params[:sort_keyword].present?
         @keyword = params[:sort_keyword]
         sort_theater(search_theater)
@@ -19,9 +19,9 @@ class TheatersController < ApplicationController
       end
     elsif params[:country].present?
       set_country(params[:country])
-      display_theater(Theater.includes(:country).country_theaters(@country))
+      display_theater(Theater.preload(:country).country_theaters(@country))
     else
-      display_theater(Theater.includes(:country))
+      display_theater(Theater.preload(:country))
     end
     @sort_list = Theater.sort_list
   end
@@ -42,7 +42,9 @@ class TheatersController < ApplicationController
       redirect_to theaters_path, notice: "戯曲情報を登録しました"
     else
       @countries = Country.all
-      render :new
+      display_theater(Theater.includes(:country))
+      @sort_list = Theater.sort_list
+      render :index
     end
   end
 
@@ -53,6 +55,7 @@ class TheatersController < ApplicationController
     if @theater.update_attributes(theater_params)
       redirect_to theater_path(@theater), notice: "戯曲情報を更新しました" 
     else
+      countries = Country.all
       render :edit
     end
   end

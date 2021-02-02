@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, expect: [:show]
 
   def show
-    @user = User.find(params[:id])
+    @user = User.eager_load(:reviews).find(params[:id])
     @reviews = @user.reviews
   end
 

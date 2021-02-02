@@ -42,17 +42,20 @@ class MoviesController < ApplicationController
       redirect_to movies_path, notice: "映画情報を登録しました"
     else
       @countries = Country.all
-      render :new
+      @sort_list = Movie.sort_list
+      display_movie(Movie.includes(:country))
+      render :index
     end
   end
-
+  
   def edit
   end
-
+  
   def update
     if @movie.update_attributes(movie_params)
       redirect_to movie_path(@movie), notice: "映画情報を更新しました" 
     else
+      @countries = Country.all
       render :edit
     end
   end

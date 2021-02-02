@@ -18,7 +18,7 @@ class StagesController < ApplicationController
     end
     @sort_list = Stage.sort_list
   end
-
+  
   def show
     @reviews = @stage.reviews.includes(:user).where.not(user: current_user)
     @review = @reviews.new
@@ -26,11 +26,11 @@ class StagesController < ApplicationController
     @lat = @stage.place.latitude
     @lng = @stage.place.longitude
   end
-
+  
   def new
     @stage = Stage.new
   end
-
+  
   def create
     @stage = Stage.new(stage_params)
     if @stage.save
@@ -38,21 +38,28 @@ class StagesController < ApplicationController
     else
       @theaters = Theater.all
       @places = Place.all
-      render :new
+      @stages = Stage.where('extract(month from end_date) = ?', Date.today.month).order(updated_at: :desc).display_list(params[:page])
+      @sort_list = Stage.sort_list
+      render :index
     end
   end
-
+  
   def edit
   end
-
+  
   def update
-    @stage.update(stage_params)
-    redirect_to stages_path, notice: "公演情報を更新しました"
+    if @stage.update_attributes(stage_params)
+      redirect_to stages_path, notice: "公演情報を更新しました"
+    else
+      @theaters = Theater.all
+      @places = Place.all
+      render :edit
+    end
   end
 
   def destroy
     @stage.destroy
-    redirect_to stages_path, notice: "公演情報を削除しました" 
+    redirect_to stages_path, notice: "公演情報を削除しました"
   end
 
   def favorite
