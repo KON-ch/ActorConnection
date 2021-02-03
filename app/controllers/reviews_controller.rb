@@ -16,10 +16,11 @@ class ReviewsController < ApplicationController
       review = post.reviews_new
     end
     if review.save_review(review, review_params)
-      redirect_to posts_path
+      redirect_page
       flash[:notice] = "レビューを作成しました"
     else
-      redirect_to posts_path, notice: "投稿に失敗しました"
+      redirect_page
+      flash[:alert] = "投稿に失敗しました"
     end
   end
 
@@ -41,7 +42,8 @@ class ReviewsController < ApplicationController
       redirect_to page_params[:review_page]
       flash[:notice] = "レビューを編集しました"
     else
-      redirect_to posts_path, notice: "編集に失敗しました"
+      redirect_to page_params[:review_page]
+      flash[:alert] = "編集に失敗しました"
     end
   end
 
@@ -56,7 +58,8 @@ class ReviewsController < ApplicationController
       review = Review.find_by(user: current_user, stage_id: params[:stage_id])
     end
     review.destroy
-    redirect_to posts_path, notice: "レビューを削除しました"
+    redirect_to posts_path
+    flash[:notice] = "レビューを削除しました"
     end
 
   def favorite
@@ -72,6 +75,14 @@ class ReviewsController < ApplicationController
 
     def page_params
       params.require(:review).permit(:review_page)
+    end
+
+    def redirect_page
+      if page_params[:review_page].include?('post')
+        redirect_to posts_path
+      else
+        redirect_to page_params[:review_page]
+      end
     end
 
 end
