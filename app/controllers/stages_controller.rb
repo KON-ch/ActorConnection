@@ -14,7 +14,7 @@ class StagesController < ApplicationController
     elsif params[:date] == "this_month"
       @stages= Stage.where("extract(month from end_date) = ?", Date.current.month).or(Stage.where("extract(month from end_date) = ?", Date.current.month)).order(updated_at: :desc).display_list(params[:page])
     else
-      @stages = Stage.where('extract(month from end_date) = ?', Date.today.month).order(updated_at: :desc).display_list(params[:page])
+      @stages = Stage.order(updated_at: :desc).display_list(params[:page])
     end
     @sort_list = Stage.sort_list
   end

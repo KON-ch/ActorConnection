@@ -1,4 +1,4 @@
-<div class="container p-0 w-50 text-center ">
+<div class="container p-0 w-50 mx-auto">
   <div class="row">
     <h2 class="mt-5 mb-lg-3 offset-lg-2">公演情報変更</h2>
   </div>
@@ -16,3 +16,13 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $('#title').select2({
+      dropdownParent: $('.container'),
+      placeholder: '作品を選択してください',
+      width: '50%'
+    });
+  });
+</script>
