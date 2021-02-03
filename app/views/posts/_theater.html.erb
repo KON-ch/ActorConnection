@@ -29,7 +29,7 @@
           <span class="ml-1 mb-0"><%= post.reviews.count %></span>
         </div>
       <% else %>
-        <%= link_to theater_review_path(post.id, current_user), method: :delete, data: { confirm: 'レビューを削除します' } do %>
+        <%= link_to theater_review_path(post.id, current_user), method: :delete, remote: true, data: { confirm: 'レビューを削除します' } do %>
           <i class="fas fa-check-circle ml-4" style="color: #FF8300;"></i>
           <span class="ml-1 mb-0" style="color: #FF8300;"><%= post.reviews.count %></span>
         <% end %>

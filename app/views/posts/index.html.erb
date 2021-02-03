@@ -52,16 +52,18 @@
                 <% elsif post.review_id.present? %>
                   <div>
                     <p class="mt-3 mb-4"><%= post.user.name %></p>
-                    <i class="fas fa-star mr-2 fa-lg" style="color: #FF8300;"></i>
-                    <i class="far fa-check-circle fa-2x mr-2"></i>
+                    <i class="fas fa-heart mr-2 fa-2x" style="color: #FF8300;"></i>
                     <div class="d-inline">
                       <%= link_to user_path(post.review.user) do %>
                         <strong class="text-dark"><%= post.review.user.name %></strong>
                       <% end %>
                         のレビューにいいねしました
-                      <div class="card my-3 shadow-sm w-100 mx-4">
+                      <div class="card my-3 shadow-sm mx-4" style="width: 30rem;">
                         <div class="card-body">
-                          <p class="ml-4 mt-2"><%= post.review.content %></p>
+                          <div class="d-flex">
+                            <i class="far fa-check-circle fa-lg mr-2 mt-2"></i>
+                            <p class="mt-2"><%= post.review.content %></p>
+                          </div>
                           <div class="float-right mt-3 mr-2">
                             <% if post.review.theater_id.present? %>
                               <%= link_to theater_path(post.review.theater), class:"text-secondary" do %>
@@ -81,7 +83,9 @@
                             <% end %>
                           </div>
                         </div>
-                        <%= render partial: "reviews/like", locals: {post: post.review} %>
+                        <% if post.review.user != current_user %>
+                          <%= render partial: "reviews/like", locals: {post: post.review} %>
+                        <% end %>
                       </div>
                     </div>
                   </div>
