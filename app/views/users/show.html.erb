@@ -68,7 +68,9 @@
               </div>
             <% end %>
           </div>
-          <%= render partial: "reviews/like", locals: {post: review} %>
+          <% if @user != current_user %>
+            <%= render partial: "reviews/like", locals: {post: review} %>
+          <% end %>
         </div>
       <% end %>
     <% else %>

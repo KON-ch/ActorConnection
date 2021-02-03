@@ -16,7 +16,8 @@ class ReviewsController < ApplicationController
       review = post.reviews_new
     end
     if review.save_review(review, review_params)
-      redirect_to posts_path, notice: "レビューを投稿しました" 
+      redirect_to posts_path
+      flash[:notice] = "レビューを作成しました"
     else
       redirect_to posts_path, notice: "投稿に失敗しました"
     end
@@ -24,16 +25,21 @@ class ReviewsController < ApplicationController
 
   def update
     if params[:theater_id].present?
-      review = Review.find_by(user: current_user, theater_id: params[:theater_id])
+      theater = params[:theater_id]
+      review = Review.find_by(user: current_user, theater_id: theater)
     elsif params[:movie_id].present?
-      review = Review.find_by(user: current_user, movie_id: params[:movie_id])
+      movie = params[:movie_id]
+      review = Review.find_by(user: current_user, movie_id: movie)
     elsif params[:stage_id].present?
-      review = Review.find_by(user: current_user, stage_id: params[:stage_id])
+      stage = params[:stage_id]
+      review = Review.find_by(user: current_user, stage_id: stage)
     elsif params[:post_id].present?
-      review = Review.find_by(user: current_user, stage_id: params[:stage_id])
+      post = params[:post_id]
+      review = Review.find_by(user: current_user, post_id: post)
     end
     if review.update_attributes(review_params)
-      redirect_to posts_path, notice: "レビューを編集しました"
+      redirect_to page_params[:review_page]
+      flash[:notice] = "レビューを編集しました"
     else
       redirect_to posts_path, notice: "編集に失敗しました"
     end
@@ -63,4 +69,9 @@ class ReviewsController < ApplicationController
     def review_params
       params.require(:review).permit(:content).merge(user_id: current_user.id, theater_id: params[:theater_id], movie_id: params[:movie_id], stage_id: params[:stage_id], post_id: params[:post_id])
     end
+
+    def page_params
+      params.require(:review).permit(:review_page)
+    end
+
 end

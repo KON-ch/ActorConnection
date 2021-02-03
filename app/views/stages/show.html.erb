@@ -60,6 +60,7 @@
                   <%=
                     f.text_area :content, size: "20x5", autofocus: "true", value: @my_review.content, class:"form-control mr-2"
                   %>
+                  <%= f.hidden_field :review_page, value: stage_path(@stage) %>
                   <%= f.submit "更新", class:"btn btn-primary mt-3 float-right" %>
                 </div>
               </div>

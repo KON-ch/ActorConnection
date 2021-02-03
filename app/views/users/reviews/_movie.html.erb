@@ -22,6 +22,7 @@
                   <%=
                     f.text_area :content, size: "20x5", autofocus: "true", value: review.content, class:"form-control mr-2"
                   %>
+                  <%= f.hidden_field :review_page, value: mypage_review_users_path %>
                   <%= f.submit "更新", class:"btn btn-primary mt-3 float-right" %>
                 </div>
               <% end %>

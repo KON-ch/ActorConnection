@@ -8,15 +8,7 @@ class TheatersController < ApplicationController
       @keyword = params[:keyword]
       display_theater(search_theater)
     elsif sort_params.present?
-      if sort_params[:sort_country].present?
-        set_country(sort_params[:sort_country])
-        sort_theater(Theater.preload(:country).country_theaters(sort_params[:sort_country]))
-      elsif params[:sort_keyword].present?
-        @keyword = params[:sort_keyword]
-        sort_theater(search_theater)
-      else
-        sort_theater(Theater)
-      end
+      sort_search
     elsif params[:country].present?
       set_country(params[:country])
       display_theater(Theater.preload(:country).country_theaters(@country))
@@ -107,6 +99,18 @@ class TheatersController < ApplicationController
     def sort_theater(theater)
       @theaters = theater.sort_info(sort_params, params[:page])
         total_count(theater)
+    end
+
+    def sort_search
+      if sort_params[:sort_country].present?
+        set_country(sort_params[:sort_country])
+        sort_theater(Theater.preload(:country).country_theaters(sort_params[:sort_country]))
+      elsif sort_params[:sort_keyword].present?
+        @keyword = params[:sort_keyword]
+        sort_theater(search_theater)
+      else
+        sort_theater(Theater)
+      end
     end
 
 end
