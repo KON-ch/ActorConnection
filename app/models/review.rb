@@ -6,6 +6,7 @@ class Review < ApplicationRecord
   has_many :posts, dependent: :destroy
   
   validates :content, presence: true
+  validates :content, length: { maximum: 170 }
 
   acts_as_likeable
 

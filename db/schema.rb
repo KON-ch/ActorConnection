@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_28_020242) do
+ActiveRecord::Schema.define(version: 2021_02_04_114657) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(version: 2021_01_28_020242) do
     t.integer "movie_id"
     t.integer "stage_id"
     t.integer "post_id"
+    t.integer "likers_count", default: 0
     t.index ["movie_id"], name: "index_reviews_on_movie_id"
     t.index ["post_id"], name: "index_reviews_on_post_id"
     t.index ["stage_id"], name: "index_reviews_on_stage_id"
