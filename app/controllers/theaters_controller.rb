@@ -16,6 +16,7 @@ class TheatersController < ApplicationController
       display_theater(Theater.preload(:country))
     end
     @sort_list = Theater.sort_list
+    @theater = Theater.new
   end
 
   def show
@@ -33,10 +34,8 @@ class TheatersController < ApplicationController
     if @theater.save
       redirect_to theaters_path, notice: "戯曲情報を登録しました"
     else
-      @countries = Country.all
-      display_theater(Theater.includes(:country))
-      @sort_list = Theater.sort_list
-      render :index
+      redirect_to theaters_path
+      flash[:alert] = "正しく登録されませんでした"
     end
   end
 
@@ -47,7 +46,7 @@ class TheatersController < ApplicationController
     if @theater.update_attributes(theater_params)
       redirect_to theater_path(@theater), notice: "戯曲情報を更新しました" 
     else
-      countries = Country.all
+      set_countries
       render :edit
     end
   end

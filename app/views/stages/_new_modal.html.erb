@@ -10,7 +10,7 @@
           <span aria-hidden="true">&times;</span>
         </div>
       </div>
-      <%= form_with model: Stage.new do |f| %>
+      <%= form_with model: @stage do |f| %>
         <div class="modal-body">
           <%= render partial: "stages/form", locals: {f: f} %>
         </div>

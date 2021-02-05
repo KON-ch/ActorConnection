@@ -1,15 +1,33 @@
 <div class="container">
   <div class="form-group row">
-    <%= f.label :title, "題名", class:"col-lg-4 offset-lg-1 col-form-label text-left px-0" %>
+    <div class="col-lg-4 offset-lg-1 pl-0">
+      <%= f.label :title, "題名", class:"col-form-label text-left px-0" %>
+      <span class="text-danger ml-3">( 必須 )</span>
+    </div>
     <%= f.text_field :title, class:"form-control col-lg-6" %>
+    <% if @theater.errors.messages[:title].present? %>
+      <strong class="error-text text-left offset-lg-1"><%= @theater.errors.full_messages_for(:title).first %></strong>
+    <% end %>
   </div>
   <div class="form-group row">
-    <%= f.label :writer, "作者", class:"col-lg-4 offset-lg-1 col-form-label text-left px-0" %>
+    <div class="col-lg-4 offset-lg-1 pl-0">
+      <%= f.label :writer, "作者", class:"col-form-label text-left px-0" %>
+      <span class="text-danger ml-3">( 必須 )</span>
+    </div>
     <%= f.text_field :writer, class:"form-control col-lg-6" %>
+    <% if @theater.errors.messages[:writer].present? %>
+      <strong class="error-text text-left offset-lg-1"><%= @theater.errors.full_messages_for(:writer).first %></strong>
+    <% end %>
   </div>
   <div class="form-group row">
-    <%= f.label :country_id, "国籍", class:"col-lg-4 offset-lg-1 col-form-label text-left px-0" %>
+    <div class="col-lg-4 offset-lg-1 pl-0">
+      <%= f.label :country_id, "国籍", class:"col-form-label text-left px-0" %>
+      <span class="text-danger ml-3">( 必須 )</span>
+    </div>
     <%= f.collection_select(:country_id, @countries, :id, :name, {prompt:""}, {class:"form-control col-lg-6"}) %>
+    <% if @theater.errors.messages[:country_id].present? %>
+      <strong class="error-text text-left offset-lg-1"><%= @theater.errors.full_messages_for(:country_id).first %></strong>
+    <% end %>
   </div>
   <div class="form-group row">
     <%= f.label :man, "登場人数 ( 男 )", class:"col-lg-4 offset-lg-1 col-form-label text-left px-0" %>

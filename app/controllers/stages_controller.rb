@@ -17,6 +17,7 @@ class StagesController < ApplicationController
       @stages = Stage.where('extract(month from end_date) = ?', Date.today.month).order(updated_at: :desc).display_list(params[:page])
     end
     @sort_list = Stage.sort_list
+    @stage = Stage.new
   end
   
   def show
@@ -36,11 +37,8 @@ class StagesController < ApplicationController
     if @stage.save
       redirect_to stages_path, notice: "公演情報を登録しました"
     else
-      @theaters = Theater.all
-      @places = Place.all
-      @stages = Stage.where('extract(month from end_date) = ?', Date.today.month).order(updated_at: :desc).display_list(params[:page])
-      @sort_list = Stage.sort_list
-      render :index
+      redirect_to stages_path
+      flash[:alert] = "正しく登録されませんでした"
     end
   end
   

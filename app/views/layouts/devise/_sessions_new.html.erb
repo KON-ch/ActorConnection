@@ -1,7 +1,7 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
   <div class="form-group row my-2">
-    <%= f.label :email, "Email", class:"col-lg-4 offset-lg-1 col-form-label text-left px-0" %>
+    <%= f.label :email, "メールアドレス", class:"col-lg-4 offset-lg-1 col-form-label text-left px-0" %>
     <%= f.email_field :email, autofocus: true, required: "required", autocomplete: "email", class:"form-control col-lg-6" %>
   </div>
   <div class="form-group row my-0">
@@ -10,7 +10,7 @@
     <% end %>
   </div>
   <div class="form-group row my-2">
-    <%= f.label :password, "Password", class:"col-lg-4 offset-lg-1 col-form-label text-left px-0" %>
+    <%= f.label :password, "パスワード", class:"col-lg-4 offset-lg-1 col-form-label text-left px-0" %>
     <%= f.password_field :password, autofocus: "true", autocomplete: "current-password", class:"form-control col-lg-6" %>
   </div>
   <div class="form-group row my-0">

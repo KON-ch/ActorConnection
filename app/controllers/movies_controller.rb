@@ -16,6 +16,7 @@ class MoviesController < ApplicationController
       display_movie(Movie.includes(:country))
     end
     @sort_list = Movie.sort_list
+    @movie = Movie.new
   end
 
   def show
@@ -33,10 +34,8 @@ class MoviesController < ApplicationController
     if @movie.save
       redirect_to movies_path, notice: "映画情報を登録しました"
     else
-      @countries = Country.all
-      @sort_list = Movie.sort_list
-      display_movie(Movie.includes(:country))
-      render :index
+      redirect_to movies_path
+      flash[:alert] = "正しく登録されませんでした"
     end
   end
   
@@ -47,7 +46,7 @@ class MoviesController < ApplicationController
     if @movie.update_attributes(movie_params)
       redirect_to movie_path(@movie), notice: "映画情報を更新しました" 
     else
-      @countries = Country.all
+      set_countries
       render :edit
     end
   end

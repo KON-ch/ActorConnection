@@ -1,22 +1,37 @@
 <div class="container">
   <div class="form-group row">
-    <%= f.label :theater_id, "公演名", class:"col-lg-2 offset-lg-2 col-form-label text-left px-0" %>
+    <div class="col-lg-4 offset-lg-1  px-0">
+      <%= f.label :theater_id, "公演名", class:"col-form-label text-left" %>
+      <span class="text-danger ml-3">( 必須 )</span>
+    </div>
     <%= f.collection_select(:theater_id, @theaters, :id, :title, {prompt:""}, {id:"title", class:"form-control col-lg-6"}) %>
   </div>
   <div class="form-group row">
-    <%= f.label :start_date, "開演日", class:"col-lg-2 offset-lg-2 col-form-label text-left px-0" %>
+    <div class="col-lg-4 offset-lg-1 px-0">
+      <%= f.label :start_date, "開演日", class:"col-form-label text-left" %>
+      <span class="text-danger ml-3">( 必須 )</span>
+    </div>
     <%= f.date_select :start_date, {use_month_numbers: true}, class:"form-control col-4 col-lg-2" %>
   </div>
   <div class="form-group row">
-    <%= f.label :end_date, "終演日", class:"col-lg-2 offset-lg-2 col-form-label text-left px-0" %>
+    <div class="col-lg-4 offset-lg-1 px-0">
+    <%= f.label :end_date, "終演日", class:"col-form-label text-left" %>
+    <span class="text-danger ml-3">( 必須 )</span>
+    </div>
     <%= f.date_select :end_date, {use_month_numbers: true}, class:"form-control col-4 col-lg-2" %>
   </div>
   <div class="form-group row">
-    <%= f.label :company, "公演団体", class:"col-lg-2 offset-lg-2 col-form-label text-left px-0" %>
+    <div class="col-lg-4 offset-lg-1 px-0">
+      <%= f.label :company, "公演団体", class:"col-form-label text-left" %>
+      <span class="text-danger ml-3">( 必須 )</span>
+    </div>
     <%= f.text_field :company, class:"form-control col-lg-6" %>
+    <% if @stage.errors.messages[:company].present? %>
+      <strong class="error-text text-left offset-lg-1"><%= @stage.errors.full_messages_for(:company).first %></strong>
+    <% end %>
   </div>
   <div class="form-group row">
-    <%= f.label :place_id, "劇場", class:"col-lg-2 offset-lg-2 col-form-label text-left px-0" %>
+    <%= f.label :place_id, "劇場", class:"col-lg-4 offset-lg-1 col-form-label text-left px-0" %>
     <%= f.collection_select(:place_id, @places, :id, :name, {prompt:""}, {class:"form-control col-lg-6"}) %>
   </div>
 </div>

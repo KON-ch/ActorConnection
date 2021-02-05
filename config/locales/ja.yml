@@ -1,5 +1,17 @@
 ja:
   activerecord:
+    attributes:
+      theater:
+        title: 題名
+        writer: 作者
+      movie:
+        title: 題名
+      stage:
+        theater_id: 作品
+        start_date: 開演日
+        end_date: 終演日
+        company: 団体
+    
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
