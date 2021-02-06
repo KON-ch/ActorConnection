@@ -1,6 +1,6 @@
 # ActorConnection ( アクター・コネクション )
 
-### [Heroku (URL)](https://git.heroku.com/actor-connection.git)
+### [Heroku (URL)](https://actor-connection.herokuapp.com)
 
 ***
 
