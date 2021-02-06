@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   }
 
   devise_scope :user do
-    root 'posts#index'
+    root 'webx#index'
     get 'signup', to: 'users/registrations#new'
     get 'login', to: 'users/sessions#new'
     get 'logout', to: 'users/sessions#destroy'
