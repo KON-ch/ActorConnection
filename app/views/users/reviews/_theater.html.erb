@@ -1,81 +1,85 @@
-<div class="card-header">
-  <i class="fas fa-book-open fa-2x mx-2 mt-2"></i>
-  <i class="fas fa-check-circle mr-1 fa-lg" style="color: #FF8300"></i>
-  My Review
-</div>
-<% if @reviews_theater.present? %>
-  <% @reviews_theater.each do |review| %>
-    <div class="card shadow m-3">
-      <div class="card-header">
-        <%= review.updated_at.mon %> 月
-        <%= review.updated_at.day %> 日
-      </div>
-      <div class="card-body d-flex justify-content-between">
-        <div class="mt-2 ml-2">
-          <%= form_with model: review, url: review_path(review), local: true, method: :put do |f| %>
-            <div class="collapse show userReview<%= review.id %> mr-2">
-              <%= review.content %>
+<div class="col-lg-6 mt-3">
+  <div class="card shadow-sm mt-3">
+    <div class="card-header">
+      <i class="fas fa-book-open fa-2x mx-2 mt-2"></i>
+      <i class="fas fa-check-circle mr-1 fa-lg" style="color: #FF8300"></i>
+      My Review
+    </div>
+    <% if @reviews_theater.present? %>
+      <% @reviews_theater.each do |review| %>
+        <div class="card shadow m-3">
+          <div class="card-header">
+            <%= review.updated_at.mon %> 月
+            <%= review.updated_at.day %> 日
+          </div>
+          <div class="card-body d-flex justify-content-between">
+            <div class="mt-2 ml-2">
+              <%= form_with model: review, url: review_path(review), local: true, method: :put do |f| %>
+                <div class="collapse show userReview<%= review.id %> mr-2">
+                  <%= review.content %>
+                </div>
+                <div class="collapse editUserReview<%= review.id %>">
+                  <%=
+                    f.text_area :content, size: "20x5", autofocus: "true", value: review.content, class:"form-control mr-2"
+                  %>
+                  <%= f.hidden_field :review_page, value: request.url %>
+                  <%= f.submit "更新", class:"btn btn-primary mt-3 float-right" %>
+                </div>
+              <% end %>
             </div>
-            <div class="collapse editUserReview<%= review.id %>">
-              <%=
-                f.text_area :content, size: "20x5", autofocus: "true", value: review.content, class:"form-control mr-2"
-              %>
-              <%= f.hidden_field :review_page, value: request.url %>
-              <%= f.submit "更新", class:"btn btn-primary mt-3 float-right" %>
+            <div>
+              <div class="card shadow-sm" style="width: 18rem;">
+                <%= render partial: "theaters/card", locals: {theater: review.theater} %>
+              </div>
             </div>
-          <% end %>
-        </div>
-        <div>
-          <div class="card shadow-sm" style="width: 18rem;">
-            <%= render partial: "theaters/card", locals: {theater: review.theater} %>
+          </div>
+          <div class="card-footer text-right">
+            <span onclick="switchEditReview('.userReview<%= review.id %>', '.editUserReview<%= review.id %>', '.userReviewEditLabel<%= review.id %>');" class="userReviewEditLabel<%= review.id %> user-edit-label btn btn-outline-secondary">
+              編集
+            </span>
           </div>
         </div>
-      </div>
-      <div class="card-footer text-right">
-        <span onclick="switchEditReview('.userReview<%= review.id %>', '.editUserReview<%= review.id %>', '.userReviewEditLabel<%= review.id %>');" class="userReviewEditLabel<%= review.id %> user-edit-label btn btn-outline-secondary">
-          編集
-        </span>
-      </div>
-    </div>
-  <% end %>
-<% else %>
-  <p class="text-center mt-4">投稿したレビューがありません。</p>
-<% end %>
-</div>
+      <% end %>
+    <% else %>
+      <p class="text-center mt-4">投稿したレビューがありません。</p>
+    <% end %>
+  </div>
 </div>
 <div class="col-sm-6 mt-3">
-<div class="card shadow-sm mt-3">
-<div class="card-header">
-  <i class="fas fa-heart fa-2x mx-2 mt-2"></i>
-  <i class="fas fa-check-circle mr-1 fa-lg" style="color: #FF8300"></i>
-  My Like
-</div>
-<% if @likes_theater.present? %>
-  <% @likes_theater.each do |review| %>
-    <div class="card shadow m-3">
-      <div class="card-header">
-        <%= review.updated_at.mon %> 月
-        <%= review.updated_at.day %> 日
-      </div>
-      <div class="card-body d-flex justify-content-between">
-        <div>
-          <%= link_to user_path(review.user), class:"text-decoration-none mt-2 ml-2" do %>
-            <% if review.user.image.present? %>
-              <%= image_tag review.user.image, class:"rounded-circle", style:"width: 3.0rem; height: 3.0rem;" %>
-            <% else %>
-              <i class="fas fa-user mx-2 pt-1" style="font-size: 2.0rem;"></i>
-            <% end %>
-            <label class="text-secondary"><%= review.user.name %></label>
-          <% end %>
-          <p class="ml-3 mt-3 mr-2"><%= review.content %></p>
-        </div>
-        <div class="card shadow-sm" style="width: 18rem;">
-          <%= render partial: "theaters/card", locals: {theater: review.theater} %>
-        </div>
-      </div>
-      <%= render partial: "reviews/like", locals: {review: review} %>
+  <div class="card shadow-sm mt-3">
+    <div class="card-header">
+      <i class="fas fa-heart fa-2x mx-2 mt-2"></i>
+      <i class="fas fa-check-circle mr-1 fa-lg" style="color: #FF8300"></i>
+      My Like
     </div>
-  <% end %>
-<% else %>
-  <p class="text-center mt-4">お気に入りのレビューがありません。</p>
-<% end %>
+    <% if @likes_theater.present? %>
+      <% @likes_theater.each do |review| %>
+        <div class="card shadow m-3">
+          <div class="card-header">
+            <%= review.updated_at.mon %> 月
+            <%= review.updated_at.day %> 日
+          </div>
+          <div class="card-body d-flex justify-content-between">
+            <div>
+              <%= link_to user_path(review.user), class:"text-decoration-none mt-2 ml-2" do %>
+                <% if review.user.image.present? %>
+                  <%= image_tag review.user.image, class:"rounded-circle", style:"width: 3.0rem; height: 3.0rem;" %>
+                <% else %>
+                  <i class="fas fa-user mx-2 pt-1" style="font-size: 2.0rem;"></i>
+                <% end %>
+                <label class="text-secondary"><%= review.user.name %></label>
+              <% end %>
+              <p class="ml-3 mt-3 mr-2"><%= review.content %></p>
+            </div>
+            <div class="card shadow-sm" style="width: 18rem;">
+              <%= render partial: "theaters/card", locals: {theater: review.theater} %>
+            </div>
+          </div>
+          <%= render partial: "reviews/like", locals: {review: review} %>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-center mt-4">お気に入りのレビューがありません。</p>
+    <% end %>
+  </div>
+</div>

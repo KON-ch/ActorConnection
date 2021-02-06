@@ -6,35 +6,35 @@ class Movie < ApplicationRecord
 
   acts_as_likeable
 
-  validates :title, presence: true, uniqueness: {scope: :sub_title, message:"この作品は既に作成されています"}
-  
+  validates :title, presence: true, uniqueness: { scope: :sub_title, message: 'この作品は既に作成されています' }
+
   extend DisplayList
   extend SortInfo
 
-  scope :search_movies, -> (keyword) {
-    where("title LIKE ? OR supervision LIKE ? OR sub_title LIKE ?", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
+  scope :search_movies, lambda { |keyword|
+    where('title LIKE ? OR supervision LIKE ? OR sub_title LIKE ?', "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
   }
 
-  scope :sort_list, -> {
+  scope :sort_list, lambda {
     {
-      "並び替え" => "",
-      "投稿の新しい順" => "updated_at_desc",
-      "投稿の古い順" => "updated_at_asc",
-      "製作年の新しい順" => "production_desc",
-      "製作年の古い順" => "production_asc"
+      '並び替え' => '',
+      '投稿の新しい順' => 'updated_at_desc',
+      '投稿の古い順' => 'updated_at_asc',
+      '製作年の新しい順' => 'production_desc',
+      '製作年の古い順' => 'production_asc'
     }
   }
 
-  def reviews_new
-    reviews.new
-  end
+  delegate :new, to: :reviews, prefix: true
 
   after_commit :create_post, on: [:create]
 
   private
-    def create_post
-      return if self.user_id == 1
-      post = Post.new(movie_id: self.id, user_id: self.user_id)
-      post.save
-    end
+
+  def create_post
+    return if user_id == 1
+
+    post = Post.new(movie_id: id, user_id: user_id)
+    post.save
+  end
 end

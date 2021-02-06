@@ -5,5 +5,4 @@ class Place < ApplicationRecord
   validates :latitude, numericality: true, allow_nil: true
   validates :longitude, numericality: true, allow_nil: true
   validates :name, uniqueness: true
-
 end

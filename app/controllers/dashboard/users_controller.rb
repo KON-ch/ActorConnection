@@ -1,9 +1,9 @@
 class Dashboard::UsersController < ApplicationController
   before_action :authenticate_admin!
-  layout "dashboard/dashboard"
+  layout 'dashboard/dashboard'
 
   def index
-    if params[:keyword] != nil
+    if !params[:keyword].nil?
       @keyword = params[:keyword]
       @users = search_user.display_list(params[:pages])
       total_count(search_user)
@@ -28,20 +28,20 @@ class Dashboard::UsersController < ApplicationController
     user = User.find(params[:id])
     user.deleted_flg = User.switch_flg(user.deleted_flg)
     user.save
-    redirect_to dashboard_users_path, notice: "ユーザー情報を削除しました" 
+    redirect_to dashboard_users_path, notice: 'ユーザー情報を削除しました'
   end
 
   private
+
   def sort_params
     params.permit(:sort)
   end
 
   def search_user
-    User.where("name LIKE ? OR email LIKE ?", "%#{@keyword}%", "%#{@keyword}%")
+    User.where('name LIKE ? OR email LIKE ?', "%#{@keyword}%", "%#{@keyword}%")
   end
 
   def total_count(user)
     @total_count = user.count
   end
-
 end

@@ -15,7 +15,7 @@ class Users::SessionsController < Devise::SessionsController
       super
       return
     end
-    redirect_to root_path
+    redirect_to web_path
   end
 
   # DELETE /resource/sign_out
@@ -23,18 +23,19 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  def after_sign_in_path_for(user)
+  def after_sign_in_path_for(_user)
     root_path
   end
 
-  def after_sign_out_path_for(user)
-    web_path
+  def after_sign_out_path_for(_user)
+    webs_path
   end
 
   protected
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_in_params
-    devise_parameter_sanitizer.permit(:sign_in, keys: [:name, :birthday, :sex, :password, :password_confirmatin, :profile])
+    devise_parameter_sanitizer.permit(:sign_in,
+                                      keys: %i[name birthday sex password password_confirmatin profile])
   end
 end

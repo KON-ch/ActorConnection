@@ -1,6 +1,6 @@
 class Dashboard::CountriesController < ApplicationController
   before_action :authenticate_admin!
-  layout "dashboard/dashboard"
+  layout 'dashboard/dashboard'
 
   def index
     @countries = Country.all
@@ -10,14 +10,15 @@ class Dashboard::CountriesController < ApplicationController
   def create
     country = Country.new(country_params)
     if country.save
-      redirect_to dashboard_countries_path, notice: "国名を登録しました" 
+      redirect_to dashboard_countries_path, notice: '国名を登録しました'
     else
       render :new
     end
   end
 
   private
-    def country_params
-      params.require(:country).permit(:name)
-    end
+
+  def country_params
+    params.require(:country).permit(:name)
+  end
 end

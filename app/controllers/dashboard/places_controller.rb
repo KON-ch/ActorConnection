@@ -1,7 +1,7 @@
 class Dashboard::PlacesController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_place, only: [:show, :edit, :update, :destroy]
-  layout "dashboard/dashboard"
+  before_action :set_place, only: %i[edit update destroy]
+  layout 'dashboard/dashboard'
 
   def index
     @places = Place.all
@@ -11,18 +11,17 @@ class Dashboard::PlacesController < ApplicationController
   def create
     @place = Place.new(place_params)
     if @place.save
-      redirect_to dashboard_places_path, notice: "劇場情報を作成しました"
+      redirect_to dashboard_places_path, notice: '劇場情報を作成しました'
     else
       render :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    if @place.update_attributes(place_params)
-      redirect_to dashboard_places_path, notice: "劇場情報を更新しました"
+    if @place.update(place_params)
+      redirect_to dashboard_places_path, notice: '劇場情報を更新しました'
     else
       render :edit
     end
@@ -30,15 +29,16 @@ class Dashboard::PlacesController < ApplicationController
 
   def destroy
     @place.destroy
-    redirect_to dashboard_places_path, notice: "劇場情報を削除しました" 
+    redirect_to dashboard_places_path, notice: '劇場情報を削除しました'
   end
 
   private
-    def set_place
-      @place = Place.find(params[:id])
-    end
 
-    def place_params
-      params.require(:place).permit(:name, :address, :latitude, :longitude, :access)
-    end
+  def set_place
+    @place = Place.find(params[:id])
+  end
+
+  def place_params
+    params.require(:place).permit(:name, :address, :latitude, :longitude, :access)
+  end
 end

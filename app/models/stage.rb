@@ -8,35 +8,35 @@ class Stage < ApplicationRecord
   acts_as_likeable
 
   validates :start_date, :end_date, :company, presence: true
-  validates :theater_id, presence: true, uniqueness: {scope: :start_date, message:"この作品は既に作成されています"}
+  validates :theater_id, presence: true, uniqueness: { scope: :start_date, message: 'この作品は既に作成されています' }
 
   extend DisplayList
   extend SortInfo
 
-  scope :this_month, -> { where("extract(month from end_date) = ?", Date.current.month) }
-  scope :last_month, -> { where("extract(month from end_date) = ?", Date.current.last_month.month) }
-  scope :next_month, -> { where("extract(month from end_date) = ?", Date.current.next_month.month) }
+  scope :this_month, -> { where('extract(month from end_date) = ?', Date.current.month) }
+  scope :last_month, -> { where('extract(month from end_date) = ?', Date.current.last_month.month) }
+  scope :next_month, -> { where('extract(month from end_date) = ?', Date.current.next_month.month) }
 
-  scope :sort_list, -> {
+  scope :sort_list, lambda {
     {
-      "並び替え" => "",
-      "開演日が近い順" => "start_date_asc",
-      "開演日が遠い順" => "start_date_desc",
-      "終演日が近い順" => "end_date_asc",
-      "終演日が遠い順" => "end_date_desc",
+      '並び替え' => '',
+      '開演日が近い順' => 'start_date_asc',
+      '開演日が遠い順' => 'start_date_desc',
+      '終演日が近い順' => 'end_date_asc',
+      '終演日が遠い順' => 'end_date_desc'
     }
   }
 
-  def reviews_new
-    reviews.new
-  end
+  delegate :new, to: :reviews, prefix: true
 
   after_commit :create_post, on: [:create]
 
   private
-    def create_post
-      return if self.user_id == 1
-      post = Post.new(stage_id: self.id, user_id: self.user_id)
-      post.save
-    end
+
+  def create_post
+    return if user_id == 1
+
+    post = Post.new(stage_id: id, user_id: user_id)
+    post.save
+  end
 end

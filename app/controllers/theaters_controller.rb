@@ -1,19 +1,19 @@
 class TheatersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_theater, only: [:show, :edit, :update, :destroy, :favorite]
-  before_action :set_countries, only: [:index, :new, :edit]
+  before_action :set_theater, only: %i[show edit update destroy favorite]
+  before_action :set_countries, only: %i[index new edit]
 
   def index
-    if params[:keyword] != nil
+    if !params[:keyword].nil?
       @keyword = params[:keyword]
       display_theater(search_theater)
     elsif sort_params.present?
       sort_search
     elsif params[:country].present?
-      set_country(params[:country])
-      display_theater(Theater.preload(:country).where(country_id: @country))
+      sort_country(params[:country])
+      display_theater(Theater.preload(:country, :reviews).where(country_id: @country))
     else
-      display_theater(Theater.preload(:country))
+      display_theater(Theater.preload(:country, :reviews))
     end
     @sort_list = Theater.sort_list
     @theater = Theater.new
@@ -32,19 +32,18 @@ class TheatersController < ApplicationController
   def create
     @theater = Theater.new(theater_params)
     if @theater.save
-      redirect_to theaters_path, notice: "戯曲情報を登録しました"
+      redirect_to theaters_path, notice: '戯曲情報を登録しました'
     else
       redirect_to theaters_path
       flash_alert
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    if @theater.update_attributes(theater_params)
-      redirect_to theater_path(@theater), notice: "戯曲情報を更新しました" 
+    if @theater.update(theater_params)
+      redirect_to theater_path(@theater), notice: '戯曲情報を更新しました'
     else
       set_countries
       render :edit
@@ -54,7 +53,7 @@ class TheatersController < ApplicationController
 
   def destroy
     @theater.destroy
-    redirect_to theaters_path, notice: "映画情報を削除しました"
+    redirect_to theaters_path, notice: '映画情報を削除しました'
   end
 
   def favorite
@@ -63,58 +62,58 @@ class TheatersController < ApplicationController
   end
 
   private
-    def theater_params
-      params.require(:theater).permit(:title, :writer, :country_id, :man, :female).merge(user_id: current_user.id)
-    end
 
-    def set_theater
-      @theater = Theater.preload(:country).find(params[:id])
-    end
+  def theater_params
+    params.require(:theater).permit(:title, :writer, :country_id, :man, :female).merge(user_id: current_user.id)
+  end
 
-    def set_countries
-      @countries = Country.all
-    end
+  def set_theater
+    @theater = Theater.preload(:country).find(params[:id])
+  end
 
-    def set_country(country)
-      @country = Country.find(country.to_i)
-    end
+  def set_countries
+    @countries = Country.all
+  end
 
-    def sort_params
-      params.permit(:sort, :sort_country, :sort_keyword)
-    end
+  def sort_country(country)
+    @country = Country.find(country.to_i)
+  end
 
-    def search_theater
-      Theater.preload(:country).search_theaters(@keyword)
-    end
-  
-    def total_count(theater)
-      @total_count = theater.count
-    end
+  def sort_params
+    params.permit(:sort, :sort_country, :sort_keyword)
+  end
 
-    def display_theater(theater)
-      @theaters = theater.order(updated_at: :desc).display_list(params[:page])
-      total_count(theater)
-    end
+  def search_theater
+    Theater.preload(:country, :reviews).search_theaters(@keyword)
+  end
 
-    def sort_theater(theater)
-      @theaters = theater.sort_info(sort_params, params[:page])
-      total_count(theater)
-    end
+  def total_count(theater)
+    @total_count = theater.count
+  end
 
-    def sort_search
-      if sort_params[:sort_country].present?
-        set_country(sort_params[:sort_country])
-        sort_theater(Theater.preload(:country).where(country_id: @country))
-      elsif sort_params[:sort_keyword].present?
-        @keyword = sort_params[:sort_keyword]
-        sort_theater(search_theater)
-      else
-        sort_theater(Theater)
-      end
-    end
+  def display_theater(theater)
+    @theaters = theater.order(updated_at: :desc).display_list(params[:page])
+    total_count(theater)
+  end
 
-    def flash_alert
-      flash[:alert] = "正しく登録されませんでした"
-    end
+  def sort_theater(theater)
+    @theaters = theater.sort_info(sort_params, params[:page])
+    total_count(theater)
+  end
 
+  def sort_search
+    if sort_params[:sort_country].present?
+      sort_country(sort_params[:sort_country])
+      sort_theater(Theater.preload(:country, :reviews).where(country_id: @country))
+    elsif sort_params[:sort_keyword].present?
+      @keyword = sort_params[:sort_keyword]
+      sort_theater(search_theater)
+    else
+      sort_theater(Theater)
+    end
+  end
+
+  def flash_alert
+    flash[:alert] = '正しく登録されませんでした'
+  end
 end

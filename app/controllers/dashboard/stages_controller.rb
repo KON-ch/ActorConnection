@@ -1,12 +1,12 @@
 class Dashboard::StagesController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_stage, only: [:edit, :update, :destroy]
-  before_action :set_theaters, only: [:new, :edit]
-  before_action :set_places, only: [:new, :edit]
-  layout "dashboard/dashboard"
+  before_action :set_stage, only: %i[edit update destroy]
+  before_action :set_theaters, only: %i[new edit]
+  before_action :set_places, only: %i[new edit]
+  layout 'dashboard/dashboard'
 
   def index
-    if params[:keyword] != nil
+    if !params[:keyword].nil?
       @keyword = params[:keyword]
       @stages = search_stage.display_list(params[:pages])
       total_count(search_stage)
@@ -34,18 +34,17 @@ class Dashboard::StagesController < ApplicationController
   def create
     @stage = Stage.new(stage_params)
     if @stage.save
-      redirect_to dashboard_stages_path, notice: "公演情報を作成しました"
+      redirect_to dashboard_stages_path, notice: '公演情報を作成しました'
     else
       render :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    if @stage.update_attributes(stage_params)
-      redirect_to dashboard_stages_path, notice: "公演情報を更新しました"
+    if @stage.update(stage_params)
+      redirect_to dashboard_stages_path, notice: '公演情報を更新しました'
     else
       render :edit
     end
@@ -53,35 +52,37 @@ class Dashboard::StagesController < ApplicationController
 
   def destroy
     @stage.destroy
-    redirect_to dashboard_stages_path, notice: "公演情報を削除しました" 
+    redirect_to dashboard_stages_path, notice: '公演情報を削除しました'
   end
 
   private
-    def stage_params
-      params.require(:stage).permit(:start_date, :end_date, :company, :theater_id, :place_id).merge(user_id: current_admin.id)
-    end
 
-    def set_stage
-      @stage = Stage.find(params[:id])
-    end
+  def stage_params
+    params.require(:stage).permit(:start_date, :end_date, :company, :theater_id,
+                                  :place_id).merge(user_id: current_admin.id)
+  end
 
-    def set_theaters
-      @theaters = Theater.all
-    end
+  def set_stage
+    @stage = Stage.find(params[:id])
+  end
 
-    def set_places
-      @places = Place.all
-    end
+  def set_theaters
+    @theaters = Theater.all
+  end
 
-    def sort_params
-      params.permit(:sort)
-    end
+  def set_places
+    @places = Place.all
+  end
 
-    def search_stage
-      Stage.includes(:theater, :place).where("company LIKE ?", "%#{@keyword}%")
-    end
+  def sort_params
+    params.permit(:sort)
+  end
 
-    def total_count(stage)
-      @total_count = stage.count
-    end
+  def search_stage
+    Stage.includes(:theater, :place).where('company LIKE ?', "%#{@keyword}%")
+  end
+
+  def total_count(stage)
+    @total_count = stage.count
+  end
 end

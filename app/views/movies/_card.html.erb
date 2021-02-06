@@ -25,12 +25,12 @@
       <% if review_present?(current_user, movie) %>
         <div style="color: #FF8300; cursor:pointer;" data-toggle="modal" data-target="#reviewModal<%= movie.id %>">
           <i class="far fa-check-circle ml-4"></i>
-          <span class="ml-1 mb-0"><%= movie.reviews.count %></span>
+          <span class="ml-1 mb-0"><%= movie.reviews.size %></span>
         </div>
       <% else %>
         <%= link_to review_path(movie.reviews.find_by(user: current_user), review_page: request.url), method: :delete, data: { confirm: 'レビューを削除します' } do %>
           <i class="fas fa-check-circle ml-4" style="color: #FF8300;"></i>
-          <span class="ml-1 mb-0" style="color: #FF8300;"><%= movie.reviews.count %></span>
+          <span class="ml-1 mb-0" style="color: #FF8300;"><%= movie.reviews.size %></span>
         <% end %>
       <% end %>
     </div>

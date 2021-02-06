@@ -1,11 +1,11 @@
 class Dashboard::MoviesController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_movie, only: [:edit, :update, :destroy]
-  before_action :set_countries, only: [:new, :edit]
-  layout "dashboard/dashboard"
+  before_action :set_movie, only: %i[edit update destroy]
+  before_action :set_countries, only: %i[new edit]
+  layout 'dashboard/dashboard'
 
   def index
-    if params[:keyword] != nil
+    if !params[:keyword].nil?
       @keyword = params[:keyword]
       @movies = search_movie.display_list(params[:pages])
       total_count(search_movie)
@@ -33,18 +33,17 @@ class Dashboard::MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     if @movie.save
-      redirect_to dashboard_movies_path, notice: "新しい映画を登録しました"
+      redirect_to dashboard_movies_path, notice: '新しい映画を登録しました'
     else
       render :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    if @movie.update_attributes(movie_params)
-      redirect_to dashboard_movies_path, notice: "映画情報を更新しました"
+    if @movie.update(movie_params)
+      redirect_to dashboard_movies_path, notice: '映画情報を更新しました'
     else
       render :edit
     end
@@ -52,12 +51,14 @@ class Dashboard::MoviesController < ApplicationController
 
   def destroy
     @movie.destroy
-    redirect_to dashboard_movies_path, notice: "映画情報を削除しました"
+    redirect_to dashboard_movies_path, notice: '映画情報を削除しました'
   end
 
   private
+
   def movie_params
-    params.require(:movie).permit(:title, :country_id, :production, :supervision, :sub_title).merge(user_id: current_admin.id)
+    params.require(:movie).permit(:title, :country_id, :production, :supervision,
+                                  :sub_title).merge(user_id: current_admin.id)
   end
 
   def set_movie
@@ -73,7 +74,8 @@ class Dashboard::MoviesController < ApplicationController
   end
 
   def search_movie
-    Movie.includes(:country).where("title LIKE ? OR sub_title LIKE ? OR supervision LIKE ?", "%#{@keyword}%", "%#{@keyword}%", "%#{@keyword}%")
+    Movie.includes(:country).where('title LIKE ? OR sub_title LIKE ? OR supervision LIKE ?', "%#{@keyword}%",
+                                   "%#{@keyword}%", "%#{@keyword}%")
   end
 
   def total_count(movie)

@@ -17,7 +17,7 @@ module ActorConnection
     # the framework and any gems in your application.
 
     # not add field_with_errors when validate error
-    config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
+    config.action_view.field_error_proc = proc { |html_tag, _instance| html_tag }
     config.time_zone = 'Tokyo'
     config.i18n.default_locale = :ja
   end

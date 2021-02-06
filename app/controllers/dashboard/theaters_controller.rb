@@ -1,11 +1,11 @@
 class Dashboard::TheatersController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_theater, only: [:edit, :update, :destroy]
-  before_action :set_countries, only: [:new, :edit]
-  layout "dashboard/dashboard"
+  before_action :set_theater, only: %i[edit update destroy]
+  before_action :set_countries, only: %i[new edit]
+  layout 'dashboard/dashboard'
 
   def index
-    if params[:keyword] != nil
+    if !params[:keyword].nil?
       @keyword = params[:keyword]
       @theaters = search_theater.display_list(params[:pages])
       total_count(search_theater)
@@ -33,18 +33,17 @@ class Dashboard::TheatersController < ApplicationController
   def create
     @theater = Theater.new(theater_params)
     if @theater.save
-      redirect_to dashboard_theaters_path, notice: "新しい戯曲を登録しました"
+      redirect_to dashboard_theaters_path, notice: '新しい戯曲を登録しました'
     else
       render :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    if @theater.update_attributes(theater_params)
-      redirect_to dashboard_theaters_path, notice: "戯曲情報を更新しました" 
+    if @theater.update(theater_params)
+      redirect_to dashboard_theaters_path, notice: '戯曲情報を更新しました'
     else
       render :edit
     end
@@ -52,10 +51,11 @@ class Dashboard::TheatersController < ApplicationController
 
   def destroy
     @theater.destroy
-    redirect_to dashboard_theaters_path, notice: "戯曲情報を削除しました" 
+    redirect_to dashboard_theaters_path, notice: '戯曲情報を削除しました'
   end
 
   private
+
   def theater_params
     params.require(:theater).permit(:title, :writer, :country_id, :man, :female).merge(user_id: current_admin.id)
   end
@@ -73,7 +73,7 @@ class Dashboard::TheatersController < ApplicationController
   end
 
   def search_theater
-    Theater.includes(:country).where("title LIKE ? OR writer LIKE ?", "%#{@keyword}%", "%#{@keyword}%")
+    Theater.includes(:country).where('title LIKE ? OR writer LIKE ?', "%#{@keyword}%", "%#{@keyword}%")
   end
 
   def total_count(theater)
