@@ -29,7 +29,7 @@
           <span class="ml-1 mb-0"><%= stage.reviews.size %></span>
         </div>
       <% else %>
-        <%= link_to review_path(stage.reviews.where(user: current_user), review_page: request.url), method: :delete, data: { confirm: 'レビューを削除します' } do %>
+        <%= link_to review_path(stage.reviews.where(user: current_user).limit(1), review_page: request.url), method: :delete, data: { confirm: 'レビューを削除します' } do %>
           <i class="fas fa-check-circle ml-4" style="color: #FF8300;"></i>
           <span class="ml-1 mb-0" style="color: #FF8300;"><%= stage.reviews.size %></span>
         <% end %>
