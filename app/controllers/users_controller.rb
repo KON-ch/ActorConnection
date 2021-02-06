@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, expect: [:show]
+  before_action :set_reviews, only: [:show, :review]
 
   def show
     @user = User.eager_load(:reviews).find(params[:id])
-    @reviews = @user.reviews
   end
 
   def update
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     if password_set?
       if @user.update_password(user_params)
         flash[:notice] = "パスワードは正しく更新されました"
-        redirect_to root_url
+        redirect_to mypage_users_path
       else
         flash[:alert] = "パスワードを6文字以上で入力してください"
         render "edit_password"
@@ -34,19 +34,18 @@ class UsersController < ApplicationController
   end
 
   def favorite
-    @favorites_theater = @user.likees(Theater.order(updated_at: :desc))
-    @favorites_movie = @user.likees(Movie.order(updated_at: :desc))
-    @favorites_stage = @user.likees(Stage.order(updated_at: :desc))
+    @theaters = @user.likees(Theater.preload(:country, :reviews).order(updated_at: :desc))
+    @movies = @user.likees(Movie.preload(:country, :reviews).order(updated_at: :desc))
+    @stages = @user.likees(Stage.preload(:theater, :reviews).order(updated_at: :desc))
   end
 
   def review
-    reviews = @user.reviews
-    @reviews_theater = reviews.where.not(theater_id: nil).order(updated_at: :desc)
-    @reviews_movie = reviews.where.not(movie_id: nil).order(updated_at: :desc)
-    @reviews_stage = reviews.where.not(stage_id: nil).order(updated_at: :desc)
-    @likes_theater = @user.likees(Review.where.not(theater_id: nil).order(updated_at: :desc))
-    @likes_movie = @user.likees(Review.where.not(movie_id: nil).order(updated_at: :desc))
-    @likes_stage = @user.likees(Review.where.not(stage_id: nil).order(updated_at: :desc))
+    @reviews_theater = @reviews.set_theaters
+    @reviews_movie = @reviews.set_movies
+    @reviews_stage = @reviews.set_stages
+    @likes_theater = @user.likees(Review.set_theaters)
+    @likes_movie = @user.likees(Review.set_movies)
+    @likes_stage = @user.likees(Review.set_stages)
 
   end
 
@@ -64,6 +63,10 @@ class UsersController < ApplicationController
 
     def set_user
       @user = current_user
+    end
+
+    def set_reviews
+      @reviews = @user.reviews
     end
 
     def password_set?

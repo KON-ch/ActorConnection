@@ -10,24 +10,9 @@ class Review < ApplicationRecord
 
   acts_as_likeable
 
-  def reviews_new
-    reviews.new
-  end
-  
-  def save_review(review, review_params)
-    review.content = review_params[:content]
-    review.user_id = review_params[:user_id]
-    if post_id.present?
-      review.post_id = review_params[:post_id]
-    elsif theater_id.present?
-      review.theater_id = review_params[:theater_id]
-    elsif movie_id.present?
-      review.movie_id = review_params[:movie_id]
-    elsif stage_id.present?
-      review.stage_id = review_params[:stage_id]
-    end
-    save
-  end
+  scope :set_theaters, -> { where.not(theater_id: nil).order(updated_at: :desc) }
+  scope :set_movies, -> { where.not(movie_id: nil).order(updated_at: :desc) }
+  scope :set_stages, -> { where.not(stage_id: nil).order(updated_at: :desc) }
 
   def self.check_user_review(user, post)
     if post.class == Theater

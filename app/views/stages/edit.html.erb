@@ -1,6 +1,6 @@
 <div class="container p-0 w-50 mx-auto">
   <div class="row">
-    <h2 class="mt-5 mb-lg-3 offset-lg-2">公演情報変更</h2>
+    <h2 class="mt-5 mb-lg-3 offset-lg-2">公演情報修正</h2>
   </div>
   <%= form_with model: @stage, local: true do |f| %>
     <%= render partial: "stages/form", locals: {f: f} %>
@@ -22,7 +22,7 @@
     $('#title').select2({
       dropdownParent: $('.container'),
       placeholder: '作品を選択してください',
-      width: '50%'
+      width: 'resolve'
     });
   });
 </script>

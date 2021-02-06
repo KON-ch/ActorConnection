@@ -21,14 +21,7 @@ class User < ApplicationRecord
   extend SwitchFlg
   extend SortInfo
 
-
-  scope :sort_list, -> {
-    {
-      "並び替え" => "",
-      "登録の新しい順" => "created_at desc",
-      "登録の古い順" => "created_at asc",
-    }
-  }
+  default_scope -> { order(created_at: :desc)}
 
   def update_password(params, *options)
     if params[:password].blank?

@@ -11,7 +11,7 @@ class TheatersController < ApplicationController
       sort_search
     elsif params[:country].present?
       set_country(params[:country])
-      display_theater(Theater.preload(:country).country_theaters(@country))
+      display_theater(Theater.preload(:country).where(country_id: @country))
     else
       display_theater(Theater.preload(:country))
     end
@@ -20,8 +20,8 @@ class TheatersController < ApplicationController
   end
 
   def show
-    @reviews = @theater.reviews.includes(:user).where.not(user: current_user)
-    @review = @reviews.new
+    @reviews = @theater.reviews.preload(:user).where.not(user: current_user)
+    @new_review = @reviews.new
     @my_review = @theater.reviews.find_by(user_id: current_user.id)
   end
 
@@ -35,7 +35,7 @@ class TheatersController < ApplicationController
       redirect_to theaters_path, notice: "戯曲情報を登録しました"
     else
       redirect_to theaters_path
-      flash[:alert] = "正しく登録されませんでした"
+      flash_alert
     end
   end
 
@@ -48,12 +48,13 @@ class TheatersController < ApplicationController
     else
       set_countries
       render :edit
+      flash_alert
     end
   end
 
   def destroy
     @theater.destroy
-    redirect_to theaters_path
+    redirect_to theaters_path, notice: "映画情報を削除しました"
   end
 
   def favorite
@@ -67,7 +68,7 @@ class TheatersController < ApplicationController
     end
 
     def set_theater
-      @theater = Theater.find(params[:id])
+      @theater = Theater.preload(:country).find(params[:id])
     end
 
     def set_countries
@@ -75,7 +76,7 @@ class TheatersController < ApplicationController
     end
 
     def set_country(country)
-      @country = Country.request_country(country)
+      @country = Country.find(country.to_i)
     end
 
     def sort_params
@@ -83,7 +84,7 @@ class TheatersController < ApplicationController
     end
 
     def search_theater
-      Theater.includes(:country).search_theaters(@keyword)
+      Theater.preload(:country).search_theaters(@keyword)
     end
   
     def total_count(theater)
@@ -97,19 +98,23 @@ class TheatersController < ApplicationController
 
     def sort_theater(theater)
       @theaters = theater.sort_info(sort_params, params[:page])
-        total_count(theater)
+      total_count(theater)
     end
 
     def sort_search
       if sort_params[:sort_country].present?
         set_country(sort_params[:sort_country])
-        sort_theater(Theater.preload(:country).country_theaters(sort_params[:sort_country]))
+        sort_theater(Theater.preload(:country).where(country_id: @country))
       elsif sort_params[:sort_keyword].present?
-        @keyword = params[:sort_keyword]
+        @keyword = sort_params[:sort_keyword]
         sort_theater(search_theater)
       else
         sort_theater(Theater)
       end
+    end
+
+    def flash_alert
+      flash[:alert] = "正しく登録されませんでした"
     end
 
 end

@@ -1,7 +1,7 @@
-<% @favorites_stage.each do |stage| %>
+<% @stages.each do |stage| %>
   <div class="col mb-4">
     <div class="card h-100 shadow-sm">
-      <%= render partial: "posts/stage", locals: {post: stage} %>
+      <%= render partial: "stages/card", locals: {stage: stage} %>
     </div>
   </div>
 <% end %>

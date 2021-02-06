@@ -13,6 +13,10 @@ class Stage < ApplicationRecord
   extend DisplayList
   extend SortInfo
 
+  scope :this_month, -> { where("extract(month from end_date) = ?", Date.current.month) }
+  scope :last_month, -> { where("extract(month from end_date) = ?", Date.current.last_month.month) }
+  scope :next_month, -> { where("extract(month from end_date) = ?", Date.current.next_month.month) }
+
   scope :sort_list, -> {
     {
       "並び替え" => "",

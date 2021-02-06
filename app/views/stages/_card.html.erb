@@ -1,0 +1,42 @@
+<div class="card-header">
+  <% if stage.start_date < Date.today && stage.end_date > Date.today %>
+    <label class="badge badge-pill badge-warning text-light py-1" style="background-color: #FF8300;">上演中</label>
+  <% end %>
+  <%= stage.start_date.mon %>月<%= stage.start_date.day %>日
+  〜
+  <% if stage.start_date.mon != stage.end_date.mon %>
+    <%= stage.end_date.mon %>月
+  <% end %>
+  <%= stage.end_date.day %>日
+</div>
+<div class="card-body">
+  <%= link_to stage_path(stage), data: { "turbolinks" => false } do %>
+    <strong class="card-title text-dark" style="font-size:1.8rem;"><%= stage.theater.title %></strong>
+  <% end %>
+  <p class="card-text"><%= stage.company %></p>
+</div>
+<div class="card-footer d-flex">
+  <%= link_to favorite_stage_path(stage), method: :post, remote: true, style:"color: #FF8300;" do %>
+    <div class="favorite-stage-<%= stage.id %>">
+      <%= render partial: "stages/favorite", locals: {stage: stage} %>
+    </div>
+  <% end %>
+  <div class="review-stage-<%= stage.id %>">
+    <div class="d-flex">
+      <% if review_present?(current_user, stage) %>
+        <div style="color: #FF8300; cursor:pointer" data-toggle="modal" data-target="#reviewModal<%= stage.id %>">
+          <i class="far fa-check-circle ml-4"></i>
+          <span class="ml-1 mb-0"><%= stage.reviews.count %></span>
+        </div>
+      <% else %>
+        <%= link_to review_path(stage.reviews.find_by(user: current_user), review_page: request.url), method: :delete, data: { confirm: 'レビューを削除します' } do %>
+          <i class="fas fa-check-circle ml-4" style="color: #FF8300;"></i>
+          <span class="ml-1 mb-0" style="color: #FF8300;"><%= stage.reviews.count %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= form_with model: stage.reviews.new, url: stage_reviews_path(stage) do |f| %>
+  <%= render partial: "reviews/modal", locals: {review: stage, review_title: stage.theater, f: f} %>
+<% end %>

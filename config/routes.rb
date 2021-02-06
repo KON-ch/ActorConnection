@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   }
 
   devise_scope :user do
-    root :to => "web#index"
+    root "posts#index"
     get "signup", :to => "users/registrations#new"
     get "login", :to => "users/sessions#new"
     get "logout", :to => "users/sessions#destroy"
@@ -48,38 +48,29 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :theaters do
-    member do
-      post :favorite
-    end
-    resources :reviews, only: [:create, :update, :destroy] do
-      member do
-        post :favorite
-      end
-    end
+  concern :reviewable do
+    resources :reviews, only: [:create]
   end
-  resources :stages do
-    member do
-      post :favorite
-    end
-    resources :reviews, only: [:create, :update, :destroy] do
-      member do
-        post :favorite
-      end
-    end
+
+  concern :favorable do
+    post 'favorite', on: :member
   end
-  resources :movies do 
-    member do
-      post :favorite
-    end
-    resources :reviews, only: [:create, :update, :destroy] do
-      member do
-        post :favorite
-      end
-    end
+
+  resources :reviews, only: [:update, :destroy] do
+    concerns :favorable
   end
+
+  resources :theaters, concerns: [:favorable, :reviewable]
+
+  resources :stages, concerns: [:favorable, :reviewable]
+
+  resources :movies, concerns: [:favorable, :reviewable]
+
   resources :posts, only: [:index] do
-    resources :reviews, only: [:create, :update, :destroy]
+    concerns :favorable
   end
+
+  resources :webs, only: [:index]
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

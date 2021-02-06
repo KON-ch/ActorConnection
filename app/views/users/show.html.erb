@@ -41,7 +41,7 @@
               </div>
               <div class="d-flex align-items-end">
                 <div class="card h-100 shadow-sm mt-2" style="width: 18rem;">
-                  <%= render partial: "posts/theater", locals: {post: review.theater} %>
+                  <%= render partial: "theaters/card", locals: {theater: review.theater} %>
                 </div>
               </div>
             <% elsif review.movie_id.present? %>
@@ -52,7 +52,7 @@
               </div>
               <div class="d-flex align-items-end">
                 <div class="card h-100 shadow-sm mt-2" style="width: 18rem;">
-                <%= render partial: "posts/movie", locals: {post: review.movie} %>
+                <%= render partial: "movies/card", locals: {movie: review.movie} %>
                 </div>
               </div>
             <% elsif review.stage_id.present? %>
@@ -63,13 +63,13 @@
               </div>
               <div class="d-flex align-items-end">
                 <div class="card h-100 shadow-sm mt-2" style="width: 18rem;">
-                  <%= render partial: "posts/stage", locals: {post: review.stage} %>
+                  <%= render partial: "stages/card", locals: {stage: review.stage} %>
                 </div>
               </div>
             <% end %>
           </div>
           <% if @user != current_user %>
-            <%= render partial: "reviews/like", locals: {post: review} %>
+            <%= render partial: "reviews/like", locals: {review: review} %>
           <% end %>
         </div>
       <% end %>

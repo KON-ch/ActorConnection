@@ -10,7 +10,7 @@
     <% end %>
     <%= link_to "編集", edit_theater_path(@theater), class:"btn btn-sm btn-outline-secondary ml-4 mb-2" %>
     <% if current_user.id == 1 %>
-      <%= link_to "削除", theater_path(@theater), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-danger ml-3 mb-2" %>
+      <%= link_to "削除", theater_path(@theater), method: :delete, data: { confirm: '本当に削除しますか？' }, class:"btn btn-sm btn-danger ml-3 mb-2" %>
     <% end %>
   </div>
   <div class="row">
@@ -28,11 +28,11 @@
         <div class="card-header d-flex justify-content-between">
           <label><i class="fas fa-check-circle mr-2" style="color: #FF8300;"></i>My Review</label>
           <% if @my_review.present? %>
-            <label class="text-right"><%= @my_review.created_at.mon %>月<%= @my_review.created_at.day %>日</label>
+            <label class="text-right"><%= @my_review.updated_at.mon %>月<%= @my_review.updated_at.day %>日</label>
           <% end %>
         </div>
         <% if review_present?(current_user, @theater) %>
-          <%= form_with model: @review, url: theater_reviews_path(@theater) do |f| %>
+          <%= form_with model: @new_review, url: theater_reviews_path(@theater) do |f| %>
             <div class="card-body">
               <%= f.text_area :content, size: "20x10", class:"form-control mr-2 " %>
             </div>
@@ -43,7 +43,7 @@
           <% end %>
         <% else %>
           <div class="card-body">
-            <%= form_with model: @my_review, url: theater_review_path(@theater, @my_review), local: true, method: :put do |f| %>
+            <%= form_with model: @my_review, url: review_path(@my_review), local: true, method: :put do |f| %>
               <div class="collapse show userReview">
                 <p class="mt-3"><%= @my_review.content %></p>
               </div>
@@ -59,7 +59,7 @@
               <span onclick="switchEditReview('.userReview', '.editUserReview', '.userReviewEditLabel');" class="userReviewEditLabel user-edit-label btn btn-outline-secondary">
                 編集
               </span>
-              <%= link_to  "削除", theater_review_path(@theater.id, current_user), method: :delete, data: { confirm: 'レビューを削除します' }, class:"btn btn-outline-danger" %>
+              <%= link_to  "削除", review_path(@my_review, review_page: request.url), method: :delete, data: { confirm: 'レビューを削除します' }, class:"btn btn-outline-danger" %>
             <% end %>
           </div>
         <% end %>
@@ -67,7 +67,7 @@
     </div>
     <div class="col-sm-5 offset-sm-1">
       <div class="card shadow-sm mt-5 p-3">
-        <%= render "reviews/show" %>
+        <%= render "reviews/index" %>
       </div>
     </div>
   </div>

@@ -1,0 +1,42 @@
+<div class="card-header">
+  <%= theater.country.name %>
+  <div class="float-right">
+    <% if theater.man.nil? && theater.female.nil? %>
+      <%= link_to "未登録", edit_theater_path(theater), class:"badge badge-pill badge-warning text-light py-2", style:"background-color: #FF8300; font-size: 0.8rem;" %>
+    <% else %>
+      男<%= theater.man%>
+      女<%= theater.female%>
+    <% end %>
+  </div>
+</div>
+<div class="card-body">
+  <%= link_to theater_path(theater), data: { "turbolinks" => false } do %>
+    <strong class="card-title text-dark" style="font-size:1.8rem;"><%= theater.title %></strong>
+  <% end %>
+  <p class="card-text"><%= theater.writer %></p>
+</div>
+<div class="card-footer d-flex">
+  <%= link_to favorite_theater_path(theater), method: :post, remote: true, style:"color: #FF8300;" do %>
+    <div class="favorite-theater-<%= theater.id %>">
+      <%= render partial: "theaters/favorite", locals: {theater: theater} %>
+    </div>
+  <% end %>
+  <div class="review-theater-<%= theater.id %>">
+    <div class="d-flex">
+      <% if review_present?(current_user, theater) %>
+        <div style="color: #FF8300; cursor: pointer" data-toggle="modal" data-target="#reviewModal<%= theater.id %>">
+          <i class="far fa-check-circle ml-4"></i>
+          <span class="ml-1 mb-0"><%= theater.reviews.count %></span>
+        </div>
+      <% else %>
+        <%= link_to review_path(theater.reviews.find_by(user: current_user), review_page: request.url), method: :delete, remote: true, data: { confirm: 'レビューを削除します' } do %>
+          <i class="fas fa-check-circle ml-4" style="color: #FF8300;"></i>
+          <span class="ml-1 mb-0" style="color: #FF8300;"><%= theater.reviews.count %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= form_with model: theater.reviews.new, url: theater_reviews_path(theater) do |f| %>
+  <%= render partial: "reviews/modal", locals: {review: theater, review_title: theater, f: f} %>
+<% end %>

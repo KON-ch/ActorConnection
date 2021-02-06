@@ -1,0 +1,62 @@
+<% if post.theater_id.present? %>
+  <div>
+    <p class="mt-3 mb-4"><%= post.user.name %></p>
+    <%= link_to theater_path(post.theater_id), class:"text-decoration-none text-dark" do %>
+      <i class="fas fa-star mr-3 fa-lg" style="color: #FF8300;"></i>
+      <i class="fas fa-book-open fa-2x mr-3"></i>
+      <p class="d-inline">
+        <strong><%= post.theater.title %></strong>
+        をお気に入りに登録しました
+      </p>
+    <% end %>
+  </div>
+<% elsif post.movie_id.present? %>
+  <div>
+    <p class="mt-3 mb-4"><%= post.user.name %></p>
+    <%= link_to movie_path(post.movie_id), class:"text-decoration-none text-dark" do %>
+      <i class="fas fa-star mr-3 fa-lg" style="color: #FF8300;"></i>
+      <i class="fas fa-film fa-2x mr-3"></i>
+      <p class="d-inline">
+        <strong><%= post.movie.title %></strong>
+        をお気に入りに登録しました
+      </p>
+    <% end %>
+  </div>
+<% elsif post.stage_id.present? %>
+  <div>
+    <p class="mt-3 mb-4"><%= post.user.name %></p>
+    <%= link_to stage_path(post.stage_id), class:"text-decoration-none text-dark" do %>
+      <i class="fas fa-star mr-2 fa-lg" style="color: #FF8300;"></i>
+      <i class="fas fa-theater-masks fa-2x mr-2"></i>
+      <p class="d-inline">
+        <strong><%= post.stage.theater.title %></strong>
+        をお気に入りに登録しました
+      </p>
+    <% end %>
+  </div>
+<% elsif post.review_id.present? %>
+  <div>
+    <p class="mt-3 mb-4"><%= post.user.name %></p>
+    <i class="fas fa-heart mr-2 fa-2x" style="color: #FF8300;"></i>
+    <div class="d-inline">
+      <%= link_to user_path(post.review.user) do %>
+        <strong class="text-dark"><%= post.review.user.name %></strong>
+      <% end %>
+        のレビューにいいねしました
+      <div class="card my-3 shadow-sm mx-4" style="width: 30rem;">
+        <div class="card-body">
+          <div class="d-flex">
+            <i class="far fa-check-circle fa-lg mr-2 mt-2"></i>
+            <p class="mt-2"><%= post.review.content %></p>
+          </div>
+          <div class="float-right mt-3 mr-2">
+            <%= render partial: "posts/like_review", locals: {review: post.review} %>
+          </div>
+        </div>
+        <% if post.review.user != current_user %>
+          <%= render partial: "reviews/like", locals: {review: post.review} %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -11,10 +11,6 @@ class Movie < ApplicationRecord
   extend DisplayList
   extend SortInfo
 
-  scope :country_movies, -> (country) {
-    where(country_id: country)
-  }
-
   scope :search_movies, -> (keyword) {
     where("title LIKE ? OR supervision LIKE ? OR sub_title LIKE ?", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
   }

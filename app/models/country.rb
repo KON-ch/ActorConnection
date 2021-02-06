@@ -4,6 +4,4 @@ class Country < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true, on: :create
 
-  scope :request_country, -> (country) { find(country.to_i) }
-
 end

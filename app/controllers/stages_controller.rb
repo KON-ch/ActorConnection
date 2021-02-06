@@ -6,23 +6,23 @@ class StagesController < ApplicationController
 
   def index
     if sort_params.present?
-      @stages = Stage.where("extract(month from end_date) = ?", Date.today.month).sort_info(sort_params, params[:page])
+      @stages = Stage.preload(:theater).this_month.sort_info(sort_params, params[:page])
     elsif params[:date] == "last_month"
-      @stages= Stage.where("extract(month from end_date) = ?", Date.current.last_month.month).order(updated_at: :desc).display_list(params[:page])
+      @stages= Stage.preload(:theater).last_month.order(updated_at: :desc).display_list(params[:page])
     elsif params[:date] == "next_month"
-      @stages= Stage.where("extract(month from end_date) = ?", Date.current.next_month.month).order(updated_at: :desc).display_list(params[:page])
+      @stages= Stage.preload(:theater).next_month.order(updated_at: :desc).display_list(params[:page])
     elsif params[:date] == "this_month"
-      @stages= Stage.where("extract(month from end_date) = ?", Date.current.month).or(Stage.where("extract(month from end_date) = ?", Date.current.month)).order(updated_at: :desc).display_list(params[:page])
+      @stages= Stage.preload(:theater).this_month.order(updated_at: :desc).display_list(params[:page])
     else
-      @stages = Stage.where('extract(month from end_date) = ?', Date.today.month).order(updated_at: :desc).display_list(params[:page])
+      @stages = Stage.preload(:theater).this_month.order(updated_at: :desc).display_list(params[:page])
     end
     @sort_list = Stage.sort_list
     @stage = Stage.new
   end
   
   def show
-    @reviews = @stage.reviews.includes(:user).where.not(user: current_user)
-    @review = @reviews.new
+    @reviews = @stage.reviews.preload(:user).where.not(user: current_user)
+    @new_review = @reviews.new
     @my_review = @stage.reviews.find_by(user_id: current_user.id)
     @lat = @stage.place.latitude
     @lng = @stage.place.longitude
@@ -38,7 +38,7 @@ class StagesController < ApplicationController
       redirect_to stages_path, notice: "公演情報を登録しました"
     else
       redirect_to stages_path
-      flash[:alert] = "正しく登録されませんでした"
+      flash_alert
     end
   end
   
@@ -47,11 +47,12 @@ class StagesController < ApplicationController
   
   def update
     if @stage.update_attributes(stage_params)
-      redirect_to stages_path, notice: "公演情報を更新しました"
+      redirect_to stage_path(@stage), notice: "公演情報を更新しました"
     else
-      @theaters = Theater.all
-      @places = Place.all
+      set_theaters
+      set_places
       render :edit
+      flash_alert
     end
   end
 
@@ -71,7 +72,7 @@ class StagesController < ApplicationController
     end
 
     def set_stage
-      @stage = Stage.find(params[:id])
+      @stage = Stage.preload(:place, :theater).find(params[:id])
     end
 
     def set_theaters

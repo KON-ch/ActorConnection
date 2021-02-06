@@ -1,12 +1,12 @@
-<div class="modal" id="reviewModal<%= post.id %>" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+<div class="modal" id="reviewModal<%= review.id %>" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <label class="modal-title text-center" id="reviewModalLabel">
           <i class="fas fa-check-circle fa-lg ml-2" style="color: #FF8300;"></i>
-          <h2 class="d-inline"><%= post_title.title %></h2>
-          <% if post.class == Movie %>
-            <p class="text-secondary text-left ml-5 mb-0"><%= post.sub_title %></p>
+          <h2 class="d-inline"><%= review_title.title %></h2>
+          <% if review.class == Movie %>
+            <p class="text-secondary text-left ml-5 mb-0"><%= review.sub_title %></p>
           <% end %>
         </label>
         <div type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -25,7 +25,7 @@
 </div>
 
 <script>
-  $('#reviewModal<%= post.id %>').on('shown.bs.modal', function (){
+  $('#reviewModal<%= review.id %>').on('shown.bs.modal', function (){
     $('#reviewInput').trigger('focus');
   });
 </script>

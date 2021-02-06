@@ -1,0 +1,16 @@
+<% if review.theater_id.present? %>
+  <%= link_to theater_path(review.theater), class:"text-secondary" do %>
+    <i class="fas fa-book-open"></i>
+    <strong><%= review.theater.title %></strong>
+  <% end %>
+<% elsif review.movie_id.present? %>
+  <%= link_to movie_path(review.movie), class:"text-secondary" do %>
+    <i class="fas fa-film"></i>
+    <strong><%= review.movie.title %></strong>
+  <% end %>
+<% elsif review.stage_id.present? %>
+  <%= link_to stage_path(review.stage), class:"text-secondary" do %>
+    <i class="fas fa-theater-masks"></i>
+    <strong><%= review.stage.theater.title %></strong>
+  <% end %>
+<% end %>

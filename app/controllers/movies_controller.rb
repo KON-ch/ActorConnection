@@ -11,17 +11,17 @@ class MoviesController < ApplicationController
       sort_search
     elsif params[:country].present?
       set_country(params[:country])
-      display_movie(Movie.includes(:country).country_movies(@country))
+      display_movie(Movie.preload(:country).where(country_id: @country))
     else
-      display_movie(Movie.includes(:country))
+      display_movie(Movie.preload(:country))
     end
     @sort_list = Movie.sort_list
     @movie = Movie.new
   end
 
   def show
-    @reviews = @movie.reviews.includes(:user).where.not(user: current_user)
-    @review = @reviews.new
+    @reviews = @movie.reviews.preload(:user).where.not(user: current_user)
+    @new_review = @reviews.new
     @my_review = @movie.reviews.find_by(user_id: current_user.id)
   end
 
@@ -35,7 +35,7 @@ class MoviesController < ApplicationController
       redirect_to movies_path, notice: "映画情報を登録しました"
     else
       redirect_to movies_path
-      flash[:alert] = "正しく登録されませんでした"
+      flash_alert
     end
   end
   
@@ -48,6 +48,7 @@ class MoviesController < ApplicationController
     else
       set_countries
       render :edit
+      flash_alert
     end
   end
 
@@ -67,7 +68,7 @@ class MoviesController < ApplicationController
     end
 
     def set_movie
-      @movie = Movie.find(params[:id])
+      @movie = Movie.preload(:country).find(params[:id])
     end
 
     def set_countries
@@ -75,7 +76,7 @@ class MoviesController < ApplicationController
     end
 
     def set_country(country)
-      @country = Country.request_country(country)
+      @country = Country.find(country.to_i)
     end
 
     def sort_params
@@ -83,7 +84,7 @@ class MoviesController < ApplicationController
     end
 
     def search_movie
-      Movie.includes(:country).search_movies(@keyword)
+      Movie.preload(:country).search_movies(@keyword)
     end
   
     def total_count(movie)
@@ -103,12 +104,16 @@ class MoviesController < ApplicationController
     def sort_search
       if sort_params[:sort_country].present?
         set_country(sort_params[:sort_country])
-        sort_movie(Movie.includes(:country).country_movies(sort_params[:sort_country]))
-      elsif params[:sort_keyword].present?
-        @keyword = params[:sort_keyword]
+        sort_movie(Movie.preload(:country).where(country_id: @country))
+      elsif sort_params[:sort_keyword].present?
+        @keyword = sort_params[:sort_keyword]
         sort_movie(search_movie)
       else
         sort_movie(Movie)
       end
+    end
+
+    def flash_alert
+      flash[:alert] = "正しく登録されませんでした"
     end
 end

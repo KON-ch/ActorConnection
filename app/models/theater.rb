@@ -15,10 +15,6 @@ class Theater < ApplicationRecord
   extend DisplayList
   extend SortInfo
 
-  scope :country_theaters, -> (country) {
-    where(country_id: country)
-  }
-
   scope :search_theaters, -> (keyword) {
     where("title LIKE ? OR writer LIKE ?", "%#{keyword}%", "%#{keyword}%")
   }

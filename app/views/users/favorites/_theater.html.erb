@@ -1,7 +1,7 @@
-<% @favorites_theater.each do |theater| %>
+<% @theaters.each do |theater| %>
   <div class="col mb-4">
     <div class="card h-100 shadow-sm">
-      <%= render partial: "posts/theater", locals: {post: theater} %>
+      <%= render partial: "theaters/card", locals: {theater: theater} %>
     </div>
   </div>
 <% end %>
