@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, expect: [:show]
-  before_action :set_reviews, only: %i[show review]
 
   def show
-    @user = User.eager_load(:reviews).find(params[:id])
+    @user = User.find(params[:id])
+    @reviews = @user.reviews
   end
 
   def update
@@ -38,6 +38,7 @@ class UsersController < ApplicationController
   end
 
   def review
+    @reviews = @user.reviews
     @reviews_theater = @reviews.set_theaters
     @reviews_movie = @reviews.set_movies
     @reviews_stage = @reviews.set_stages
@@ -61,10 +62,6 @@ class UsersController < ApplicationController
 
   def set_user
     @user = current_user
-  end
-
-  def set_reviews
-    @reviews = @user.reviews
   end
 
   def password_set?
