@@ -2,12 +2,8 @@
 
 ### [Heroku (URL)](https://actor-connection.herokuapp.com)
 
-***
-
 ## 概要
 舞台・戯曲・映画のレビューアプリです。
-
-***
 
 ## 使用技術
 - Ruby 3.0.0
@@ -15,8 +11,6 @@
 - Bootstrap 4.5.3
 - Vue.js 2.6.12
 - Google Maps API
-
-***
 
 ## 機能一覧
 - ログイン機能
