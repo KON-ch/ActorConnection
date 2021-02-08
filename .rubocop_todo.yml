@@ -35,11 +35,6 @@ Metrics/CyclomaticComplexity:
 Metrics/MethodLength:
   Max: 19
 
-# Offense count: 2
-# Configuration parameters: IgnoredMethods.
-Metrics/PerceivedComplexity:
-  Max: 10
-
 # Offense count: 32
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
@@ -57,17 +52,6 @@ Style/Documentation:
 # SupportedStyles: always, always_true, never
 Style/FrozenStringLiteralComment:
   Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/GlobalStdStream:
-  Exclude:
-    - 'config/environments/production.rb'
-
-# Offense count: 4
-Style/IdenticalConditionalBranches:
-  Exclude:
-    - 'app/controllers/reviews_controller.rb'
 
 # Offense count: 4
 # Cop supports --auto-correct.
