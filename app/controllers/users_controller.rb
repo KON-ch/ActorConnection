@@ -35,6 +35,8 @@ class UsersController < ApplicationController
     @theaters = @user.likees(Theater.preload(:country, :reviews).order(updated_at: :desc))
     @movies = @user.likees(Movie.preload(:country, :reviews).order(updated_at: :desc))
     @stages = @user.likees(Stage.preload(:theater, :reviews).order(updated_at: :desc))
+    theater_reviews = current_user.reviews.where(theater_id: @theaters.pluck(:id))
+    @theater_review = theater_reviews.index_by(&:theater_id)
   end
 
   def review

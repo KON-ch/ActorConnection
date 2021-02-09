@@ -23,13 +23,13 @@
   <% end %>
   <div class="review-theater-<%= theater.id %>">
     <div class="d-flex">
-      <% if review_present?(current_user, theater) %>
+      <% if review.nil? %>
         <div style="color: #FF8300; cursor: pointer" data-toggle="modal" data-target="#reviewModal<%= theater.id %>">
           <i class="far fa-check-circle ml-4"></i>
           <span class="ml-1 mb-0"><%= theater.reviews.size %></span>
         </div>
       <% else %>
-        <%= link_to review_path(theater.reviews.find_by(user: current_user), review_page: request.url), method: :delete, remote: true, data: { confirm: 'レビューを削除します' } do %>
+        <%= link_to review_path(review, review_page: request.url), method: :delete, remote: true, data: { confirm: 'レビューを削除します' } do %>
           <i class="fas fa-check-circle ml-4" style="color: #FF8300;"></i>
           <span class="ml-1 mb-0" style="color: #FF8300;"><%= theater.reviews.size %></span>
         <% end %>

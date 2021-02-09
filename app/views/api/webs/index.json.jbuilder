@@ -1,1 +1,0 @@
-json.array! @stages, :company, :start_date, :end_date

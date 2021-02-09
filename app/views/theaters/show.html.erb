@@ -31,7 +31,7 @@
             <label class="text-right"><%= @my_review.updated_at.mon %>月<%= @my_review.updated_at.day %>日</label>
           <% end %>
         </div>
-        <% if review_present?(current_user, @theater) %>
+        <% if @my_review.nil? %>
           <%= form_with model: @new_review, url: theater_reviews_path(@theater) do |f| %>
             <div class="card-body">
               <%= f.text_area :content, size: "20x10", class:"form-control mr-2 " %>

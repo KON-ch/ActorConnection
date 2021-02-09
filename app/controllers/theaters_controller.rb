@@ -17,12 +17,15 @@ class TheatersController < ApplicationController
     end
     @sort_list = Theater.sort_list
     @theater = Theater.new
+    user_reviews = current_user.reviews.where(theater_id: @theaters.pluck(:id))
+    @review = user_reviews.index_by(&:theater_id)
   end
 
   def show
-    @reviews = @theater.reviews.preload(:user).where.not(user: current_user)
+    theater_reviews = @theater.reviews
+    @reviews = theater_reviews.where.not(user: current_user)
     @new_review = @reviews.new
-    @my_review = @theater.reviews.find_by(user_id: current_user.id)
+    @my_review = theater_reviews.find_by(user_id: current_user.id)
   end
 
   def new
@@ -68,7 +71,7 @@ class TheatersController < ApplicationController
   end
 
   def set_theater
-    @theater = Theater.preload(:country).find(params[:id])
+    @theater = Theater.preload(:country, :reviews, :user).find(params[:id])
   end
 
   def set_countries
