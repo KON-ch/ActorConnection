@@ -40,7 +40,7 @@
             <label class="text-right"><%= @my_review.updated_at.mon %>月<%= @my_review.updated_at.day %>日</label>
           <% end %>
         </div>
-        <% if review_present?(current_user, @movie) %>
+        <% if @my_review.nil? %>
           <%= form_with model: @new_review, url: movie_reviews_path(@movie) do |f| %>
             <div class="card-body">
               <%= f.text_area :content, size: "20x10", class:"form-control mr-2 " %>
@@ -65,7 +65,7 @@
               </div>
             </div>
             <div class="card-footer text-right">
-              <span onclick="switchEditReview('.userReview', '.editUserReview', '.userReviewEditLabel');" class="userReviewEditLabel user-edit-label btn btn-outline-secondary">
+              <span id="review-edit" class="userReviewEditLabel user-edit-label btn btn-outline-secondary">
                 編集
               </span>
               <%= link_to  "削除", review_path(@my_review, review_page: request.url), method: :delete, data: { confirm: 'レビューを削除します' }, class:"btn btn-outline-danger" %>
@@ -82,16 +82,4 @@
   </div>
 </div>
 
-<script type="text/javascript">
-  let switchEditReview = (textClass, inputClass, labelClass) => {
-      if ($(textClass).css('display') == 'block') {
-          $(labelClass).text("キャンセル");
-          $(textClass).removeClass('show');
-          $(inputClass).addClass('show');
-      } else {
-          $(labelClass).text("編集");
-          $(textClass).addClass('show');
-          $(inputClass).removeClass('show');
-      }
-  }
-</script>
+<%= javascript_pack_tag "reviews/edit" %>

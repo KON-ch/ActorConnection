@@ -18,12 +18,14 @@ class StagesController < ApplicationController
               end
     @sort_list = Stage.sort_list
     @stage = Stage.new
+    @review = current_user.reviews.stages(@stages)
   end
 
   def show
-    @reviews = @stage.reviews.preload(:user).where.not(user: current_user)
+    stage_reviews = @stage.reviews.preload(:user)
+    @reviews = stage_reviews.where.not(user: current_user)
     @new_review = @reviews.new
-    @my_review = @stage.reviews.find_by(user_id: current_user.id)
+    @my_review = stage_reviews.find_by(user: current_user)
     @lat = @stage.place.latitude
     @lng = @stage.place.longitude
   end

@@ -29,7 +29,7 @@
             </div>
             <div>
               <div class="card shadow-sm" style="width: 18rem;">
-                <%= render partial: "stages/card", locals: {stage: review.stage} %>
+                <%= render partial: "stages/card", locals: {stage: review.stage, review: review} %>
               </div>
             </div>
           </div>
@@ -72,7 +72,7 @@
               <p class="ml-3 mt-3 mr-2"><%= review.content %></p>
             </div>
             <div class="card shadow-sm" style="width: 18rem;">
-              <%= render partial: "stages/card", locals: {stage: review.stage} %>
+              <%= render partial: "stages/card", locals: {stage: review.stage, review: review} %>
             </div>
           </div>
           <%= render partial: "reviews/like", locals: {review: review} %>

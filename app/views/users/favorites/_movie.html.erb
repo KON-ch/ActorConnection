@@ -1,7 +1,7 @@
 <% @movies.each do |movie| %>
   <div class="col mb-4">
     <div class="card h-100 shadow-sm">
-      <%= render partial: "movies/card", locals: {movie: movie} %>
+      <%= render partial: "movies/card", locals: {movie: movie, review: @movie_review[movie.id]} %>
     </div>
   </div>
 <% end %>

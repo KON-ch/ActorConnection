@@ -4,7 +4,7 @@ class TheatersController < ApplicationController
   before_action :set_countries, only: %i[index new edit]
 
   def index
-    if !params[:keyword].nil?
+    if params[:keyword].present?
       @keyword = params[:keyword]
       display_theater(search_theater)
     elsif sort_params.present?
@@ -17,8 +17,7 @@ class TheatersController < ApplicationController
     end
     @sort_list = Theater.sort_list
     @theater = Theater.new
-    user_reviews = current_user.reviews.where(theater_id: @theaters.pluck(:id))
-    @review = user_reviews.index_by(&:theater_id)
+    @review = current_user.reviews.theaters(@theaters)
   end
 
   def show
@@ -71,7 +70,7 @@ class TheatersController < ApplicationController
   end
 
   def set_theater
-    @theater = Theater.preload(:country, :reviews, :user).find(params[:id])
+    @theater = Theater.preload(:country).find(params[:id])
   end
 
   def set_countries
@@ -91,7 +90,7 @@ class TheatersController < ApplicationController
   end
 
   def total_count(theater)
-    @total_count = theater.count
+    @total_count = theater.size
   end
 
   def display_theater(theater)

@@ -7,7 +7,7 @@
   </div>
   <div class="d-flex align-items-start">
     <div class="card shadow-sm mt-2" style="width: 18rem;">
-      <%= render partial: "theaters/card", locals: {theater: review.theater, review: @theater_review[review.theater.id]} %>
+      <%= render partial: "theaters/card", locals: {theater: review.theater, review: review} %>
     </div>
   </div>
 <% elsif review.movie_id.present? %>
@@ -19,7 +19,7 @@
   </div>
   <div class="d-flex align-items-start">
     <div class="card shadow-sm mt-2" style="width: 18rem;">
-    <%= render partial: "movies/card", locals: {movie: review.movie} %>
+    <%= render partial: "movies/card", locals: {movie: review.movie, review: review} %>
     </div>
   </div>
 <% elsif review.stage_id.present? %>
@@ -31,7 +31,7 @@
   </div>
   <div class="d-flex align-items-start">
     <div class="card shadow-sm mt-2" style="width: 18rem;">
-      <%= render partial: "stages/card", locals: {stage: review.stage} %>
+      <%= render partial: "stages/card", locals: {stage: review.stage, review: review} %>
     </div>
   </div>
 <% end %>

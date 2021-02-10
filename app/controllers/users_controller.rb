@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @reviews = @user.reviews
+    @reviews = @user.reviews.preload(:theater, :movie, :stage).order(updated_at: :desc)
   end
 
   def update
@@ -35,8 +35,9 @@ class UsersController < ApplicationController
     @theaters = @user.likees(Theater.preload(:country, :reviews).order(updated_at: :desc))
     @movies = @user.likees(Movie.preload(:country, :reviews).order(updated_at: :desc))
     @stages = @user.likees(Stage.preload(:theater, :reviews).order(updated_at: :desc))
-    theater_reviews = current_user.reviews.where(theater_id: @theaters.pluck(:id))
-    @theater_review = theater_reviews.index_by(&:theater_id)
+    @theater_review = current_user.reviews.theaters(@theaters)
+    @movie_review = current_user.reviews.movies(@movies)
+    @stage_review = current_user.reviews.stages(@stages)
   end
 
   def review

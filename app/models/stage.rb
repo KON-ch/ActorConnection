@@ -27,8 +27,6 @@ class Stage < ApplicationRecord
     }
   }
 
-  delegate :new, to: :reviews, prefix: true
-
   after_commit :create_post, on: [:create]
 
   private

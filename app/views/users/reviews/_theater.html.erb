@@ -72,7 +72,7 @@
               <p class="ml-3 mt-3 mr-2"><%= review.content %></p>
             </div>
             <div class="card shadow-sm" style="width: 18rem;">
-              <%= render partial: "theaters/card", locals: {theater: review.theater} %>
+              <%= render partial: "theaters/card", locals: {theater: review.theater, review: review} %>
             </div>
           </div>
           <%= render partial: "reviews/like", locals: {review: review} %>

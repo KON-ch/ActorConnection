@@ -17,12 +17,14 @@ class MoviesController < ApplicationController
     end
     @sort_list = Movie.sort_list
     @movie = Movie.new
+    @review = current_user.reviews.movies(@movies)
   end
 
   def show
-    @reviews = @movie.reviews.where.not(user: current_user)
+    movie_reviews = @movie.reviews
+    @reviews = movie_reviews.where.not(user: current_user)
     @new_review = @reviews.new
-    @my_review = @movie.reviews.find_by(user_id: current_user.id)
+    @my_review = movie_reviews.find_by(user_id: current_user.id)
   end
 
   def new

@@ -13,16 +13,9 @@ class Review < ApplicationRecord
   scope :set_theaters, -> { where.not(theater_id: nil).order(updated_at: :desc) }
   scope :set_movies, -> { where.not(movie_id: nil).order(updated_at: :desc) }
   scope :set_stages, -> { where.not(stage_id: nil).order(updated_at: :desc) }
-
-  def self.check_user_review(user, post)
-    if post.instance_of?(Theater)
-      where(user_id: user.id, theater_id: post.id)
-    elsif post.instance_of?(Movie)
-      where(user_id: user.id, movie_id: post.id)
-    elsif post.instance_of?(Stage)
-      where(user_id: user.id, stage_id: post.id)
-    end
-  end
+  scope :theaters, ->(theaters) { where(theater_id: theaters.pluck(:id)).index_by(&:theater_id) }
+  scope :movies, ->(movies) { where(movie_id: movies.pluck(:id)).index_by(&:movie_id) }
+  scope :stages, ->(stages) { where(stage_id: stages.pluck(:id)).index_by(&:stage_id) }
 
   after_commit :create_post, on: [:create]
 
