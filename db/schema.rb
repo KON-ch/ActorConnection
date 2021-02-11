@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_11_032448) do
+ActiveRecord::Schema.define(version: 2021_02_11_112235) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -173,6 +173,9 @@ ActiveRecord::Schema.define(version: 2021_02_11_032448) do
     t.text "synopsis"
     t.time "matinee"
     t.time "soiree"
+    t.string "image"
+    t.string "director"
+    t.string "quote"
     t.index ["place_id"], name: "index_stages_on_place_id"
     t.index ["theater_id", "start_date"], name: "index_stages_on_theater_id_and_start_date", unique: true
     t.index ["theater_id"], name: "index_stages_on_theater_id"

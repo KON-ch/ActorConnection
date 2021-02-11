@@ -33,22 +33,24 @@
                 <label class="float-right"><%= stage.place.name %></label>
             </div>
             <div class="card-body pl-5 pb-0 d-flex justify-content-between">
-              <div class="mb-4 mb-lg-0">
+              <div class="mb-4 mb-lg-5">
                 <div class="d-flex align-items-end">
                   <%= link_to stage_path(stage), data: { "turbolinks" => false } do %>
                     <h1 class="card-title text-dark mb-0"><%= stage.theater.title %></h1>
                   <% end %>
                   <p id="company" class="card-text ml-4 mb-1"><%= stage.company %></p>
                 </div>
-                <h2 class="mt-3"><span style="font-size: 1.4rem;">演出 : </span>田中 麻衣子</h2>
+                <h2 class="mt-3"><span style="font-size: 1.4rem;">演出 : </span><%= stage.director %></h2>
                 <h2 class="mt-3 mb-5"><span style="font-size: 1.4rem;">作者 : </span><%= stage.theater.writer %></h2>
                 <label class="border rounded py-2 px-3 mr-3">炭鉱</label>
                 <label class="border rounded py-2 px-3">借金</label>
               </div>
-              <div class="d-none d-lg-block">
-                <img id="image" src="http://www.gekidanmingei.co.jp/mingeicms2016/wp-content/uploads/flyer_2021_chinetsu.jpg">
-                <p class="mt-3" id="company">引用: 劇団民藝公式サイト</p>
-              </div>
+              <% if stage.image.present? %>
+                <div class="d-none d-lg-block">
+                  <img id="image" src=<%= stage.image %>>
+                  <p class="mt-3" id="company">引用: <%= stage.quote %></p>
+                </div>
+              <% end %>
             </div>
             <div class="card-footer d-flex">
               <%= link_to favorite_stage_path(stage), method: :post, remote: true, class:"text-primary" do %>

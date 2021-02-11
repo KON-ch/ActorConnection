@@ -42,6 +42,10 @@
     <%= f.collection_check_boxes(:soiree_ids, Soiree.all, :id, :performance_date, class:"form-cobntrol col") %>
   </div>
   <div class="form-group row">
+    <%= f.label :director, "演出家", class:"col-lg-4 offset-lg-1 px-0 col-form-label text-left" %>
+    <%= f.text_field :director, class:"form-control col-lg-6" %>
+  </div>
+  <div class="form-group row">
     <div class="col-lg-4 offset-lg-1 px-0">
       <%= f.label :company, "公演団体", class:"col-form-label text-left" %>
       <span class="text-danger ml-3">( 必須 )</span>
@@ -51,6 +55,15 @@
       <strong class="error-text text-left offset-lg-1"><%= @stage.errors.full_messages_for(:company).first %></strong>
     <% end %>
   </div>
+  <div class="form-group row">
+    <%= f.label :image, "画像URL", class:"col-lg-4 offset-lg-1 px-0 col-form-label text-left" %>
+    <%= f.text_field :image, class:"form-control col-lg-6" %>
+  </div>
+  <div class="form-group row">
+    <%= f.label :quote, "引用元", class:"col-lg-4 offset-lg-1 px-0 col-form-label text-left" %>
+    <%= f.text_field :quote, class:"form-control col-lg-6" %>
+  </div>
+
   <div class="form-group row">
     <%= f.label :synopsis, "あらすじ", class:"col-lg-4 offset-lg-1 col-form-label text-left px-0" %>
     <%= f.text_area :synopsis, class:"form-control col-lg-6" %>
