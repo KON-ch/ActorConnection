@@ -1,0 +1,10 @@
+<div style="margin-top: 11vh;">
+  <%= form_with model: @soiree_new, url: dashboard_soirees_path, method: :post, loacl: true do |f| %>
+    <%= f.date_select :performance_date %>
+    <%= f.submit "登録" %>
+  <% end %>
+</div>
+
+<% @soirees.each do |soiree| %>
+  <%= soiree.inspect %>
+<% end %>

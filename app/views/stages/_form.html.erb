@@ -22,6 +22,27 @@
   </div>
   <div class="form-group row">
     <div class="col-lg-4 offset-lg-1 px-0">
+    <%= f.label :matinee, "時間(マチネ)", class:"col-form-label text-left" %>
+    <span class="text-danger ml-3">( 必須 )</span>
+    </div>
+    <%= f.time_select :matinee, {minute_step: 30, prompt:""}, class:"form-control col-5 col-lg-3" %>
+  </div>
+  <div class="form-group row">
+    <div class="col-lg-4 offset-lg-1 px-0">
+    <%= f.label :soiree, "時間(ソワレ)", class:"col-form-label text-left" %>
+    <span class="text-danger ml-3">( 必須 )</span>
+    </div>
+    <%= f.time_select :soiree, {minute_step: 30, prompt:""}, class:"form-control col-5 col-lg-3" %>
+  </div>
+  <div class="form-group row">
+    <div class="col-lg-4 offset-lg-1 px-0">
+    <%= f.label :soiree_ids, "夜公演日", class:"col-form-label text-left" %>
+    <span class="text-danger ml-3">( 必須 )</span>
+    </div>
+    <%= f.collection_check_boxes(:soiree_ids, Soiree.all, :id, :performance_date, class:"form-cobntrol col") %>
+  </div>
+  <div class="form-group row">
+    <div class="col-lg-4 offset-lg-1 px-0">
       <%= f.label :company, "公演団体", class:"col-form-label text-left" %>
       <span class="text-danger ml-3">( 必須 )</span>
     </div>
@@ -29,6 +50,10 @@
     <% if @stage.errors.messages[:company].present? %>
       <strong class="error-text text-left offset-lg-1"><%= @stage.errors.full_messages_for(:company).first %></strong>
     <% end %>
+  </div>
+  <div class="form-group row">
+    <%= f.label :synopsis, "あらすじ", class:"col-lg-4 offset-lg-1 col-form-label text-left px-0" %>
+    <%= f.text_area :synopsis, class:"form-control col-lg-6" %>
   </div>
   <div class="form-group row">
     <%= f.label :place_id, "劇場", class:"col-lg-4 offset-lg-1 col-form-label text-left px-0" %>

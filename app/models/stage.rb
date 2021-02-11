@@ -2,6 +2,9 @@ class Stage < ApplicationRecord
   belongs_to :theater
   has_many :posts, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :soiree_stages, dependent: :destroy
+  has_many :soirees, through: :soiree_stages
+  accepts_nested_attributes_for :soiree_stages
   belongs_to :place
   belongs_to :user
 

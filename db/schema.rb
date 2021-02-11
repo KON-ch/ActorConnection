@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_06_100325) do
+ActiveRecord::Schema.define(version: 2021_02_11_032448) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -145,6 +145,21 @@ ActiveRecord::Schema.define(version: 2021_02_06_100325) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "soiree_stages", force: :cascade do |t|
+    t.integer "stage_id"
+    t.integer "soiree_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["soiree_id"], name: "index_soiree_stages_on_soiree_id"
+    t.index ["stage_id"], name: "index_soiree_stages_on_stage_id"
+  end
+
+  create_table "soirees", force: :cascade do |t|
+    t.date "performance_date", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "stages", force: :cascade do |t|
     t.string "company"
     t.date "start_date", null: false
@@ -155,6 +170,9 @@ ActiveRecord::Schema.define(version: 2021_02_06_100325) do
     t.integer "place_id"
     t.integer "user_id"
     t.integer "likers_count", default: 0
+    t.text "synopsis"
+    t.time "matinee"
+    t.time "soiree"
     t.index ["place_id"], name: "index_stages_on_place_id"
     t.index ["theater_id", "start_date"], name: "index_stages_on_theater_id_and_start_date", unique: true
     t.index ["theater_id"], name: "index_stages_on_theater_id"
@@ -207,6 +225,8 @@ ActiveRecord::Schema.define(version: 2021_02_06_100325) do
   add_foreign_key "reviews", "stages"
   add_foreign_key "reviews", "theaters"
   add_foreign_key "reviews", "users"
+  add_foreign_key "soiree_stages", "soirees"
+  add_foreign_key "soiree_stages", "stages"
   add_foreign_key "stages", "places"
   add_foreign_key "stages", "theaters"
   add_foreign_key "stages", "users"

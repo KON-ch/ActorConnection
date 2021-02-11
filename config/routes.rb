@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :stages, except: [:show]
     resources :places, except: [:show]
     resources :movies, except: [:show]
+    resources :soirees, except: [:show]
     resources :countries, only: %i[index create]
   end
 
