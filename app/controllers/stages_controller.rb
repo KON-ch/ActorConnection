@@ -14,7 +14,7 @@ class StagesController < ApplicationController
               elsif params[:date] == 'this_month'
                 Stage.preload(:theater, :reviews).this_month.order(updated_at: :desc).display_list(params[:page])
               else
-                Stage.preload(:theater, :reviews).this_month.order(updated_at: :desc).display_list(params[:page])
+                Stage.preload(:theater, :reviews).order(updated_at: :desc).display_list(params[:page])
               end
     @sort_list = Stage.sort_list
     @stage = Stage.new
@@ -28,6 +28,8 @@ class StagesController < ApplicationController
     @my_review = stage_reviews.find_by(user: current_user)
     @lat = @stage.place.latitude
     @lng = @stage.place.longitude
+    @movies = Movie.limit(3)
+    @review = Review.movies(@movies)
   end
 
   def new

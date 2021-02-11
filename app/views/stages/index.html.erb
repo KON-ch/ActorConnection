@@ -17,15 +17,67 @@
           <% end %>
         <% end %>
       </div>
-      <div class="row row-cols-2 row-cols-md-3">
-        <% @stages.each do |stage| %>
-          <div class="col mb-4">
-            <div class="card h-100 shadow-sm">
-              <%= render partial: "stages/card", locals: {stage: stage, review: @review[stage.id]} %>
+      <% @stages.each do |stage| %>
+        <div class="col mb-4 px-0">
+          <div class="card h-100 shadow-sm">
+            <div class="card-header justify-content-between">
+                <% if stage.start_date < Date.today && stage.end_date > Date.today %>
+                  <label class="badge badge-pill badge-warning text-light py-1" style="background-color: #FF8300;">上演中</label>
+                <% end %>
+                <%= stage.start_date.mon %>月<%= stage.start_date.day %>日(<%= %w(日 月 火 水 木 金 土)[stage.start_date.wday] %>)
+                〜
+                <% if stage.start_date.mon != stage.end_date.mon %>
+                  <%= stage.end_date.mon %>月
+                <% end %>
+                <%= stage.end_date.day %>日(<%= %w(日 月 火 水 木 金 土)[stage.start_date.wday] %>)
+                <label class="float-right"><%= stage.place.name %></label>
             </div>
+            <div class="card-body pl-5 pb-0 d-flex justify-content-between">
+              <div class="mb-4 mb-lg-0">
+                <div class="d-flex align-items-end">
+                  <%= link_to stage_path(stage), data: { "turbolinks" => false } do %>
+                    <h1 class="card-title text-dark mb-0"><%= stage.theater.title %></h1>
+                  <% end %>
+                  <p id="company" class="card-text ml-4 mb-1"><%= stage.company %></p>
+                </div>
+                <h2 class="mt-3"><span style="font-size: 1.4rem;">演出 : </span>田中 麻衣子</h2>
+                <h2 class="mt-3 mb-5"><span style="font-size: 1.4rem;">作者 : </span><%= stage.theater.writer %></h2>
+                <label class="border rounded py-2 px-3 mr-3">炭鉱</label>
+                <label class="border rounded py-2 px-3">借金</label>
+              </div>
+              <div class="d-none d-lg-block">
+                <img id="image" src="http://www.gekidanmingei.co.jp/mingeicms2016/wp-content/uploads/flyer_2021_chinetsu.jpg">
+                <p class="mt-3" id="company">引用: 劇団民藝公式サイト</p>
+              </div>
+            </div>
+            <div class="card-footer d-flex">
+              <%= link_to favorite_stage_path(stage), method: :post, remote: true, class:"text-primary" do %>
+                <div class="favorite-stage-<%= stage.id %>">
+                  <%= render partial: "stages/favorite", locals: {stage: stage} %>
+                </div>
+              <% end %>
+              <div class="review-stage-<%= stage.id %>">
+                <div class="d-flex">
+                  <% if @review[stage.id].nil? %>
+                    <div class="text-primary" style="cursor:pointer" data-toggle="modal" data-target="#reviewModal<%= stage.id %>">
+                      <i class="far fa-check-circle ml-4"></i>
+                      <span class="ml-1 mb-0"><%= stage.reviews.size %></span>
+                    </div>
+                  <% else %>
+                    <%= link_to review_path(@review[stage.id], review_page: request.url), method: :delete, data: { confirm: 'レビューを削除します' }, class:"text-primary" do %>
+                      <i class="fas fa-check-circle ml-4"></i>
+                      <span class="ml-1 mb-0"><%= stage.reviews.size %></span>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <%= form_with model: stage.reviews.new, url: stage_reviews_path(stage) do |f| %>
+              <%= render partial: "reviews/modal", locals: {review: stage, review_title: stage.theater, f: f} %>
+            <% end %>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
       <%= paginate @stages %>
       <div class="btn btn-lg btn-primary float-right position-fixed rounded p-2" style="bottom:10vh; right:5vw;" data-toggle="modal" data-target="#newModal">
         <i class="fas fa-pen fa-2x mr-md-2"></i>

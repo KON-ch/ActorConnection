@@ -2,25 +2,28 @@
   <div class="align-items-end d-flex justify-content-between border py-3 px-5">
     <div>
       <h1 id="title" class="font-weight-bold d-inline"><%= @stage.theater.title %></h1>
-      <%= link_to favorite_stage_path(@stage), method: :post, remote: true, class:"ml-5 mb-4", style:"color: #FF8300;" do %>
+      <%= link_to favorite_stage_path(@stage), method: :post, remote: true, class:"ml-4 mb-4", style:"color: #FF8300;" do %>
         <h2 class="favorite-stage-<%= @stage.id %> d-inline">
           <%= render partial: "stages/favorite", locals: {stage: @stage} %>
         </h2>
       <% end %>
       <% if current_user.id == 1 %>
-        <%= link_to "編集", edit_stage_path(@stage), class:"btn btn-sm btn-outline-secondary ml-5 mb-3" %>
-        <%= link_to "削除", stage_path(@stage), method: :delete, data: { confirm: '本当に削除しますか？' }, class:"btn btn-sm btn-danger ml-3 mb-3" %>
+        <%= link_to "編集", edit_stage_path(@stage), class:"btn btn-sm btn-outline-secondary ml-lg-5 mb-3" %>
+        <%= link_to "削除", stage_path(@stage), method: :delete, data: { confirm: '本当に削除しますか？' }, class:"btn btn-sm btn-danger ml-lg-3 mb-3" %>
       <% end %>
     </div>
     <h2 id="company" class="ml-2"><%= @stage.company %></h2>
   </div>
-  <div class="mt-5">
-    <label>あらすじ</label><br>
+  <div class="mt-5 mx-5">
+    <h2>
+      <span style="font-size: 1.4rem;">演出 : </span>田中 麻衣子 <span class="ml-4" style="font-size: 1.4rem;">作者 : </span><%= @stage.theater.writer %>
+    </h2>
+    <label class="mt-5">あらすじ</label><br>
     <p class="mt-2"><%= @stage.synopsis %></p>
   </div>
   <div class="row">
-    <div class="col-sm-5 col text-left mt-5">
-      <h2>
+    <div class="col-lg-5 col text-left mt-3 mt-lg-5">
+      <h2 class="d-none d-md-block ml-5">
         <%= @stage.start_date.mon %>月<%= @stage.start_date.day %>日<span style="font-size: 2.1rem;">(<%= %w(日 月 火 水 木 金 土)[@stage.start_date.wday] %>)</span>
         〜
         <% if @stage.start_date.mon != @stage.end_date.mon %>
@@ -39,7 +42,7 @@
         <tbody>
           <% (@stage.start_date..@stage.end_date).each do |date| %>
             <tr>
-              <th scope="row"><%= date.mon %>月<%= date.day %>日(<%= %w(日 月 火 水 木 金 土)[date.wday] %>)</th>
+              <th scope="row" class="text-center"><%= date.mon %>月<%= date.day %>日(<%= %w(日 月 火 水 木 金 土)[date.wday] %>)</th>
                 <% if @stage.soirees.first.performance_date == date || @stage.soirees.last.performance_date == date %>
                   <td></td>
                   <td class="text-center">○</td>
@@ -52,7 +55,7 @@
         </tbody>
       </table>
     </div>
-    <div class="col-sm-5 offset-sm-2 mt-5">
+    <div class="col-sm-6 offset-sm-1 mt-5">
       <label>劇場 :</label>
       <% if @stage.place.nil? %>
         <%= link_to "未登録", edit_stage_path(@stage), class:"btn btn-lg btn-outline-primary mb-3 ml-2" %>
@@ -65,10 +68,7 @@
     </div>
   </div>
   <div class="row mt-5">
-    <div class="col-sm-7 card shadow-sm p-3">
-      <%= render "reviews/index"%>
-    </div>
-    <div class="col-sm-5">
+    <div class="col-lg-5 order-lg-2">
       <div class="card shadow mb-4">
         <div class="card-header d-flex justify-content-between">
           <label><i class="fas fa-check-circle mr-2" style="color: #FF8300;"></i>My Review</label>
@@ -110,6 +110,21 @@
         <% end %>
       </div>
     </div>
+    <div class="col-lg-7 card shadow-sm py-3 order-lg-1">
+      <%= render "reviews/index"%>
+    </div>
+  </div>
+  <h1 class="mt-5 text-light py-3 pl-5 bg-primary"><i class="fas fa-film mr-3"></i>関連映画</h1>
+  <h2 class="mt-5" style="color: #FC8300;">炭鉱</h2>
+  <hr>
+  <div class="row row-cols-2 row-cols-md-3">
+    <% @movies.each do |movie| %>
+      <div class="col mb-4">
+        <div class="card  h-100 shadow-sm">
+          <%= render partial: "movies/card", locals: { movie: movie, review: @review[movie.id] } %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 
