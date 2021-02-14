@@ -3,10 +3,15 @@ class Movie < ApplicationRecord
   has_many :reviews, dependent: :destroy
   belongs_to :country
   belongs_to :user
+  has_many :movie_tags, dependent: :destroy
+  has_many :tags, through: :movie_tags
+  accepts_nested_attributes_for :movie_tags
 
   acts_as_likeable
 
   validates :title, presence: true, uniqueness: { scope: :sub_title, message: 'この作品は既に作成されています' }
+
+  validates :screen_time, numericality: { only_integer: true }, allow_nil: true
 
   extend DisplayList
   extend SortInfo

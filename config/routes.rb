@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :places, except: [:show]
     resources :movies, except: [:show]
     resources :soirees, except: [:show]
+    resources :tags, except: [:show]
     resources :countries, only: %i[index create]
   end
 
@@ -71,6 +72,8 @@ Rails.application.routes.draw do
   end
 
   resources :webs, only: [:index]
+
+  resources :tags, only: %i[show]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

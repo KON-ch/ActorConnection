@@ -5,6 +5,9 @@ class Stage < ApplicationRecord
   has_many :soiree_stages, dependent: :destroy
   has_many :soirees, through: :soiree_stages
   accepts_nested_attributes_for :soiree_stages
+  has_many :stage_tags, dependent: :destroy
+  has_many :tags, through: :stage_tags
+  accepts_nested_attributes_for :stage_tags
   belongs_to :place
   belongs_to :user
 

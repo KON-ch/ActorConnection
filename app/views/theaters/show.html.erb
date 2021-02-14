@@ -1,29 +1,38 @@
-<div class="container p-sm-0" style="margin-top:12vh;">
-  <div class="align-items-end mb-3">
-    <h1 class="font-weight-bold"><%= @theater.title %></h1>
-    <h2 class="d-inline"><%= @theater.writer %></h2>
-    <label class="ml-2">( <%= @theater.country.name %> )</label>
-    <%= link_to favorite_theater_path(@theater), method: :post, remote: true, class:"ml-4", style:"color: #FF8300;" do %>
-      <span class="favorite-theater-<%= @theater.id %>">
-        <%= render partial: "theaters/favorite", locals: {theater: @theater} %>
-      </span>
-    <% end %>
-    <%= link_to "編集", edit_theater_path(@theater), class:"btn btn-sm btn-outline-secondary ml-4 mb-2" %>
+<div class="container" style="margin-top:12vh;">
+  <div class="align-items-end d-flex justify-content-between border py-3 px-5">
+    <div class="align-items-start d-flex">
+      <h1 class="font-weight-bold"><%= @theater.title %></h1>
+      <%= link_to favorite_theater_path(@theater), method: :post, remote: true, class:"ml-4 mt-2", style:"color: #FF8300;" do %>
+        <h2 class="favorite-theater-<%= @theater.id %>">
+          <%= render partial: "theaters/favorite", locals: {theater: @theater} %>
+        </h2>
+      <% end %>
+    </div>
+    <h2 class="ml-2 d-none d-md-inline"><%= @theater.country.name %></h2>
+  </div>
+  <div class="text-right">
     <% if current_user.id == 1 %>
-      <%= link_to "削除", theater_path(@theater), method: :delete, data: { confirm: '本当に削除しますか？' }, class:"btn btn-sm btn-danger ml-3 mb-2" %>
+      <%= link_to "編集", edit_theater_path(@theater), class:"btn btn-sm btn-outline-secondary mb-2 d-inline-block mt-3" %>
+      <%= link_to "削除", theater_path(@theater), method: :delete, data: { confirm: '本当に削除しますか？' }, class:"btn btn-sm btn-danger ml-3 mb-2 d-inline-block mt-3" %>
     <% end %>
   </div>
-  <div class="row">
-    <div class="col-sm-6 text-left">
-      <h2 class="d-inline">登場人数</h2>
+  <div class="mt-3">
+    <h2>
+      <span class="mx-4 d-inline-block" style="font-size: 1.4rem;">作者 : </span><%= @theater.writer %><br>
       <% if @theater.man.nil? && @theater.female.nil? %>
-        <%= link_to "未登録", edit_theater_path(@theater), class:"btn btn-lg btn-outline-primary mb-3 ml-2" %>
+        <span class="ml-4 mt-4 d-inline" style="font-size: 1.4rem;">登場人数 : </span>
+        <%= link_to "未登録", edit_theater_path(@theater), class:"btn btn-outline-primary my-3 ml-2" %>
       <% else %>
-        <br>
-        <label>男 : <%= @theater.man %> 人</label>
-        <span> / </span>
-        <label>女 : <%= @theater.female %> 人</label>
+        <span class="mx-4 mt-5 mb-4 d-inline-block" style="font-size: 1.4rem;">男 : </span><%= @theater.man %> 人
+        <span class="mx-4 d-inline-block" style="font-size: 1.4rem;">女 : </span><%= @theater.female %> 人
       <% end %>
+      <br>
+      <span class="mx-4 d-md-none" style="font-size: 1.4rem;">製作国 : </span>
+      <span class="d-md-none"><%= @theater.country.name %></span>
+    </h2>
+  </div>
+  <div class="row mt-3">
+    <div class="col-sm-6 text-left">
       <div class="card shadow mt-4">
         <div class="card-header d-flex justify-content-between">
           <label><i class="fas fa-check-circle mr-2" style="color: #FF8300;"></i>My Review</label>
@@ -65,11 +74,23 @@
         <% end %>
       </div>
     </div>
-    <div class="col-sm-5 offset-sm-1">
-      <div class="card shadow-sm mt-5 p-3">
+    <div class="col-sm-6">
+      <div class="card shadow-sm mt-4 p-3">
         <%= render "reviews/index" %>
       </div>
     </div>
+  </div>
+  <div>
+    <% if @theater.stages.present? %>
+      <h1 class="mt-5 text-light py-3 pl-5" style="background-color: #4CA2FF;"><i class="fas fa-theater-masks mr-3"></i>上演履歴</h1>
+      <% @theater.stages.each do |stage| %>
+        <div class="row row-cols-1 row-cols-lg-2 my-4 mx-1">
+            <div class="card h-100 shadow-sm">
+              <%= render partial: "stages/card", locals: { stage: stage, review: @review[stage.id] } %>
+            </div>
+          </div>
+      <% end %>
+    <% end %>
   </div>
 </div>
 

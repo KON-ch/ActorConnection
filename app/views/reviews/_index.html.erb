@@ -19,9 +19,7 @@
       <div class="card-body">
         <p class="m-3"><%= review.content %></p>
       </div>
-      <div class="card-footer">
-        <%= render partial: "reviews/like", locals: {review: review} %>
-      </div>
+      <%= render partial: "reviews/like", locals: {review: review} %>
     </div>
   <% end %>
 <% end %>

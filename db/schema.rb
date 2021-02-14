@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_11_112235) do
+ActiveRecord::Schema.define(version: 2021_02_12_120735) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -83,6 +83,15 @@ ActiveRecord::Schema.define(version: 2021_02_11_112235) do
     t.index ["mentioner_id", "mentioner_type"], name: "fk_mentions"
   end
 
+  create_table "movie_tags", force: :cascade do |t|
+    t.integer "movie_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_movie_tags_on_movie_id"
+    t.index ["tag_id"], name: "index_movie_tags_on_tag_id"
+  end
+
   create_table "movies", force: :cascade do |t|
     t.string "title", null: false
     t.date "production"
@@ -93,6 +102,9 @@ ActiveRecord::Schema.define(version: 2021_02_11_112235) do
     t.integer "country_id", null: false
     t.integer "user_id"
     t.integer "likers_count", default: 0
+    t.integer "screen_time"
+    t.string "quote_url"
+    t.string "synopsis"
     t.index ["country_id"], name: "index_movies_on_country_id"
     t.index ["title", "sub_title"], name: "index_movies_on_title_and_sub_title", unique: true
     t.index ["user_id"], name: "index_movies_on_user_id"
@@ -160,6 +172,15 @@ ActiveRecord::Schema.define(version: 2021_02_11_112235) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "stage_tags", force: :cascade do |t|
+    t.integer "stage_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["stage_id"], name: "index_stage_tags_on_stage_id"
+    t.index ["tag_id"], name: "index_stage_tags_on_tag_id"
+  end
+
   create_table "stages", force: :cascade do |t|
     t.string "company"
     t.date "start_date", null: false
@@ -173,13 +194,18 @@ ActiveRecord::Schema.define(version: 2021_02_11_112235) do
     t.text "synopsis"
     t.time "matinee"
     t.time "soiree"
-    t.string "image"
     t.string "director"
-    t.string "quote"
+    t.string "quote_url"
     t.index ["place_id"], name: "index_stages_on_place_id"
     t.index ["theater_id", "start_date"], name: "index_stages_on_theater_id_and_start_date", unique: true
     t.index ["theater_id"], name: "index_stages_on_theater_id"
     t.index ["user_id"], name: "index_stages_on_user_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "theaters", force: :cascade do |t|
@@ -215,6 +241,8 @@ ActiveRecord::Schema.define(version: 2021_02_11_112235) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "movie_tags", "movies"
+  add_foreign_key "movie_tags", "tags"
   add_foreign_key "movies", "countries"
   add_foreign_key "movies", "users"
   add_foreign_key "posts", "likes"
@@ -230,6 +258,8 @@ ActiveRecord::Schema.define(version: 2021_02_11_112235) do
   add_foreign_key "reviews", "users"
   add_foreign_key "soiree_stages", "soirees"
   add_foreign_key "soiree_stages", "stages"
+  add_foreign_key "stage_tags", "stages"
+  add_foreign_key "stage_tags", "tags"
   add_foreign_key "stages", "places"
   add_foreign_key "stages", "theaters"
   add_foreign_key "stages", "users"

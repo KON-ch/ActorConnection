@@ -25,6 +25,8 @@ class TheatersController < ApplicationController
     @reviews = theater_reviews.where.not(user: current_user)
     @new_review = @reviews.new
     @my_review = theater_reviews.find_by(user_id: current_user.id)
+    stages = @theater.stages
+    @review = Review.stages(stages)
   end
 
   def new

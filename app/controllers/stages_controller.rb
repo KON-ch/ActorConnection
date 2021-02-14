@@ -1,5 +1,5 @@
 class StagesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[index show]
   before_action :set_stage, only: %i[show edit update destroy favorite]
   before_action :set_theaters, only: %i[index new edit]
   before_action :set_places, only: %i[index new edit]
@@ -73,7 +73,8 @@ class StagesController < ApplicationController
 
   def stage_params
     params.require(:stage).permit(:start_date, :end_date, :company, :theater_id,
-                                  :place_id, :synopsis, :matinee, :soiree, :quote, :director, :image, { :soiree_ids => [] }).merge(user_id: current_user.id)
+                                  :place_id, :synopsis, :matinee, :soiree, :director,
+                                  :quote_url, { tag_ids: [] }, { soiree_ids: [] }).merge(user_id: current_user.id)
   end
 
   def set_stage

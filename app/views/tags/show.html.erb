@@ -1,0 +1,27 @@
+<div class="container" style="margin-top: 12vh;">
+  <h1 class="border rounded font-weight-bold d-inline-block p-3 ml-0"><%= @tag.name %></h1>
+  <h2 class="mt-3 ml-3"><i class="fas fa-theater-masks mr-2"></i>関連舞台</h2>
+  <hr>
+  <% @tag.stages.each do |stage| %>
+    <div class="row row-cols-1 row-cols-lg-2 mb-4 mx-1">
+      <div class="card h-100 shadow-sm">
+        <%= render partial: "stages/card", locals: { stage: stage, review: @stage_review[stage.id] } %>
+        <%= form_with model: stage.reviews.new, url: stage_reviews_path(stage) do |f| %>
+          <%= render partial: "reviews/modal", locals: {review: stage, review_title: stage.theater, f: f} %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <h2 class="ml-3" style="margin-top:8vh;"><i class="fas fa-film mr-2"></i>関連映画</h2>
+  <hr>
+  <% @tag.movies.each do |movie| %>
+    <div class="row row-cols-1 row-cols-lg-2 mb-4 mx-1">
+      <div class="card h-100 shadow-sm">
+        <%= render partial: "movies/card", locals: { movie: movie, review: @movie_review[movie.id] } %>
+        <%= form_with model: movie.reviews.new, url: movie_reviews_path(movie) do |f| %>
+          <%= render partial: "reviews/modal", locals: {review: movie, review_title: movie, f: f} %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

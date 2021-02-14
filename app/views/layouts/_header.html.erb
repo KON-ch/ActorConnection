@@ -8,37 +8,37 @@
 
       <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto justify-content-between">
+          <li class="align-self-center mr-4">
+            <%= link_to mypage_favorite_users_path, class:"text-light text-decoration-none" do %>
+              <i class="fas fa-bookmark fa-2x"></i>
+              <span class="d-none d-lg-inline">お気に入り</span>
+            <% end %>
+          </li>
+          <li class="align-self-center mr-4">
+            <%= link_to stages_path, class:"text-light text-decoration-none" do %>
+              <i class="fas fa-theater-masks fa-2x"></i>
+              <span class="d-none d-lg-inline">舞台</span>
+            <% end %>
+          </li>
+          <li class="align-self-center mr-4">
+            <%= link_to movies_path, class:"text-light text-decoration-none" do %>
+              <i class="fas fa-film fa-2x"></i>
+              <span class="d-none d-lg-inline">映画</span>
+            <% end %>
+          </li>
+          <li class="align-self-center mr-4">
+            <%= link_to theaters_path, class:"text-light text-decoration-none" do %>
+              <i class="fas fa-book-open fa-2x"></i>
+              <span class="d-none d-lg-inline">戯曲</span>
+            <% end %>
+          </li>
+          <li class="align-self-center mr-5">
+            <%= link_to mypage_review_users_path, class:"text-light text-decoration-none", data: { "turbolinks" => false } do %>
+              <i class="fas fa-check-circle fa-2x"></i>
+              <span class="d-none d-lg-inline">レビュー</span>
+            <% end %>
+          </li>
           <% if user_signed_in? %>
-            <li class="align-self-center mr-4">
-              <%= link_to theaters_path, class:"text-light text-decoration-none" do %>
-                <i class="fas fa-book-open fa-2x"></i>
-                <span class="d-none d-lg-inline">戯曲</span>
-              <% end %>
-            </li>
-            <li class="align-self-center mr-4">
-              <%= link_to stages_path, class:"text-light text-decoration-none" do %>
-                <i class="fas fa-theater-masks fa-2x"></i>
-                <span class="d-none d-lg-inline">舞台</span>
-              <% end %>
-            </li>
-            <li class="align-self-center mr-4">
-              <%= link_to movies_path, class:"text-light text-decoration-none" do %>
-                <i class="fas fa-film fa-2x"></i>
-                <span class="d-none d-lg-inline">映画</span>
-              <% end %>
-            </li>
-            <li class="align-self-center mr-4">
-              <%= link_to mypage_favorite_users_path, class:"text-light text-decoration-none" do %>
-                <i class="fas fa-star fa-2x"></i>
-                <span class="d-none d-lg-inline">お気に入り</span>
-              <% end %>
-            </li>
-            <li class="align-self-center mr-5">
-              <%= link_to mypage_review_users_path, class:"text-light text-decoration-none", data: { "turbolinks" => false } do %>
-                <i class="fas fa-check-circle fa-2x"></i>
-                <span class="d-none d-lg-inline">レビュー</span>
-              <% end %>
-            </li>
             <li class="nav-item dropdown">
               <%= link_to "#", id: "navbarDropdown", class: "nav-link dropdown-toggle text-light", role: "button", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" } do %>
                 <% if current_user.image.present? %>
