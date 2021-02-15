@@ -58,7 +58,8 @@ class Dashboard::MoviesController < ApplicationController
 
   def movie_params
     params.require(:movie).permit(:title, :country_id, :production, :supervision,
-                                  :sub_title).merge(user_id: current_admin.id)
+                                  :sub_title, :screen_time, :quote_url, :synopsis, 
+                                  :parent_id, :recommend, { tag_ids: [] }).merge(user_id: current_admin.id)
   end
 
   def set_movie

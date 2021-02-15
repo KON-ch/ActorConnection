@@ -59,7 +59,8 @@ class Dashboard::StagesController < ApplicationController
 
   def stage_params
     params.require(:stage).permit(:start_date, :end_date, :company, :theater_id,
-                                  :place_id).merge(user_id: current_admin.id)
+                                  :place_id, :synopsis, :matinee, :soiree, :director,
+                                  :quote_url, { tag_ids: [] }, { soiree_ids: [] }).merge(user_id: current_admin.id)
   end
 
   def set_stage
