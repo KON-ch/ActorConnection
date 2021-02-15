@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_12_120735) do
+ActiveRecord::Schema.define(version: 2021_02_15_050348) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -105,7 +105,10 @@ ActiveRecord::Schema.define(version: 2021_02_12_120735) do
     t.integer "screen_time"
     t.string "quote_url"
     t.string "synopsis"
+    t.integer "parent_id"
+    t.boolean "recommend", default: false, null: false
     t.index ["country_id"], name: "index_movies_on_country_id"
+    t.index ["parent_id"], name: "index_movies_on_parent_id"
     t.index ["title", "sub_title"], name: "index_movies_on_title_and_sub_title", unique: true
     t.index ["user_id"], name: "index_movies_on_user_id"
   end

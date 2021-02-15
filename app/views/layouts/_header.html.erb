@@ -1,13 +1,8 @@
 <header>
   <nav class="navbar navbar-expand navbar-light shadow-sm p-3 fixed-top" style="background-color: #4CA2FF;">
     <div class="container">
-      <a class="navbar-brand mr-md-5 text-light" href="/" style="font-family: 'Dancing Script'; font-size: 2.1rem;, cursive;" data-turbolinks="false"><i class="fas fa-users mr-2 fa-lg"></i>Actor Connection</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
       <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto justify-content-between">
+        <ul class="navbar-nav justify-content-between">
           <li class="align-self-center mr-4">
             <%= link_to posts_path, class:"text-light text-decoration-none", data: { "turbolinks" => false } do %>
               <i class="fas fa-stream fa-2x"></i>
@@ -65,7 +60,7 @@
               </div>
             </li>
           <% else %>
-            <li class="nav-item">
+            <li class="nav-item ml-auto">
               <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
             </li>
             <li class="nav-item">

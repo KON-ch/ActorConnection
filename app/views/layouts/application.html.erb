@@ -16,7 +16,9 @@
   </head>
 
   <body>
-    <%= render partial: "layouts/header" %>
+    <% if user_signed_in? %>
+      <%= render partial: "layouts/header" %>
+    <% end %>
     <% if flash[:notice] %>
       <div class="alert alert-info text-center position-absolute w-100" style="top:10vh; z-index: 10;" >
         <%= flash[:notice] %>

@@ -38,6 +38,10 @@
     <%= f.text_field :supervision, class:"form-control col-lg-6" %>
   </div>
   <div class="form-group row">
+    <%= f.label :parent_id, "前作", class:"col-form-label text-left col-lg-4 offset-lg-1 px-0" %>
+    <%= f.collection_select(:parent_id, Movie.all, :id, :title, class:"form-cobntrol col") %>
+  </div>
+  <div class="form-group row">
     <%= f.label :tag_ids, "関連タグ", class:"col-form-label text-left col-lg-4 offset-lg-1 px-0" %>
     <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name, class:"form-cobntrol col") %>
   </div>

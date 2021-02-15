@@ -1,4 +1,4 @@
-<div class="card-header pl-5 justify-content-between">
+<div class="card-header pl-4 justify-content-between">
   <%= stage.start_date.mon %>月<%= stage.start_date.day %>日(<%= %w(日 月 火 水 木 金 土)[stage.start_date.wday] %>)
   〜
   <% if stage.start_date.mon != stage.end_date.mon %>
@@ -7,7 +7,7 @@
   <%= stage.end_date.day %>日(<%= %w(日 月 火 水 木 金 土)[stage.end_date.wday] %>)
   <label class="float-right"><%= stage.place.name %></label>
 </div>
-<div class="card-body pl-5 pb-0 mb-4 mb-lg-5">
+<div class="card-body pl-4 pb-0 mb-4 mb-lg-5">
   <% if stage.start_date <= Date.today && stage.end_date >= Date.today %>
     <label class="badge badge-pill badge-warning text-light py-2 px-3 mt-3" style="background-color: #FF8300;">上演中</label>
   <% elsif stage.start_date - Date.today <= 14 && stage.start_date - Date.today > 0 %>

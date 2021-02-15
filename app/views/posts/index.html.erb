@@ -1,7 +1,7 @@
 <div class="container">
   <div id="posts" class="row px-3" style="margin-top:12vh; margin-bottom:8vh;">
     <% @posts.each do |post| %>
-      <div class="card shadow p-0 mb-3 w-100 posts">
+      <div class="card shadow p-0 mb-3 w-100 posts col-lg-8 offset-lg-2">
         <div class="d-flex">
           <%= link_to user_path(post.user) do %>
             <% if post.user.image.present? %>

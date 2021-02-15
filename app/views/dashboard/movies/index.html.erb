@@ -29,11 +29,10 @@
   <table class="table table-hover">
     <thead>
       <tr>
+        <th>認定</th>
         <th>題名</th>
         <th>副題</th>
         <th>製作国</th>
-        <th>製作年</th>
-        <th>監督</th>
         <th></th>
         <th></th>
       </tr>
@@ -41,11 +40,14 @@
     <tbody>
       <% @movies.each do |movie| %>
         <tr>
+          <td>
+            <%= form_with model: movie, local: true do |f| %>
+              <% f.check_box :recommend, onChange: "javascript: this.form.submit();" %>
+            <% end %>
+          </td>
           <td><%= movie.title %></td>
           <td><%= movie.sub_title %></td>
           <td><%= movie.country.name %></td>
-          <td><%= movie.production.year %></td>
-          <td><%= movie.supervision %></td>
           <td><%= link_to "編集", edit_dashboard_movie_path(movie), class:"btn btn-outline-secondary" %></td>
           <td><%= link_to "削除", dashboard_movie_path(movie), method: :delete, data: { confirm: '映画を削除しますが、よろしいですか？' }, class:"btn btn-outline-danger" %></td>
         </tr>

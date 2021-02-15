@@ -7,7 +7,7 @@
       <strong><%= review.theater.title %></strong>
     <% end %>
     にレビューしました
-    <p class="mt-2 border p-4"><%= review.content %></p>
+    <p class="mt-2 border p-4 mr-5"><%= review.content %></p>
   </div>
 <% elsif review.movie_id.present? %>
   <div class="mr-2">
@@ -18,7 +18,7 @@
       <strong><%= review.movie.title %></strong>
     <% end %>
     にレビューしました
-    <p class="mt-2 border p-4"><%= review.content %></p>
+    <p class="mt-2 border p-4 mr-5"><%= review.content %></p>
   </div>
 <% elsif review.stage_id.present? %>
   <div class="mr-2">
@@ -29,6 +29,6 @@
       <strong><%= review.stage.theater.title %></strong>
     <% end %>
     にレビューしました
-    <p class="mt-2 border p-4"><%= review.content %></p>
+    <p class="mt-2 border p-4 mr-5"><%= review.content %></p>
   </div>
 <% end %>

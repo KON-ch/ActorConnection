@@ -4,7 +4,7 @@
       <%= link_to movie_path(movie), class:"text-dark text-decoration-none" do %>
         <strong><%= movie.title %></strong>
       <% end %>
-      <%= link_to favorite_movie_path(movie), method: :post, remote: true, class:"text-decoration-none", style:"color: #FC8300;" do %>
+      <%= link_to favorite_movie_path(movie), method: :post, remote: true, class:"text-decoration-none", style:"color: #4CA2FF;" do %>
         <div class="favorite-movie-<%= movie.id %> ml-3">
           <%= render partial: "movies/favorite", locals: { movie: movie} %>
         </div>

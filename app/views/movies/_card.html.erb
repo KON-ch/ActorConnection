@@ -1,4 +1,4 @@
-<div class="card-header pl-5">
+<div class="card-header pl-4">
   <% if movie.production.present? %>
     <%= movie.production.year %>年 / 
   <% end %>
@@ -6,8 +6,11 @@
     <%= movie.screen_time %>分 / 
   <% end %>
   <%= movie.country.name %>
+  <% if movie.recommend %>
+    <i class="fas fa-certificate ml-2" style="color:#FC8300;"></i>
+  <% end %>
 </div>
-<div class="card-body pl-5">
+<div class="card-body pl-4">
   <%= link_to movie_path(movie), class:"text-dark text-decoration-none", data: { "turbolinks" => false } do %>
     <h2 class="mt-3 card-title"><strong><%= movie.title %></strong></h2>
     <p class="card-text"><strong><%= movie.sub_title %></strong></p>
@@ -17,7 +20,7 @@
     <%= link_to tag.name, tag_path(tag), class:"border rounded py-2 px-3 mr-3 d-inline-block my-3 text-secondary text-decoration-none" %>
   <% end %>
 </div>
-<div class="card-footer d-flex pl-5">
+<div class="card-footer d-flex pl-4">
   <%= link_to favorite_movie_path(movie), method: :post, remote: true, style:"color: #4CA2FF;" do %>
     <div class="favorite-movie-<%= movie.id %>">
       <%= render partial: "movies/favorite", locals: {movie: movie} %>

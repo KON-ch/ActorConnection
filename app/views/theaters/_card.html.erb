@@ -1,7 +1,7 @@
-<div class="card-header pl-5">
+<div class="card-header pl-4">
   <%= theater.country.name %>
 </div>
-<div class="card-body pl-5">
+<div class="card-body pl-4">
   <%= link_to theater_path(theater), data: { "turbolinks" => false } do %>
     <h2 class="card-title text-dark mt-3"><strong><%= theater.title %></strong></h2>
   <% end %>
@@ -16,7 +16,7 @@
     女 : <%= theater.female%>人
   <% end %>
 </div>
-<div class="card-footer d-flex pl-5">
+<div class="card-footer d-flex pl-4">
   <%= link_to favorite_theater_path(theater), method: :post, remote: true, style:"color: #4CA2FF;" do %>
     <div class="favorite-theater-<%= theater.id %>">
       <%= render partial: "theaters/favorite", locals: {theater: theater} %>

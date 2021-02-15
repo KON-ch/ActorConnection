@@ -27,6 +27,7 @@ class MoviesController < ApplicationController
     @my_review = movie_reviews.find_by(user_id: current_user.id)
     @stages = Stage.limit(3)
     @review = Review.stages(@stages)
+    @next = Movie.find_by(parent_id: @movie.id)
   end
 
   def new
@@ -70,7 +71,7 @@ class MoviesController < ApplicationController
   def movie_params
     params.require(:movie).permit(:title, :country_id, :production, :supervision,
                                   :sub_title, :screen_time, :quote_url, :synopsis, 
-                                  { tag_ids: [] }).merge(user_id: current_user.id)
+                                  :parent_id, :recommend, { tag_ids: [] }).merge(user_id: current_user.id)
   end
 
   def set_movie

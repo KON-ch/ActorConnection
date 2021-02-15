@@ -21,6 +21,9 @@
         <%= @movie.production.year %>年製作 / 
       <% end %>
       <%= @movie.screen_time %>分 / <%= @movie.country.name %>
+      <% if @movie.recommend %>
+        <i class="fas fa-certificate ml-2" style="color:#FC8300;"></i>
+      <% end %>
     </label>
   </div>
   <% @movie.tags.each do |tag| %>
@@ -77,7 +80,7 @@
       <%= render "reviews/index" %>
     </div>
   </div>
-  <div class="mt-5">
+  <div class="my-5">
     <label class="d-lg-none mb-4">
       <% if @movie.production.present? %>
         <%= @movie.production.year %>年製作 / 
@@ -98,20 +101,37 @@
       </blockquote>
     </div>
   <% end %>
-
+  <div class="row row-cols-1 row-cols-lg-2 h-100">
+    <% if @movie.parent.present? %>
+      <div class="col mb-4">
+        <h2><i class="far fa-caret-square-left mr-2" style="color:#FC8300;"></i>前作</h2>
+        <hr>
+        <div class="card w-100 shadow-sm">
+          <%= render partial: "movies/card", locals: {movie: @movie.parent, review: @review[@movie.parent_id] } %>
+        </div>
+      </div>
+    <% end %>
+    <% if @next.present? %>
+      <div class="col mb-4">
+        <h2><i class="far fa-caret-square-right mr-2" style="color:#FC8300;"></i>続編</h2>
+        <hr>
+        <div class="card w-100 shadow-sm">
+          <%= render partial: "movies/card", locals: {movie: @next, review: @review[@next.parent_id] } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
   <h1 class="mt-5 text-light py-3 pl-5" style="background-color: #4CA2FF;"><i class="fas fa-theater-masks mr-3"></i>おすすめ舞台</h1>
   <% @movie.tags.each do |tag| %>
     <h2 class="mt-5" style="color: #FC8300;"><%= tag.name %></h2>
     <hr>
     <div class="row row-cols-1 row-cols-lg-2">
-      <% if tag.stages.present? %>
-        <% tag.stages.limit(3).each do |stage| %>
-          <div class="col mb-4">
-            <div class="card h-100 shadow-sm">
-              <%= render partial: "stages/card", locals: { stage: stage, review: @review[stage.id] } %>
-            </div>
+      <% tag.stages.limit(3).each do |stage| %>
+        <div class="col mb-4">
+          <div class="card h-100 shadow-sm">
+            <%= render partial: "stages/card", locals: { stage: stage, review: @review[stage.id] } %>
           </div>
-        <% end %>
+        </div>
       <% end %>
     </div>
   <% end %>

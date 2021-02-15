@@ -1,5 +1,5 @@
 <div class="card-footer">
-  <%= link_to favorite_review_path(review), method: :post, remote: true, style:"color: #FF8300;" do %>
+  <%= link_to favorite_review_path(review), method: :post, remote: true, class:"text-decoration-none", style:"color: #4CA2FF;" do %>
     <div id="favorite-review-<%= review.id %>" class="ml-4">
       <%= render partial: "reviews/favorite", locals: {review: review} %>
     </div>
