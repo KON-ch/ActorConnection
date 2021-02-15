@@ -8,7 +8,7 @@ class Stage < ApplicationRecord
   has_many :stage_tags, dependent: :destroy
   has_many :tags, through: :stage_tags
   accepts_nested_attributes_for :stage_tags
-  belongs_to :place
+  belongs_to :place, optional: true
   belongs_to :user
 
   acts_as_likeable

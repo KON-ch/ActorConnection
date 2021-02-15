@@ -20,10 +20,7 @@
     <% end %>
   </div>
   <div class="form-group row">
-    <div class="col-lg-4 offset-lg-1 pl-0">
-      <%= f.label :country_id, "国籍", class:"col-form-label text-left px-0" %>
-      <span class="text-danger ml-3">( 必須 )</span>
-    </div>
+    <%= f.label :country_id, "国籍", class:"col-form-label text-left px-0 col-lg-4 offset-lg-1 pl-0" %>
     <%= f.collection_select(:country_id, @countries, :id, :name, {prompt:""}, {class:"form-control col-lg-6"}) %>
     <% if @theater.errors.messages[:country_id].present? %>
       <strong class="error-text text-left offset-lg-1"><%= @theater.errors.full_messages_for(:country_id).first %></strong>

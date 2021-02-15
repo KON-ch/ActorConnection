@@ -2,12 +2,12 @@ class Theater < ApplicationRecord
   has_many :stages, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :posts, dependent: :destroy
-  belongs_to :country
+  belongs_to :country, optional: true
   belongs_to :user
 
   acts_as_likeable
 
-  validates :title, :writer, :country_id, presence: true
+  validates :title, :writer, presence: true
   validates :title, presence: true, uniqueness: { scope: :writer, message: 'この作品は既に作成されています' }
   validates :man, numericality: { only_integer: true }, allow_nil: true
   validates :female, numericality: { only_integer: true }, allow_nil: true

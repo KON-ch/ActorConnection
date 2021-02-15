@@ -2,7 +2,7 @@ class Dashboard::SoireesController < ApplicationController
   layout 'dashboard/dashboard'
 
   def index
-    @soirees = Soiree.all.order(performance_date: :desc)
+    @soirees = Soiree.all.order(performance_date: :asc)
     @soiree_new = Soiree.new
   end
 
