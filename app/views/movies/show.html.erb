@@ -1,14 +1,16 @@
 <div class="container" style="margin-top:12vh;">
-  <div class="align-items-end d-flex justify-content-between border py-3 pl-3">
+  <div class="align-items-end d-flex justify-content-between border p-4">
     <div class="d-flex align-items-start">
-      <% if @movie.title.length < 8 %>
-        <h1 class="font-weight-bold"><%= @movie.title %></h1>
-        <h2 class="d-inline"><%= @movie.sub_title %></h2>
-      <% else %>
-        <h2 class="font-weight-bold mt-2"><%= @movie.title %></h2>
-        <p class="d-inline"><%= @movie.sub_title %></p>
-      <% end %>
-      <%= link_to favorite_movie_path(@movie), method: :post, remote: true, class:"ml-5 mt-2 text-decoration-none", style:"color: #FF8300;" do %>
+      <div class="mr-4">
+        <% if @movie.title.length < 8 %>
+          <h1 class="font-weight-bold"><%= @movie.title %></h1>
+          <h2><%= @movie.sub_title %></h2>
+        <% else %>
+          <h2 class="font-weight-bold"><%= @movie.title %></h2>
+          <p class="m-0"><strong><%= @movie.sub_title %><strong></p>
+        <% end %>
+      </div>
+      <%= link_to favorite_movie_path(@movie), method: :post, remote: true, class:"text-decoration-none", style:"color: #FF8300;" do %>
         <h2 class="favorite-movie-<%= @movie.id %> mb-0">
           <%= render partial: "movies/favorite", locals: {movie: @movie} %>
         </h2>

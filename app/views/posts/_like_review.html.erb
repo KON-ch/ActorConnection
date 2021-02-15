@@ -3,14 +3,29 @@
     <i class="fas fa-book-open"></i>
     <strong><%= review.theater.title %></strong>
   <% end %>
+  <%= link_to favorite_theater_path(review.theater), method: :post, remote: true,class:"text-decoration-none", style:"color: #4CA2FF;" do %>
+    <div class="favorite-theater-<%= review.theater.id %> d-inline ml-3">
+      <%= render partial: "theaters/favorite", locals: {theater: review.theater} %>
+    </div>
+  <% end %>
 <% elsif review.movie_id.present? %>
   <%= link_to movie_path(review.movie), class:"text-secondary" do %>
     <i class="fas fa-film"></i>
     <strong><%= review.movie.title %></strong>
   <% end %>
+  <%= link_to favorite_movie_path(review.movie), method: :post, remote: true,class:"text-decoration-none", style:"color: #4CA2FF;" do %>
+    <div class="favorite-movie-<%= review.movie.id %> d-inline ml-3">
+      <%= render partial: "movies/favorite", locals: {movie: review.movie} %>
+    </div>
+  <% end %>
 <% elsif review.stage_id.present? %>
   <%= link_to stage_path(review.stage), class:"text-secondary" do %>
     <i class="fas fa-theater-masks"></i>
     <strong><%= review.stage.theater.title %></strong>
+  <% end %>
+  <%= link_to favorite_stage_path(review.stage), method: :post, remote: true, class:"text-decoration-none", style:"color: #4CA2FF;" do %>
+    <div class="favorite-stage-<%= review.stage.id %> d-inline ml-3">
+      <%= render partial: "stages/favorite", locals: {stage: review.stage} %>
+    </div>
   <% end %>
 <% end %>

@@ -1,0 +1,17 @@
+<div class="card mt-4">
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <%= link_to movie_path(movie), class:"text-dark text-decoration-none" do %>
+        <strong><%= movie.title %></strong>
+      <% end %>
+      <%= link_to favorite_movie_path(movie), method: :post, remote: true, class:"text-decoration-none", style:"color: #FC8300;" do %>
+        <div class="favorite-movie-<%= movie.id %> ml-3">
+          <%= render partial: "movies/favorite", locals: { movie: movie} %>
+        </div>
+      <% end %>
+    </div>
+    <% if movie.sub_title.present? %>
+      <p class="text-secondary mb-0"><%= movie.sub_title %></p>
+    <% end %>
+  </div>
+</div>

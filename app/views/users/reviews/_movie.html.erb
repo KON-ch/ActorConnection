@@ -1,4 +1,4 @@
-<div class="col-lg-6 mt-3">
+<div class="col-sm-6 mt-3">
   <div class="card shadow-sm mt-3">
     <div class="card-header">
       <i class="fas fa-film fa-2x mx-2 mt-2"></i>
@@ -12,7 +12,7 @@
             <%= review.updated_at.mon %> 月
             <%= review.updated_at.day %> 日
           </div>
-          <div class="card-body d-flex justify-content-between">
+          <div class="card-body">
             <div class="mt-2 ml-2">
               <%= form_with model: review, url: review_path(review), local: true, method: :put do |f| %>
                 <div class="collapse show userReview<%= review.id %> mr-2">
@@ -26,11 +26,7 @@
                   <%= f.submit "更新", class:"btn btn-primary mt-3 float-right" %>
                 </div>
               <% end %>
-            </div>
-            <div>
-              <div class="card shadow-sm" style="width: 18rem;">
-                <%= render partial: "movies/card", locals: {movie: review.movie, review: review} %>
-              </div>
+              <%= render partial: "movies/review_card", locals: { movie: review.movie, review: review } %>
             </div>
           </div>
           <div class="card-footer text-right">
@@ -59,7 +55,7 @@
             <%= review.updated_at.mon %> 月
             <%= review.updated_at.day %> 日
           </div>
-          <div class="card-body d-flex justify-content-between">
+          <div class="card-body">
             <div>
               <%= link_to user_path(review.user), class:"text-decoration-none mt-2 ml-2" do %>
                 <% if review.user.image.present? %>
@@ -71,9 +67,7 @@
               <% end %>
               <p class="ml-3 mt-3 mr-2"><%= review.content %></p>
             </div>
-            <div class="card shadow-sm" style="width: 18rem;">
-              <%= render partial: "movies/card", locals: {movie: review.movie, review: review} %>
-            </div>
+            <%= render partial: "movies/review_card", locals: { movie: review.movie, review: review } %>
           </div>
           <%= render partial: "reviews/like", locals: {review: review} %>
         </div>

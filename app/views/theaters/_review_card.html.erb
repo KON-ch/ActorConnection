@@ -1,0 +1,15 @@
+<div class="card mt-4">
+  <div class="card-body">
+    <div class="d-flex justify-content-between mr-2">
+    <%= link_to theater_path(theater), class:"text-dark text-decoration-none" do %>
+      <strong><%= theater.title %></strong>
+    <% end %>
+      <%= link_to favorite_theater_path(theater), method: :post, remote: true, class:"text-decoration-none", style:"color: #FC8300;" do %>
+        <div class="favorite-theater-<%= theater.id %> ml-3">
+          <%= render partial: "theaters/favorite", locals: {theater: theater} %>
+        </div>
+      <% end %>
+    </div>
+    <p class="text-secondary mb-0 mt-2"><%= theater.writer %></p>
+  </div>
+</div>

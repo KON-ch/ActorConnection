@@ -6,7 +6,7 @@
       <i class="fas fa-book-open fa-2x mr-3"></i>
       <p class="d-inline">
         <strong><%= post.theater.title %></strong>
-        をお気に入りに登録しました
+        をお気に入りしました
       </p>
     <% end %>
   </div>
@@ -18,7 +18,7 @@
       <i class="fas fa-film fa-2x mr-3"></i>
       <p class="d-inline">
         <strong><%= post.movie.title %></strong>
-        をお気に入りに登録しました
+        をお気に入りしました
       </p>
     <% end %>
   </div>
@@ -30,12 +30,12 @@
       <i class="fas fa-theater-masks fa-2x mr-2"></i>
       <p class="d-inline">
         <strong><%= post.stage.theater.title %></strong>
-        をお気に入りに登録しました
+        をお気に入りしました
       </p>
     <% end %>
   </div>
 <% elsif post.review_id.present? %>
-  <div>
+  <div class="pr-5">
     <p class="mt-3 mb-4"><%= post.user.name %></p>
     <i class="fas fa-heart mr-2 fa-2x" style="color: #FF8300;"></i>
     <div class="d-inline">
@@ -43,9 +43,9 @@
         <strong class="text-dark"><%= post.review.user.name %></strong>
       <% end %>
         のレビューにいいねしました
-      <div class="card my-3 shadow-sm mx-4" style="width: 30rem;">
+      <div class="card w-100 shadow-sm mt-3">
         <div class="card-body">
-          <div class="d-flex">
+          <div class="d-flex pl-3">
             <i class="far fa-check-circle fa-lg mr-2 mt-2"></i>
             <p class="mt-2"><%= post.review.content %></p>
           </div>

@@ -7,15 +7,7 @@
   <ul class="nav nav-tabs">
     <li class="nav-item">
       <%= link_to "#", remote: true do %>
-        <div id="nav-theater" class="nav-link active text-secondary" href="#">
-          <i class="fas fa-book-open"></i>
-          戯曲
-        </div>
-      <% end %>
-    </li>
-    <li class="nav-item">
-      <%= link_to "#", remote: true do %>
-        <div id="nav-stage" class="nav-link text-secondary" href="#">
+        <div id="nav-stage" class="nav-link active text-secondary" href="#">
           <i class="fas fa-theater-masks"></i>
           舞台
         </div>
@@ -29,9 +21,17 @@
       </div>
       <% end %>
     </li>
+    <li class="nav-item">
+      <%= link_to "#", remote: true do %>
+        <div id="nav-theater" class="nav-link text-secondary" href="#">
+          <i class="fas fa-book-open"></i>
+          戯曲
+        </div>
+      <% end %>
+    </li>
   </ul>
   <div class="row" id="reviews-content">
-    <%= render "users/reviews/theater" %>
+    <%= render "users/reviews/stage" %>
   </div>
 </div>
 
