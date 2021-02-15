@@ -1,0 +1,19 @@
+<div>
+  <%= form_with model: @tag_new, url: dashboard_tags_path, method: :post, loacl: true do |f| %>
+    <%= f.text_field :name %>
+    <%= f.submit "登録" %>
+  <% end %>
+</div>
+
+<table class="table table-hover mt-5">
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td>
+          <%= tag.name %>
+        </td>
+        <td><%= link_to "削除", dashboard_tag_path(tag), method: :delete, data: { confirm: '本当に削除しますか？' }, class:"btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

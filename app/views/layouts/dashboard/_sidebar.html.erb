@@ -1,13 +1,5 @@
 <div class="ml-3 mt-4" style="font-size: 1rem;">
 
-  <h2 class="text-secondary" style="font-size: 1.5rem;">戯曲情報管理</h2>
-  <div class="d-flex flex-column mb-3">
-    <ul class="pl-4">
-      <li><%= link_to "戯曲一覧", dashboard_theaters_path,  class:"text-dark" %></li>
-      <li><%= link_to "戯曲情報登録", new_dashboard_theater_path,  class:"text-dark" %></li>
-    </ul>
-  </div>
-
   <h2 class="text-secondary" style="font-size: 1.5rem;">公演情報管理</h2>
   <div class="d-flex flex-column mb-3">
     <ul class="pl-4">
@@ -15,12 +7,6 @@
       <li><%= link_to "公演情報登録", new_dashboard_stage_path, class:"text-dark" %></li>
       <li><%= link_to "夜公演日登録", dashboard_soirees_path, class:"text-dark" %></li>
     </ul>
-  </div>
-
-  <h2 style="font-size: 1.5rem;">AD & WS 管理</h2>
-  <div class="d-flex flex-column mb-3">
-    <label class="">劇場一覧</label>
-    <label class="">劇場情報登録</label>
   </div>
 
   <h2 style="font-size: 1.5rem;">映画情報管理</h2>
@@ -31,10 +17,19 @@
     </ul>
   </div>
 
+  <h2 class="text-secondary" style="font-size: 1.5rem;">戯曲情報管理</h2>
+  <div class="d-flex flex-column mb-3">
+    <ul class="pl-4">
+      <li><%= link_to "戯曲一覧", dashboard_theaters_path,  class:"text-dark" %></li>
+      <li><%= link_to "戯曲情報登録", new_dashboard_theater_path,  class:"text-dark" %></li>
+    </ul>
+  </div>
+
   <h2 style="font-size: 1.5rem;">その他</h2>
   <div class="d-flex flex-column mb-3">
     <ul class="pl-4">
       <li>新着情報管理</li>
+      <li><%= link_to "タグ管理", dashboard_tags_path, class:"text-dark" %></li>
       <li><%= link_to "ユーザー管理", dashboard_users_path, class:"text-dark" %></li>
       <li><%= link_to "劇場情報管理", dashboard_places_path, class:"text-dark", data: { "turbolinks" => false } %></li>
       <li><%= link_to "国名管理", dashboard_countries_path, class:"text-dark" %></li>

@@ -1,10 +1,19 @@
-<div style="margin-top: 11vh;">
+<div>
   <%= form_with model: @soiree_new, url: dashboard_soirees_path, method: :post, loacl: true do |f| %>
     <%= f.date_select :performance_date %>
     <%= f.submit "登録" %>
   <% end %>
 </div>
 
-<% @soirees.each do |soiree| %>
-  <%= soiree.inspect %>
-<% end %>
+<table class="table table-hover mt-5">
+  <tbody>
+    <% @soirees.each do |soiree| %>
+      <tr>
+        <td>
+          <%= soiree.performance_date %>
+        </td>
+        <td><%= link_to "削除", dashboard_soiree_path(soiree), method: :delete, data: { confirm: '本当に削除しますか？' }, class:"btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
