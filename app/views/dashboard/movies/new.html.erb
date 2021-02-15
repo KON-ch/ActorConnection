@@ -3,26 +3,7 @@
     <h2 class="mt-5 mb-lg-3 offset-lg-2">映画情報登録</h2>
   </div>
   <%= form_with model: @movie, url: dashboard_movies_path, local: true do |f| %>
-    <div class="form-group row">
-      <%= f.label :title, "タイトル", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
-      <%= f.text_field :title, class:"form-control col-lg-5" %>
-    </div>
-    <div class="form-group row">
-      <%= f.label :sub_title, "サブタイトル", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
-      <%= f.text_field :sub_title, class:"form-control col-lg-5" %>
-    </div>
-    <div class="form-group row">
-      <%= f.label :country, "製作国", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
-      <%= f.collection_select(:country_id, @countries, :id, :name) %>
-    </div>
-    <div class="form-group row">
-      <%= f.label :production, "製作年", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
-      <%= f.date_select :production, {discard_month: true, start_year: 1900}, class:"form-control col-lg-5" %>
-    </div>
-    <div class="form-group row">
-      <%= f.label :supervision, "監督", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
-      <%= f.text_field :supervision, class:"form-control col-lg-5" %>
-    </div>
+    <%= render partial: "dashboard/movies/form", locals: {f: f}%>
     <div class="form-group text-right row">
       <%= f.submit "登録", class:"btn btn-primary mt-3 col-lg-3 offset-lg-7" %>
     </div>

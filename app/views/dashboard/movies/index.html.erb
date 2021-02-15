@@ -40,9 +40,9 @@
     <tbody>
       <% @movies.each do |movie| %>
         <tr>
-          <td>
-            <%= form_with model: movie, local: true do |f| %>
-              <% f.check_box :recommend, onChange: "javascript: this.form.submit();" %>
+          <td class="text-center">
+            <% if movie.recommend %>
+              <i class="fas fa-certificate" style="color: #FC8300;"></i>
             <% end %>
           </td>
           <td><%= movie.title %></td>

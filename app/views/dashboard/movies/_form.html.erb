@@ -1,0 +1,44 @@
+<div class="form-group row">
+  <%= f.label :title, "タイトル", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+  <%= f.text_field :title, class:"form-control col-lg-5" %>
+</div>
+<div class="form-group row">
+  <%= f.label :sub_title, "サブタイトル", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+  <%= f.text_field :sub_title, class:"form-control col-lg-5" %>
+</div>
+<div class="form-group row">
+  <%= f.label :country, "製作国", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+  <%= f.collection_select(:country_id, @countries, :id, :name, {prompt:""}, {class:"form-control col-lg-5"}) %>
+</div>
+<div class="form-group row">
+  <%= f.label :production, "製作年", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+  <%= f.date_select :production, {discard_month: true, start_year: 1930}, class:"form-control col-lg-5" %>
+</div>
+<div class="form-group row">
+  <%= f.label :screen_time, "上映時間", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+  <%= f.number_field :screen_time, min: 1, class:"form-control col-lg-5" %>
+</div>
+<div class="form-group row">
+  <%= f.label :supervision, "監督", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+  <%= f.text_field :supervision, class:"form-control col-lg-5" %>
+</div>
+<div class="form-group row">
+  <%= f.label :synopsis, "あらすじ", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+  <%= f.text_field :synopsis, class:"form-control col-lg-5" %>
+</div>
+<div class="form-group row">
+  <%= f.label :quote_url, "引用元URL", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+  <%= f.text_field :quote_url, class:"form-control col-lg-5" %>
+</div>
+<div class="form-group row">
+  <%= f.label :parent_id, "前作", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+  <%= f.collection_select(:parent_id, Movie.all, :id, :title, {prompt:""}, {class:"form-control col-lg-5"}) %>
+</div>
+<div class="form-group row">
+  <%= f.label :tag_ids, "関連タグ", class:"col-form-label text-left col-lg-3 offset-lg-2 px-0" %>
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name, class:"form-control col-lg-5") %>
+</div>
+<div class="form-group row">
+  <%= f.label :recommend, "認定", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
+  <%= f.check_box :recommend, class:"form-control col-lg-5" %>
+</div>

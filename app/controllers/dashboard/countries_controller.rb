@@ -9,11 +9,14 @@ class Dashboard::CountriesController < ApplicationController
 
   def create
     country = Country.new(country_params)
-    if country.save
-      redirect_to dashboard_countries_path, notice: '国名を登録しました'
-    else
-      render :new
-    end
+    country.save
+    redirect_to dashboard_countries_path
+  end
+
+  def destroy
+    country = Country.find(params[:ie])
+    country.destroy
+    redirect_to dashboard_countries_path
   end
 
   private

@@ -1,5 +1,6 @@
 <div>
   <%= form_with model: @tag_new, url: dashboard_tags_path, method: :post, loacl: true do |f| %>
+    <%= f.label :name, "タグ名" %>
     <%= f.text_field :name %>
     <%= f.submit "登録" %>
   <% end %>
@@ -9,9 +10,8 @@
   <tbody>
     <% @tags.each do |tag| %>
       <tr>
-        <td>
-          <%= tag.name %>
-        </td>
+        <td><%= tag.id %></td>
+        <td><%= tag.name %></td>
         <td><%= link_to "削除", dashboard_tag_path(tag), method: :delete, data: { confirm: '本当に削除しますか？' }, class:"btn btn-danger" %></td>
       </tr>
     <% end %>
