@@ -91,29 +91,31 @@
         <% end %>
         <%= @stage.end_date.day %>日<span style="font-size: 2.1rem;">(<%= %w(日 月 火 水 木 金 土)[@stage.end_date.wday] %>)</span>
       </h2>
-      <table class="table mt-5">
-        <thead>
-          <tr>
-            <th></th>
-            <th class="text-center"><%= @stage.matinee.strftime('%H:%M') %></th>
-            <th class="text-center"><%= @stage.soiree.strftime('%H:%M') %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% (@stage.start_date..@stage.end_date).each do |date| %>
+      <% if @stage.matinee.present? %>
+        <table class="table mt-5">
+          <thead>
             <tr>
-              <th scope="row" class="text-center"><%= date.mon %>月<%= date.day %>日(<%= %w(日 月 火 水 木 金 土)[date.wday] %>)</th>
-                <% if @stage.soirees.pluck(:performance_date).include?(date) %>
-                  <td></td>
-                  <td class="text-center">○</td>
-                <% else %>
-                  <td class="text-center">○</td>
-                  <td></td>
-                <% end %>
+              <th></th>
+              <th class="text-center"><%= @stage.matinee.strftime('%H:%M') %></th>
+              <th class="text-center"><%= @stage.soiree.strftime('%H:%M') %></th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% (@stage.start_date..@stage.end_date).each do |date| %>
+              <tr>
+                <th scope="row" class="text-center"><%= date.mon %>月<%= date.day %>日(<%= %w(日 月 火 水 木 金 土)[date.wday] %>)</th>
+                  <% if @stage.soirees.pluck(:performance_date).include?(date) %>
+                    <td></td>
+                    <td class="text-center">○</td>
+                  <% else %>
+                    <td class="text-center">○</td>
+                    <td></td>
+                  <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
     </div>
     <div class="col-sm-6 offset-sm-1 mt-5">
       <label>劇場 :</label>

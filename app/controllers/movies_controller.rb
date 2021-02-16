@@ -18,6 +18,10 @@ class MoviesController < ApplicationController
     @sort_list = Movie.sort_list
     @movie = Movie.new
     @review = current_user.reviews.movies(@movies)
+    like_movies = current_user.likees(Movie)
+    like_tags = like_movies.map(&:tag_ids).flatten!
+    @tag = Tag.find(like_tags.max_by{ |v| like_tags.count(v) })
+    @recommend_movie = @tag.movies.where.not(id: like_movies.pluck(:id))
   end
 
   def show
