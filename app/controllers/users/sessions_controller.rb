@@ -15,7 +15,7 @@ class Users::SessionsController < Devise::SessionsController
       super
       return
     end
-    redirect_to web_path
+    redirect_to webs_path
   end
 
   # DELETE /resource/sign_out
