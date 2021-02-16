@@ -7,7 +7,7 @@
       <% if @like_tags.present? %>
         <h2 class="mt-5"><%= current_user.name %>さんへのおすすめ<i class="fas fa-film ml-2"></i></h2>
         <hr>
-        <div class="row row-cols-1 row-cols-lg-2">
+        <div class="row row-cols-1 row-cols-lg-2 mt-3">
           <% @recommend_movie.limit(4).each do |movie| %>
             <div class="col mb-4">
               <div class="card h-100 shadow-sm">
