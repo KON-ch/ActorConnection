@@ -4,18 +4,19 @@
       <%= render partial: "movies/sidebar" %>
     </div>
     <div class="col-lg-10">
-      <h2 class="mt-5"><%= current_user.name %>さんへのおすすめ<i class="fas fa-film ml-2"></i></h2>
-      <hr>
-      <label class="border p-2 d-inline-block"><%= @tag.name %></label><br>
-      <div class="row row-cols-1 row-cols-lg-2">
-        <% @recommend_movie.limit(4).each do |movie| %>
-          <div class="col mb-4">
-            <div class="card h-100 shadow-sm">
-              <%= render partial: "movies/card", locals: {movie: movie, review: @review[movie.id]} %>
+      <% if @like_tags.present? %>
+        <h2 class="mt-5"><%= current_user.name %>さんへのおすすめ<i class="fas fa-film ml-2"></i></h2>
+        <hr>
+        <div class="row row-cols-1 row-cols-lg-2">
+          <% @recommend_movie.limit(4).each do |movie| %>
+            <div class="col mb-4">
+              <div class="card h-100 shadow-sm">
+                <%= render partial: "movies/card", locals: {movie: movie, review: @review[movie.id]} %>
+              </div>
             </div>
-          </div>
-        <% end %>
-      </div>
+          <% end %>
+        </div>
+      <% end %>
 
       <h2 class="mt-5 mb-3 text-dark p-3 d-inline-block rounded border border-dark">
         <i class="fas fa-film"></i>
