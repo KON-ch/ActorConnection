@@ -22,7 +22,7 @@ class MoviesController < ApplicationController
     @like_tags = like_movies.map(&:tag_ids).flatten!
     return if @like_tags.nil?
     tag = Tag.find(@like_tags.max_by{ |v| @like_tags.count(v) })
-    @recommend_movie = tag.movies.where.not(id: like_movies.pluck(:id))
+    @recommend_movie = tag.movies.where.not(id: like_movies.pluck(:id).order(likers_count: :asc))
   end
 
   def show

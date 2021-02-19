@@ -9,7 +9,6 @@
 - Ruby 3.0.0
 - Ruby on Rails 6.0.3.4
 - Bootstrap 4.5.3
-- Vue.js 2.6.12
 - Google Maps API
 
 ## 機能一覧
