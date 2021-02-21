@@ -1,5 +1,5 @@
 class StagesController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!
   before_action :set_stage, only: %i[show edit update destroy favorite]
   before_action :set_theaters, only: %i[index new edit]
   before_action :set_places, only: %i[index new edit]

@@ -23,8 +23,14 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def guest
+    user = User.new_guest
+    sign_in user
+    redirect_to root_path, notice: "ゲストユーザーとしてログインしました"
+  end
+
   def after_sign_in_path_for(_user)
-    posts_path
+    root_path
   end
 
   def after_sign_out_path_for(_user)

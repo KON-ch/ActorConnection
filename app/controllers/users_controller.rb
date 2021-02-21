@@ -8,6 +8,11 @@ class UsersController < ApplicationController
   end
 
   def update
+    if check_guest
+      redirect_to mypage_users_path
+      flash[:alert] = 'ゲストユーザーは変更できません'
+      return
+    end
     @user.update_without_password(user_params)
     redirect_to mypage_users_path
   end
@@ -15,6 +20,11 @@ class UsersController < ApplicationController
   def mypage; end
 
   def update_password
+    if check_guest
+      redirect_to mypage_users_path
+      flash[:alert] = 'ゲストユーザーは変更できません'
+      return
+    end
     if password_set?
       if @user.update_password(user_params)
         flash[:notice] = 'パスワードは正しく更新されました'
@@ -69,5 +79,9 @@ class UsersController < ApplicationController
 
   def password_set?
     user_params[:password].present? && user_params[:password_confirmation].present? ? true : false
+  end
+
+  def check_guest
+    @user.email == "guest@example.com"
   end
 end

@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     get 'signup', to: 'users/registrations#new'
     get 'login', to: 'users/sessions#new'
     get 'logout', to: 'users/sessions#destroy'
+    get 'guest_login', to: 'users/sessions#guest'
   end
 
   resources :users, only: %i[show edit update] do
