@@ -25,6 +25,7 @@ test:
 
 production:
   <<: *default
-  host: <%= ENV.fetch("DB_HOST") %>
-  username: <%= ENV.fetch("DB_USERNAME") %>
-  password: <%= ENV.fetch("DB_PASSWORD") %>
+  database: actorconnection_production
+  host: <%= ENV.fetch("DB_HOST", 'localhost') %>
+  username: <%= ENV.fetch("DB_USERNAME", 'uroot') %>
+  password: <%= ENV.fetch("DB_PASSWORD", '') %>
