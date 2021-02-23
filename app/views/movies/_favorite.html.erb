@@ -1,4 +1,4 @@
-<% if current_user.likes?(movie) %>
+<% if current_user&.likes?(movie) %>
   <i class="fas fa-bookmark"></i>
 <% else %>
   <i class="far fa-bookmark"></i>

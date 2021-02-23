@@ -1,39 +1,42 @@
 <div class="container">
-  <h2 class="p-3 text-light rounded" style="background-color:#4CA2FF;">
-    <i class="fas fa-info-circle fa-lg ml-2"></i>
-    俳優のための情報共有アプリ
-  </h2>
-  <h1 id="app_title">Actor Connection</h1>
-  
-  <div class="row">
-    <div class="col-7">
-      <%= image_tag "/images/Top-img.jpg", class:"w-100" %>
+  <div class="text-center">
+    <% if !user_signed_in? %>
+      <h1 style="font-family: 'Russo One', cursive;"><span style="color: #FF8300;">Theater</span><i class="fas fa-exchange-alt mx-4"></i><span class="text-primary">Theater</span></h1>
+      <p class="font-weight-bold mt-3"><span id="top-intro">映画</span>から、<span id="top-intro">舞台</span>が見つかる</p>
+      <p class="font-weight-bold"><span id="top-intro">舞台</span>から、<span id="top-intro">映画</span>が見つかる</p>
+      <%= link_to signup_path, class:"w-50 shadow btn btn-outline-primary mt-5 mb-3 py-2 d-block mx-auto", id:"signup_btn" do %>
+        <h2>新規登録はこちら</h2>
+      <% end %>
+      <%= link_to "ログイン", login_path, class:"w-25 btn btn-outline-secondary"%>
+      <%= link_to "ゲストログイン", guest_login_path, class:"w-25 btn btn-outline-info"%>
+    <% end %>
+
+    <h1 class="rounded py-2 border border-primary text-primary" style="margin-top: 14vh;">
+      <i class="fas fa-theater-masks mr-3"></i>舞台情報
+    </h1>
+    <div class="row row-cols-1 row-cols-lg-2 text-left">
+      <% @stages.each do |stage| %>
+        <div class="col mb-4">
+          <div class="card h-100 shadow-sm mt-5">
+            <%= render partial: "stages/card", locals: {stage: stage, review: @review} %>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <div class="col-5 pl-0">
-      <p class="border rounded p-3">最近、なに見た？</p>
-      <p class="border rounded p-3">これ面白かった！</p>
-      <p class="border rounded p-3">見てみようかな。</p>
-      <p class="border rounded p-3">こんなのあるよ！</p>
+    
+    <h1 class="rounded py-2 border border-primary text-primary" style="margin-top: 8vh;">
+      <i class="fas fa-film mr-3"></i>人気の映画
+    </h1>
+    <div class="row row-cols-1 row-cols-lg-3 text-left">
+      <% @movies.each do |movie| %>
+        <div class="col">
+          <div class="card h-100 shadow-sm mt-5">
+            <%= render partial: "movies/card", locals: {movie: movie, review: @review} %>
+          </div>
+        </div>
+      <% end %>
     </div>
+    
   </div>
 
-  <h2 class="mt-5 mb-4 p-3 text-light rounded" style="background-color:#4CA2FF;">
-    <i class="fas fa-user-friends fa-lg ml-2"></i>
-    演劇情報を総まとめ
-  </h2>
-  <ul class="list-unstyled" style="font-size:2.4rem;">
-    <li class="ml-2 mt-4"><i class="fas fa-book-open fa-lg mx-3"></i>気になる戯曲が見つかる</li>
-    <li class="ml-2 mt-4"><i class="fas fa-theater-masks fa-lg mx-3"></i>上演中の舞台を見逃さない</li>
-    <li class="ml-2 mt-4"><i class="fas fa-film fa-lg mx-3"></i>好きな映画を登録できる</li>
-    <li class="ml-2 mt-4"><i class="fas fa-star fa-lg mx-3"></i>気になる作品はお気に入り</li>
-    <li class="ml-2 mt-4"><i class="fas fa-check-circle fa-lg mx-3"></i>レビューを書いておすすめしよう</li>
-  </ul>
-  <h2 class="mt-5 ml-sm-2 mb-4">
-    あなたが繋げる <span style="font-family: 'Dancing Script', cursive; font-size: 4.8rem; color:#4CA2FF;">Actor Connection</span>
-  </h2>
-  <div class="text-center", style="margin-top: 2.8rem;">
-    <%= link_to "新規登録はこちら", signup_path, class:"w-75 shadow btn btn-outline-primary my-4", style:"font-size: 2.8rem;" %>
-    <%= link_to "ログイン", login_path, class:"w-25 btn btn-outline-secondary mb-4", style:"font-size: 1.4rem;" %><br>
-    <%= link_to "ゲストログイン(閲覧用)", guest_login_path, class:"w-25 btn btn-outline-info", style:"font-size: 1.4rem; margin-bottom: 8.4rem;" %>
-  </div>
 </div>
