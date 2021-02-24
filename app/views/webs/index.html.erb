@@ -1,17 +1,24 @@
-<div class="container">
+<div class="container web_body">
   <div class="text-center">
     <% if !user_signed_in? %>
-      <h1 style="font-family: 'Russo One', cursive;"><span style="color: #FF8300;">Theater</span><i class="fas fa-exchange-alt mx-4"></i><span class="text-primary">Theater</span></h1>
-      <p class="font-weight-bold mt-3"><span id="top-intro">映画</span>から、<span id="top-intro">舞台</span>が見つかる</p>
-      <p class="font-weight-bold"><span id="top-intro">舞台</span>から、<span id="top-intro">映画</span>が見つかる</p>
-      <%= link_to signup_path, class:"w-50 shadow btn btn-outline-primary mt-5 mb-3 py-2 d-block mx-auto", id:"signup_btn" do %>
-        <h2>新規登録はこちら</h2>
+      <h1 class="top-font"><span style="color: #FF8300;">Theater</span><i class="fas fa-exchange-alt mx-4"></i><span class="text-primary">Theater</span></h1>
+      <p class="font-weight-bold mt-3"><span class="top-intro"><i class="fas fa-search mr-3"></i>映画</span>から、<span class="top-intro">舞台</span>が見つかる</p>
+      <p class="font-weight-bold mb-5"><span class="top-intro">舞台</span>から、<span class="top-intro">映画</span>が見つかる<h2></i></h2></p>
+      <% @tags.each do |tag| %>
+        <label class="border rounded py-2 px-3 mr-3 my-2 text-secondary"><%= tag.name %></label>
+      <% end %>
+      <h2 class="font-weight-bold mt-5 mb-3"><i class="fas fa-info-circle mr-2"></i>使い方は簡単</h2><hr>
+      <p class="font-weight-bold mt-5">好きな作品を<i class="far fa-bookmark ml-2 mr-1 fa-lg"></i>お気に入りに登録するだけ！</p>
+      <p class="font-weight-bold mt-4">さらに</p>
+      <p class="font-weight-bold"><i class="far fa-check-circle fa-lg"></i>レビュー機能でおすすめできる<i class="far fa-comments ml-3 fa-2x"></i></p>
+      <%= link_to signup_path, class:"w-50 shadow rounded mt-5 mb-3 py-3 d-block mx-auto signup_btn" do %>
+        <h2>新規登録<i class="far fa-hand-point-up ml-3"></i></h2>
       <% end %>
       <%= link_to "ログイン", login_path, class:"w-25 btn btn-outline-secondary"%>
       <%= link_to "ゲストログイン", guest_login_path, class:"w-25 btn btn-outline-info"%>
     <% end %>
 
-    <h1 class="rounded py-2 border border-primary text-primary" style="margin-top: 14vh;">
+    <h1 class="rounded py-2 border border-primary text-primary" style="margin-top: 8vh;">
       <i class="fas fa-theater-masks mr-3"></i>舞台情報
     </h1>
     <div class="row row-cols-1 row-cols-lg-2 text-left">
@@ -29,7 +36,7 @@
     </h1>
     <div class="row row-cols-1 row-cols-lg-3 text-left">
       <% @movies.each do |movie| %>
-        <div class="col">
+        <div class="col mb-4">
           <div class="card h-100 shadow-sm mt-5">
             <%= render partial: "movies/card", locals: {movie: movie, review: @review} %>
           </div>
