@@ -20,6 +20,32 @@
   }
 }
 
+.guest-btn {
+  border: 1px solid;
+  width: 25%;
+  color: #FF8300;
+  border-color: #FF8300;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  &:hover {
+    color: white;
+    background-color: #FF8300;
+    text-decoration: none;
+  }
+}
+
+.login-btn {
+  border: 1px solid;
+  width: 25%;
+  color: #6C757D;
+  border-color: #6C757D;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  &:hover {
+    color: white;
+    background-color: #6C757D;
+    text-decoration: none;
+  }
+}
+
 .top-intro {
   font-size: 2.8rem;
 }
