@@ -1,15 +1,29 @@
-# ActorConnection ( アクター・コネクション )
+# TheaterConnection ( シアター・コネクション )
 
-### [Heroku (URL)](https://actor-connection.herokuapp.com)
+### [Theater Coneection (Heroku)](https://actor-connection.herokuapp.com)
 
 ## 概要
 舞台・戯曲・映画のレビューアプリです。
+タグ機能により、映画と舞台が繋がります。
+さらにお気に入り傾向からおすすめ作品を表示！
+https://user-images.githubusercontent.com/70884785/108937820-58ad7e80-7692-11eb-9fa4-c269bb904742.png
 
 ## 使用技術
 - Ruby 3.0.0
 - Ruby on Rails 6.0.3.4
 - Bootstrap 4.5.3
 - Google Maps API
+- gem
+  - devise (ログイン機能)
+  - socialization (お気に入り機能)
+  - kaminari (ページング)
+  - ridgepole (Schemafileの作成)
+
+## 開発環境
+- Docker
+
+## データベース
+- postgreSQL
 
 ## 機能一覧
 - ログイン機能
