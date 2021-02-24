@@ -1,7 +1,7 @@
 # TheaterConnection ( シアター・コネクション )
 
 ## app URL
-### [Theater Coneection (Heroku)](https://actor-connection.herokuapp.com)
+### [Theater Connection (Heroku)](https://actor-connection.herokuapp.com)
 
 ## 概要
 舞台・戯曲・映画のレビューアプリです。<br>
