@@ -9,6 +9,8 @@
 さらにお気に入り傾向からおすすめ作品を表示！<br>
 <img width="1173" alt="スクリーンショット 2021-02-24 11 18 57" src="https://user-images.githubusercontent.com/70884785/108937820-58ad7e80-7692-11eb-9fa4-c269bb904742.png">
 
+<img width="1138" alt="スクリーンショット 2021-02-24 11 41 31" src="https://user-images.githubusercontent.com/70884785/108939577-4719a600-7695-11eb-9c1f-dbd4baa372e9.png">
+
 ## 使用技術
 - Ruby 3.0.0
 - Ruby on Rails 6.0.3.4
