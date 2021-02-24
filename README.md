@@ -3,9 +3,9 @@
 ### [Theater Coneection (Heroku)](https://actor-connection.herokuapp.com)
 
 ## 概要
-舞台・戯曲・映画のレビューアプリです。
-タグ機能により、映画と舞台が繋がります。
-さらにお気に入り傾向からおすすめ作品を表示！
+舞台・戯曲・映画のレビューアプリです。<br>
+タグ機能により、映画と舞台が繋がります。<br>
+さらにお気に入り傾向からおすすめ作品を表示！<br>
 <img width="1173" alt="スクリーンショット 2021-02-24 11 18 57" src="https://user-images.githubusercontent.com/70884785/108937820-58ad7e80-7692-11eb-9fa4-c269bb904742.png">
 
 ## 使用技術
