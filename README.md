@@ -13,7 +13,11 @@
 - Ruby on Rails 6.0.3.4
 - Bootstrap 4.5.3
 - Google Maps API
-- gem
+- JS
+  - jquery 3.5.1
+  - infinite-scroll 4.0.1
+  - select2 4.1.0
+- Gem
   - devise (ログイン機能)
   - socialization (お気に入り機能)
   - kaminari (ページング)
