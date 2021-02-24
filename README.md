@@ -6,7 +6,7 @@
 舞台・戯曲・映画のレビューアプリです。
 タグ機能により、映画と舞台が繋がります。
 さらにお気に入り傾向からおすすめ作品を表示！
-https://user-images.githubusercontent.com/70884785/108937820-58ad7e80-7692-11eb-9fa4-c269bb904742.png
+<img width="1173" alt="スクリーンショット 2021-02-24 11 18 57" src="https://user-images.githubusercontent.com/70884785/108937820-58ad7e80-7692-11eb-9fa4-c269bb904742.png">
 
 ## 使用技術
 - Ruby 3.0.0
