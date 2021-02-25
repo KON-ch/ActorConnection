@@ -3,4 +3,6 @@ class Tag < ApplicationRecord
   has_many :stages, through: :stage_tags
   has_many :movie_tags, dependent: :destroy
   has_many :movies, through: :movie_tags
+
+  validates :name, presence: true, uniqueness: true
 end

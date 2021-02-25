@@ -3,11 +3,13 @@ require 'rails_helper'
 RSpec.describe Stage, type: :model do
 
   describe "Stageモデルのバリデーションテスト" do
+    
     before do
       @theater = FactoryBot.create(:theater)
     end
     
     context '必須入力であること' do
+
       it "作品が必須であること" do
         stage = FactoryBot.build(:stage)
         expect(stage).not_to be_valid

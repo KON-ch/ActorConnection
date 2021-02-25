@@ -9,8 +9,8 @@ class Theater < ApplicationRecord
 
   validates :title, :writer, presence: true
   validates :title, presence: true, uniqueness: { scope: :writer, message: 'この作品は既に作成されています' }
-  validates :man, numericality: { only_integer: true }, allow_nil: true
-  validates :female, numericality: { only_integer: true }, allow_nil: true
+  validates :man, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :female, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
 
   extend DisplayList
   extend SortInfo
