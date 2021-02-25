@@ -28,12 +28,17 @@
   - socialization (お気に入り機能)
   - kaminari (ページング)
   - ridgepole (Schemafileの作成)
+  - rubocop (コード整形)
 
 ## 開発環境
 - Docker
 
 ## データベース
 - postgreSQL
+
+## テスト
+- RSpec
+
 
 ## 機能一覧
 - ログイン機能
