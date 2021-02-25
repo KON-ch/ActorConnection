@@ -1,6 +1,6 @@
 # TheaterConnection ( シアター・コネクション )
 
-## app URL
+## アプリ URL
 ### [Theater Connection (Heroku)](https://actor-connection.herokuapp.com)
 
 ## 概要
@@ -51,3 +51,9 @@
   - 戯曲情報登録
   - 映画情報登録
 - 劇場付近マップ
+
+## Qiita URL
+### [Qiita](https://qiita.com/KON-ch)
+
+## Twitter URL
+### [Twitter](https://twitter.com/KON_chNNN)
