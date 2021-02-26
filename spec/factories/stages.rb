@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :stage do
-    company {'テストカンパニー'}
-    start_date {'2020-12-1'}
-    end_date {'2020-12-31'}
-    user {FactoryBot.build(:user)}
+    company { 'テストカンパニー' }
+    start_date { '2020-12-1' }
+    end_date { '2020-12-31' }
+    user { FactoryBot.build(:user) }
   end
 end

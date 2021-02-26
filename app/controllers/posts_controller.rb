@@ -10,5 +10,4 @@ class PostsController < ApplicationController
     stage_reviews = current_user.reviews.where(stage_id: all_posts.pluck(:stage_id))
     @stage_review = stage_reviews.index_by(&:stage_id)
   end
-
 end

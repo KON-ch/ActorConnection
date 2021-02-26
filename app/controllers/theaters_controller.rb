@@ -29,10 +29,6 @@ class TheatersController < ApplicationController
     @review = Review.stages(stages)
   end
 
-  def new
-    @theater = Theater.new
-  end
-
   def create
     @theater = Theater.new(theater_params)
     if @theater.save
@@ -57,7 +53,7 @@ class TheatersController < ApplicationController
 
   def destroy
     @theater.destroy
-    redirect_to theaters_path, notice: '映画情報を削除しました'
+    redirect_to theaters_path, notice: '戯曲情報を削除しました'
   end
 
   def favorite

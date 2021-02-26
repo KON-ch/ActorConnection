@@ -62,11 +62,11 @@ Rails.application.routes.draw do
     concerns :favorable
   end
 
-  resources :theaters, concerns: %i[favorable reviewable]
+  resources :theaters, except: [:new], concerns: %i[favorable reviewable]
 
-  resources :stages, concerns: %i[favorable reviewable]
+  resources :stages, except: [:new], concerns: %i[favorable reviewable]
 
-  resources :movies, concerns: %i[favorable reviewable]
+  resources :movies, except: [:new], concerns: %i[favorable reviewable]
 
   resources :posts, only: [:index] do
     concerns :favorable

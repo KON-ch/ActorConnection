@@ -82,6 +82,6 @@ class UsersController < ApplicationController
   end
 
   def check_guest
-    @user.email == "guest@example.com"
+    @user.email == 'guest@example.com'
   end
 end

@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :review do
-    content {'テストレビュー'}
+    content { 'テストレビュー' }
   end
 end

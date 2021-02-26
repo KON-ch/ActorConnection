@@ -4,7 +4,7 @@ class Dashboard::TagsController < ApplicationController
     @tags = Tag.all
     @tag_new = Tag.new
   end
-  
+
   def create
     tag = Tag.new(tag_params)
     tag.save
@@ -18,7 +18,8 @@ class Dashboard::TagsController < ApplicationController
   end
 
   private
-    def tag_params
-      params.require(:tag).permit(:name)
-    end
+
+  def tag_params
+    params.require(:tag).permit(:name)
+  end
 end

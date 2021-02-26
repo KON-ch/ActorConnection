@@ -43,9 +43,9 @@ class User < ApplicationRecord
   end
 
   def self.new_guest
-    find_or_create_by(email: "guest@example.com") do |user|
+    find_or_create_by(email: 'guest@example.com') do |user|
       user.name = 'ゲスト'
-      user.birthday = "1991-01-01"
+      user.birthday = '1991-01-01'
       user.sex = 9
       user.password = ENV['GUEST_PASS']
     end

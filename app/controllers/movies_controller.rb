@@ -21,7 +21,8 @@ class MoviesController < ApplicationController
     like_movies = current_user.likees(Movie)
     @like_tags = like_movies.map(&:tag_ids).flatten!
     return if @like_tags.nil?
-    tag = Tag.find(@like_tags.max_by{ |v| @like_tags.count(v) })
+
+    tag = Tag.find(@like_tags.max_by { |v| @like_tags.count(v) })
     @recommend_movie = tag.movies.where.not(id: like_movies.pluck(:id))
   end
 
@@ -75,7 +76,7 @@ class MoviesController < ApplicationController
 
   def movie_params
     params.require(:movie).permit(:title, :country_id, :production, :supervision,
-                                  :sub_title, :screen_time, :quote_url, :synopsis, 
+                                  :sub_title, :screen_time, :quote_url, :synopsis,
                                   :parent_id, :recommend, { tag_ids: [] }).merge(user_id: current_user.id)
   end
 

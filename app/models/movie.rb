@@ -6,7 +6,7 @@ class Movie < ApplicationRecord
   has_many :movie_tags, dependent: :destroy
   has_many :tags, through: :movie_tags
   accepts_nested_attributes_for :movie_tags
-  belongs_to :parent, class_name: "Movie", optional: true
+  belongs_to :parent, class_name: 'Movie', optional: true
 
   acts_as_likeable
 
