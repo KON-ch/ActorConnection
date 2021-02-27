@@ -32,10 +32,6 @@ class StagesController < ApplicationController
     @review = Review.movies(@movies)
   end
 
-  def new
-    @stage = Stage.new
-  end
-
   def create
     @stage = Stage.new(stage_params)
     if @stage.save
@@ -91,5 +87,9 @@ class StagesController < ApplicationController
 
   def sort_params
     params.permit(:sort)
+  end
+
+  def flash_alert
+    flash[:alert] = '正しく登録されませんでした'
   end
 end

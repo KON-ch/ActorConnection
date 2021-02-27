@@ -36,10 +36,6 @@ class MoviesController < ApplicationController
     @next = Movie.find_by(parent_id: @movie.id)
   end
 
-  def new
-    @movie = Movie.new
-  end
-
   def create
     @movie = Movie.new(movie_params)
     if @movie.save

@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
       flash[:notice] = 'レビューを作成しました'
     else
       redirect_page
-      flash[:alert] = '投稿に失敗しました'
+      flash[:alert] = 'レビューに失敗しました'
     end
   end
 

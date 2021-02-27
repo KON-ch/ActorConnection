@@ -46,7 +46,7 @@ RSpec.describe "Theaters", type: :request do
       @country = FactoryBot.create(:country)
     end
 
-    describe '登録が成功する場合' do
+    context '登録が成功する場合' do
 
       it "リクエストが成功すること" do
         post theaters_path, params: {theater: FactoryBot.attributes_for(:theater, country_id: @country.id)}
@@ -72,7 +72,7 @@ RSpec.describe "Theaters", type: :request do
       end
     end
 
-    describe '登録が失敗する場合' do
+    context '登録が失敗する場合' do
       
       it "登録が失敗すること" do
         expect do
@@ -96,7 +96,7 @@ RSpec.describe "Theaters", type: :request do
       @theater = FactoryBot.create(:theater, country_id: @country.id)
     end
 
-    describe '更新される場合' do
+    context '更新される場合' do
 
       it "リクエストが成功すること" do
         put theater_path(@theater), params: {theater: FactoryBot.attributes_for(:theater, country_id: @country.id, title: "テストアップデートタイトル")}
@@ -115,14 +115,14 @@ RSpec.describe "Theaters", type: :request do
         expect(response).to have_http_status(200)
       end
 
-      it "登録成功のメッセージが表示されること" do
+      it "更新成功のメッセージが表示されること" do
           put theater_path(@theater), params: {theater: FactoryBot.attributes_for(:theater, country_id: @country.id, title: "テストアップデートタイトル")}
           follow_redirect!
           expect(response.body).to include '戯曲情報を更新しました'
       end
     end
 
-    describe '登録が失敗する場合' do
+    context '登録が失敗する場合' do
       
       it "作品名が変更されないこと" do
         expect do
