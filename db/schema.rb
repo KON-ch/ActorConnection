@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_02_15_134608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_countries_on_name", unique: true
   end
 
   create_table "follows", force: :cascade do |t|
@@ -87,8 +86,8 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "movie_tags", force: :cascade do |t|
-    t.integer "movie_id", null: false
-    t.integer "tag_id", null: false
+    t.bigint "movie_id", null: false
+    t.bigint "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["movie_id"], name: "index_movie_tags_on_movie_id"
@@ -108,7 +107,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "screen_time"
     t.string "quote_url"
     t.string "synopsis"
-    t.integer "parent_id"
+    t.bigint "parent_id"
     t.boolean "recommend", default: false, null: false
     t.index ["country_id"], name: "index_movies_on_country_id"
     t.index ["parent_id"], name: "index_movies_on_parent_id"
@@ -124,7 +123,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "access"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_places_on_name", unique: true
   end
 
   create_table "posts", force: :cascade do |t|
@@ -164,8 +162,8 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "soiree_stages", force: :cascade do |t|
-    t.integer "stage_id"
-    t.integer "soiree_id"
+    t.bigint "stage_id"
+    t.bigint "soiree_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["soiree_id"], name: "index_soiree_stages_on_soiree_id"
@@ -179,8 +177,8 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "stage_tags", force: :cascade do |t|
-    t.integer "stage_id", null: false
-    t.integer "tag_id", null: false
+    t.bigint "stage_id", null: false
+    t.bigint "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["stage_id"], name: "index_stage_tags_on_stage_id"
@@ -197,10 +195,11 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "place_id"
     t.integer "user_id"
     t.integer "likers_count", default: 0
+    t.string "director"
+    t.string "quote_url"
     t.text "synopsis"
     t.time "matinee"
     t.time "soiree"
-    t.string "quote_url"
     t.index ["place_id"], name: "index_stages_on_place_id"
     t.index ["theater_id", "start_date"], name: "index_stages_on_theater_id_and_start_date", unique: true
     t.index ["theater_id"], name: "index_stages_on_theater_id"
