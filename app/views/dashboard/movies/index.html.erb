@@ -29,7 +29,7 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>認定</th>
+        <th>承認</th>
         <th>題名</th>
         <th>副題</th>
         <th>製作国</th>
@@ -40,9 +40,10 @@
     <tbody>
       <% @movies.each do |movie| %>
         <tr>
-          <td class="text-center">
-            <% if movie.recommend %>
-              <i class="fas fa-certificate" style="color: #FC8300;"></i>
+          <td>
+            <%= form_with model: movie, url: dashboard_movie_path(movie), local: true do |f| %>
+              <%= f.check_box :request, checked: movie.request == true %>
+              <%= f.submit "登録", class:"btn btn-sm btn-outline-secondary" %>
             <% end %>
           </td>
           <td><%= movie.title %></td>

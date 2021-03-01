@@ -4,7 +4,7 @@
       <div class="modal-header">
         <label class="modal-title text-center" id="newModalLabel">
           <i class="fas fa-film fa-2x mx-2 text-primary"></i>
-          <h2 class="d-inline">映画情報登録</h2>
+          <p class="d-inline"><i class="fas fa-plus mr-2"></i>映画情報をリクエストする</p>
         </label>
         <div type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -15,7 +15,7 @@
           <%= render partial: "movies/form", locals: {f: f} %>
         </div>
         <div class="modal-footer">
-          <%= f.submit "登録", class:"btn btn-primary w-25 mr-lg-5 my-2" %>
+          <%= f.submit "リクエスト", class:"btn btn-primary w-25 mr-lg-5 my-2" %>
         </div>
       <% end %>
     </div>

@@ -19,7 +19,7 @@ class Dashboard::MoviesController < ApplicationController
         total_count(Movie)
       end
     else
-      @movies = Movie.includes(:country).display_list(params[:page])
+      @movies = Movie.includes(:country).order(request: :asc).display_list(params[:page])
       total_count(Movie)
     end
 
@@ -33,7 +33,7 @@ class Dashboard::MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     if @movie.save
-      redirect_to dashboard_movies_path, notice: '新しい映画を登録しました'
+      redirect_to dashboard_movies_path, notice: '映画情報を登録しました'
     else
       render :new
     end
@@ -59,7 +59,7 @@ class Dashboard::MoviesController < ApplicationController
   def movie_params
     params.require(:movie).permit(:title, :country_id, :production, :supervision,
                                   :sub_title, :screen_time, :quote_url, :synopsis,
-                                  :parent_id, :recommend, { tag_ids: [] }).merge(user_id: current_admin.id)
+                                  :parent_id, :recommend, :request, { tag_ids: [] }).merge(user_id: current_admin.id)
   end
 
   def set_movie

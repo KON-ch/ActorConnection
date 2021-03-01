@@ -21,9 +21,8 @@ class MoviesController < ApplicationController
     like_movies = current_user.likees(Movie)
     @like_tags = like_movies.map(&:tag_ids).flatten!
     return if @like_tags.nil?
-
     tag = Tag.find(@like_tags.max_by { |v| @like_tags.count(v) })
-    @recommend_movie = tag.movies.where.not(id: like_movies.pluck(:id))
+    @recommend_movie = tag.movies.where.not(id: like_movies.pluck(:id), request: false)
   end
 
   def show
@@ -39,7 +38,7 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     if @movie.save
-      redirect_to movies_path, notice: '映画情報を登録しました'
+      redirect_to movies_path, notice: " #{@movie.title} をリクエストしました"
     else
       redirect_to movies_path
       flash_alert
@@ -73,7 +72,7 @@ class MoviesController < ApplicationController
   def movie_params
     params.require(:movie).permit(:title, :country_id, :production, :supervision,
                                   :sub_title, :screen_time, :quote_url, :synopsis,
-                                  :parent_id, :recommend, { tag_ids: [] }).merge(user_id: current_user.id)
+                                  :parent_id, :recommend, :request, { tag_ids: [] }).merge(user_id: current_user.id)
   end
 
   def set_movie
@@ -101,12 +100,12 @@ class MoviesController < ApplicationController
   end
 
   def display_movie(movie)
-    @movies = movie.order(updated_at: :desc).display_list(params[:page])
+    @movies = movie.where(request: true).order(updated_at: :desc).display_list(params[:page])
     total_count(movie)
   end
 
   def sort_movie(movie)
-    @movies = movie.sort_info(sort_params, params[:page])
+    @movies = movie.where(request: true).sort_info(sort_params, params[:page])
     total_count(movie)
   end
 
