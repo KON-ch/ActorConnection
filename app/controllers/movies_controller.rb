@@ -26,6 +26,11 @@ class MoviesController < ApplicationController
   end
 
   def show
+    if @movie.request == false
+      redirect_to movies_path, notice: "#{@movie.title}は承認されていません"
+      return
+    end
+
     movie_reviews = @movie.reviews
     @reviews = movie_reviews.where.not(user: current_user)
     @new_review = @reviews.new

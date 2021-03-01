@@ -6,15 +6,15 @@ class StagesController < ApplicationController
 
   def index
     @stages = if sort_params.present?
-                Stage.preload(:theater, :reviews).this_month.sort_info(sort_params, params[:page])
+                Stage.preload(:theater, :reviews).where(request: true).this_month.sort_info(sort_params, params[:page])
               elsif params[:date] == 'last_month'
-                Stage.preload(:theater, :reviews).last_month.order(updated_at: :desc).display_list(params[:page])
+                Stage.preload(:theater, :reviews).where(request: true).last_month.order(start_date: :asc).display_list(params[:page])
               elsif params[:date] == 'next_month'
-                Stage.preload(:theater, :reviews).next_month.order(updated_at: :desc).display_list(params[:page])
+                Stage.preload(:theater, :reviews).where(request: true).next_month.order(start_date: :asc).display_list(params[:page])
               elsif params[:date] == 'this_month'
-                Stage.preload(:theater, :reviews).this_month.order(updated_at: :desc).display_list(params[:page])
+                Stage.preload(:theater, :reviews).where(request: true).this_month.order(start_date: :asc).display_list(params[:page])
               else
-                Stage.preload(:theater, :reviews).this_month.order(updated_at: :desc).display_list(params[:page])
+                Stage.preload(:theater, :reviews).where(request: true).this_month.order(start_date: :asc).display_list(params[:page])
               end
     @sort_list = Stage.sort_list
     @stage = Stage.new
@@ -22,6 +22,11 @@ class StagesController < ApplicationController
   end
 
   def show
+    if @stage.request == false
+      redirect_to stages_path, notice: "#{@stage.title}は承認されていません"
+      return
+    end
+
     stage_reviews = @stage.reviews.preload(:user)
     @reviews = stage_reviews.where.not(user: current_user)
     @new_review = @reviews.new

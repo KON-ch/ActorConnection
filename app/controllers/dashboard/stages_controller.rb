@@ -20,7 +20,7 @@ class Dashboard::StagesController < ApplicationController
         total_count(Stage)
       end
     else
-      @stages = Stage.includes(:theater, :place).display_list(params[:page])
+      @stages = Stage.includes(:theater, :place).order(request: :asc).display_list(params[:page])
       total_count(Stage)
     end
 
@@ -60,7 +60,7 @@ class Dashboard::StagesController < ApplicationController
   def stage_params
     params.require(:stage).permit(:start_date, :end_date, :company, :theater_id,
                                   :place_id, :synopsis, :matinee, :soiree, :director,
-                                  :quote_url, { tag_ids: [] }, { soiree_ids: [] }).merge(user_id: current_admin.id)
+                                  :quote_url, :request, { tag_ids: [] }, { soiree_ids: [] }).merge(user_id: current_admin.id)
   end
 
   def set_stage
