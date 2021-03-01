@@ -39,8 +39,8 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:content).merge(user_id: current_user.id, theater_id: params[:theater_id],
-                                                   movie_id: params[:movie_id], stage_id: params[:stage_id], post_id: params[:post_id])
+    params.require(:review).permit(:content, :rate).merge(user_id: current_user.id, theater_id: params[:theater_id],
+                                                          movie_id: params[:movie_id], stage_id: params[:stage_id], post_id: params[:post_id])
   end
 
   def page_params

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_01_011209) do
+ActiveRecord::Schema.define(version: 2021_03_01_092356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,6 +157,7 @@ ActiveRecord::Schema.define(version: 2021_03_01_011209) do
     t.integer "stage_id"
     t.integer "post_id"
     t.integer "likers_count", default: 0
+    t.float "rate", null: false
     t.index ["movie_id"], name: "index_reviews_on_movie_id"
     t.index ["post_id"], name: "index_reviews_on_post_id"
     t.index ["stage_id"], name: "index_reviews_on_stage_id"
@@ -203,6 +204,7 @@ ActiveRecord::Schema.define(version: 2021_03_01_011209) do
     t.text "synopsis"
     t.time "matinee"
     t.time "soiree"
+    t.boolean "request", default: false, null: false
     t.index ["place_id"], name: "index_stages_on_place_id"
     t.index ["theater_id", "start_date"], name: "index_stages_on_theater_id_and_start_date", unique: true
     t.index ["theater_id"], name: "index_stages_on_theater_id"

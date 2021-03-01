@@ -19,7 +19,15 @@
     </h2>
     <p class="card-text"><strong><%= movie.sub_title %></strong></p>
   <% end %>
-  <p class="mt-4">監督 : <%= movie.supervision %></p>
+  <div class="mt-4" style="color: #FC8300;">
+    <i class="fas fa-star"></i>
+    <% if movie.reviews.pluck(:rate).present? %>
+      <%= movie.reviews.pluck(:rate).sum / movie.reviews.pluck(:rate).size %>
+    <% else %>
+    0
+    <% end %>
+  </div>
+  <p class="mt-3">監督 : <%= movie.supervision %></p>
   <% movie.tags.each do |tag| %>
     <%= link_to tag.name, tag_path(tag), class:"border rounded py-2 px-3 mr-3 d-inline-block my-3 text-secondary text-decoration-none" %>
   <% end %>
@@ -49,4 +57,3 @@
 <%= form_with model: movie.reviews.new, url: movie_reviews_path(movie) do |f| %>
   <%= render partial: "reviews/modal", locals: {review: movie, review_title: movie, f: f} %>
 <% end %>
-<%= %>

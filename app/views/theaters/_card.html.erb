@@ -5,6 +5,14 @@
   <%= link_to theater_path(theater), data: { "turbolinks" => false } do %>
     <h2 class="card-title text-dark mt-3"><strong><%= theater.title %></strong></h2>
   <% end %>
+  <div class="mt-4" style="color: #FC8300;">
+    <i class="fas fa-star"></i>
+    <% if theater.reviews.pluck(:rate).present? %>
+      <%= theater.reviews.pluck(:rate).sum / theater.reviews.pluck(:rate).size %>
+    <% else %>
+    0
+    <% end %>
+  </div>
   <p class="card-text my-3">作者 : <%= theater.writer %></p>
   <% if theater.man.nil? && theater.female.nil? %>
     <label class="align-items-end d-flex">

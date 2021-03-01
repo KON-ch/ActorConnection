@@ -14,6 +14,9 @@
         </div>
       </div>
         <div class="modal-body">
+          <i class="fas fa-star ml-2"></i>
+          <%= f.label :rate, "評価", class:"mr-3" %>
+          <%= f.number_field :rate, in: 1..5, step: 0.5, class:"w-25" %>
           <%= f.text_area :content, size: "20x10", id:"reviewInput",class:"form-control m-2" %>
           <%= f.hidden_field :review_page, value: request.url %>
         </div>
@@ -23,9 +26,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  $('#reviewModal<%= review.id %>').on('shown.bs.modal', function (){
-    $('#reviewInput').trigger('focus');
-  });
-</script>
