@@ -42,7 +42,7 @@
         <tr>
           <td>
             <%= form_with model: movie, url: dashboard_movie_path(movie), local: true do |f| %>
-              <%= f.check_box :request, checked: movie.request == true %>
+              <%= f.check_box :request %>
               <%= f.submit "登録", class:"btn btn-sm btn-outline-secondary" %>
             <% end %>
           </td>

@@ -44,7 +44,7 @@
         <tr>
           <td>
             <%= form_with model: stage, url: dashboard_stage_path(stage), local: true do |f| %>
-              <%= f.check_box :request, checked: stage.request == true %>
+              <%= f.check_box :request %>
               <%= f.submit "登録", class:"btn btn-sm btn-outline-secondary" %>
             <% end %>
           </td>

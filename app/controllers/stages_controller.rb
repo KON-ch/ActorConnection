@@ -23,7 +23,7 @@ class StagesController < ApplicationController
 
   def show
     if @stage.request == false
-      redirect_to stages_path, notice: "#{@stage.title}は承認されていません"
+      redirect_to stages_path, notice: "#{@stage.theater.title}は承認されていません"
       return
     end
 
