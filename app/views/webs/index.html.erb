@@ -21,7 +21,7 @@
     <h1 class="rounded py-2 border border-primary text-primary" style="margin-top: 8vh;">
       <i class="fas fa-theater-masks mr-3"></i>舞台情報
     </h1>
-    <div class="row row-cols-1 row-cols-lg-2 text-left">
+    <div id="slick-stage-card" class="row text-left">
       <% @stages.each do |stage| %>
         <div class="col mb-4">
           <div class="card h-100 shadow-sm mt-5">
@@ -34,7 +34,7 @@
     <h1 class="rounded py-2 border border-primary text-primary" style="margin-top: 8vh;">
       <i class="fas fa-film mr-3"></i>人気の映画
     </h1>
-    <div class="row row-cols-1 row-cols-lg-3 text-left">
+    <div id="slick-movie-card" class="row text-left">
       <% @movies.each do |movie| %>
         <div class="col mb-4">
           <div class="card h-100 shadow-sm mt-5">
@@ -47,3 +47,43 @@
   </div>
 
 </div>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script><%= javascript_pack_tag 'slick' %>
+<script>
+  $(function(){
+    $('#slick-stage-card').slick({
+      dots: true,
+      infinite: true,
+      slidesToScroll: 1,
+      swipe: true,
+      responsive: [{
+        breakpoint: 4096,
+        settings: {
+          slidesToShow: 2
+        }
+      }, {
+        breakpoint: 992,
+        setings: {
+          slidesToShow:1
+        }
+      }]
+    });
+    $('#slick-movie-card').slick({
+      dots: true,
+      infinite: true,
+      slidesToScroll: 1,
+      swipe: true,
+      responsive: [{
+        breakpoint: 4096,
+        settings: {
+          slidesToShow: 3
+        }
+      }, {
+        breakpoint: 992,
+        setings: {
+          slidesToShow:1
+        }
+      }]
+    });
+  });
+</script>

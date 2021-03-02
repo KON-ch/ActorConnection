@@ -7,7 +7,7 @@
       <% if @like_tags.present? %>
         <h2 class="mt-5"><%= current_user.name %>さんへのおすすめ<i class="fas fa-film ml-2"></i></h2>
         <hr>
-        <div class="row row-cols-1 row-cols-lg-2 mt-3">
+        <div id="slick-card" class="row mt-3">
           <% @recommend_movie.limit(4).each do |movie| %>
             <div class="col mb-4">
               <div class="card h-100 shadow-sm">
@@ -66,3 +66,27 @@
     </div>
   </div>
 </div>
+
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script><%= javascript_pack_tag 'slick' %>
+<script>
+  $(function(){
+    $('#slick-card').slick({
+      dots: true,
+      infinite: true,
+      slidesToScroll: 1,
+      swipe: true,
+      responsive: [{
+        breakpoint: 4096,
+        settings: {
+          slidesToShow: 2
+        }
+      }, {
+        breakpoint: 992,
+        setings: {
+          slidesToShow:1
+        }
+      }]
+    });
+  });
+</script>
