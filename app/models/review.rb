@@ -5,7 +5,7 @@ class Review < ApplicationRecord
   belongs_to :stage, -> { includes :theater }, inverse_of: :reviews, optional: true
   has_many :posts, dependent: :destroy
 
-  validates :rate, presence: true
+  validates :rate, numericality: {greater_than_or_equal_to: 1, less_than_or_equal_to: 5}
   validates :content, length: { maximum: 170 }
 
   acts_as_likeable

@@ -40,7 +40,7 @@ class StagesController < ApplicationController
   def create
     @stage = Stage.new(stage_params)
     if @stage.save
-      redirect_to stages_path, notice: '公演情報を登録しました'
+      redirect_to stages_path, notice: "#{@stage.theater.title}をリクエストしました"
     else
       redirect_to stages_path
       flash_alert

@@ -43,7 +43,7 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     if @movie.save
-      redirect_to movies_path, notice: " #{@movie.title} をリクエストしました"
+      redirect_to movies_path, notice: "#{@movie.title}をリクエストしました"
     else
       redirect_to movies_path
       flash_alert

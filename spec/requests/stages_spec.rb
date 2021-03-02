@@ -12,19 +12,26 @@ RSpec.describe "Stages", type: :request do
       get stages_path
       expect(response).to have_http_status(200)
     end
+
   end
   
   describe "GET #show" do
-
+    
     before do
       theater = FactoryBot.create(:theater)
       place = FactoryBot.create(:place)
-      @stage = FactoryBot.create(:stage, theater: theater, place: place)
+      @stage = FactoryBot.create(:stage, theater: theater, place: place, request: true)
     end
 
     it "リクエストが成功すること" do
       get stage_path(@stage)
       expect(response).to have_http_status(200)
+    end
+
+    it "未承認作品のリクエストが失敗すること" do
+      @stage.update(request: false)
+      get stage_path(@stage)
+      expect(response).to have_http_status(302)
     end
 
   end
@@ -70,10 +77,10 @@ RSpec.describe "Stages", type: :request do
         expect(response).to have_http_status(200)
       end
 
-      it "登録成功のメッセージが表示されること" do
+      it "リクエスト成功のメッセージが表示されること" do
         post stages_path, params: {stage: FactoryBot.attributes_for(:stage, theater_id: @theater.id, place_id: @place.id)}
           follow_redirect!
-          expect(response.body).to include '公演情報を登録しました'
+          expect(response.body).to include 'テストタイトルをリクエストしました'
       end
     end
 
@@ -99,7 +106,7 @@ RSpec.describe "Stages", type: :request do
     before do
       @theater = FactoryBot.create(:theater)
       @place = FactoryBot.create(:place)
-      @stage = FactoryBot.create(:stage, theater: @theater, place: @place)
+      @stage = FactoryBot.create(:stage, theater: @theater, place: @place, request: true)
     end
 
     context '更新される場合' do

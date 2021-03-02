@@ -40,12 +40,12 @@ RSpec.describe "Reviews", type: :request do
       
       it "登録が失敗すること" do
         expect do
-          post theater_reviews_path(@theater), params: {review: FactoryBot.attributes_for(:review, theater_id: @theater.id, review_page: theater_path(@theater), content: "")}
+          post theater_reviews_path(@theater), params: {review: FactoryBot.attributes_for(:review, theater_id: @theater.id, review_page: theater_path(@theater), rate: "")}
         end.to_not change(Review, :count)
       end
 
       it "エラーメッセージが表示されること" do
-        post theater_reviews_path(@theater), params: {review: FactoryBot.attributes_for(:review, theater_id: @theater.id, review_page: theater_path(@theater), content: "")}
+        post theater_reviews_path(@theater), params: {review: FactoryBot.attributes_for(:review, theater_id: @theater.id, review_page: theater_path(@theater), rate: "")}
         follow_redirect!
         expect(response.body).to include 'レビューに失敗しました'
       end
@@ -54,7 +54,7 @@ RSpec.describe "Reviews", type: :request do
     context '映画にレビューする場合' do
 
       before do
-        @movie = FactoryBot.create(:movie)
+        @movie = FactoryBot.create(:movie, request: true)
       end
 
       it "リクエストが成功すること" do
@@ -82,12 +82,12 @@ RSpec.describe "Reviews", type: :request do
       
       it "登録が失敗すること" do
         expect do
-          post movie_reviews_path(@movie), params: {review: FactoryBot.attributes_for(:review, movie_id: @movie.id, review_page: movie_path(@movie), content: "")}
+          post movie_reviews_path(@movie), params: {review: FactoryBot.attributes_for(:review, movie_id: @movie.id, review_page: movie_path(@movie), rate: "")}
         end.to_not change(Review, :count)
       end
 
       it "エラーメッセージが表示されること" do
-        post movie_reviews_path(@movie), params: {review: FactoryBot.attributes_for(:review, movie_id: @movie.id, review_page: movie_path(@movie), content: "")}
+        post movie_reviews_path(@movie), params: {review: FactoryBot.attributes_for(:review, movie_id: @movie.id, review_page: movie_path(@movie), rate: "")}
         follow_redirect!
         expect(response.body).to include 'レビューに失敗しました'
       end
@@ -98,7 +98,7 @@ RSpec.describe "Reviews", type: :request do
       before do
         theater = FactoryBot.create(:theater)
         place = FactoryBot.create(:place)
-        @stage = FactoryBot.create(:stage, theater: theater, place: place)
+        @stage = FactoryBot.create(:stage, theater: theater, place: place, request: true)
       end
 
       it "リクエストが成功すること" do
@@ -126,12 +126,12 @@ RSpec.describe "Reviews", type: :request do
       
       it "登録が失敗すること" do
         expect do
-          post stage_reviews_path(@stage), params: {review: FactoryBot.attributes_for(:review, stage_id: @stage.id, review_page: stage_path(@stage), content: "")}
+          post stage_reviews_path(@stage), params: {review: FactoryBot.attributes_for(:review, stage_id: @stage.id, review_page: stage_path(@stage), rate: "")}
         end.to_not change(Review, :count)
       end
 
       it "エラーメッセージが表示されること" do
-        post stage_reviews_path(@stage), params: {review: FactoryBot.attributes_for(:review, stage_id: @stage.id, review_page: stage_path(@stage), content: "")}
+        post stage_reviews_path(@stage), params: {review: FactoryBot.attributes_for(:review, stage_id: @stage.id, review_page: stage_path(@stage), rate: "")}
         follow_redirect!
         expect(response.body).to include 'レビューに失敗しました'
       end
@@ -175,17 +175,17 @@ RSpec.describe "Reviews", type: :request do
       
       it "レビューが変更されないこと" do
         expect do
-          put review_path(@review), params: {review: FactoryBot.attributes_for(:review,review_page: root_path, content: "")}
-        end.to_not change(@review, :content)
+          put review_path(@review), params: {review: FactoryBot.attributes_for(:review,review_page: root_path, rate: "")}
+        end.to_not change(@review, :rate)
       end
 
       it "編集ページが再表示されること" do
-        put review_path(@review), params: {review: FactoryBot.attributes_for(:review,review_page: root_path, content: "")}
+        put review_path(@review), params: {review: FactoryBot.attributes_for(:review,review_page: root_path, rate: "")}
         expect(response).to redirect_to(root_path)
       end
 
       it "エラーメッセージが表示されること" do
-        put review_path(@review), params: {review: FactoryBot.attributes_for(:review,review_page: root_path, content: "")}
+        put review_path(@review), params: {review: FactoryBot.attributes_for(:review,review_page: root_path, rate: "")}
         follow_redirect!
         expect(response.body).to include '編集に失敗しました'
       end

@@ -18,12 +18,18 @@ RSpec.describe "Movies", type: :request do
 
     before do
       country = FactoryBot.create(:country)
-      @movie = FactoryBot.create(:movie, country: country)
+      @movie = FactoryBot.create(:movie, country: country, request: true)
     end
 
     it "リクエストが成功すること" do
       get movie_path(@movie)
       expect(response).to have_http_status(200)
+    end
+
+    it "未承認作品のリクエストが失敗すること" do
+      @movie.update(request: false)
+      get movie_path(@movie)
+      expect(response).to have_http_status(302)
     end
 
   end
@@ -62,15 +68,15 @@ RSpec.describe "Movies", type: :request do
       end
 
       it "リダイレクトが成功すること" do
-        post movies_path, params: {movie: FactoryBot.attributes_for(:movie, country_id: @country.id)}
+        post movies_path, params: {movie: FactoryBot.attributes_for(:movie, country_id: @country.id, )}
         follow_redirect!
         expect(response).to have_http_status(200)
       end
 
-      it "登録成功のメッセージが表示されること" do
+      it "リクエスト成功のメッセージが表示されること" do
         post movies_path, params: {movie: FactoryBot.attributes_for(:movie, country_id: @country.id)}
         follow_redirect!
-        expect(response.body).to include '映画情報を登録しました'
+        expect(response.body).to include 'テストタイトルをリクエストしました'
       end
     end
 
@@ -95,7 +101,7 @@ RSpec.describe "Movies", type: :request do
 
     before do
       @country = FactoryBot.create(:country)
-      @movie = FactoryBot.create(:movie, country: @country)
+      @movie = FactoryBot.create(:movie, country: @country, request: true)
     end
 
     context '更新される場合' do

@@ -19,7 +19,7 @@ RSpec.describe "Theaters", type: :system do
       theater = FactoryBot.build(:theater)
       country = FactoryBot.create(:country)
       visit "/theaters"
-      find('.fa-pen').click
+      find('.fa-plus').click
       fill_in '題名', with: theater.title
       fill_in '作者', with: theater.writer
       select '日本', from: 'theater_country_id'
