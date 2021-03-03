@@ -43,6 +43,9 @@
         <% if @my_review.nil? %>
           <%= form_with model: @new_review, url: theater_reviews_path(@theater) do |f| %>
             <div class="card-body">
+              <%= f.label :rate, "評価", class:"mr-1" %>
+              <i class="fas fa-star mr-2" style="color: #FC8300;"></i>
+              <%= f.number_field :rate, in: 1..5, step: 0.5, class:"w-25 mb-2 form-control d-inline" %>
               <%= f.text_area :content, size: "20x10", class:"form-control mr-2 " %>
             </div>
             <div class="card-footer text-right">
@@ -54,9 +57,17 @@
           <div class="card-body">
             <%= form_with model: @my_review, url: review_path(@my_review), local: true, method: :put do |f| %>
               <div class="collapse show userReview">
+                <p class="mt-3">
+                  <i class="fas fa-star mr-2" style="color: #FC8300;"></i>
+                  <%= @my_review.rate %>
+                </p>
                 <p class="mt-3"><%= @my_review.content %></p>
               </div>
               <div class="collapse editUserReview">
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-star mr-2 align-content-center mb-2" style="color: #FC8300;"></i>
+                  <%= f.number_field :rate, in: 1..5, step: 0.5, class:"w-25 mb-2 form-control" %>
+                </div>
                 <%=
                   f.text_area :content, size: "20x5", autofocus: "true", value: @my_review.content, class:"form-control mr-2"
                 %>

@@ -10,13 +10,13 @@
 $slick-font-path: "./fonts/" !default;
 $slick-font-family: "slick" !default;
 $slick-loader-path: "./" !default;
-$slick-arrow-color: white !default;
+$slick-arrow-color: #494F54 !default;
 $slick-dot-color: black !default;
 $slick-dot-color-active: $slick-dot-color !default;
 $slick-prev-character: "\2190" !default;
 $slick-next-character: "\2192" !default;
 $slick-dot-character: "\2022" !default;
-$slick-dot-size: 6px !default;
+$slick-dot-size: 5rem !default;
 $slick-opacity-default: 0.75 !default;
 $slick-opacity-on-hover: 1 !default;
 $slick-opacity-not-active: 0.25 !default;
@@ -91,7 +91,7 @@ $slick-opacity-not-active: 0.25 !default;
     }
     &:before {
         font-family: $slick-font-family;
-        font-size: 20px;
+        font-size: 2.8rem;
         line-height: 1;
         color: $slick-arrow-color;
         opacity: $slick-opacity-default;
