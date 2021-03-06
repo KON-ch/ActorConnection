@@ -1,5 +1,15 @@
 version: '3'
 services:
+  app:
+    build: .
+    volumes:
+      - .:/webapp
+      - public-data:/webapp/public
+      - tmp-data:/webapp/tmp
+      - log-data:/webapp/log
+    depends_on:
+      - db
+    command: bundle exec puma -C config/puma.rb
   db:
     image: postgres
     volumes:
@@ -7,20 +17,20 @@ services:
       - .:/myapp
     environment:
       - POSTGRES_PASSWORD=password
-      
   web:
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle install && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    build:
+      context: containers/nginx
     volumes:
-      - .:/myapp
+      - public-data:/webapp/public
+      - tmp-data:/webapp/tmp
     ports:
-      - "3000:3000"
+      - "80:80"
     depends_on:
-      - db
+      - app
     env_file: production.env
-    environment:
-      - "SELENIUM_DRIVER_URL=http://selenium_chrome:4444/wd/hub"
-  selenium_chrome:
-    image: selenium/standalone-chrome-debug
-    logging:
-      driver: none
+
+volumes:
+  public-data:
+  tmp-data:
+  log-data:
+  db-data:

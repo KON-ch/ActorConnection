@@ -45,6 +45,7 @@ group :development, :test do
 
   # Use dotenv-rails as Management of the environment variable
   gem 'dotenv-rails'
+  
   # Use rubocop
   gem 'rubocop', '~> 1.9', require: false
   gem 'rubocop-performance', require: false
