@@ -9,7 +9,7 @@ default: &default
   encoding: unicode
   host: db
   username: postgres
-  password: password # docker-compose.ymlのPOSTGRES_PASSWORDで指定した値
+  password: password
   pool: 5
 
 development:
