@@ -9,8 +9,6 @@ services:
       - ./public:/webapp/public
       - ./tmp:/webapp/tmp
       - ./log:/webapp/log
-    ports:
-      - 3000:3000
       
   web:
     build:
