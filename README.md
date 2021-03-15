@@ -35,6 +35,7 @@
 - EC2
 - Nginx
 - Puma
+![AWS構成図](https://user-images.githubusercontent.com/70884785/111093948-7da05d80-857d-11eb-83de-79db7ef4ffe6.jpg)
 
 ## 開発環境
 - Docker
