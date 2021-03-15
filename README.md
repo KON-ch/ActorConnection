@@ -1,6 +1,7 @@
 # ActorConnection ( アクター・コネクション )
 
 ## アプリ URL
+### [Actor Connection (AWS)](http://13.115.1.52)
 ### [Actor Connection (Heroku)](https://actor-connection.herokuapp.com)
 
 ## 概要
@@ -30,15 +31,20 @@
   - ridgepole (Schemafileの作成)
   - rubocop (コード整形)
 
+## デプロイ
+- EC2
+- Nginx
+- Puma
+
 ## 開発環境
 - Docker
 
 ## データベース
+- RDS
 - postgreSQL
 
 ## テスト
 - RSpec
-
 
 ## 機能一覧
 - ログイン機能
