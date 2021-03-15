@@ -37,12 +37,13 @@
 - Puma
 ![AWS構成図](https://user-images.githubusercontent.com/70884785/111093948-7da05d80-857d-11eb-83de-79db7ef4ffe6.jpg)
 
-## 開発環境
-- Docker
-
 ## データベース
 - RDS
 - postgreSQL
+![ER図](https://user-images.githubusercontent.com/70884785/111099230-66b33880-8588-11eb-8be1-7e97e1ccb227.png)
+
+## 開発環境
+- Docker
 
 ## テスト
 - RSpec
