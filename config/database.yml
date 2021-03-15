@@ -26,6 +26,6 @@ test:
 production:
   <<: *default
   database: actorconnection_production
-  host: <%= ENV['DB_HOST'] %>
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= Rails.application.credentials.DB_HOST %>
+  username: <%= Rails.application.credentials.DB_USERNAME %>
+  password: <%= Rails.application.credentials.DB_PASSWORD %>
