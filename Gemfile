@@ -35,6 +35,10 @@ gem 'socialization'
 # Use kaminari as paginate system
 gem 'kaminari'
 
+# Use dotenv-rails as Management of the environment variable
+gem 'dotenv-rails'
+
+# Use Schemafile as migration file
 gem 'ridgepole'
 
 gem 'pg'
@@ -42,9 +46,7 @@ gem 'pg'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-
-  # Use dotenv-rails as Management of the environment variable
-  gem 'dotenv-rails'
+  
   # Use rubocop
   gem 'rubocop', '~> 1.9', require: false
   gem 'rubocop-performance', require: false

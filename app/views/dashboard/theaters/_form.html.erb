@@ -8,7 +8,7 @@
 </div>
 <div class="form-group row">
   <%= f.label :country_id, "国籍", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>
-  <%= f.collection_select(:country_id, @countries, :id, :name, {prompt:""}, {class:"form-control col-lg-5"}) %>
+  <%= f.collection_select(:country_id, countries, :id, :name, {prompt:""}, {class:"form-control col-lg-5"}) %>
 </div>
 <div class="form-group row">
   <%= f.label :man, "登場人数 ( 男 )", class:"col-lg-3 offset-lg-2 col-form-label text-left px-0" %>

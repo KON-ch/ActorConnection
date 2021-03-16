@@ -3,7 +3,7 @@
     <h2 class="mt-5 mb-lg-3 offset-lg-2">戯曲修正</h2>
   </div>
   <%= form_with model: @theater, url: dashboard_theater_path(@theater) do |f| %>
-    <%= render partial: "dashboard/theaters/form", locals: {f: f, submit: "更新"} %>
+    <%= render partial: "dashboard/theaters/form", locals: {f: f, countries: @countries, submit: "更新"} %>
   <% end %>
 
   <div class="row">
