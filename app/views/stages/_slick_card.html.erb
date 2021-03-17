@@ -35,28 +35,3 @@
     <%= link_to tag.name, tag_path(tag), class:"border rounded py-2 d-inline-block px-3 mb-4 mr-3 text-decoration-none text-secondary" %>
   <% end %>
 </div>
-<div class="card-footer d-flex pl-4">
-  <%= link_to favorite_stage_path(stage), method: :post, remote: true, style:"color: #4CA2FF;" do %>
-    <div class="favorite-stage-<%= stage.id %> ml-4">
-      <%= render partial: "stages/favorite", locals: {stage: stage} %>
-    </div>
-  <% end %>
-  <div class="review-stage-<%= stage.id %>">
-    <div class="d-flex">
-      <% if review.nil? %>
-        <div style="cursor:pointer; color: #4CA2FF;" data-toggle="modal" data-target="#reviewModal<%= stage.id %>">
-          <i class="far fa-check-circle ml-4"></i>
-          <span class="ml-1 mb-0"><%= stage.reviews.size %></span>
-        </div>
-      <% else %>
-        <%= link_to review_path(review, review_page: request.url), method: :delete, data: { confirm: 'レビューを削除します' }, style:"color: #4CA2FF;" do %>
-          <i class="fas fa-check-circle ml-4"></i>
-          <span class="ml-1 mb-0"><%= stage.reviews.size %></span>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-</div>
-<%= form_with model: stage.reviews.new, url: stage_reviews_path(stage) do |f| %>
-  <%= render partial: "reviews/modal", locals: {review: stage, review_title: stage.theater, f: f} %>
-<% end %>
