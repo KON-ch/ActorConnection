@@ -25,7 +25,7 @@
       <% @stages.each do |stage| %>
         <div class="col mb-4">
           <div class="card h-100 shadow-sm mt-5">
-            <%= render partial: "stages/slick_card", locals: {stage: stage, review: @review} %>
+            <%= render partial: "stages/slick_card", locals: {stage: stage} %>
           </div>
         </div>
       <% end %>
@@ -38,7 +38,7 @@
       <% @movies.each do |movie| %>
         <div class="col mb-4">
           <div class="card h-100 shadow-sm mt-5">
-            <%= render partial: "movies/slick_card", locals: {movie: movie, review: @review} %>
+            <%= render partial: "movies/slick_card", locals: {movie: movie} %>
           </div>
         </div>
       <% end %>

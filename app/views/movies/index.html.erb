@@ -11,7 +11,7 @@
           <% @recommend_movie.limit(4).each do |movie| %>
             <div class="col mb-4">
               <div class="card h-100 shadow-sm">
-                <%= render partial: "movies/slick_card", locals: {movie: movie, review: @review[movie.id]} %>
+                <%= render partial: "movies/slick_card", locals: {movie: movie} %>
               </div>
             </div>
           <% end %>
