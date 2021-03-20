@@ -1,22 +1,30 @@
 <div class="container" style="margin-top:12vh;">
   <div class="align-items-end d-flex justify-content-between border p-4">
-    <div class="d-flex align-items-start">
+    <div class="d-flex align-items-end">
       <div class="mr-4">
         <% if @movie.title.length < 8 %>
-          <h1 class="font-weight-bold"><%= @movie.title %></h1>
+          <h1 class="font-weight-bold mb-0"><%= @movie.title %></h1>
           <h2><%= @movie.sub_title %></h2>
         <% else %>
-          <h2 class="font-weight-bold"><%= @movie.title %></h2>
+          <h2 class="font-weight-bold mb-0"><%= @movie.title %></h2>
           <p class="m-0"><strong><%= @movie.sub_title %><strong></p>
         <% end %>
       </div>
-      <%= link_to favorite_movie_path(@movie), method: :post, remote: true, class:"text-decoration-none", style:"color: #FF8300;" do %>
+      <div style="color: #FC8300; font-size: 2.8rem;">
+        <i class="fas fa-star"></i>
+        <% if @movie.reviews.pluck(:rate).present? %>
+          <%= @movie.reviews.pluck(:rate).sum / @movie.reviews.pluck(:rate).size %>
+        <% else %>
+        0
+        <% end %>
+      </div>
+    </div>
+    <label class="d-none d-lg-inline mr-3">
+      <%= link_to favorite_movie_path(@movie), method: :post, remote: true, class:"text-decoration-none text-right", style:"color: #FF8300;" do %>
         <h2 class="favorite-movie-<%= @movie.id %> mb-0">
           <%= render partial: "movies/favorite", locals: {movie: @movie} %>
         </h2>
       <% end %>
-    </div>
-    <label class="d-none d-lg-inline mr-3">
       <% if @movie.production.present? %>
         <%= @movie.production.year %>年製作 / 
       <% end %>
