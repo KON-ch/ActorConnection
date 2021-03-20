@@ -13,7 +13,7 @@ threads threads_count, threads_count
 
 # Specifies the `environment` that Puma will run in.
 #
-environment ENV.fetch('RAILS_ENV') { 'production' }
+environment ENV.fetch('RAILS_ENV') { 'development' }
 
 # Specifies the `pidfile` that Puma will use.
 pidfile ENV.fetch('PIDFILE') { 'tmp/pids/server.pid' }
@@ -40,4 +40,4 @@ bind "unix://#{app_root}/tmp/sockets/puma.sock"
 
 stdout_redirect "#{app_root}/log/puma.stdout.log", "#{app_root}/log/puma.stderr.log", true
 
-daemonize
+# daemonize

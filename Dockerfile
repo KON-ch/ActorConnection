@@ -1,7 +1,7 @@
 FROM ruby:3.0.0
 
 RUN apt-get update -qq \
-    && apt-get install -y build-essential libpq-dev
+    && apt-get install -y build-essential libpq-dev postgresql-client
 
 RUN apt-get update && apt-get install -y curl apt-transport-https wget \ 
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
@@ -17,5 +17,9 @@ ADD Gemfile /webapp/Gemfile
 ADD Gemfile.lock /webapp/Gemfile.lock
 RUN bundle install
 ADD . /webapp
+
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
 
 RUN mkdir -p tmp/sockets

@@ -1,23 +1,31 @@
 version: '3'
 services:
+  db:
+    image: postgres
+    volumes: 
+      - ./tmp/db:/var/lib/postgresql/data
+    environment: 
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+
   app:
     build: .
     env_file: .env
-    command: bundle exec puma -C config/puma.rb -e production
+    command: bundle exec puma -C config/puma.rb
     volumes:
       - .:/webapp
       - ./public:/webapp/public
       - ./tmp:/webapp/tmp
       - ./log:/webapp/log
-      
+    depends_on:
+      - db
+
   web:
-    build:
-      context: containers/nginx
+    build: containers/nginx
     volumes:
       - ./public:/webapp/public
       - ./tmp:/webapp/tmp
     ports:
-      - "80:80"
+      - 80:80
     depends_on:
       - app
-    env_file: production.env
