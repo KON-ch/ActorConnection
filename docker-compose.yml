@@ -2,7 +2,7 @@ version: '3'
 services:
   app:
     build: .
-    env_file: production.env
+    env_file: .env
     command: bundle exec puma -C config/puma.rb -e production
     volumes:
       - .:/webapp
