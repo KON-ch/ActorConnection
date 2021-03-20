@@ -2,7 +2,7 @@
   <div>
     <p class="mt-3 mb-4"><%= post.user.name %></p>
     <%= link_to theater_path(post.theater_id), class:"text-decoration-none text-dark" do %>
-      <i class="fas fa-star mr-3 fa-lg" style="color: #FF8300;"></i>
+      <i class="fas fa-bookmark mr-3 fa-lg" style="color: #FF8300;"></i>
       <i class="fas fa-book-open fa-2x mr-3"></i>
       <p class="d-inline">
         <strong><%= post.theater.title %></strong>
@@ -14,7 +14,7 @@
   <div>
     <p class="mt-3 mb-4"><%= post.user.name %></p>
     <%= link_to movie_path(post.movie_id), class:"text-decoration-none text-dark" do %>
-      <i class="fas fa-star mr-3 fa-lg" style="color: #FF8300;"></i>
+      <i class="fas fa-bookmark mr-3 fa-lg" style="color: #FF8300;"></i>
       <i class="fas fa-film fa-2x mr-3"></i>
       <p class="d-inline">
         <strong><%= post.movie.title %></strong>
@@ -26,7 +26,7 @@
   <div>
     <p class="mt-3 mb-4"><%= post.user.name %></p>
     <%= link_to stage_path(post.stage_id), class:"text-decoration-none text-dark" do %>
-      <i class="fas fa-star mr-2 fa-lg" style="color: #FF8300;"></i>
+      <i class="fas fa-bookmark mr-2 fa-lg" style="color: #FF8300;"></i>
       <i class="fas fa-theater-masks fa-2x mr-2"></i>
       <p class="d-inline">
         <strong><%= post.stage.theater.title %></strong>
