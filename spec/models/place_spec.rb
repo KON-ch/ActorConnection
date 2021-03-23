@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Place, type: :model do
   describe 'Placeモデルのバリデーションテスト' do
     it '劇場名が必須であること' do
-      place = FactoryBot.build(:place, name: '')
+      place = FactoryBot.build(:place, name: 'テスト')
       expect(place).not_to be_valid
       expect(place.errors[:name]).to include('を入力してください')
     end
