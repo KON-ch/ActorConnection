@@ -61,7 +61,9 @@ jobs:
             echo "aws configure set region ap-northeast-1" >> ./sg.sh
             echo "aws ec2 authorize-security-group-ingress --group-id $SECURITY_GROUP_ID --protocol tcp --port 22 --cidr ${IP}/32" >> ./sg.sh
             bash ./sg.sh
-      - add_ssh_keys
+      - add_ssh_keys:
+          fingerprints:
+            - $FINGERPRINTS
       - run:
           name: ssh
           command: ssh -p $PORT_NAME $USER_NAME@$HOST_NAME 
