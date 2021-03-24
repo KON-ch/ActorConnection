@@ -48,6 +48,7 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 
+jobs:
   deploy:
     machine:
       image: circleci/classic:edge
