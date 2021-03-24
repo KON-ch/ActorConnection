@@ -47,3 +47,22 @@ jobs:
           command: bundle exec rspec
       - store_test_results:
           path: /tmp/test-results
+
+  deploy:
+    machine:
+      image: circleci/classic:edge
+    steps:
+      - checkout
+      - add_ssh_keys:
+      - run:
+          name: ssh
+          command: ssh ${USER_NAME}@${HOST_NAME} "cd /var/www/develop && git pull"
+
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - deploy:
+        filters:
+          branches:
+            only: master
