@@ -63,8 +63,11 @@ jobs:
             bash ./sg.sh
       - add_ssh_keys
       - run:
+          name: ssh
+          command: ssh -p $PORT_NAME $USER_NAME@$HOST_NAME 
+      - run:
           name: deploy
-          command: ssh -p $PORT_NAME $USER_NAME@$HOST_NAME 'bash /var/www/ActorConnection/ActorConnection/deploy.sh'
+          command: bash /var/www/ActorConnection/ActorConnection/deploy.sh
       - run:
           name: "revoke-security-group-ingress"
           command: |
