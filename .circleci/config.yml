@@ -49,13 +49,13 @@ jobs:
           path: /tmp/test-results
   deploy:
     machine:
-      image: circleci/classic:edge
+      enabled: true
     steps:
       - checkout
-      - add_ssh_keys:
+      - add_ssh_keys
       - run:
           name: ssh
-          command: ssh -p $PORT_NAME $USER_NAME@$HOST_NAME 'cd /var/www/ActorConnection/ActorConnection && git pull'
+          command: ssh -p $PORT_NAME $USER_NAME@$HOST_NAME '/var/www/ActorConnection/ActorConnection/deploy.sh'
 
 workflows:
     version: 2
@@ -63,9 +63,8 @@ workflows:
       jobs:
         - build
         - deploy:
-          requires: 
-            - build
-          filters:
-            branches:
-              only: 
-                - master
+            requires:
+              - build
+            filters:
+              branches:
+                only: master
