@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  - build:
     working_directory: ~/my-app
     docker:
       - image: circleci/ruby:3.0.0-node-browsers
@@ -48,7 +48,7 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 
-  deploy:
+  - deploy:
     machine:
       image: circleci/classic:edge
     steps:
@@ -64,8 +64,8 @@ workflows:
       jobs:
         - build
         - deploy:
-          requires:
-            - build
+          requires: 
+          - build
           filters:
             branches:
               only: master
