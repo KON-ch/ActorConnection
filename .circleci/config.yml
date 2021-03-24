@@ -47,7 +47,6 @@ jobs:
           command: bundle exec rspec
       - store_test_results:
           path: /tmp/test-results
-jobs:
   deploy:
     machine:
       image: circleci/classic:edge
@@ -56,7 +55,7 @@ jobs:
       - add_ssh_keys:
       - run:
           name: ssh
-          command: ssh ${USER_NAME}@${HOST_NAME} 'cd /var/www/ActorConnection/ActorConnection && git pull'
+          command: ssh -p $PORT_NAME $USER_NAME@$HOST_NAME 'cd /var/www/ActorConnection/ActorConnection && git pull'
 
 workflows:
     version: 2
