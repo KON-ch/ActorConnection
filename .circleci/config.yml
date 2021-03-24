@@ -52,6 +52,7 @@ jobs:
     machine:
       image: circleci/classic:edge
     steps:
+      - checkout
       - add_ssh_keys:
       - run:
           name: ssh
