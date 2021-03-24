@@ -66,6 +66,6 @@ workflows:
           - deploy
             requires
               - build
-            filters:
+            filters
               branches:
                 only: master
