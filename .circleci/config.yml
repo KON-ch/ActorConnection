@@ -47,8 +47,6 @@ jobs:
           command: bundle exec rspec
       - store_test_results:
           path: /tmp/test-results
-
-jobs:
   deploy:
     machine:
       image: circleci/classic:edge
@@ -61,11 +59,9 @@ jobs:
 
 workflows:
     version: 2
-    build:
+    build-deploy:
       jobs:
         - build
-    deploy:
-      jobs:
         - deploy:
           requires: 
             - build
