@@ -1,5 +1,5 @@
 set +e
-cd /home/ec2-user/ActorConnection/
+cd /var/www/ActorConnection/ActorConnection
 git pull
 bundle install --without test development
 bundle exec rails assets:precompile RAILS_ENV=production
