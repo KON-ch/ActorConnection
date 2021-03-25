@@ -48,8 +48,8 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
   deploy:
-    machine:
-      enabled: true
+    docker:
+      - image: circleci/ruby:3.0.0-node-browsers
     steps:
       - checkout
       - run: sudo pip install awscli
