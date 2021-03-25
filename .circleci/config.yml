@@ -50,6 +50,7 @@ jobs:
   deploy:
     docker:
       - image: circleci/ruby:3.0.0-node-browsers
+      - image: buildpack-deps:trusty
     steps:
       - checkout
       - run: sudo pip install awscli
