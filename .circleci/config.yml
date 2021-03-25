@@ -50,7 +50,6 @@ jobs:
   deploy:
     machine:
       image: circleci/classic:edge
-enabled: true
     steps:
       - checkout
       - run: sudo pip install awscli
