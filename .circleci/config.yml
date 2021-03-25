@@ -49,7 +49,7 @@ jobs:
           path: /tmp/test-results
   deploy:
     docker:
-      - image: circleci/ruby:3.0.0-node-browsers
+      - image: circleci/classic:edge
     steps:
       - checkout
       - add_ssh_keys:
