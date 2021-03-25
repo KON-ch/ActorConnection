@@ -1,8 +1,6 @@
 set +e
 cd /var/www/ActorConnection/ActorConnection
 git pull
-gem update --system
-gem install bundler -v 2.2.3
 bundle install --without test development
 bundle exec rails assets:precompile RAILS_ENV=production
 bundle exec rails db:migrate RAILS_ENV=production
