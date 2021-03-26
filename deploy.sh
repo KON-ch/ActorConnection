@@ -1,7 +1,6 @@
 set +e
 
 source ~/.bash_profile
-source ~/.bashrc
 
 cd /var/www/ActorConnection/ActorConnection
 git pull
