@@ -64,9 +64,12 @@ jobs:
       - add_ssh_keys:
       - run:
           name: ssh
+          command: ssh $USER_NAME@$HOST_NAME
+      - run:
+          name: deploy
           command: |
-            ssh $USER_NAME@$HOST_NAME
-            bash /var/www/ActorConnection/ActorConnection/deploy.sh
+            cd /var/www/ActorConnection/ActorConnection
+            bash ./deploy.sh
       - run:
           name: "revoke-security-group-ingress"
           command: |
