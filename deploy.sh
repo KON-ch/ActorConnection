@@ -1,4 +1,4 @@
-set +e
+set -ex
 cd /var/www/ActorConnection/ActorConnection
 git pull
 bundle install --without test development
