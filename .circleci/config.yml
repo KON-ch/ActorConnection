@@ -63,11 +63,9 @@ jobs:
             bash ./sg.sh
       - add_ssh_keys:
       - run:
-          name: ssh
-          command: ssh $USER_NAME@$HOST_NAME
-      - run:
-          name: deploy
+          name: ssh & deploy
           command: |
+            ssh $USER_NAME@$HOST_NAME
             cd /var/www/ActorConnection/ActorConnection
             bash ./deploy.sh
       - run:
