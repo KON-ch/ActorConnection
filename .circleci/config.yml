@@ -49,10 +49,10 @@ jobs:
           path: /tmp/test-results
   deploy:
     docker:
-      - image: circleci/ruby:3.0.0-node-browsers
+      image: circleci/ruby:3.0.0-node-browsers
     steps:
       - checkout
-      - run: sudo pip install awscli
+      - run: docker run --rm -it amazon/aws-cli command
       - run:
           name: authorize-security-group-ingress
           command: |
