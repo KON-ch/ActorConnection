@@ -1,0 +1,15 @@
+current directory: /var/www/ActorConnection/ActorConnection/vendor/cache/ruby/3.0.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+/home/ec2-user/.rbenv/versions/3.0.0/bin/ruby -I /home/ec2-user/.rbenv/versions/3.0.0/lib/ruby/3.0.0 -r ./siteconf20210325-14922-twoj47.rb extconf.rb
+creating Makefile
+
+current directory: /var/www/ActorConnection/ActorConnection/vendor/cache/ruby/3.0.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /var/www/ActorConnection/ActorConnection/vendor/cache/ruby/3.0.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /var/www/ActorConnection/ActorConnection/vendor/cache/ruby/3.0.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20210325-14922-ywp1ec
