@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Theater < ApplicationRecord
   has_many :stages, dependent: :destroy
   has_many :reviews, dependent: :destroy

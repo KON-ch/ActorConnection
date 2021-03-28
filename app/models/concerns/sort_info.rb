@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SortInfo
   def sort_info(sort_order, page)
     case sort_order[:sort]

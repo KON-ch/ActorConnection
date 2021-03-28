@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class MoviesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_movie, only: %i[show edit update destroy favorite]
-  before_action :set_countries, only: %i[index new edit]
+  before_action :set_countries, only: %i[index edit]
 
   def index
     if !params[:keyword].nil?
@@ -21,6 +23,7 @@ class MoviesController < ApplicationController
     like_movies = current_user.likees(Movie)
     @like_tags = like_movies.map(&:tag_ids).flatten!
     return if @like_tags.nil?
+
     tag = Tag.find(@like_tags.max_by { |v| @like_tags.count(v) })
     @recommend_movie = tag.movies.where.not(id: like_movies.pluck(:id), request: false)
   end

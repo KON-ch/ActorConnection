@@ -1,26 +1,30 @@
-class Dashboard::SoireesController < ApplicationController
-  layout 'dashboard/dashboard'
+# frozen_string_literal: true
 
-  def index
-    @soirees = Soiree.all.order(performance_date: :asc)
-    @soiree_new = Soiree.new
-  end
+module Dashboard
+  class SoireesController < ApplicationController
+    layout 'dashboard/dashboard'
 
-  def create
-    @soiree = Soiree.new(soiree_params)
-    @soiree.save
-    redirect_to dashboard_soirees_path
-  end
+    def index
+      @soirees = Soiree.all.order(performance_date: :asc)
+      @soiree_new = Soiree.new
+    end
 
-  def destroy
-    soiree = Soiree.find(params[:id])
-    soiree.destroy
-    redirect_to dashboard_soirees_path
-  end
+    def create
+      @soiree = Soiree.new(soiree_params)
+      @soiree.save
+      redirect_to dashboard_soirees_path
+    end
 
-  private
+    def destroy
+      soiree = Soiree.find(params[:id])
+      soiree.destroy
+      redirect_to dashboard_soirees_path
+    end
 
-  def soiree_params
-    params.require(:soiree).permit(:performance_date)
+    private
+
+    def soiree_params
+      params.require(:soiree).permit(:performance_date)
+    end
   end
 end

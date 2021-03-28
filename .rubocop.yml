@@ -5,3 +5,13 @@ require:
 
 AllCops:
   TargetRubyVersion: 3.0
+
+Metrics/LineLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Style/Documentation:
+  Enabled: false

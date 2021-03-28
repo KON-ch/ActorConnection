@@ -1,27 +1,31 @@
-class Dashboard::CountriesController < ApplicationController
-  before_action :authenticate_admin!
-  layout 'dashboard/dashboard'
+# frozen_string_literal: true
 
-  def index
-    @countries = Country.all
-    @country = Country.new
-  end
+module Dashboard
+  class CountriesController < ApplicationController
+    before_action :authenticate_admin!
+    layout 'dashboard/dashboard'
 
-  def create
-    country = Country.new(country_params)
-    country.save
-    redirect_to dashboard_countries_path
-  end
+    def index
+      @countries = Country.all
+      @country = Country.new
+    end
 
-  def destroy
-    country = Country.find(params[:ie])
-    country.destroy
-    redirect_to dashboard_countries_path
-  end
+    def create
+      country = Country.new(country_params)
+      country.save
+      redirect_to dashboard_countries_path
+    end
 
-  private
+    def destroy
+      country = Country.find(params[:ie])
+      country.destroy
+      redirect_to dashboard_countries_path
+    end
 
-  def country_params
-    params.require(:country).permit(:name)
+    private
+
+    def country_params
+      params.require(:country).permit(:name)
+    end
   end
 end

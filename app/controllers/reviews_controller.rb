@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
 
@@ -14,7 +16,8 @@ class ReviewsController < ApplicationController
 
   def update
     review = Review.find(params[:id])
-    if review.update(review_params.merge(post_id: review.post_id, theater_id: review.theater_id, movie_id: review.movie_id, stage_id: review.stage_id))
+    if review.update(review_params.merge(post_id: review.post_id, theater_id: review.theater_id,
+                                         movie_id: review.movie_id, stage_id: review.stage_id))
       redirect_to page_params[:review_page]
       flash[:notice] = 'レビューを編集しました'
     else

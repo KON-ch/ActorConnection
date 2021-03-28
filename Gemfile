@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.3'
+gem 'rails', '6.0.3.6'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
@@ -41,12 +43,17 @@ gem 'dotenv-rails'
 # Use Schemafile as migration file
 gem 'ridgepole'
 
+# Use pogrespl as Database system
 gem 'pg'
+
+# Use sentry
+gem 'sentry-rails'
+gem 'sentry-ruby'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  
+
   # Use rubocop
   gem 'rubocop', '~> 1.9', require: false
   gem 'rubocop-performance', require: false
@@ -54,9 +61,8 @@ group :development, :test do
 
   # Use rspec
   gem 'factory_bot_rails'
-  gem 'rspec-rails'
   gem 'rails-controller-testing'
-
+  gem 'rspec-rails'
 end
 
 group :development do
