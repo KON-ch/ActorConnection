@@ -1,7 +1,11 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
-class Dashboard::MoviesControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+module Dashboard
+  class MoviesControllerTest < ActionDispatch::IntegrationTest
+    # test "the truth" do
+    #   assert true
+    # end
+  end
 end

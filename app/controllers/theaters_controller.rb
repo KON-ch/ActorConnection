@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class TheatersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_theater, only: %i[show edit update destroy favorite]
-  before_action :set_countries, only: %i[index new edit]
+  before_action :set_countries, only: %i[index edit]
 
   def index
     if params[:keyword].present?

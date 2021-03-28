@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WebsController < ApplicationController
   def index
     @movies = Movie.order(likers_count: :desc).limit(6)

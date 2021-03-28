@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MovieTag < ApplicationRecord
   belongs_to :movie
   belongs_to :tag

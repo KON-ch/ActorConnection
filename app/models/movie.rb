@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Movie < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :reviews, dependent: :destroy

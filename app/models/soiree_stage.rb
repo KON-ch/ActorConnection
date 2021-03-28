@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SoireeStage < ApplicationRecord
   belongs_to :soiree
   belongs_to :stage

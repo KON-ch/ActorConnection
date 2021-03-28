@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Country < ApplicationRecord
   has_many :theaters, dependent: :nullify
   has_many :movies, dependent: :nullify
