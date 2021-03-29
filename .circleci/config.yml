@@ -47,8 +47,6 @@ jobs:
           command: bundle exec rspec
       - store_test_results:
           path: /tmp/test-results
-      - run: pipenv run coverage run --source='.' ./manage.py test
-      - run: pipenv run codecov
 
   deploy:
     machine:
