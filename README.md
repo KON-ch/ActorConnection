@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/KON-ch/ActorConnection/branch/master/graph/badge.svg?token=S8N6TB55Q1)](https://codecov.io/gh/KON-ch/ActorConnection)
+
 # ActorConnection ( アクター・コネクション )
 
 ## アプリ URL
