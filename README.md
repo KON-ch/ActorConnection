@@ -47,6 +47,7 @@
 
 ## テスト
 - RSpec
+- Coverage 1211 / 1298 LOC (93.3%) covered.
 
 ## 監視システム
 - Sentry
