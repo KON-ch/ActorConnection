@@ -7,10 +7,12 @@
       <strong><%= review.theater.title %></strong>
     <% end %>
     にレビューしました
-    <div class="mt-3 border p-4 d-flex">
-      <div class="mr-3 d-flex flex-nowrap" style="color: #FF8300;"><i class="fas fa-star mr-2 mt-1"></i><%= review.rate %></div>
-      <p class="mb-0"><%= review.content %></p>
+    <div class="mt-3 d-flex align-items-center">
+      <div class="mr-3 d-flex flex-nowrap" style="color: #FF8300; font-size:2.8rem;">
+        <i class="fas fa-star mr-2 mt-1"></i><%= review.rate %>
+      </div>
     </div>
+    <p class="mt-2 ml-3"><%= review.content %></p>
   </div>
 <% elsif review.movie_id.present? %>
   <div class="mr-2">
@@ -21,10 +23,12 @@
       <strong><%= review.movie.title %></strong>
     <% end %>
     にレビューしました
-    <div class="mt-3 border p-4 d-flex">
-      <div class="mr-3 d-flex flex-nowrap" style="color: #FF8300;"><i class="fas fa-star mr-2 mt-1"></i><%= review.rate %></div>
-      <p class="mb-0"><%= review.content %></p>
+    <div class="mt-3 d-flex align-items-center">
+      <div class="mr-3 d-flex flex-nowrap" style="color: #FF8300; font-size:2.8rem;">
+        <i class="fas fa-star mr-2 mt-1"></i><%= review.rate %>
+      </div>
     </div>
+    <p class="mt-2 ml-3"><%= review.content %></p>
   </div>
 <% elsif review.stage_id.present? %>
   <div class="mr-2">
@@ -35,9 +39,11 @@
       <strong><%= review.stage.theater.title %></strong>
     <% end %>
     にレビューしました
-    <div class="mt-3 border p-4 d-flex">
-      <div class="mr-3 d-flex flex-nowrap" style="color: #FF8300;"><i class="fas fa-star mr-2 mt-1"></i><%= review.rate %></div>
-      <p class="mb-0"><%= review.content %></p>
+    <div class="mt-3 d-flex align-items-center">
+      <div class="mr-3 d-flex flex-nowrap" style="color: #FF8300; font-size:2.8rem;">
+        <i class="fas fa-star mr-2 mt-1"></i><%= review.rate %>
+      </div>
     </div>
+    <p class="mt-2 ml-3"><%= review.content %></p>
   </div>
 <% end %>
