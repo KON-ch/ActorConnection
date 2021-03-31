@@ -18,4 +18,8 @@ ADD Gemfile.lock /webapp/Gemfile.lock
 RUN bundle install
 ADD . /webapp
 
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+
 RUN mkdir -p tmp/sockets
