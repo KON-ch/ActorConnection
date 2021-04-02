@@ -13,8 +13,13 @@ default: &default
   pool: 5
 
 development:
-  <<: *default
-  database: actorconnection_development
+  primary: &primary
+    <<: *default
+    database: actorconnection_development
+  replica:
+    <<: *primary
+    database: actorconnection_development
+    replica: true
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -24,8 +29,15 @@ test:
   database: actorconnection_test
 
 production:
-  <<: *default
-  database: actorconnection_production
-  host: <%= Rails.application.credentials.DB_HOST %>
-  username: <%= Rails.application.credentials.DB_USERNAME %>
-  password: <%= Rails.application.credentials.DB_PASSWORD %>
+  primary: &primary
+    <<: *default
+    database: actorconnection_production
+    host: <%= Rails.application.credentials.DB_HOST %>
+    username: <%= Rails.application.credentials.DB_USERNAME %>
+    password: <%= Rails.application.credentials.DB_PASSWORD %>
+  replica:
+    <<: *primary
+    database: actorconnection_production
+    host: <%= Rails.application.credentials.DB_HOST_REPLICA %>
+    username: <%= Rails.application.credentials.DB_USERNAME %>
+    password: <%= Rails.application.credentials.DB_PASSWORD %>
