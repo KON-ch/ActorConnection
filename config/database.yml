@@ -25,8 +25,13 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: actorconnection_test
+  primary: &primary
+    <<: *default
+    database: actorconnection_test
+  replica:
+    <<: *primary
+    database: actorconnection_test
+    replica: true
 
 production:
   primary: &primary
