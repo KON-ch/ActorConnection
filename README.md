@@ -37,7 +37,7 @@
 - EC2
 - Nginx
 - Puma
-!K![AWS](https://user-images.githubusercontent.com/70884785/113464132-74f8c400-9465-11eb-885d-e865f2bbef5e.png)
+![AWS構成図](https://user-images.githubusercontent.com/70884785/113464184-c2753100-9465-11eb-901f-566025cb45cb.png)
 
 ## データベース
 - RDS
