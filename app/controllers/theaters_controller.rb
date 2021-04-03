@@ -111,7 +111,7 @@ class TheatersController < ApplicationController
       @keyword = sort_params[:sort_keyword]
       sort_theater(search_theater)
     else
-      sort_theater(Theater)
+      sort_theater(Theater.preload(:country, :reviews))
     end
   end
 

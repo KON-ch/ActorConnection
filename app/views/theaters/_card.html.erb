@@ -10,7 +10,7 @@
     <% if theater.reviews.pluck(:rate).present? %>
       <%= theater.reviews.pluck(:rate).sum / theater.reviews.pluck(:rate).size %>
     <% else %>
-    0
+      -
     <% end %>
   </div>
   <p class="card-text my-3">作者 : <%= theater.writer %></p>
