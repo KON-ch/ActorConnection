@@ -3,7 +3,7 @@
   <h2 class="mt-3 ml-3"><i class="fas fa-theater-masks mr-2"></i>関連舞台</h2>
   <hr>
   <div class="row row-cols-1 row-cols-lg-2">
-    <% @tag.stages.each do |stage| %>
+    <% @tag_stages.each do |stage| %>
       <div class="col mb-4">
         <div class="card h-100 shadow-sm">
           <%= render partial: "stages/card", locals: { stage: stage, review: @stage_review[stage.id] } %>
@@ -17,7 +17,7 @@
   <h2 class="ml-3" style="margin-top:8vh;"><i class="fas fa-film mr-2"></i>関連映画</h2>
   <hr>
   <div class="row row-cols-1 row-cols-lg-2">
-    <% @tag.movies.each do |movie| %>
+    <% @tag_movies.each do |movie| %>
       <div class="col mb-4">
         <div class="card h-100 shadow-sm">
           <%= render partial: "movies/card", locals: { movie: movie, review: @movie_review[movie.id] } %>
