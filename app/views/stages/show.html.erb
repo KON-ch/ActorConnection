@@ -145,7 +145,7 @@
     <h2 class="mt-5" style="color: #FC8300;"><%= tag.name %></h2>
     <hr>
     <div class="row row-cols-1 row-cols-md-2">
-      <% tag.movies.limit(3).each do |movie| %>
+      <% tag_movies(tag.id).each do |movie| %>
         <div class="col mb-4">
           <div class="card  h-100 shadow-sm">
             <%= render partial: "movies/card", locals: { movie: movie, review: @review[movie.id] } %>
