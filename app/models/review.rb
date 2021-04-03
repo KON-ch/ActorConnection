@@ -2,8 +2,8 @@
 
 class Review < ApplicationRecord
   belongs_to :user
-  belongs_to :theater, -> { includes :country }, inverse_of: :reviews, optional: true
-  belongs_to :movie, -> { includes :country }, inverse_of: :reviews, optional: true
+  belongs_to :theater, inverse_of: :reviews, optional: true
+  belongs_to :movie, inverse_of: :reviews, optional: true
   belongs_to :stage, -> { includes :theater }, inverse_of: :reviews, optional: true
   has_many :posts, dependent: :destroy
 
