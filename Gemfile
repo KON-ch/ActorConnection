@@ -46,6 +46,10 @@ gem 'ridgepole'
 # Use pogrespl as Database system
 gem 'pg'
 
+# Use sentry
+gem 'sentry-rails'
+gem 'sentry-ruby'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -83,9 +87,6 @@ end
 
 group :development, :production do
   gem 'listen', '~> 3.2'
-  # Use sentry
-  gem 'sentry-rails'
-  gem 'sentry-ruby'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
