@@ -142,13 +142,13 @@
   </div>
   <h1 class="mt-5 text-light py-3 pl-5" style="background-color: #4CA2FF;"><i class="fas fa-theater-masks mr-3"></i>おすすめ舞台</h1>
   <% @movie.tags.each do |tag| %>
-    <% if tag.stages.empty? %>
+    <% if tag_stages(tag.id).empty? %>
       現在、上演予定がありません
     <% else %>
       <h2 class="mt-5" style="color: #FC8300;"><%= tag.name %></h2>
       <hr>
       <div class="row row-cols-1 row-cols-lg-2">
-        <% tag.stages.limit(3).each do |stage| %>
+        <% tag_stages(tag.id).each do |stage| %>
           <div class="col mb-4">
             <div class="card h-100 shadow-sm">
               <%= render partial: "stages/card", locals: { stage: stage, review: @review[stage.id] } %>

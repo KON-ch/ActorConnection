@@ -13,9 +13,9 @@ class MoviesController < ApplicationController
       sort_search
     elsif params[:country].present?
       sort_country(params[:country])
-      display_movie(Movie.preload(:country, :reviews).where(country_id: @country))
+      display_movie(Movie.preload(:country, :reviews, :movie_tags, :tags).where(country_id: @country))
     else
-      display_movie(Movie.preload(:country, :reviews))
+      display_movie(Movie.preload(:country, :reviews, :movie_tags, :tags))
     end
     @sort_list = Movie.sort_list
     @movie = Movie.new
@@ -25,7 +25,7 @@ class MoviesController < ApplicationController
     return if @like_tags.nil?
 
     tag = Tag.find(@like_tags.max_by { |v| @like_tags.count(v) })
-    @recommend_movie = tag.movies.where.not(id: like_movies.pluck(:id), request: false)
+    @recommend_movie = tag.movies.where.not(id: like_movies.pluck(:id), request: false).preload(:country, :tags)
   end
 
   def show
@@ -35,7 +35,7 @@ class MoviesController < ApplicationController
     end
 
     movie_reviews = @movie.reviews
-    @reviews = movie_reviews.where.not(user: current_user)
+    @reviews = movie_reviews.preload(:user, user: :image_attachment).where.not(user: current_user)
     @new_review = @reviews.new
     @my_review = movie_reviews.find_by(user_id: current_user.id)
     @stages = Stage.limit(3)
@@ -84,7 +84,7 @@ class MoviesController < ApplicationController
   end
 
   def set_movie
-    @movie = Movie.preload(:country).find(params[:id])
+    @movie = Movie.preload(:country, :tags).find(params[:id])
   end
 
   def set_countries
@@ -100,7 +100,7 @@ class MoviesController < ApplicationController
   end
 
   def search_movie
-    Movie.preload(:country, :reviews).search_movies(@keyword)
+    Movie.preload(:country, :reviews, :tags, :movie_tags).search_movies(@keyword)
   end
 
   def total_count(movie)
@@ -120,12 +120,12 @@ class MoviesController < ApplicationController
   def sort_search
     if sort_params[:sort_country].present?
       sort_country(sort_params[:sort_country])
-      sort_movie(Movie.preload(:country, :reviews).where(country_id: @country))
+      sort_movie(Movie.preload(:country, :reviews, :tags).where(country_id: @country))
     elsif sort_params[:sort_keyword].present?
       @keyword = sort_params[:sort_keyword]
       sort_movie(search_movie)
     else
-      sort_movie(Movie)
+      sort_movie(Movie.preload(:country, :movie_tags, :tags, :reviews))
     end
   end
 
