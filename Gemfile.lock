@@ -138,6 +138,7 @@ GEM
     minitest (5.14.4)
     msgpack (1.4.2)
     multipart-post (2.1.1)
+    newrelic_rpm (6.15.0)
     nio4r (2.5.7)
     nokogiri (1.11.2-x86_64-darwin)
       racc (~> 1.4)
@@ -328,6 +329,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   kaminari
   listen (~> 3.2)
+  newrelic_rpm
   pg
   puma (~> 4.1)
   rails (= 6.0.3.6)
