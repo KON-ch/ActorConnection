@@ -44,9 +44,9 @@ class UsersController < ApplicationController
   def edit_password; end
 
   def favorite
-    @theaters = @user.likees(Theater.preload(:country, :reviews).order(updated_at: :desc))
-    @movies = @user.likees(Movie.preload(:country, :reviews).order(updated_at: :desc))
-    @stages = @user.likees(Stage.preload(:theater, :reviews).order(updated_at: :desc))
+    @theaters = @user.likees(Theater.preload(:country).order(updated_at: :desc))
+    @movies = @user.likees(Movie.preload(:country, :tags).order(updated_at: :desc))
+    @stages = @user.likees(Stage.preload(:theater, :place, :tags).order(updated_at: :desc))
     @theater_review = current_user.reviews.theaters(@theaters)
     @movie_review = current_user.reviews.movies(@movies)
     @stage_review = current_user.reviews.stages(@stages)
