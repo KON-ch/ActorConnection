@@ -37,10 +37,11 @@
 - EC2
 - Nginx
 - Puma
-![AWS構成図](https://user-images.githubusercontent.com/70884785/111867891-54872f00-89ba-11eb-9a77-1ae7db77953e.png)
+![AWS構成図](https://user-images.githubusercontent.com/70884785/113464184-c2753100-9465-11eb-901f-566025cb45cb.png)
 
 ## データベース
 - RDS
+- Read Replica
 - postgreSQL
 ![ER図](https://user-images.githubusercontent.com/70884785/111099230-66b33880-8588-11eb-8be1-7e97e1ccb227.png)
 
