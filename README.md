@@ -52,8 +52,9 @@
 - RSpec
 - Coverage 1211 / 1298 LOC (93.3%) covered.
 
-## 監視システム
+## 監視
 - Sentry
+- New Relic
 
 ## 機能一覧
 - ログイン機能
