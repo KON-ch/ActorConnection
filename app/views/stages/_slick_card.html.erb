@@ -7,11 +7,11 @@
   <%= stage.end_date.day %>日(<%= %w(日 月 火 水 木 金 土)[stage.end_date.wday] %>)
 </div>
 <div class="card-body pl-4 pb-0 mb-4 mb-lg-5">
-  <% if stage.start_date <= Date.today && stage.end_date >= Date.today %>
+  <% if stage_playing(stage) %>
     <label class="badge badge-pill badge-warning text-light py-2 px-4 mt-3" style="background-color: #FF8300;"><h2>上演中</h2></label>
-  <% elsif stage.start_date - Date.today <= 14 && stage.start_date - Date.today > 0 %>
+  <% elsif stage_14days_ago(stage) %>
     <label class="badge badge-pill badge-primary text-light pt-3 px-4 mt-3">初日まで<h2><%= (stage.start_date - Date.today).to_i %>日</h2></label>
-  <% elsif stage.end_date < Date.today %>
+  <% elsif stage_finished(stage) %>
     <label class="badge badge-pill badge-secondary text-light py-3 px-4 mt-3">終演しました</h2></label>
   <% end %>
   <div class="d-flex align-items-end">
@@ -22,10 +22,10 @@
   </div>
   <div class="mt-4" style="color: #FC8300;">
     <i class="fas fa-star"></i>
-    <% if stage.reviews.pluck(:rate).present? %>
-      <%= stage.reviews.pluck(:rate).sum / stage.reviews.pluck(:rate).size %>
+    <% if stage.reviews.pluck(:rate).sum == 0 %>
+      -
     <% else %>
-    0
+      <%= stage.reviews.pluck(:rate).sum / stage.reviews.pluck(:rate).size %>
     <% end %>
   </div>
   <p class="mt-3">演出 : <%= stage.director %></p>
