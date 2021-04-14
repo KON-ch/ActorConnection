@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+m# frozen_string_literal: true
 
 class AddEvaluationToReviews < ActiveRecord::Migration[6.0]
   def change
