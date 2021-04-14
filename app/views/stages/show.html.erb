@@ -85,7 +85,7 @@
     </h2>
   </div>
   <div class="mt-5">
-    <h2 class="d-inline">あらすじ</h2>
+    <h2 class="d-inline font-weight-bold">あらすじ</h2>
     <label id="company" class="text-decoration-none">( 引用元: <%= link_to @stage.company + "公式サイト", @stage.quote_url, id:"company" %> )</label>
     <hr>
     <blockquote class="blockquote">
@@ -129,7 +129,23 @@
       <% end %>
     </div>
     <div class="col-sm-6 offset-sm-1 mt-5">
-      <label>劇場 :</label>
+      <% if @stage.plices.present? %>
+        <div class="row">
+          <div class="col-sm-4 col-3 offset-1 offset-sm-0">
+            <h2 class="mb-4 font-weight-bold">料金</h2>
+          </div>
+          <div class="mt-2 col-8">
+            <% @stage.plices.each do |plice| %>
+              <div class="row">
+                <p class="col-sm-6 col"><%= plice.name %></p>
+                <p class="col-sm-6 col justify-content-end"><%= plice.fee %>円</p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <hr>
+      <% end %>
+      <h2 class="mt-5 mb-3 font-weight-bold d-inline-block">劇場</h2>
       <% if @stage.place.nil? %>
         <%= link_to "未登録", edit_stage_path(@stage), class:"btn btn-lg btn-outline-primary mb-3 ml-2" %>
       <% else %>

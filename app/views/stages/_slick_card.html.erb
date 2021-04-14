@@ -30,7 +30,12 @@
   </div>
   <p class="mt-3">演出 : <%= stage.director %></p>
   <p class="mt-3">作者 : <%= stage.theater.writer %></p>
-  <p class="mt-3 mb-5">劇場 : <%= stage.place.name %></p>
+  <p class="mt-3">劇場 : <%= stage.place.name %></p>
+  <p class="mt-3  mb-5">
+    <% if stage.plices.present? %>
+      <%= stage.plices[0].name %> : <%= stage.plices[0].fee %>円
+    <% end %>
+  </p>
   <% stage.tags.each do |tag| %>
     <%= link_to tag.name, tag_path(tag), class:"border rounded py-2 d-inline-block px-3 mb-4 mr-3 text-decoration-none text-secondary" %>
   <% end %>

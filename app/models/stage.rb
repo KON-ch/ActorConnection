@@ -10,6 +10,9 @@ class Stage < ApplicationRecord
   has_many :stage_tags, dependent: :destroy
   has_many :tags, through: :stage_tags
   accepts_nested_attributes_for :stage_tags
+  has_many :stage_plices, dependent: :destroy
+  has_many :plices, through: :stage_plices
+  accepts_nested_attributes_for :stage_plices
   belongs_to :place, optional: true
   belongs_to :user
 

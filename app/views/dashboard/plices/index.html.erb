@@ -1,0 +1,23 @@
+<div>
+  <%= form_with model: @plice_new, url: dashboard_plices_path, method: :post, loacl: true do |f| %>
+    <div class="form-group row my-0">
+      <%= f.label :name, "料金種別", class:"col-lg-1 offset-lg-1 col-form-label text-left px-0" %>
+      <%= f.select :name, Plice.names.keys.to_a, { prompt: "" }, class:"col-lg-3 col-form-label text-left px-0" %>
+      <%= f.text_field :fee, class:"col-lg-3 col-form-label text-left px-0" %>
+      <%= f.submit "登録", class:"offset-lg-1" %>
+    </div>
+
+  <% end %>
+</div>
+<table class="table table-hover mt-5">
+  <tbody>
+    <% @plices.each do |plice| %>
+      <tr>
+        <td><%= plice.id %></td>
+        <td><%= plice.name %></td>
+        <td><%= plice.fee %>円</td>
+        <td><%= link_to "削除", dashboard_plice_path(plice), method: :delete, data: { confirm: '本当に削除しますか？' }, class:"btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

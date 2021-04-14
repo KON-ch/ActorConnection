@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_01_092356) do
+ActiveRecord::Schema.define(version: 2021_04_07_133812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,13 @@ ActiveRecord::Schema.define(version: 2021_03_01_092356) do
     t.index ["name"], name: "index_places_on_name", unique: true
   end
 
+  create_table "plices", force: :cascade do |t|
+    t.integer "name", null: false
+    t.integer "fee", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer "theater_id"
     t.integer "stage_id"
@@ -178,6 +185,15 @@ ActiveRecord::Schema.define(version: 2021_03_01_092356) do
     t.date "performance_date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "stage_plices", force: :cascade do |t|
+    t.bigint "stage_id"
+    t.bigint "plice_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["plice_id"], name: "index_stage_plices_on_plice_id"
+    t.index ["stage_id"], name: "index_stage_plices_on_stage_id"
   end
 
   create_table "stage_tags", force: :cascade do |t|
@@ -267,6 +283,8 @@ ActiveRecord::Schema.define(version: 2021_03_01_092356) do
   add_foreign_key "reviews", "users"
   add_foreign_key "soiree_stages", "soirees"
   add_foreign_key "soiree_stages", "stages"
+  add_foreign_key "stage_plices", "plices"
+  add_foreign_key "stage_plices", "stages"
   add_foreign_key "stage_tags", "stages"
   add_foreign_key "stage_tags", "tags"
   add_foreign_key "stages", "places"

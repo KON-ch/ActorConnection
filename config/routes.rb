@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :movies, except: [:show]
     resources :soirees, only: %i[index create destroy]
     resources :tags, only: %i[index create destroy]
+    resources :plices, only: %i[index create destroy]
     resources :countries, only: %i[index create destroy]
   end
 

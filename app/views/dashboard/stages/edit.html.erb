@@ -2,7 +2,7 @@
   <div class="row">
     <h2 class="mt-5 mb-lg-3 offset-lg-2">公演情報変更</h2>
   </div>
-  <%= form_with model: @stage, url: dashboard_stage_path(@stage), local: true do |f| %>
+  <%= form_with model: @stage, url: dashboard_stage_path(@stage), method: :put, local: true do |f| %>
     <%= render partial: "dashboard/stages/form", locals: {f: f, submit: "更新"} %>
   <% end %>
 
