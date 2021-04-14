@@ -3,7 +3,7 @@ class Plice < ApplicationRecord
   has_many :stages, through: :stage_plices
 
   validates :name, :fee, presence: true
-  validates :name, :fee, numericality: { only_integer: true}
+  validates :fee, numericality: { only_integer: true}
   
   enum name: {
     "一般": 0, 
