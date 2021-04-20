@@ -34,15 +34,8 @@ test:
     replica: true
 
 production:
-  primary: &primary
-    <<: *default
-    database: actorconnection_production
-    host: <%= Rails.application.credentials.DB_HOST %>
-    username: <%= Rails.application.credentials.DB_USERNAME %>
-    password: <%= Rails.application.credentials.DB_PASSWORD %>
-  replica:
-    <<: *primary
-    database: actorconnection_production
-    host: <%= Rails.application.credentials.DB_HOST %>
-    username: <%= Rails.application.credentials.DB_USERNAME %>
-    password: <%= Rails.application.credentials.DB_PASSWORD %>
+  <<: *default
+  database: actorconnection_production
+  host: <%= Rails.application.credentials.DB_HOST %>
+  username: <%= Rails.application.credentials.DB_USERNAME %>
+  password: <%= Rails.application.credentials.DB_PASSWORD %>
