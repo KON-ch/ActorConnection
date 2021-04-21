@@ -53,7 +53,7 @@ jobs:
       image: circleci/classic:edge
     steps:
       - checkout
-      - run: sudo -H pip install awscli
+      - run: sudo pip install awscli
       - run:
           name: authorize-security-group-ingress
           command: |
