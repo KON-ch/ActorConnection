@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class TagsController < ApplicationController
+  before_action :authenticate_user!
+  
   def show
     @tag = Tag.find(params[:id])
     @tag_stages = @tag.stages.preload(:theater, :place, :stage_tags, :tags, :reviews)
