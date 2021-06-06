@@ -121,9 +121,11 @@
                   <% elsif stage_soiree?(@stage, date) %>
                     <td></td>
                     <td class="text-center">○</td>
-                  <% else %>
+                  <% elsif stage_matinee?(@stage, date) %>
                     <td class="text-center">○</td>
                     <td></td>
+                  <% else %>
+                    <td colspan=2 class="text-center">休演日</td>
                   <% end %>
               </tr>
             <% end %>
