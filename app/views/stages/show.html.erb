@@ -115,7 +115,10 @@
             <% (@stage.start_date..@stage.end_date).each do |date| %>
               <tr>
                 <th scope="row" class="text-center"><%= date.mon %>月<%= date.day %>日(<%= %w(日 月 火 水 木 金 土)[date.wday] %>)</th>
-                  <% if @stage.soirees.pluck(:performance_date).include?(date) %>
+                  <% if stage_matinee?(@stage, date) && stage_soiree?(@stage, date) %>
+                    <td class="text-center">○</td>
+                    <td class="text-center">○</td>
+                  <% elsif stage_soiree?(@stage, date) %>
                     <td></td>
                     <td class="text-center">○</td>
                   <% else %>

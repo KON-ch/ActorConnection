@@ -17,4 +17,12 @@ module StagesHelper
   def stage_14days_ago(stage)
     stage.start_date - Date.today <= 14 && stage.start_date - Date.today > 0
   end
+
+  def stage_matinee?(stage, date)
+    stage.matinees.pluck(:performance_date).include?(date)
+  end
+  
+  def stage_soiree?(stage, date)
+    stage.soirees.pluck(:performance_date).include?(date)
+  end
 end

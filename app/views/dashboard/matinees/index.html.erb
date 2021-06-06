@@ -1,0 +1,19 @@
+<div>
+  <%= form_with model: @matinee_new, url: dashboard_matinees_path, method: :post, loacl: true do |f| %>
+    <%= f.label :performance_date, "日付", class:"mr-3" %>
+    <%= f.date_select :performance_date %>
+    <%= f.submit "登録" %>
+  <% end %>
+</div>
+
+<table class="table table-hover mt-5">
+  <tbody>
+    <% @matinees.each do |matinee| %>
+      <tr>
+        <td><%= matinee.id %></td>
+        <td><%= matinee.performance_date %></td>
+        <td><%= link_to "削除", dashboard_matinee_path(matinee), method: :delete, data: { confirm: '本当に削除しますか？' }, class:"btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

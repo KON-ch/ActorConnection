@@ -63,7 +63,7 @@ module Dashboard
 
     def stage_params
       params.require(:stage).permit(:start_date, :end_date, :company, :theater_id,
-                                    :place_id, :synopsis, :matinee, :soiree, :director,:quote_url, :request, { tag_ids: [] }, { soiree_ids: [] }, { plice_ids: [] }).merge(user_id: current_admin.id)
+                                    :place_id, :synopsis, :matinee, :soiree, :director,:quote_url, :request, { tag_ids: [] }, { matinee_ids: [] }, { soiree_ids: [] }, { plice_ids: [] }).merge(user_id: current_admin.id)
     end
 
     def set_stage
