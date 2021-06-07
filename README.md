@@ -19,7 +19,7 @@
 
 ## 使用技術
 - Ruby 3.0.0
-- Ruby on Rails 6.0.3.4
+- Ruby on Rails 6.0.3.7
 - Bootstrap 4.5.3
 - Google Maps API
 - JS
