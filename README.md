@@ -4,7 +4,6 @@
 
 ## アプリ URL
 ### [Actor Connection (AWS)](http://13.115.1.52)
-### [Actor Connection (Heroku)](https://actor-connection.herokuapp.com)
 
 ## 概要
 舞台・戯曲・映画のレビューアプリです。<br>
